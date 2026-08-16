@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qiansi Sourcing — China Factory-Direct Sourcing for Importers & Wholesalers</title>
 <meta name="description" content="Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) connects importers in Brazil and Malaysia with verified 1688 factories. Pet supplies, car phone mounts, LED strip lights. Small parcel & dedicated line shipping.">
+<meta name="keywords" content="China sourcing agent, 1688 sourcing, wholesale from China, pet supplies wholesale, car phone mount supplier, LED strip lights, Brazil importer, Malaysia importer, cross-border trade, China factory direct">
 <meta property="og:title" content="Qiansi Sourcing — China Factory-Direct Sourcing">
 <meta property="og:description" content="Pet supplies, car phone mounts & LED strip lights at factory-direct prices. Small parcel and dedicated-line shipping to Brazil and Malaysia.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://snktow.github.io/qiansi-sourcing-site/">
+<meta property="og:site_name" content="Qiansi Sourcing">
+<link rel="canonical" href="https://snktow.github.io/qiansi-sourcing-site/">
 <style>
   :root{
     --navy:#0B3C5D; --navy-dark:#082B44; --teal:#1B9AAA; --orange:#E85D2F;
@@ -330,7 +334,9 @@
       <h2>Send Your Inquiry</h2>
       <p>Tell us what you need — we reply within 24 hours with prices, shipping options and a quote.</p>
     </div>
-    <form id="lead-form" novalidate>
+    <form id="lead-form" action="https://formsubmit.co/2103476619@qq.com" method="POST" novalidate>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New Inquiry from Qiansi Sourcing Website">
       <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="row">
         <div class="field">
@@ -401,9 +407,8 @@
 
 <script>
 (function(){
-  // Lead capture: POST to local server (preview stage).
-  // In production (static hosting) replace ENDPOINT with Formspree / Web3Forms / your backend.
-  var ENDPOINT = '/api/lead';
+  // Lead capture: native form POST to FormSubmit (free email endpoint for static hosting).
+  // First submission sends an activation email to 2103476619@qq.com; click the link to activate.
 
   var form = document.getElementById('lead-form');
   var msg  = document.getElementById('form-msg');
@@ -415,7 +420,9 @@
   }
 
   form.addEventListener('submit', function(e){
-    e.preventDefault();
+    // Honeypot — silently ignore bot submissions
+    if (form.company.value !== '') { show('Thank you! We will get back to you shortly.', true); form.reset(); e.preventDefault(); return; }
+
     var payload = {
       name:     form.name.value.trim(),
       email:    form.email.value.trim(),
@@ -425,36 +432,28 @@
       message:  form.message.value.trim()
     };
 
-    // Honeypot — silently ignore bot submissions
-    if (form.company.value !== '') { show('Thank you! We will get back to you shortly.', true); form.reset(); return; }
-
     if (!payload.name || !payload.email || !payload.country || !payload.category || !payload.message) {
+      e.preventDefault();
       show('Please fill in all required fields.', false);
       return;
     }
 
+    // If JS is available, submit via fetch to FormSubmit so we can show an inline result
+    // without leaving the page. Fall back to native form POST if fetch fails.
+    e.preventDefault();
     var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
 
-    fetch(ENDPOINT, {
+    fetch(form.action, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
+      headers: {'Accept': 'application/json'},
+      body: new FormData(form)
     }).then(function(r){
       if (!r.ok) throw new Error('bad status');
       return r.json();
     }).then(function(d){
       done(true, '✓ Thank you, ' + payload.name.split(' ')[0] + '! Your inquiry has been received. We will reply within 24 hours.');
     }).catch(function(){
-      // Fallback when the API is unreachable (e.g. static hosting preview): keep the lead locally
-      try {
-        var key = 'qiansi_leads';
-        var leads = JSON.parse(localStorage.getItem(key) || '[]');
-        leads.push(Object.assign({ts: new Date().toISOString()}, payload));
-        localStorage.setItem(key, JSON.stringify(leads));
-        done(true, '✓ Thank you! Inquiry saved locally (preview mode). We will reply within 24 hours.');
-      } catch(err) {
-        done(false, 'Sorry, submission failed. Please email us directly at sales@qiansisourcing.com');
-      }
+      done(false, 'Sorry, submission failed. Please email us directly at sales@qiansisourcing.com');
     });
   });
 })();
