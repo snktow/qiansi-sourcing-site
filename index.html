@@ -41,7 +41,12 @@
   .nav-links a{color:#D7E3EC;font-size:.92rem;font-weight:500}
   .nav-links a:hover{color:#fff}
   .nav-cta{font-size:.88rem;padding:9px 18px}
-  @media(max-width:820px){.nav-links{display:none}}
+  .nav-right{display:flex;align-items:center;gap:24px}
+  .lang{display:flex;gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px}
+  .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
+  .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
+  .lang a:hover{color:#fff}
+  @media(max-width:820px){.nav-links{display:none}.nav-right{gap:14px}}
 
   /* Hero */
   .hero{background:linear-gradient(135deg,var(--navy) 0%,#0E4A75 55%,var(--teal) 130%);color:#fff;padding:92px 0 84px;position:relative;overflow:hidden}
@@ -129,12 +134,18 @@
 <header>
   <div class="wrap nav">
     <a class="logo" href="#top">Qiansi <span>Sourcing</span></a>
-    <nav class="nav-links">
-      <a href="#products">Products</a>
-      <a href="#logistics">Logistics</a>
-      <a href="#why">Why Us</a>
-      <a class="btn nav-cta" href="#inquiry">Send Inquiry</a>
-    </nav>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#logistics">Logistics</a>
+        <a href="#why">Why Us</a>
+        <a class="btn nav-cta" href="#inquiry">Send Inquiry</a>
+      </nav>
+      <div class="lang">
+        <a class="on" href="./" aria-current="page">EN</a>
+        <a href="pt/">PT</a>
+      </div>
+    </div>
   </div>
 </header>
 
