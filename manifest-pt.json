@@ -1,0 +1,16 @@
+{
+  "name": "Qiansi Sourcing — Fornecimento Direto de Fábrica na China",
+  "short_name": "Qiansi Sourcing",
+  "description": "Seu parceiro de sourcing na China — preço de fábrica direto do 1688, inspeção antes do envio. Pet supplies, suportes para celular no carro e fitas de LED.",
+  "start_url": "/pt/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F7F9FB",
+  "theme_color": "#0B3C5D",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
