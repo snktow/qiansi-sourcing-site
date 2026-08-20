@@ -146,6 +146,51 @@
   footer .copy{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;text-align:center;font-size:.8rem}
   .zh{color:#8FA8BA;font-size:.8rem}
 
+  /* App download CTA */
+  .app-cta{background:#EEF3F7;border-top:1px solid var(--line)}
+  .app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;max-width:880px;margin:0 auto}
+  .app-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+  .app-card-icon{width:52px;height:52px;border-radius:12px;background:#EAF4F6;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px}
+  .app-card h3{color:var(--navy);margin-bottom:8px;font-size:1.15rem}
+  .app-card p{font-size:.9rem;color:var(--muted);margin-bottom:12px}
+  .app-card .btn{width:100%;margin-top:4px}
+  .app-alt{font-size:.82rem;color:var(--muted);margin-bottom:0}
+  .ios-steps{list-style:none;margin:12px 0 0;padding:0;counter-reset:step}
+  .ios-steps li{counter-increment:step;padding:8px 0 8px 30px;position:relative;color:#3A4A58;font-size:.9rem;border-bottom:1px dashed var(--line)}
+  .ios-steps li:last-child{border-bottom:0}
+  .ios-steps li:before{content:counter(step);position:absolute;left:0;top:9px;width:20px;height:20px;border-radius:50%;background:var(--navy);color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .app-note{text-align:center;font-size:.85rem;color:var(--muted);margin-top:24px}
+
+  /* Supply & Demand board */
+  .sd{background:var(--card);border-bottom:1px solid var(--line)}
+  .sd-panel{background:#F7F9FB;border:1px solid var(--line);border-radius:var(--radius);padding:30px;margin-bottom:34px}
+  .sd-head{margin-bottom:20px}
+  .sd-head h3{color:var(--navy);font-size:1.3rem;margin-bottom:6px}
+  .sd-head p{color:var(--muted);font-size:.92rem}
+  .sd-panel form{max-width:none;margin:0;background:#fff;box-shadow:none;border:1px solid var(--line);padding:24px}
+  .radio-row{display:flex;gap:18px;flex-wrap:wrap}
+  .radio,.checkbox{display:flex;align-items:flex-start;gap:8px;font-size:.9rem;color:var(--text);font-weight:500;margin:0}
+  .radio input,.checkbox input{width:auto;margin-top:3px;flex-shrink:0}
+  .sd-list-wrap{margin-bottom:34px}
+  .sd-list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px solid var(--navy);padding-bottom:10px;margin-bottom:18px}
+  .sd-list-head h3{color:var(--navy);font-size:1.2rem}
+  .sd-badge{background:#EAF4F6;color:var(--navy);font-size:.75rem;font-weight:700;padding:3px 12px;border-radius:14px}
+  .sd-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+  .sd-item{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#FCFDFE}
+  .sd-item-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+  .sd-item h4{color:var(--navy);font-size:.95rem;line-height:1.35}
+  .sd-tag{flex-shrink:0;background:#E8F1EC;color:#1B7A43;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:12px}
+  .sd-tag.mto{background:#FBF0E4;color:#B45309}
+  .sd-meta{font-size:.82rem;color:var(--muted);margin-bottom:8px}
+  .sd-item a.src{font-size:.82rem}
+  .sd-empty{font-size:.9rem;color:var(--muted);background:#F7F9FB;border:1px dashed var(--line);border-radius:12px;padding:28px;text-align:center;grid-column:1/-1}
+  .sd-note{font-size:.82rem;color:var(--muted);background:#FBF6EF;border-left:3px solid #E8B04B;padding:10px 14px;border-radius:0 8px 8px 0;margin-top:18px}
+  .sd-msg{margin-top:12px;text-align:center;font-weight:600;display:none}
+  .sd-msg.ok{color:#1B7A43}
+  .sd-msg.err{color:#C0392B}
+  .sd-msg.warn{color:#8A5A00;background:#FFF7E0;border:1px solid #E8B04B;padding:10px 14px;text-align:left}
+  .compliance-warn{font-size:.85rem;color:#8A5A00;background:#FFF7E0;border-left:4px solid #E8B04B;padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0 6px;line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -202,7 +247,7 @@
         <div class="cat-title">
           <div class="cat-icon">🐾</div>
           <div>
-            <h3>Pet Supplies <small>宠物用品</small></h3>
+            <h3>Pet Supplies <small>pet essentials</small></h3>
             <small>Auto feeders, water dispensers &amp; bowls for export</small>
           </div>
         </div>
@@ -214,13 +259,13 @@
       <div class="products">
         <div class="prod">
           <h4>2-in-1 Automatic Pet Feeder &amp; Water Dispenser</h4>
-          <p class="spec">二合一自动喂食器饮水机 — combined food &amp; water station, ideal for pet e-commerce and pet shop resale.</p>
+          <p class="spec">Combined food and water station — convenient daily feeding in one unit, ideal for pet e-commerce and pet shop resale.</p>
           <p class="price">Sourcing: ¥0.14 – 10.2 <small>/pc (category range)</small></p>
           <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
         <div class="prod">
           <h4>Stainless Steel Non-Slip Cat Bowl</h4>
-          <p class="spec">跨境不锈钢防滑猫碗 — export-grade stainless steel, non-slip base, dishwasher safe. Cross-border bestseller.</p>
+          <p class="spec">Export-grade stainless steel, non-slip base, dishwasher safe. A cross-border bestseller.</p>
           <p class="price">Sourcing: ¥0.14 – 10.2 <small>/pc (category range)</small></p>
           <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
@@ -239,7 +284,7 @@
         <div class="cat-title">
           <div class="cat-icon">📱</div>
           <div>
-            <h3>Car Phone Mounts <small>车载手机支架</small></h3>
+            <h3>Car Phone Mounts <small>driving &amp; riding holders</small></h3>
             <small>Riding, dashboard &amp; gravity-sensor holders</small>
           </div>
         </div>
@@ -251,13 +296,13 @@
       <div class="products">
         <div class="prod">
           <h4>Cycling / E-Bike Phone Mount</h4>
-          <p class="spec">骑行/电动车手机支架 — shock-resistant holder for bicycles, e-bikes and motorcycles. Hot on cross-border platforms.</p>
+          <p class="spec">Shock-resistant holder for bicycles, e-bikes and motorcycles. A hot seller on cross-border platforms.</p>
           <p class="price">Sourcing: ¥1.67 – 7.5 <small>/pc (category range)</small></p>
           <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
         <div class="prod">
           <h4>Suction Cup Gravity-Sensing Phone Holder</h4>
-          <p class="spec">吸盘重力感应支架 — one-hand gravity auto-lock, 360° rotation, strong suction for dashboard or windshield.</p>
+          <p class="spec">One-hand gravity auto-lock with 360° rotation and strong suction for dashboard or windshield.</p>
           <p class="price">Sourcing: ¥1.67 – 7.5 <small>/pc (category range)</small></p>
           <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
@@ -276,7 +321,7 @@
         <div class="cat-title">
           <div class="cat-icon">💡</div>
           <div>
-            <h3>LED Strip Lights <small>LED 灯带</small></h3>
+            <h3>LED Strip Lights <small>flexible linear lighting</small></h3>
             <small>Waterproof COB, silicone linear &amp; RGB strips</small>
           </div>
         </div>
@@ -288,19 +333,19 @@
       <div class="products">
         <div class="prod">
           <h4>Waterproof COB LED Strip — 220V (Outdoor Grade)</h4>
-          <p class="spec">跨境亚马逊川越照明高压灯带 户外防水工程亮化线条灯 220V COB — cross-border bestseller, outdoor waterproof, easy install.</p>
+          <p class="spec">220V COB high-voltage strip — outdoor waterproof, built for architectural lighting projects, easy to install. A cross-border bestseller.</p>
           <p class="price">Sourcing: ¥2.82 <small>/pc</small></p>
           <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
         <div class="prod">
           <h4>Waterproof Silicone LED Linear Strip</h4>
-          <p class="spec">led硅胶灯带 嵌入式明装长条线条灯 户外防水柔性软线性灯 — flexible silicone, indoor/outdoor linear lighting.</p>
+          <p class="spec">Flexible silicone linear strip — recessed or surface mount, waterproof, for indoor and outdoor lighting.</p>
           <p class="price">Sourcing: ¥10.74 <small>/pc</small></p>
           <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
         <div class="prod">
           <h4>5V RGB WS2812B LED Strip (Addressable)</h4>
-          <p class="spec">5V RGB 幻彩低压灯带 5.5mm宽 WS2812B 内置IC/5050 — addressable RGB for display cases, gaming rooms &amp; decoration.</p>
+          <p class="spec">5V low-voltage addressable RGB strip, 5.5mm wide with built-in WS2812B IC — for display cases, gaming rooms and decoration.</p>
           <p class="price">Sourcing: ¥4.00 <small>/pc</small></p>
           <a class="src" href="https://detail.1688.com/offer/842879939840.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
@@ -335,7 +380,7 @@
     </div>
     <div class="logi-grid">
       <div class="logi">
-        <h3>Small Parcel Direct Mail <span>小包直邮</span></h3>
+        <h3>Small Parcel Direct Mail <span>direct mail</span></h3>
         <ul>
           <li>Ideal for small trial orders &amp; e-commerce restock</li>
           <li>Door-to-door with full tracking number</li>
@@ -345,7 +390,7 @@
         <span class="lbl">Brazil</span><span class="lbl">Malaysia</span>
       </div>
       <div class="logi">
-        <h3>Dedicated Line Logistics <span>专线物流</span></h3>
+        <h3>Dedicated Line Logistics <span>dedicated line</span></h3>
         <ul>
           <li>Consolidated sea/air freight for bulk orders</li>
           <li>Lower per-kg cost as volumes grow</li>
@@ -372,6 +417,220 @@
       <div class="why"><div class="ic">🌐</div><h4>Full Export Handling</h4><p>Packing, consolidation, customs documents and shipping — one point of contact.</p></div>
     </div>
     <div class="trust-strip">✅ Registered company: Kunming Zhoubiao Trading Co., Ltd. · Verifiable in China's national enterprise credit system · Reply within 24 hours</div>
+  </div>
+</section>
+
+<!-- DOWNLOAD APP -->
+<section class="app-cta" id="app">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Get the Qiansi App</h2>
+      <p>No app store, no install file — add Qiansi straight to your home screen and keep browsing even offline.</p>
+    </div>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-card-icon">📱</div>
+        <h3>Android &amp; Chrome</h3>
+        <p>Open this page in Chrome, tap <strong>Install App</strong> and confirm — the app lands on your home screen like any other app.</p>
+        <button id="install-app-btn" class="btn" hidden>Install App</button>
+        <p class="app-alt" id="install-app-alt" hidden>No install button? Open your browser menu (⋮) and choose <strong>Add to Home screen</strong>.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-card-icon">🍎</div>
+        <h3>iPhone &amp; iPad</h3>
+        <p>This site works best as an app. In Safari, follow these 3 steps:</p>
+        <ol class="ios-steps">
+          <li>Tap the <strong>Share</strong> button ⤴</li>
+          <li>Choose <strong>Add to Home Screen</strong></li>
+          <li>Tap <strong>Add</strong> — the app is now on your home screen</li>
+        </ol>
+      </div>
+    </div>
+    <p class="app-note">📶 Works offline — product lines, prices and contact details stay available without an internet connection.</p>
+  </div>
+</section>
+
+<!-- SUPPLY & DEMAND -->
+<section class="sd" id="sd">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Supply &amp; Demand Board</h2>
+      <p>Chinese sellers post what they supply, international buyers post what they need — Qiansi matches both sides and handles the rest.</p>
+    </div>
+
+    <!-- Sellers post supply -->
+    <div class="sd-panel">
+      <div class="sd-head">
+        <h3>📤 Chinese Sellers — Find Buyers</h3>
+        <p>Post your goods, stock type, delivery time and channel. Buyers contact you through the platform. Pre-sell crops or goods still in production — list them with an expected delivery date.</p>
+      </div>
+      <form id="supply-form" action="https://formsubmit.co/2103476619@qq.com" method="POST" novalidate>
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Supply Listing — Qiansi Sourcing Website">
+        <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="row">
+          <div class="field">
+            <label for="sup-product">Product name *</label>
+            <input type="text" id="sup-product" name="product" required placeholder="e.g. Non-slip stainless steel cat bowl">
+          </div>
+          <div class="field">
+            <label for="sup-cat">Category</label>
+            <select id="sup-cat" name="category">
+              <option>Pet Supplies</option>
+              <option>Car Phone Mounts</option>
+              <option>LED Strip Lights</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label>In stock or made to order?</label>
+            <div class="radio-row">
+              <label class="radio"><input type="radio" name="stocktype" value="in stock" checked> In stock</label>
+              <label class="radio"><input type="radio" name="stocktype" value="made to order"> Made to order</label>
+              <label class="radio"><input type="radio" name="stocktype" value="Presale / Futures"> Presale / Futures</label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="sup-moq">Minimum order (MOQ) *</label>
+            <input type="text" id="sup-moq" name="moq" required placeholder="e.g. 100 pcs">
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="sup-delivery">Delivery time</label>
+            <input type="text" id="sup-delivery" name="delivery" placeholder="e.g. 7–15 days after order">
+          </div>
+          <div class="field">
+            <label for="sup-channel">Shipping channel</label>
+            <select id="sup-channel" name="channel">
+              <option>Small parcel</option>
+              <option>Dedicated line</option>
+              <option>Sea freight</option>
+              <option>Air freight</option>
+              <option>Any</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="sup-market">Target market</label>
+            <input type="text" id="sup-market" name="market" placeholder="e.g. Brazil, Malaysia, Global">
+          </div>
+          <div class="field">
+            <label for="sup-contact">Contact *</label>
+            <input type="text" id="sup-contact" name="contact" required placeholder="WeChat / WhatsApp / email">
+          </div>
+        </div>
+        <div class="field">
+          <label class="checkbox"><input type="checkbox" name="private" value="yes"> Keep private — do not show on the public board; the platform arranges the match privately</label>
+        </div>
+        <div class="compliance-warn">⚠️ Listings involving restricted or prohibited goods (weapons, drugs, whole vehicles, rare earths, controlled dual-use items, etc.) are subject to platform review before being published.</div>
+        <div class="field">
+          <label class="checkbox"><input type="checkbox" name="compliance" required> I confirm this listing complies with China's export control regulations and the destination country's import regulations.</label>
+        </div>
+        <button type="submit" class="btn dark">Post Supply</button>
+        <div id="supply-msg" class="sd-msg" role="status"></div>
+      </form>
+    </div>
+
+    <!-- Latest supply (real 1688 sourcing data) -->
+    <div class="sd-list-wrap">
+      <div class="sd-list-head">
+        <h3>Latest Supply</h3>
+        <span class="sd-badge">Live 1688 sourcing data</span>
+      </div>
+      <div class="sd-list">
+        <div class="sd-item">
+          <div class="sd-item-top"><h4>2-in-1 Automatic Pet Feeder &amp; Water Dispenser</h4><span class="sd-tag">In stock</span></div>
+          <p class="sd-meta">Pet Supplies · from ¥0.14/pc · MOQ 100 pcs · delivery 5–10 days · small parcel · target: Brazil &amp; Malaysia</p>
+          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+        </div>
+        <div class="sd-item">
+          <div class="sd-item-top"><h4>Stainless Steel Non-Slip Cat Bowl</h4><span class="sd-tag">In stock</span></div>
+          <p class="sd-meta">Pet Supplies · ¥0.14–10.2/pc · MOQ 200 pcs · delivery 7–15 days · dedicated line · target: Brazil</p>
+          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+        </div>
+        <div class="sd-item">
+          <div class="sd-item-top"><h4>Cycling / E-Bike Phone Mount</h4><span class="sd-tag mto">Made to order</span></div>
+          <p class="sd-meta">Car Phone Mounts · ¥1.67–7.5/pc · MOQ 500 pcs · delivery 10–20 days · sea freight · target: Malaysia</p>
+          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+        </div>
+        <div class="sd-item">
+          <div class="sd-item-top"><h4>Suction Cup Gravity-Sensing Phone Holder</h4><span class="sd-tag">In stock</span></div>
+          <p class="sd-meta">Car Phone Mounts · ¥1.67–7.5/pc · MOQ 100 pcs · delivery 7–12 days · small parcel · target: Brazil</p>
+          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+        </div>
+        <div class="sd-item">
+          <div class="sd-item-top"><h4>220V COB Waterproof LED Strip (Outdoor)</h4><span class="sd-tag">In stock</span></div>
+          <p class="sd-meta">LED Strip Lights · from ¥2.82/pc · MOQ 50 rolls · delivery 5–10 days · air freight · target: Brazil &amp; Malaysia</p>
+          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+        </div>
+        <div class="sd-item">
+          <div class="sd-item-top"><h4>Silicone Waterproof LED Linear Strip</h4><span class="sd-tag mto">Made to order</span></div>
+          <p class="sd-meta">LED Strip Lights · ¥10.74/pc · MOQ 100 rolls · delivery 15–25 days · sea freight · target: Malaysia</p>
+          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buyers post demand -->
+    <div class="sd-panel">
+      <div class="sd-head">
+        <h3>🛒 International Buyers — Post Your Demand</h3>
+        <p>Tell us what you want to buy — product, quantity, destination and budget. Chinese suppliers reach out to you.</p>
+      </div>
+      <form id="demand-form" action="https://formsubmit.co/2103476619@qq.com" method="POST" novalidate>
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Buying Request — Qiansi Sourcing Website">
+        <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="row">
+          <div class="field">
+            <label for="dem-product">What do you want to buy? *</label>
+            <input type="text" id="dem-product" name="product" required placeholder="e.g. Stainless steel cat bowls">
+          </div>
+          <div class="field">
+            <label for="dem-qty">Quantity *</label>
+            <input type="text" id="dem-qty" name="quantity" required placeholder="e.g. 1,000 pcs">
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="dem-dest">Destination *</label>
+            <input type="text" id="dem-dest" name="destination" required placeholder="e.g. São Paulo, Brazil">
+          </div>
+          <div class="field">
+            <label for="dem-budget">Budget</label>
+            <input type="text" id="dem-budget" name="budget" placeholder="e.g. US$0.50/pc CIF">
+          </div>
+        </div>
+        <div class="field">
+          <label for="dem-contact">Contact *</label>
+          <input type="text" id="dem-contact" name="contact" required placeholder="WhatsApp / email">
+        </div>
+        <div class="field">
+          <label class="checkbox"><input type="checkbox" name="private" value="yes"> Keep private — do not show on the public board; the platform arranges the match privately</label>
+        </div>
+        <div class="field">
+          <label class="checkbox"><input type="checkbox" name="compliance" required> I confirm this listing complies with China's export control regulations and the destination country's import regulations.</label>
+        </div>
+        <button type="submit" class="btn dark">Post Demand</button>
+        <div id="demand-msg" class="sd-msg" role="status"></div>
+      </form>
+    </div>
+
+    <!-- Latest demand (manually curated by the platform) -->
+    <div class="sd-list-wrap">
+      <div class="sd-list-head">
+        <h3>Latest Demand</h3>
+        <span class="sd-badge">Posted by buyers</span>
+      </div>
+      <div class="sd-list">
+        <p class="sd-empty">No public demand yet — post yours above. Private requests are matched offline by the platform.</p>
+      </div>
+      <p class="sd-note">🔒 Checking "keep private" hides your listing from the public board; the platform introduces you to matched partners privately.</p>
+    </div>
   </div>
 </section>
 
@@ -419,7 +678,7 @@
       </div>
       <div>
         <h5>Contact</h5>
-        <p>Email: <a href="mailto:sales@qiansisourcing.com">sales@qiansisourcing.com</a></p>
+        <p>Email: <a href="mailto:zhoubiao@zhoubiaotrade.cn">zhoubiao@zhoubiaotrade.cn</a></p>
         <p>Working hours: Mon – Sat (GMT+8) · 9:00–18:00</p>
       </div>
       <div>
@@ -482,9 +741,101 @@
     }).then(function(d){
       done(true, '✓ Thank you, ' + payload.name.split(' ')[0] + '! Your inquiry has been received. We will reply within 24 hours.');
     }).catch(function(){
-      done(false, 'Sorry, submission failed. Please email us directly at sales@qiansisourcing.com');
+      done(false, 'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn');
     });
   });
+})();
+</script>
+<script>
+(function(){
+  // PWA install: show the native install prompt where supported (Android/Chrome),
+  // and fall back to a manual "add to home screen" hint for other browsers.
+  var btn = document.getElementById('install-app-btn');
+  var alt = document.getElementById('install-app-alt');
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (isIOS) return; // iOS has no install prompt — the Safari guide is shown instead
+
+  var deferred = null;
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferred = e;
+    if (btn) btn.hidden = false;
+  });
+  window.addEventListener('appinstalled', function () {
+    deferred = null;
+    if (btn) btn.hidden = true;
+    if (alt) alt.hidden = true;
+  });
+  if (btn) {
+    btn.addEventListener('click', function () {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function () {
+        deferred = null;
+        btn.hidden = true;
+      });
+    });
+  }
+  // No install prompt fired (unsupported browser / desktop) — show manual steps
+  setTimeout(function () {
+    if (!deferred && alt) alt.hidden = false;
+  }, 3000);
+})();
+</script>
+<script>
+(function(){
+  // Supply & Demand forms: same FormSubmit flow as the lead form, with per-form
+  // inline success/error messages (no page reload).
+  function wire(formId, msgId, okText, errText, warnList, warnText) {
+    var form = document.getElementById(formId);
+    var msg = document.getElementById(msgId);
+    if (!form || !msg) return;
+    function show(txt, ok) {
+      msg.textContent = txt;
+      msg.className = ok === 'warn' ? 'sd-msg warn' : (ok ? 'sd-msg ok' : 'sd-msg err');
+      msg.style.display = 'block';
+    }
+    form.addEventListener('submit', function (e) {
+      // Honeypot — silently ignore bot submissions
+      if (form.company.value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
+      e.preventDefault();
+      // Restricted-goods keyword check: warn but never block the submission.
+      var flagged = false;
+      if (warnList) {
+        var cat = form.category && form.category.value ? form.category.value.toLowerCase() : '';
+        var safeCats = ['pet supplies', 'car phone mounts', 'led strip lights', 'other'];
+        if (safeCats.indexOf(cat) !== -1) cat = '';
+        var hay = ((form.product && form.product.value) || '') + ' ' + cat;
+        hay = hay.toLowerCase();
+        for (var i = 0; i < warnList.length; i++) {
+          if (hay.indexOf(warnList[i]) !== -1) { flagged = warnList[i]; break; }
+        }
+      }
+      if (flagged) show(warnText + ' (keyword: ' + flagged + ')', 'warn');
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        return r.json();
+      }).then(function () {
+        show(flagged ? warnText + ' Submitted — the platform will review compliance before matching.' : okText, flagged ? 'warn' : true);
+        form.reset();
+      }).catch(function () {
+        show(errText, false);
+      });
+    });
+  }
+  wire('supply-form', 'supply-msg',
+    '✓ Received! The platform will contact you within 24 hours.',
+    'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn',
+    ['weapon', 'arms', 'drug', 'narcotic', 'vehicle', 'car', 'rare earth', 'uranium', 'chemical weapon', 'explosive'],
+    '⚠️ This category may be subject to export controls or import restrictions — the platform will manually review compliance before connecting you.');
+  wire('demand-form', 'demand-msg',
+    '✓ Received! Chinese suppliers will be matched to your request within 24 hours.',
+    'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn');
 })();
 </script>
 <script>
