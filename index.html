@@ -3,15 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qiansi Sourcing — China Factory-Direct Sourcing for Importers & Wholesalers</title>
-<meta name="description" content="Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) connects importers in Brazil and Malaysia with verified 1688 factories. Pet supplies, car phone mounts, LED strip lights. Small parcel & dedicated line shipping.">
+<title>Qiansi Sourcing — Your China Sourcing Partner | Factory-Direct Prices, Verified 1688 Suppliers</title>
+<meta name="description" content="Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) helps importers and wholesalers in Brazil and Malaysia buy factory-direct from verified 1688 suppliers — pet supplies, car phone mounts, LED strip lights. Inspection before shipping, small parcels & dedicated-line delivery, reply within 24 hours.">
 <meta name="keywords" content="China sourcing agent, 1688 sourcing, wholesale from China, pet supplies wholesale, car phone mount supplier, LED strip lights, Brazil importer, Malaysia importer, cross-border trade, China factory direct">
-<meta property="og:title" content="Qiansi Sourcing — China Factory-Direct Sourcing">
-<meta property="og:description" content="Pet supplies, car phone mounts & LED strip lights at factory-direct prices. Small parcel and dedicated-line shipping to Brazil and Malaysia.">
+<meta property="og:title" content="Qiansi Sourcing — Your China Sourcing Partner">
+<meta property="og:description" content="Factory-direct 1688 prices · Inspection before shipping · Delivered to your door. Pet supplies, car phone mounts & LED strip lights for importers in Brazil and Malaysia.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://xn--yhq58j.com/">
+<meta property="og:url" content="https://snktow.github.io/qiansi-sourcing-site/">
 <meta property="og:site_name" content="Qiansi Sourcing">
-<link rel="canonical" href="https://xn--yhq58j.com/">
+<link rel="canonical" href="https://snktow.github.io/qiansi-sourcing-site/">
+<link rel="alternate" hreflang="en" href="https://snktow.github.io/qiansi-sourcing-site/">
+<link rel="alternate" hreflang="pt-BR" href="https://snktow.github.io/qiansi-sourcing-site/pt/">
+<link rel="alternate" hreflang="x-default" href="https://snktow.github.io/qiansi-sourcing-site/">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0B3C5D">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 <style>
   :root{
     --navy:#0B3C5D; --navy-dark:#082B44; --teal:#1B9AAA; --orange:#E85D2F;
@@ -30,6 +37,7 @@
   .btn.ghost:hover{background:rgba(255,255,255,.12)}
   .btn.dark{background:var(--navy);color:#fff}
   .btn.dark:hover{background:var(--navy-dark)}
+
   .tag{display:inline-block;background:#EAF4F6;color:var(--navy);font-size:.8rem;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.3px}
 
   /* Header */
@@ -37,11 +45,11 @@
   .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
   .logo{font-size:1.25rem;font-weight:800;letter-spacing:.3px;color:#fff}
   .logo span{color:#FFB85C}
+  .nav-right{display:flex;align-items:center;gap:24px}
   .nav-links{display:flex;gap:26px;align-items:center}
   .nav-links a{color:#D7E3EC;font-size:.92rem;font-weight:500}
   .nav-links a:hover{color:#fff}
   .nav-cta{font-size:.88rem;padding:9px 18px}
-  .nav-right{display:flex;align-items:center;gap:24px}
   .lang{display:flex;gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px}
   .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
   .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
@@ -53,7 +61,7 @@
   .hero:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.05)}
   .hero .wrap{position:relative;z-index:1}
   .hero h1{font-size:2.7rem;line-height:1.15;max-width:760px;margin-bottom:18px;letter-spacing:-.5px}
-  .hero p.lead{font-size:1.15rem;max-width:660px;color:#CFE0EB;margin-bottom:30px}
+  .hero p.lead{font-size:1.15rem;max-width:680px;color:#CFE0EB;margin-bottom:30px}
   .hero .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
   .hero .chips span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:24px;font-size:.85rem}
   .hero .actions{display:flex;gap:14px;flex-wrap:wrap}
@@ -85,6 +93,13 @@
   .prod a.src{font-size:.85rem;font-weight:600}
   .note{font-size:.82rem;color:var(--muted);margin-top:16px;background:#FBF6EF;border-left:3px solid #E8B04B;padding:10px 14px;border-radius:0 8px 8px 0}
 
+  /* How we work */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+  .step .num{width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .step h4{color:var(--navy);margin-bottom:6px;font-size:1.02rem}
+  .step p{font-size:.88rem;color:var(--muted)}
+
   /* Logistics */
   .logi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
   .logi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
@@ -101,6 +116,7 @@
   .why .ic{font-size:1.9rem;margin-bottom:10px}
   .why h4{color:var(--navy);margin-bottom:6px}
   .why p{font-size:.88rem;color:var(--muted)}
+  .trust-strip{background:#EAF4F6;border:1px solid #C9E0E6;border-radius:12px;padding:16px 20px;text-align:center;color:var(--navy);font-size:.9rem;font-weight:600;margin-top:28px}
 
   /* Inquiry form */
   .inquiry{background:linear-gradient(160deg,var(--navy) 0%,#0E4A75 100%);color:#fff}
@@ -125,8 +141,11 @@
   footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-bottom:26px}
   footer h5{color:#fff;margin-bottom:10px;font-size:.98rem}
   footer p{margin:4px 0}
+  footer .terms{margin-top:14px;border-left:3px solid var(--teal);padding-left:14px}
+  footer .terms p{font-size:.83rem;margin:5px 0;color:#A9BBC9}
   footer .copy{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;text-align:center;font-size:.8rem}
   .zh{color:#8FA8BA;font-size:.8rem}
+
 </style>
 </head>
 <body>
@@ -137,6 +156,7 @@
     <div class="nav-right">
       <nav class="nav-links">
         <a href="#products">Products</a>
+        <a href="#how">How We Work</a>
         <a href="#logistics">Logistics</a>
         <a href="#why">Why Us</a>
         <a class="btn nav-cta" href="#inquiry">Send Inquiry</a>
@@ -152,17 +172,17 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap">
-    <span class="tag">Factory-direct sourcing from China · 1688 verified suppliers</span>
+    <span class="tag">Your China sourcing partner · Factory-direct 1688 suppliers · Data collected 2026-08-07</span>
     <h1>Source From China With Confidence.<br>Small Parcels. Big Margins.</h1>
-    <p class="lead">Qiansi Sourcing helps importers and wholesalers in <strong>Brazil</strong> and <strong>Malaysia</strong> buy directly from verified 1688 factories — pet supplies, car phone mounts and LED strip lights at factory-direct prices, shipped to your door.</p>
+    <p class="lead">We help importers and wholesalers in <strong>Brazil</strong> and <strong>Malaysia</strong> buy factory-direct from verified 1688 suppliers — pet supplies, car phone mounts and LED strip lights at wholesale prices, inspected before shipping and delivered to your door.</p>
     <div class="chips">
-      <span>✔ Factory-direct pricing</span>
-      <span>✔ MOQ-friendly (small batches OK)</span>
-      <span>✔ Small parcel & dedicated-line shipping</span>
+      <span>✔ Factory-direct 1688 pricing</span>
+      <span>✔ Inspection before shipping</span>
+      <span>✔ Small parcel & dedicated-line delivery</span>
       <span>✔ English · Português · 中文 support</span>
     </div>
     <div class="actions">
-      <a class="btn" href="#inquiry">Send Your Inquiry</a>
+      <a class="btn" href="#lead-form">Get a Quote</a>
       <a class="btn ghost" href="#products">Browse Products</a>
     </div>
   </div>
@@ -173,7 +193,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Current Product Lines</h2>
-      <p>Live 1688 sourcing data (collected 2026-08-07). Prices shown are ex-factory wholesale prices in RMB (¥ / CNY). Click any item to view the original 1688 listing.</p>
+      <p>Live 1688 sourcing data (collected 2026-08-07). Prices shown are ex-factory wholesale prices in RMB (¥ / CNY). Click any item to view the original 1688 listing — every link is verifiable.</p>
     </div>
 
     <!-- Category 1: Pet Supplies -->
@@ -183,7 +203,7 @@
           <div class="cat-icon">🐾</div>
           <div>
             <h3>Pet Supplies <small>宠物用品</small></h3>
-            <small>Auto feeders, water dispensers & bowls for export</small>
+            <small>Auto feeders, water dispensers &amp; bowls for export</small>
           </div>
         </div>
         <div class="price-band">
@@ -285,13 +305,29 @@
           <a class="src" href="https://detail.1688.com/offer/842879939840.html" target="_blank" rel="noopener">View on 1688 ↗</a>
         </div>
       </div>
-      <p class="note">📈 <strong>Margin example (Brazil):</strong> LED strips retail at <strong>R$19.90 – 50</strong> in Brazil — roughly <strong>2.5× – 6×</strong> the sourcing price. A proven high-margin category for BR importers.</p>
+      <p class="note">📈 <strong>Margin example (Brazil):</strong> LED strips retail at <strong>R$19.90 – 50</strong> in Brazil — roughly <strong>2.5× – 6×</strong> the sourcing price. A proven high-margin category for BR importers. Retail reference for other categories is typically in the same 2.5× – 6× range (verify per product).</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section id="how" style="background:#EEF3F7">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>How We Work</h2>
+      <p>One point of contact from factory to your door — no middlemen, no guesswork.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4>Send Your Requirements</h4><p>WhatsApp, email or the inquiry form — tell us the product, target price, quantity and destination city.</p></div>
+      <div class="step"><div class="num">2</div><h4>We Source on 1688</h4><p>We find the best factory deals on 1688 and send you a full quote (goods + service fee + shipping + tax).</p></div>
+      <div class="step"><div class="num">3</div><h4>Inspection Before Shipping</h4><p>Goods are inspected and photo/video-confirmed with you before dispatch. Only then do we ship.</p></div>
+      <div class="step"><div class="num">4</div><h4>Door-to-Door Delivery</h4><p>Small parcel or dedicated line, with tracking, customs handled. You receive what you ordered.</p></div>
     </div>
   </div>
 </section>
 
 <!-- LOGISTICS -->
-<section id="logistics" style="background:#EEF3F7">
+<section id="logistics">
   <div class="wrap">
     <div class="sec-head">
       <h2>Shipping &amp; Logistics</h2>
@@ -323,7 +359,7 @@
 </section>
 
 <!-- WHY US -->
-<section id="why">
+<section id="why" style="background:#EEF3F7">
   <div class="wrap">
     <div class="sec-head">
       <h2>Why Work With Qiansi Sourcing</h2>
@@ -335,6 +371,7 @@
       <div class="why"><div class="ic">🛡️</div><h4>Quality Check</h4><p>Goods are inspected and re-packed before shipping, so what arrives matches what you ordered.</p></div>
       <div class="why"><div class="ic">🌐</div><h4>Full Export Handling</h4><p>Packing, consolidation, customs documents and shipping — one point of contact.</p></div>
     </div>
+    <div class="trust-strip">✅ Registered company: Kunming Zhoubiao Trading Co., Ltd. · Verifiable in China's national enterprise credit system · Reply within 24 hours</div>
   </div>
 </section>
 
@@ -355,33 +392,13 @@
           <input type="text" id="name" name="name" required placeholder="e.g. João Silva">
         </div>
         <div class="field">
-          <label for="email">Business Email *</label>
-          <input type="email" id="email" name="email" required placeholder="you@company.com">
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <label for="country">Country *</label>
-          <input type="text" id="country" name="country" required placeholder="e.g. Brazil / Malaysia">
-        </div>
-        <div class="field">
-          <label for="category">Product Category *</label>
-          <select id="category" name="category" required>
-            <option value="">Select a category…</option>
-            <option>Pet Supplies (宠物用品)</option>
-            <option>Car Phone Mounts (车载手机支架)</option>
-            <option>LED Strip Lights (LED 灯带)</option>
-            <option>Multiple / Other</option>
-          </select>
+          <label for="whatsapp">WhatsApp or Email *</label>
+          <input type="text" id="whatsapp" name="whatsapp" required placeholder="WhatsApp number or email — how we reach you">
         </div>
       </div>
       <div class="field">
-        <label for="quantity">Estimated Quantity</label>
-        <input type="text" id="quantity" name="quantity" placeholder="e.g. 500 pcs / 100 kg / trial parcel">
-      </div>
-      <div class="field">
-        <label for="message">Message *</label>
-        <textarea id="message" name="message" required placeholder="Tell us the products you're interested in, target price, destination city, and any specific requirements…"></textarea>
+        <label for="message">Your Requirement</label>
+        <textarea id="message" name="message" placeholder="e.g. 500 cat bowls, target price R$…, ship to São Paulo"></textarea>
       </div>
       <button type="submit" class="btn">Submit Inquiry</button>
       <div id="form-msg" role="status"></div>
@@ -397,20 +414,24 @@
       <div>
         <h5>Qiansi Sourcing <span class="zh">千丝采购</span></h5>
         <p>Kunming Zhoubiao Trading Co., Ltd. <span class="zh">昆明周标贸易有限责任公司</span></p>
+        <p class="zh">Registered in Kunming, Yunnan, China · Verifiable in the national enterprise credit system</p>
         <p class="zh">China sourcing partner for importers &amp; wholesalers</p>
       </div>
       <div>
-        <h5>Contact (placeholders)</h5>
+        <h5>Contact</h5>
         <p>Email: <a href="mailto:sales@qiansisourcing.com">sales@qiansisourcing.com</a></p>
-        <p>WhatsApp: +86 XXX XXXX XXXX</p>
-        <p>Working hours: Mon – Sat (GMT+8)</p>
+        <p>Working hours: Mon – Sat (GMT+8) · 9:00–18:00</p>
       </div>
       <div>
         <h5>Quick Links</h5>
         <p><a href="#products">Product Lines</a></p>
+        <p><a href="#how">How We Work</a></p>
         <p><a href="#logistics">Shipping &amp; Logistics</a></p>
         <p><a href="#inquiry">Send Inquiry</a></p>
       </div>
+    </div>
+    <div class="terms">
+      <p><strong>Our commitment:</strong> goods are photo/video-confirmed before shipping and dispatched after your confirmation; transit damage is covered by shipping insurance; quality issues are handled within 15 days with photos/videos (return, replacement or re-shipment per responsibility). Not satisfied with your first order? The service fee is refundable.</p>
     </div>
     <div class="copy">© 2026 Kunming Zhoubiao Trading Co., Ltd. · Qiansi Sourcing. All rights reserved.</div>
   </div>
@@ -436,16 +457,13 @@
 
     var payload = {
       name:     form.name.value.trim(),
-      email:    form.email.value.trim(),
-      country:  form.country.value.trim(),
-      category: form.category.value,
-      quantity: form.quantity.value.trim(),
+      whatsapp: form.whatsapp.value.trim(),
       message:  form.message.value.trim()
     };
 
-    if (!payload.name || !payload.email || !payload.country || !payload.category || !payload.message) {
+    if (!payload.name || !payload.whatsapp) {
       e.preventDefault();
-      show('Please fill in all required fields.', false);
+      show('Please fill in your name and a contact (WhatsApp or email).', false);
       return;
     }
 
@@ -468,6 +486,13 @@
     });
   });
 })();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function (e) {
+      console.warn('SW register failed:', e);
+    });
+  }
 </script>
 </body>
 </html>
