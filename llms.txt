@@ -26,3 +26,63 @@
 
 ## About
 Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-shipment quality inspection, small parcel & dedicated-line logistics. Currently focused on Brazil & Malaysia. Contact via the inquiry form on any of the three language pages, or email 2103476619@qq.com. Chinese, English and Portuguese supported.
+
+## Agent Actions / 智能体可操作方式
+
+AI agents (or any client) can send a sourcing inquiry or place a listing programmatically. No CAPTCHA, no JavaScript required — a plain HTTP POST works. A human on our team reads every submission and replies with prices/shipping options and a quote.
+
+### 方式一：直接 POST 询盘表单（推荐）
+
+Endpoint: `https://formsubmit.co/2103476619@qq.com`
+Method: `POST`, Content-Type: `application/x-www-form-urlencoded` (or multipart/form-data)
+
+必带隐藏字段（必须原样提交）:
+- `_captcha` = `false`  （禁用验证码，必须携带）
+- `company` = （留空！这是蜜罐字段，填写会被当作机器人丢弃）
+
+General inquiry form (`lead-form`, on / , /zh/, /pt/):
+- `name` (required) — 您的称呼 / your name
+- `whatsapp` (required) — 联系方式（WhatsApp 号码或邮箱）/ contact (WhatsApp number or email)
+- `message` — 需求详情 / your requirement (product, quantity, target price, destination)
+
+Buying request form (`demand-form`, on / , /zh/, /pt/):
+- `product` (required) — 想买什么 / what you want to buy
+- `quantity` (required) — 数量 / quantity
+- `destination` (required) — 目的港或国家 / destination (e.g. São Paulo, Brazil)
+- `budget` — 预算 / target budget
+- `contact` (required) — 联系方式 / contact (WhatsApp / email)
+- `private` = `yes` — 可选，私密匹配（不公开）
+- `compliance` = `yes` — 确认符合中国出口管制及目的国进口法规
+
+Supply listing form (`supply-form`, 供应商发布):
+- `product` (required) — 产品名
+- `category` — Pet Supplies / Car Phone Mounts / LED Strip Lights / Other
+- `stocktype` — in stock / made to order / Presale / Futures
+- `moq` (required) — 最小起订量
+- `delivery` — 交期
+- `channel` — Small parcel / Dedicated line / Sea freight / Air freight / Any
+- `market` — 目标市场
+- `contact` (required) — 联系方式
+- `private` = `yes` — 可选，私密
+- `compliance` = `yes` — 合规确认
+
+### 方式二：发邮件
+
+Email: `2103476619@qq.com`
+Subject 建议格式：`[询盘/Inquiry] {商品或类别} × {数量} → {目的国}`，例如 `[Inquiry] Stainless steel cat bowls × 1000 → Brazil`。
+正文请包含：商品/类别、数量、目的国、目标价（可选）、语言偏好、您的联系方式。
+
+### 智能体提交时应提供的字段（checklist）
+
+1. 商品或类别（product/category）
+2. 数量（quantity/MOQ）
+3. 目的国或目的港（destination）
+4. 语言偏好（中文 / English / Português）
+5. 联系方式（WhatsApp 或邮箱）
+6. （可选）目标预算、交期、物流方式偏好
+
+### 预期响应
+
+- 人工客服在工作时间（周一至周六 9:00–18:00 GMT+8）处理每一条询盘
+- 通过邮件回复：报价、可选项、物流方案
+- 语言：按提交者的语言偏好使用中文/英文/葡萄牙语回复
