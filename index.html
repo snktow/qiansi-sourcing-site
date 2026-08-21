@@ -471,37 +471,7 @@
       <div class="why"><div class="ic">🛡️</div><h4>Quality Check</h4><p>Goods are inspected and re-packed before shipping, so what arrives matches what you ordered.</p></div>
       <div class="why"><div class="ic">🌐</div><h4>Full Export Handling</h4><p>Packing, consolidation, customs documents and shipping — one point of contact.</p></div>
     </div>
-    <div class="trust-strip">✅ Registered company: Kunming Zhoubiao Trading Co., Ltd. · Verifiable in China's national enterprise credit system · Reply within 24 hours</div>
-  </div>
-</section>
-
-<!-- DOWNLOAD APP -->
-<section class="app-cta" id="app">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>Get the Qiansi App</h2>
-      <p>No app store, no install file — add Qiansi straight to your home screen and keep browsing even offline.</p>
-    </div>
-    <div class="app-grid">
-      <div class="app-card">
-        <div class="app-card-icon">📱</div>
-        <h3>Android &amp; Chrome</h3>
-        <p>Open this page in Chrome, tap <strong>Install App</strong> and confirm — the app lands on your home screen like any other app.</p>
-        <button id="install-app-btn" class="btn" hidden>Install App</button>
-        <p class="app-alt" id="install-app-alt" hidden>No install button? Open your browser menu (⋮) and choose <strong>Add to Home screen</strong>.</p>
-      </div>
-      <div class="app-card">
-        <div class="app-card-icon">🍎</div>
-        <h3>iPhone &amp; iPad</h3>
-        <p>This site works best as an app. In Safari, follow these 3 steps:</p>
-        <ol class="ios-steps">
-          <li>Tap the <strong>Share</strong> button ⤴</li>
-          <li>Choose <strong>Add to Home Screen</strong></li>
-          <li>Tap <strong>Add</strong> — the app is now on your home screen</li>
-        </ol>
-      </div>
-    </div>
-    <p class="app-note">📶 Works offline — product lines, prices and contact details stay available without an internet connection.</p>
+    <div class="trust-strip">✅ Registered company · Verifiable in China's national enterprise credit system · Reply within 24 hours</div>
   </div>
 </section>
 
@@ -733,7 +703,6 @@
     <div class="cols">
       <div>
         <h5>Qiansi Sourcing <span class="zh">千丝采购</span></h5>
-        <p>Kunming Zhoubiao Trading Co., Ltd. <span class="zh">昆明周标贸易有限责任公司</span></p>
         <p class="zh">Registered in Kunming, Yunnan, China · Verifiable in the national enterprise credit system</p>
         <p class="zh">China sourcing partner for importers &amp; wholesalers</p>
       </div>
@@ -805,43 +774,6 @@
       done(false, 'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn');
     });
   });
-})();
-</script>
-<script>
-(function(){
-  // PWA install: show the native install prompt where supported (Android/Chrome),
-  // and fall back to a manual "add to home screen" hint for other browsers.
-  var btn = document.getElementById('install-app-btn');
-  var alt = document.getElementById('install-app-alt');
-  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if (isIOS) return; // iOS has no install prompt — the Safari guide is shown instead
-
-  var deferred = null;
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    deferred = e;
-    if (btn) btn.hidden = false;
-  });
-  window.addEventListener('appinstalled', function () {
-    deferred = null;
-    if (btn) btn.hidden = true;
-    if (alt) alt.hidden = true;
-  });
-  if (btn) {
-    btn.addEventListener('click', function () {
-      if (!deferred) return;
-      deferred.prompt();
-      deferred.userChoice.then(function () {
-        deferred = null;
-        btn.hidden = true;
-      });
-    });
-  }
-  // No install prompt fired (unsupported browser / desktop) — show manual steps
-  setTimeout(function () {
-    if (!deferred && alt) alt.hidden = false;
-  }, 3000);
 })();
 </script>
 <script>

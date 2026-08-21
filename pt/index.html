@@ -471,37 +471,7 @@
       <div class="why"><div class="ic">🛡️</div><h4>Controle de Qualidade</h4><p>A mercadoria é inspecionada e reembalada antes do envio — o que chega é o que você pediu.</p></div>
       <div class="why"><div class="ic">🌐</div><h4>Exportação Completa</h4><p>Embalagem, consolidação, documentos aduaneiros e frete — um único ponto de contato.</p></div>
     </div>
-    <div class="trust-strip">✅ Empresa registrada: Kunming Zhoubiao Trading Co., Ltd. · Verificável no sistema nacional de crédito empresarial da China · Resposta em até 24 horas</div>
-  </div>
-</section>
-
-<!-- DOWNLOAD APP -->
-<section class="app-cta" id="app">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>Baixe o App da Qiansi</h2>
-      <p>Sem loja de aplicativos, sem arquivo para instalar — adicione a Qiansi à tela inicial e continue navegando mesmo offline.</p>
-    </div>
-    <div class="app-grid">
-      <div class="app-card">
-        <div class="app-card-icon">📱</div>
-        <h3>Android e Chrome</h3>
-        <p>Abra esta página no Chrome, toque em <strong>Instalar App</strong> e confirme — o app aparece na tela inicial como qualquer outro aplicativo.</p>
-        <button id="install-app-btn" class="btn" hidden>Instalar App</button>
-        <p class="app-alt" id="install-app-alt" hidden>Não apareceu o botão? Abra o menu do navegador (⋮) e escolha <strong>Adicionar à tela inicial</strong>.</p>
-      </div>
-      <div class="app-card">
-        <div class="app-card-icon">🍎</div>
-        <h3>iPhone e iPad</h3>
-        <p>Este site funciona melhor como app. No Safari, siga estes 3 passos:</p>
-        <ol class="ios-steps">
-          <li>Toque no botão <strong>Compartilhar</strong> ⤴</li>
-          <li>Escolha <strong>Adicionar à Tela de Início</strong></li>
-          <li>Toque em <strong>Adicionar</strong> — o app já está na tela inicial</li>
-        </ol>
-      </div>
-    </div>
-    <p class="app-note">📶 Funciona offline — linhas de produtos, preços e contatos ficam disponíveis mesmo sem conexão.</p>
+    <div class="trust-strip">✅ Empresa registrada · Verificável no sistema nacional de crédito empresarial da China · Resposta em até 24 horas</div>
   </div>
 </section>
 
@@ -733,7 +703,6 @@
     <div class="cols">
       <div>
         <h5>Qiansi Sourcing <span class="zh">千丝采购</span></h5>
-        <p>Kunming Zhoubiao Trading Co., Ltd. <span class="zh">昆明周标贸易有限责任公司</span></p>
         <p class="zh">Registrada em Kunming, Yunnan, China · Verificável no sistema nacional de crédito empresarial</p>
         <p class="zh">Parceiro de compras na China para importadores e atacadistas</p>
       </div>
@@ -806,43 +775,6 @@
       done(false, 'Desculpe, o envio falhou. Envie um e-mail direto para zhoubiao@zhoubiaotrade.cn');
     });
   });
-})();
-</script>
-<script>
-(function(){
-  // Instalação PWA: mostra o prompt nativo onde há suporte (Android/Chrome)
-  // e, nos demais navegadores, exibe a orientação manual "adicionar à tela inicial".
-  var btn = document.getElementById('install-app-btn');
-  var alt = document.getElementById('install-app-alt');
-  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if (isIOS) return; // iOS não tem prompt de instalação — o guia do Safari já é exibido
-
-  var deferred = null;
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    deferred = e;
-    if (btn) btn.hidden = false;
-  });
-  window.addEventListener('appinstalled', function () {
-    deferred = null;
-    if (btn) btn.hidden = true;
-    if (alt) alt.hidden = true;
-  });
-  if (btn) {
-    btn.addEventListener('click', function () {
-      if (!deferred) return;
-      deferred.prompt();
-      deferred.userChoice.then(function () {
-        deferred = null;
-        btn.hidden = true;
-      });
-    });
-  }
-  // Nenhum prompt de instalação disparou (navegador sem suporte / desktop) — mostra os passos manuais
-  setTimeout(function () {
-    if (!deferred && alt) alt.hidden = false;
-  }, 3000);
 })();
 </script>
 <script>
