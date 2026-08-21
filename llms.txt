@@ -32,6 +32,13 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 产品目录（中文 / 简体中文）: https://xn--yhq58j.com/zh/products.html
 - 产品目录（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/products.html
 
+## 市场指南 Market Import Guides
+- 进口到越南（英文 / English）: https://xn--yhq58j.com/guide/import-to-vietnam.html
+- 进口到泰国（英文 / English）: https://xn--yhq58j.com/guide/import-to-thailand.html
+- 进口到印度尼西亚（英文 / English）: https://xn--yhq58j.com/guide/import-to-indonesia.html
+- 进口到巴西（英文 / English）: https://xn--yhq58j.com/guide/import-to-brazil.html
+- 进口到巴西（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/guide/import-to-brazil.html
+
 ## 询盘方式
 - 网站首页询盘表单（/、/zh/、/pt/ 均有表单）
 - 邮箱（Email）: 2103476619@qq.com
