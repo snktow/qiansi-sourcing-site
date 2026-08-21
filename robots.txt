@@ -1,4 +1,81 @@
-User-agent: *
+# robots.txt — xn--yhq58j.com (千丝 Qiansi Sourcing)
+#
+# 策略：精确白名单制（explicit allow-list）。
+# 只显式放行主流搜索引擎与 AI 助手的官方爬虫；未列入的 UA 一律禁止抓取，
+# 以阻止批量采集商业信息（产品线、市场、联系方式）与恶意爬虫。
+# 注意：robots.txt 是"君子协定"，真正的执行层在 Cloudflare Bot Fight Mode（见安全基线文档）。
+# Cloudflare 会在本文件后追加其托管管理段（CloudflareBrowserRenderingCrawler 等），不影响以上策略。
+
+# --- 主流搜索引擎（索引 + 展示） ---
+User-agent: Googlebot
 Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Yahoo! Slurp
+Allow: /
+
+# --- AI 助手 / 大模型官方爬虫（放行以支持 AI 推荐与回答） ---
+# OpenAI：网页浏览与 AI 搜索
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity（AI 搜索）
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI 训练抓取（默认放行；若不想被用于训练可改为 Disallow，见安全基线文档）
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl（部分开源模型训练数据源；放行以扩大可发现性）
+User-agent: CCBot
+Allow: /
+
+# --- SEO / 分析爬虫（抓取公开页面做排名分析，非商业数据采集） ---
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+# --- 其他一切未列出的 UA：禁止抓取（防批量采集与恶意爬虫） ---
+User-agent: *
+Disallow: /
 
 Sitemap: https://xn--yhq58j.com/sitemap.xml
