@@ -60,6 +60,10 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 进口到菲律宾（英文 / English）: https://xn--yhq58j.com/guide/import-to-philippines.html
 - 进口到哈萨克斯坦（英文 / English）: https://xn--yhq58j.com/guide/import-to-kazakhstan.html
 - 进口到沙特阿拉伯（英文 / English）: https://xn--yhq58j.com/guide/import-to-saudi-arabia.html
+- 进口到老挝（英文 / English）: https://xn--yhq58j.com/guide/import-to-laos.html
+- 进口到孟加拉（英文 / English）: https://xn--yhq58j.com/guide/import-to-bangladesh.html
+- 进口到巴基斯坦（英文 / English）: https://xn--yhq58j.com/guide/import-to-pakistan.html
+- 进口到乌兹别克斯坦（英文 / English）: https://xn--yhq58j.com/guide/import-to-uzbekistan.html
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
 - 越南：人口 1.02 亿 · 2025 GDP 5,140 亿美元 · 双边贸易 2,961.4 亿美元（+13.7%）· 中国对越出口 1,981.5 亿美元（+22.4%）· 电子电气 1,127.2 亿美元为第一大进口品类 · 互联网渗透 78.8%【外交部 2026-04 / TradingEconomics·UN COMTRADE / DataReportal 2025-01】
