@@ -1,6 +1,6 @@
-/* Qiansi Sourcing PWA service worker — qiansi-v1 (2026-08-20)
- * 网络优先 + 离线兜底；语言感知回退；不拦截外域表单 POST。 */
-const CACHE = "qiansi-v1";
+/* Qiansi Sourcing PWA service worker — qiansi-v2 (2026-08-21)
+ * 网络优先 + 5s 超时竞速（挂起即回退缓存）+ 离线兜底；语言感知回退；不拦截外域表单 POST。 */
+const CACHE = "qiansi-v2";
 const ASSETS = [
   "/",
   "/index.html",
@@ -36,15 +36,20 @@ self.addEventListener("fetch", (event) => {
   if (req.url.indexOf("formsubmit.co") >= 0) return;
 
   event.respondWith(
-    fetch(req)
-      .then((res) => {
-        // 网络优先：同源 GET 成功时顺手更新缓存
-        if (res && res.ok && req.url.indexOf(self.location.origin) === 0) {
-          const copy = res.clone();
-          caches.open(CACHE).then((cache) => cache.put(req, copy));
-        }
-        return res;
-      })
+    // 网络优先 + 5 秒超时竞速：网络挂起（不报错、TLS 黑洞/QUIC 丢包）时不再无限转圈，
+    // 超时立即回退缓存；无缓存则走语言感知离线兜底。
+    Promise.race([
+      fetch(req)
+        .then((res) => {
+          // 网络优先：同源 GET 成功时顺手更新缓存
+          if (res && res.ok && req.url.indexOf(self.location.origin) === 0) {
+            const copy = res.clone();
+            caches.open(CACHE).then((cache) => cache.put(req, copy));
+          }
+          return res;
+        }),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("fetch-timeout")), 5000))
+    ])
       .catch(() =>
         caches.match(req).then((hit) => {
           if (hit) return hit;
