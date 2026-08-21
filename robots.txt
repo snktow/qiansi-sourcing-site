@@ -19,6 +19,9 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+User-agent: Applebot-Extended
+Allow: /
+
 User-agent: DuckDuckBot
 Allow: /
 
@@ -52,6 +55,9 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
+User-agent: Claude-User
+Allow: /
+
 # Perplexity（AI 搜索）
 User-agent: PerplexityBot
 Allow: /
@@ -65,6 +71,22 @@ Allow: /
 
 # Common Crawl（部分开源模型训练数据源；放行以扩大可发现性）
 User-agent: CCBot
+Allow: /
+
+# 字节跳动 / 豆包（AI 搜索与训练）
+User-agent: Bytespider
+Allow: /
+
+# Amazon（AI 搜索与商品抓取）
+User-agent: Amazonbot
+Allow: /
+
+# Cohere（企业级 RAG / AI 检索）
+User-agent: cohere-ai
+Allow: /
+
+# Meta（AI 搜索与外部代理，如 Ray-Ban 智能眼镜）
+User-agent: Meta-ExternalAgent
 Allow: /
 
 # --- SEO / 分析爬虫（抓取公开页面做排名分析，非商业数据采集） ---

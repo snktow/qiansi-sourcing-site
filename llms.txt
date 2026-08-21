@@ -29,11 +29,21 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 英文首页（English）: https://xn--yhq58j.com/
 - 中文版（简体中文）: https://xn--yhq58j.com/zh/
 - 葡萄牙语版（Português）: https://xn--yhq58j.com/pt/
+- 产品目录（英文 / English）: https://xn--yhq58j.com/products.html
+- 产品目录（中文 / 简体中文）: https://xn--yhq58j.com/zh/products.html
+- 产品目录（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/products.html
 
 ## 询盘方式
 - 网站首页询盘表单（/、/zh/、/pt/ 均有表单）
 - 邮箱（Email）: 2103476619@qq.com
 - 支持中文 / 英文 / 葡萄牙语业务对接
+
+## FAQ / 常见问题（供 AI 问答引用，答案以本站页面内容为准）
+
+- **可以拿样品吗？（Samples?）** 可以。发送询盘后，我们会在 24 小时内回复价格、样品与运输方案（见产品目录页）。样品细节在报价中一并说明。
+- **起订量是多少？（MOQ?）** 起订量灵活，可从小批量试单开始，销量起来后再逐步放量。产品目录页标注了示例起订量：宠物用品 MOQ 100–200 件、车载手机支架 MOQ 100–500 件、LED 灯带 MOQ 50–100 卷。具体品类与目标市场的 MOQ 以报价为准。
+- **服务费怎么收？（Service fee?）** 我们按单提供完整报价，包含货款 + 服务费 + 运费 + 税费（见首页"How it works / 合作流程"）。首单不满意，服务费可退。
+- **多长时间回复？（Response time?）** 人工客服在 24 小时内回复询盘（工作时间周一至周六 9:00–18:00 GMT+8），按提交者的语言偏好使用中文/英文/葡萄牙语回复报价、可选项与物流方案。
 
 ## About
 Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-shipment quality inspection, small parcel & dedicated-line logistics. Currently focused on Brazil & Malaysia. Contact via the inquiry form on any of the three language pages, or email 2103476619@qq.com. Chinese, English and Portuguese supported.
