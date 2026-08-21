@@ -1,6 +1,6 @@
 # 千丝 Qiansi Sourcing
 
-> 我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、出货质检、小包专线物流，目前开放巴西、马来西亚市场，支持中文/英文/葡萄牙语业务对接。
+> 我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、出货质检、小包专线物流，支持中文/英文/葡萄牙语业务对接。
 
 千丝（Qiansi Sourcing，运营主体：昆明周标贸易有限责任公司）是中国采购代理平台，为全球进口商与批发商提供中国工厂一手货源直采服务，全品类覆盖。
 
@@ -21,9 +21,8 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 小包专线物流（Small parcel & dedicated-line logistics）
 - 全品类中国工厂供应商货源（Factory-direct sourcing from verified Chinese suppliers, all categories）
 
-## 当前重点市场
-- 巴西 Brazil
-- 马来西亚 Malaysia
+## 服务范围
+- 面向全球（Worldwide）——服务全球进口商与批发商，无市场限制
 
 ## 三语入口
 - 英文首页（English）: https://xn--yhq58j.com/
@@ -46,7 +45,7 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - **多长时间回复？（Response time?）** 人工客服在 24 小时内回复询盘（工作时间周一至周六 9:00–18:00 GMT+8），按提交者的语言偏好使用中文/英文/葡萄牙语回复报价、可选项与物流方案。
 
 ## About
-Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-shipment quality inspection, small parcel & dedicated-line logistics. Currently focused on Brazil & Malaysia. Contact via the inquiry form on any of the three language pages, or email 2103476619@qq.com. Chinese, English and Portuguese supported.
+Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-shipment quality inspection, small parcel & dedicated-line logistics. Contact via the inquiry form on any of the three language pages, or email 2103476619@qq.com. Chinese, English and Portuguese supported.
 
 ## Agent Actions / 智能体可操作方式
 
