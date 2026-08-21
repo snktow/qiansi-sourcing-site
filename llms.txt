@@ -24,6 +24,23 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 ## 服务范围
 - 面向全球（Worldwide）——服务全球进口商与批发商，无市场限制
 
+## 品类与价格带（Catalog & Pricing，数据日期 2026-08-07）
+- 宠物用品：¥0.14–10.2/件，MOQ 100–200 件
+- 车载手机支架：¥1.67–7.5/件，MOQ 100–500 件
+- LED 灯带：¥1.88–11.88/卷，MOQ 50–100 卷
+- 工厂交期：5–25 天
+- 来源：实时工厂目录抓取（2026-08-07）；实际价格以下单时报价为准
+
+## 物流时效（Logistics，数据日期 2026-08-07）
+- 小包直邮（门到门）：10–20 天，全程跟踪
+- 专线（海/空）：50kg+ 起，单公斤成本随货量下降
+- 具体时效与运费取决于目的国/目的港，以报价为准
+
+## 服务费结构（Service Fee，数据日期 2026-08-07）
+- 仅向买家收取；卖家零费用
+- &lt;¥1K：15% 或固定 ¥150（取高）；¥1K–10K：10%；&gt;¥10K：8%
+- 首单不满意，服务费可退
+
 ## 三语入口
 - 英文首页（English）: https://xn--yhq58j.com/
 - 中文版（简体中文）: https://xn--yhq58j.com/zh/
@@ -31,6 +48,7 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 产品目录（英文 / English）: https://xn--yhq58j.com/products.html
 - 产品目录（中文 / 简体中文）: https://xn--yhq58j.com/zh/products.html
 - 产品目录（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/products.html
+- 智能体专区（Agent Hub，机器可读）: https://xn--yhq58j.com/agents/
 
 ## 市场指南 Market Import Guides
 - 进口到越南（英文 / English）: https://xn--yhq58j.com/guide/import-to-vietnam.html
@@ -38,6 +56,12 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 进口到印度尼西亚（英文 / English）: https://xn--yhq58j.com/guide/import-to-indonesia.html
 - 进口到巴西（英文 / English）: https://xn--yhq58j.com/guide/import-to-brazil.html
 - 进口到巴西（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/guide/import-to-brazil.html
+
+## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
+- 越南：人口 1.02 亿 · 2025 GDP 5,140 亿美元 · 双边贸易 2,961.4 亿美元（+13.7%）· 中国对越出口 1,981.5 亿美元（+22.4%）· 电子电气 1,127.2 亿美元为第一大进口品类 · 互联网渗透 78.8%【外交部 2026-04 / TradingEconomics·UN COMTRADE / DataReportal 2025-01】
+- 泰国：双边贸易 153.26 亿美元（+14.4%）· 中国为最大贸易伙伴 · 互联网渗透 91% · ⚠️ 2026-01-01 海关新政：≥1 泰铢商品征收关税+VAT、取消低值免税、FCL 整柜开箱查验率 30%【外交部 2026-04 / 商务部驻泰经商参处 2026-08 / 世界银行 2024】
+- 印度尼西亚：人口 2.84 亿（东南亚最大）· 中位年龄 30.4 岁 · 中国占其进口 36.2%（2025 年自华进口 875.4 亿美元）· 2026 上半年进口同比 +18.69%【TradingEconomics/UN COMTRADE 2025 / DataReportal 2025-01】
+- 巴西：现有电商重点市场（Remessa Conforme 简化税制），详见 /guide/import-to-brazil.html（EN/PT）
 
 ## 询盘方式
 - 网站首页询盘表单（/、/zh/、/pt/ 均有表单）
@@ -54,34 +78,75 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 ## About
 Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-shipment quality inspection, small parcel & dedicated-line logistics. Contact via the inquiry form on any of the three language pages, or email 2103476619@qq.com. Chinese, English and Portuguese supported.
 
-## Agent Actions / 智能体可操作方式
+## Agent 询盘协议 v1（Agent Inquiry Protocol v1）/ 智能体可操作方式（原 Agent Actions 段）
 
 AI agents (or any client) can send a sourcing inquiry or place a listing programmatically. No CAPTCHA, no JavaScript required — a plain HTTP POST works. A human on our team reads every submission and replies with prices/shipping options and a quote.
 
-### 方式一：直接 POST 询盘表单（推荐）
+### 方式一：POST 询盘端点（推荐，协议 v1）
 
-Endpoint: `https://formsubmit.co/2103476619@qq.com`
-Method: `POST`, Content-Type: `application/x-www-form-urlencoded` (or multipart/form-data)
+Endpoint: `https://formsubmit.co/2103476619@qq.com`（表单提交）
+JSON 结构化回执端点: `https://formsubmit.co/ajax/2103476619@qq.com`
+Method: `POST`
 
-必带隐藏字段（必须原样提交）:
+Content-Type:
+- form-urlencoded: `application/x-www-form-urlencoded`（默认，推荐）
+- JSON: `application/json`（仅用于 /ajax/ 端点，返回结构化 JSON 回执）
+
+#### 蜜罐字段（必须留空，填了会被当机器人丢弃）
 - `_captcha` = `false`  （禁用验证码，必须携带）
-- `company` = （留空！这是蜜罐字段，填写会被当作机器人丢弃）
+- `company` = （留空！蜜罐字段）
 - `_honey` = （留空！FormSubmit 官方蜜罐，任何值都会导致提交被静默丢弃）
-- `_blacklist` = （可选，内容固定，用于过滤垃圾词，无需改动）
+- `_blacklist` = （可选，内容固定，用于过滤垃圾词）
 
-General inquiry form (`lead-form`, on / , /zh/, /pt/):
-- `name` (required) — 您的称呼 / your name
-- `whatsapp` (required) — 联系方式（WhatsApp 号码或邮箱）/ contact (WhatsApp number or email)
-- `message` — 需求详情 / your requirement (product, quantity, target price, destination)
+#### 询盘字段（Agent 询盘 / lead-form · demand-form）
+| 字段 | 必填 | 说明 |
+|---|---|---|
+| product | 是 | 想买什么 / what you want to buy |
+| quantity | 是 | 数量 / quantity |
+| destination | 是 | 目的港或国家 / destination |
+| budget | 否 | 目标预算 / target budget |
+| contact | 是 | 联系方式（WhatsApp / email） |
+| language | 否 | 回复语言偏好（en / zh / pt / vi / th / id） |
+| private | 否 | = `yes` 私密匹配（不公开） |
+| compliance | 否 | = `yes` 确认符合中国出口管制及目的国进口法规 |
 
-Buying request form (`demand-form`, on / , /zh/, /pt/):
-- `product` (required) — 想买什么 / what you want to buy
-- `quantity` (required) — 数量 / quantity
-- `destination` (required) — 目的港或国家 / destination (e.g. São Paulo, Brazil)
-- `budget` — 预算 / target budget
-- `contact` (required) — 联系方式 / contact (WhatsApp / email)
-- `private` = `yes` — 可选，私密匹配（不公开）
-- `compliance` = `yes` — 确认符合中国出口管制及目的国进口法规
+（兼容字段：`name`、`whatsapp`、`message` 仍可用于首页 lead-form。）
+
+#### curl 示例（form-urlencoded）
+```
+curl -X POST https://formsubmit.co/2103476619@qq.com \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "_captcha=false" \
+  -d "_honey=" \
+  -d "company=" \
+  -d "product=LED strip lights" \
+  -d "quantity=200 rolls" \
+  -d "destination=Jakarta, Indonesia" \
+  -d "budget=USD 1,500" \
+  -d "contact=agent@example.com" \
+  -d "language=en" \
+  -d "private=yes" \
+  -d "compliance=yes"
+```
+
+#### curl 示例（JSON /ajax/，结构化回执）
+```
+curl -X POST https://formsubmit.co/ajax/2103476619@qq.com \
+  -H "Content-Type: application/json" \
+  -d '{
+    "product": "LED strip lights",
+    "quantity": "200 rolls",
+    "destination": "Jakarta, Indonesia",
+    "budget": "USD 1,500",
+    "contact": "agent@example.com",
+    "language": "en",
+    "private": "yes",
+    "compliance": "yes"
+  }'
+```
+回执格式（/ajax/ 端点返回 JSON）: `{"success": true, "message": "..."}`；`success=false` 时 `message` 为失败原因。收到 `success: true` 即表示提交已入队，人工客服随后回复。
+
+> ⚠️ 本协议仅作文档化参考；请不要向线上端点发送测试 POST（会触发真实邮件到 2103476619@qq.com）。
 
 Supply listing form (`supply-form`, 供应商发布):
 - `product` (required) — 产品名
