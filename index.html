@@ -212,6 +212,28 @@
   .sd-msg.warn{color:#8A5A00;background:#FFF7E0;border:1px solid #E8B04B;padding:10px 14px;text-align:left}
   .compliance-warn{font-size:.85rem;color:#8A5A00;background:#FFF7E0;border-left:4px solid #E8B04B;padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0 6px;line-height:1.5}
 
+  /* Service entry buttons (hero) */
+  .quick-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:0 0 30px;max-width:780px}
+  .quick-services a{display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:14px 16px;color:#fff;transition:.2s}
+  .quick-services a:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+  .quick-services .qs-ic{font-size:1.3rem}
+  .quick-services .qs-t{font-weight:700;font-size:.95rem}
+  .quick-services .qs-s{font-size:.75rem;color:#CFE0EB}
+
+  /* Category entry cards (homepage) */
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .cat-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;transition:.2s;color:var(--text)}
+  .cat-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,154,170,.16)}
+  .cat-card .cat-icon{width:56px;height:56px;border-radius:14px;background:#EAF4F6;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:14px}
+  .cat-card h3{color:var(--navy);font-size:1.15rem;margin-bottom:6px}
+  .cat-card p{font-size:.88rem;color:var(--muted);flex:1;margin-bottom:16px}
+  .cat-card .btn{align-self:flex-start}
+  .cat-card .btn.dark{background:var(--navy)}
+  .cat-card .btn.dark:hover{background:var(--navy-dark)}
+  .cat-card .band{font-size:.8rem;color:var(--muted);margin-bottom:4px}
+  .cat-card .band b{color:var(--orange)}
+  .cat-card small{font-size:.78rem;color:var(--muted)}
+
 </style>
 <script type="application/ld+json">
 {
@@ -254,7 +276,7 @@
     <a class="logo" href="#top">Qiansi <span>Sourcing</span></a>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="#products">Products</a>
+        <a href="products.html">Products</a>
         <a href="#how">How We Work</a>
         <a href="#logistics">Logistics</a>
         <a href="#why">Why Us</a>
@@ -281,9 +303,16 @@
       <span>✔ Small parcel & dedicated-line delivery</span>
       <span>✔ English · Português · 中文 support</span>
     </div>
+    <div class="quick-services">
+      <a href="#products"><span class="qs-ic">🏭</span><span class="qs-t">Factory Sourcing</span><span class="qs-s">Factory-direct 1688 prices</span></a>
+      <a href="#inquiry"><span class="qs-ic">💬</span><span class="qs-t">Get a Quote</span><span class="qs-s">Wholesale price list</span></a>
+      <a href="#logistics"><span class="qs-ic">🔍</span><span class="qs-t">Quality Inspection</span><span class="qs-s">Checked before shipping</span></a>
+      <a href="#logistics"><span class="qs-ic">📦</span><span class="qs-t">Small-Parcel Logistics</span><span class="qs-s">Dedicated lines to your door</span></a>
+      <a href="#sd"><span class="qs-ic">🤝</span><span class="qs-t">Supply &amp; Demand</span><span class="qs-s">Post your request</span></a>
+    </div>
     <div class="actions">
       <a class="btn" href="#lead-form">Get a Quote</a>
-      <a class="btn ghost" href="#products">Browse Products</a>
+      <a class="btn ghost" href="products.html">Browse Products</a>
     </div>
   </div>
 </section>
@@ -292,120 +321,39 @@
 <section id="products">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Current Product Lines</h2>
-      <p>Live 1688 sourcing data (collected 2026-08-07). Prices shown are ex-factory wholesale prices in RMB (¥ / CNY). Click any item to view the original 1688 listing — every link is verifiable.</p>
+      <h2>Browse by Category</h2>
+      <p>Three live categories with factory-direct 1688 prices. Open the catalog for full product details — every 1688 link is verifiable.</p>
     </div>
 
-    <!-- Category 1: Pet Supplies -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">🐾</div>
-          <div>
-            <h3>Pet Supplies <small>pet essentials</small></h3>
-            <small>Auto feeders, water dispensers &amp; bowls for export</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">Sourcing price</span>
-          <span class="val">¥0.14 – 10.2 /pc</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>2-in-1 Automatic Pet Feeder &amp; Water Dispenser</h4>
-          <p class="spec">Combined food and water station — convenient daily feeding in one unit, ideal for pet e-commerce and pet shop resale.</p>
-          <p class="price">Sourcing: ¥0.14 – 10.2 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">View on 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Stainless Steel Non-Slip Cat Bowl</h4>
-          <p class="spec">Export-grade stainless steel, non-slip base, dishwasher safe. A cross-border bestseller.</p>
-          <p class="price">Sourcing: ¥0.14 – 10.2 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">View on 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>More pet items available</h4>
-          <p class="spec">Auto feeders, gravity water dispensers, pet bowls and accessories — ask us for the full list and bulk quotes.</p>
-          <p class="price">Sourcing: from ¥0.14 <small>/pc</small></p>
-          <a class="src" href="#inquiry">Request full catalog →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category 2: Car Phone Mounts -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">📱</div>
-          <div>
-            <h3>Car Phone Mounts <small>driving &amp; riding holders</small></h3>
-            <small>Riding, dashboard &amp; gravity-sensor holders</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">Sourcing price</span>
-          <span class="val">¥1.67 – 7.5 /pc</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>Cycling / E-Bike Phone Mount</h4>
-          <p class="spec">Shock-resistant holder for bicycles, e-bikes and motorcycles. A hot seller on cross-border platforms.</p>
-          <p class="price">Sourcing: ¥1.67 – 7.5 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">View on 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Suction Cup Gravity-Sensing Phone Holder</h4>
-          <p class="spec">One-hand gravity auto-lock with 360° rotation and strong suction for dashboard or windshield.</p>
-          <p class="price">Sourcing: ¥1.67 – 7.5 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">View on 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>More mount styles available</h4>
-          <p class="spec">Magnetic, air-vent clip, dashboard and rear-seat models — ask us for the full list and bulk quotes.</p>
-          <p class="price">Sourcing: from ¥1.67 <small>/pc</small></p>
-          <a class="src" href="#inquiry">Request full catalog →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category 3: LED Strip Lights -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">💡</div>
-          <div>
-            <h3>LED Strip Lights <small>flexible linear lighting</small></h3>
-            <small>Waterproof COB, silicone linear &amp; RGB strips</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">Sourcing price</span>
-          <span class="val">¥1.88 – 11.88 /pc</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>Waterproof COB LED Strip — 220V (Outdoor Grade)</h4>
-          <p class="spec">220V COB high-voltage strip — outdoor waterproof, built for architectural lighting projects, easy to install. A cross-border bestseller.</p>
-          <p class="price">Sourcing: ¥2.82 <small>/pc</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">View on 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Waterproof Silicone LED Linear Strip</h4>
-          <p class="spec">Flexible silicone linear strip — recessed or surface mount, waterproof, for indoor and outdoor lighting.</p>
-          <p class="price">Sourcing: ¥10.74 <small>/pc</small></p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">View on 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>5V RGB WS2812B LED Strip (Addressable)</h4>
-          <p class="spec">5V low-voltage addressable RGB strip, 5.5mm wide with built-in WS2812B IC — for display cases, gaming rooms and decoration.</p>
-          <p class="price">Sourcing: ¥4.00 <small>/pc</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842879939840.html" target="_blank" rel="noopener">View on 1688 ↗</a>
-        </div>
-      </div>
-      <p class="note">📈 <strong>Margin example (Brazil):</strong> LED strips retail at <strong>R$19.90 – 50</strong> in Brazil — roughly <strong>2.5× – 6×</strong> the sourcing price. A proven high-margin category for BR importers. Retail reference for other categories is typically in the same 2.5× – 6× range (verify per product).</p>
+    <div class="cat-grid">
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">🐾</div>
+        <h3>Pet Supplies</h3>
+        <p>Auto feeders, water dispensers &amp; bowls — export-grade pet essentials.</p>
+        <span class="band">Sourcing <b>¥0.14 – 10.2</b> /pc</span>
+        <span class="btn dark">Open Catalog →</span>
+      </a>
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">📱</div>
+        <h3>Car Phone Mounts</h3>
+        <p>Riding, dashboard &amp; gravity-sensor holders for driving and biking.</p>
+        <span class="band">Sourcing <b>¥1.67 – 7.5</b> /pc</span>
+        <span class="btn dark">Open Catalog →</span>
+      </a>
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">💡</div>
+        <h3>LED Strip Lights</h3>
+        <p>Waterproof COB, silicone linear &amp; RGB strips — a proven high-margin BR bestseller.</p>
+        <span class="band">Sourcing <b>¥1.88 – 11.88</b> /pc</span>
+        <span class="btn dark">Open Catalog →</span>
+      </a>
+      <a class="cat-card" href="#inquiry">
+        <div class="cat-icon">🧺</div>
+        <h3>More Categories</h3>
+        <p>All-category coverage — tell us what you need and we source it for you.</p>
+        <span class="band">Any product · Any market</span>
+        <span class="btn dark">Ask Us →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -572,32 +520,32 @@
         <div class="sd-item">
           <div class="sd-item-top"><h4>2-in-1 Automatic Pet Feeder &amp; Water Dispenser</h4><span class="sd-tag">In stock</span></div>
           <p class="sd-meta">Pet Supplies · from ¥0.14/pc · MOQ 100 pcs · delivery 5–10 days · small parcel · target: Brazil &amp; Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <a class="src" href="products.html#pet">View in catalog ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Stainless Steel Non-Slip Cat Bowl</h4><span class="sd-tag">In stock</span></div>
           <p class="sd-meta">Pet Supplies · ¥0.14–10.2/pc · MOQ 200 pcs · delivery 7–15 days · dedicated line · target: Brazil</p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <a class="src" href="products.html#pet">View in catalog ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Cycling / E-Bike Phone Mount</h4><span class="sd-tag mto">Made to order</span></div>
           <p class="sd-meta">Car Phone Mounts · ¥1.67–7.5/pc · MOQ 500 pcs · delivery 10–20 days · sea freight · target: Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <a class="src" href="products.html#mounts">View in catalog ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Suction Cup Gravity-Sensing Phone Holder</h4><span class="sd-tag">In stock</span></div>
           <p class="sd-meta">Car Phone Mounts · ¥1.67–7.5/pc · MOQ 100 pcs · delivery 7–12 days · small parcel · target: Brazil</p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <a class="src" href="products.html#mounts">View in catalog ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>220V COB Waterproof LED Strip (Outdoor)</h4><span class="sd-tag">In stock</span></div>
           <p class="sd-meta">LED Strip Lights · from ¥2.82/pc · MOQ 50 rolls · delivery 5–10 days · air freight · target: Brazil &amp; Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <a class="src" href="products.html#led">View in catalog ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Silicone Waterproof LED Linear Strip</h4><span class="sd-tag mto">Made to order</span></div>
           <p class="sd-meta">LED Strip Lights · ¥10.74/pc · MOQ 100 rolls · delivery 15–25 days · sea freight · target: Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <a class="src" href="products.html#led">View in catalog ↗</a>
         </div>
       </div>
     </div>

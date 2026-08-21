@@ -203,6 +203,28 @@
   .sd-msg.warn{color:#8A5A00;background:#FFF7E0;border:1px solid #E8B04B;padding:10px 14px;text-align:left}
   .compliance-warn{font-size:.85rem;color:#8A5A00;background:#FFF7E0;border-left:4px solid #E8B04B;padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0 6px;line-height:1.5}
 
+  /* Service entry buttons (hero) */
+  .quick-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:0 0 30px;max-width:780px}
+  .quick-services a{display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:14px 16px;color:#fff;transition:.2s}
+  .quick-services a:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+  .quick-services .qs-ic{font-size:1.3rem}
+  .quick-services .qs-t{font-weight:700;font-size:.95rem}
+  .quick-services .qs-s{font-size:.75rem;color:#CFE0EB}
+
+  /* Category entry cards (homepage) */
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .cat-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;transition:.2s;color:var(--text)}
+  .cat-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,154,170,.16)}
+  .cat-card .cat-icon{width:56px;height:56px;border-radius:14px;background:#EAF4F6;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:14px}
+  .cat-card h3{color:var(--navy);font-size:1.15rem;margin-bottom:6px}
+  .cat-card p{font-size:.88rem;color:var(--muted);flex:1;margin-bottom:16px}
+  .cat-card .btn{align-self:flex-start}
+  .cat-card .btn.dark{background:var(--navy)}
+  .cat-card .btn.dark:hover{background:var(--navy-dark)}
+  .cat-card .band{font-size:.8rem;color:var(--muted);margin-bottom:4px}
+  .cat-card .band b{color:var(--orange)}
+  .cat-card small{font-size:.78rem;color:var(--muted)}
+
 </style>
 <script type="application/ld+json">
 {
@@ -245,7 +267,7 @@
     <a class="logo" href="#top">Qiansi <span>Sourcing</span></a>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="#products">产品线</a>
+        <a href="products.html">产品线</a>
         <a href="#how">服务流程</a>
         <a href="#logistics">物流运输</a>
         <a href="#why">为什么选择我们</a>
@@ -272,9 +294,16 @@
       <span>✔ 小包与专线配送</span>
       <span>✔ English · Português · 中文 服务支持</span>
     </div>
+    <div class="quick-services">
+      <a href="#products"><span class="qs-ic">🏭</span><span class="qs-t">工厂货源直采</span><span class="qs-s">1688 出厂价直供</span></a>
+      <a href="#inquiry"><span class="qs-ic">💬</span><span class="qs-t">询价报价</span><span class="qs-s">批发价格清单</span></a>
+      <a href="#logistics"><span class="qs-ic">🔍</span><span class="qs-t">出货质检</span><span class="qs-s">发货前逐批验货</span></a>
+      <a href="#logistics"><span class="qs-ic">📦</span><span class="qs-t">小包专线物流</span><span class="qs-s">直达您家门口</span></a>
+      <a href="#sd"><span class="qs-ic">🤝</span><span class="qs-t">供需对接</span><span class="qs-s">发布您的需求</span></a>
+    </div>
     <div class="actions">
       <a class="btn" href="#lead-form">获取报价</a>
-      <a class="btn ghost" href="#products">浏览产品</a>
+      <a class="btn ghost" href="products.html">浏览产品</a>
     </div>
   </div>
 </section>
@@ -283,120 +312,39 @@
 <section id="products">
   <div class="wrap">
     <div class="sec-head">
-      <h2>当前产品线</h2>
-      <p>实时 1688 采购数据（2026-08-07 采集）。所示价格为 1688 出厂批发价（人民币 ¥ / CNY）。点击任意商品可查看 1688 原始链接——每个链接均可验证。</p>
+      <h2>按品类浏览</h2>
+      <p>三大在售品类，1688 出厂价直供。进入产品目录查看全部明细——每个 1688 链接均可验证。</p>
     </div>
 
-    <!-- Category 1: Pet Supplies -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">🐾</div>
-          <div>
-            <h3>宠物用品 <small>宠物必需品</small></h3>
-            <small>自动喂食器、饮水器与碗具（出口级）</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">采购价</span>
-          <span class="val">¥0.14 – 10.2 /件</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>二合一自动宠物喂食器+饮水机</h4>
-          <p class="spec">食物与水一体式喂养站——日常喂食一台搞定，适合宠物电商与宠物店转售。</p>
-          <p class="price">采购价：¥0.14 – 10.2 <small>/件（品类区间）</small></p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>不锈钢防滑猫碗</h4>
-          <p class="spec">出口级不锈钢，防滑底座，可进洗碗机。跨境电商畅销款。</p>
-          <p class="price">采购价：¥0.14 – 10.2 <small>/件（品类区间）</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>更多宠物用品可询</h4>
-          <p class="spec">自动喂食器、重力饮水器、宠物碗与配件——欢迎索取完整清单与批量报价。</p>
-          <p class="price">采购价：¥0.14 起 <small>/件</small></p>
-          <a class="src" href="#inquiry">索取完整产品目录 →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category 2: Car Phone Mounts -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">📱</div>
-          <div>
-            <h3>车载手机支架 <small>行车与骑行支架</small></h3>
-            <small>骑行、仪表台与重力感应支架</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">采购价</span>
-          <span class="val">¥1.67 – 7.5 /件</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>骑行 / 电动车手机支架</h4>
-          <p class="spec">减震设计，适用于自行车、电动车与摩托车。跨境电商热销款。</p>
-          <p class="price">采购价：¥1.67 – 7.5 <small>/件（品类区间）</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>吸盘重力感应手机支架</h4>
-          <p class="spec">单手重力自动锁紧，360° 旋转，强力吸附，适用于仪表台或挡风玻璃。</p>
-          <p class="price">采购价：¥1.67 – 7.5 <small>/件（品类区间）</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>更多支架款式可询</h4>
-          <p class="spec">磁吸、出风口夹、仪表台与后座款——欢迎索取完整清单与批量报价。</p>
-          <p class="price">采购价：¥1.67 起 <small>/件</small></p>
-          <a class="src" href="#inquiry">索取完整产品目录 →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category 3: LED Strip Lights -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">💡</div>
-          <div>
-            <h3>LED 灯带 <small>柔性线性照明</small></h3>
-            <small>防水 COB、硅胶灯带与 RGB 灯带</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">采购价</span>
-          <span class="val">¥1.88 – 11.88 /件</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>220V 防水 COB LED 灯带（户外级）</h4>
-          <p class="spec">220V COB 高压灯带——户外防水，适合建筑照明工程，安装简单。跨境电商畅销款。</p>
-          <p class="price">采购价：¥2.82 <small>/件</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>防水硅胶 LED 灯带</h4>
-          <p class="spec">柔性硅胶灯带——可嵌入或明装，防水设计，室内外皆宜。</p>
-          <p class="price">采购价：¥10.74 <small>/件</small></p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>5V RGB WS2812B LED 灯带（可编程）</h4>
-          <p class="spec">5V 低压可编程 RGB 灯带，宽 5.5mm，内置 WS2812B IC——适用于展柜、电竞房与装饰。</p>
-          <p class="price">采购价：¥4.00 <small>/件</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842879939840.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
-        </div>
-      </div>
-      <p class="note">📈 <strong>巴西利润示例：</strong>LED 灯带在巴西零售价约 <strong>R$19.90 – 50</strong>——约为采购价的 <strong>2.5 – 6 倍</strong>，是巴西进口商公认的高毛利品类。其他品类零售倍率通常在 2.5 – 6 倍区间（请按具体产品核实）。</p>
+    <div class="cat-grid">
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">🐾</div>
+        <h3>宠物用品</h3>
+        <p>自动喂食器、饮水器与碗具——出口级宠物必需品。</p>
+        <span class="band">采购价 <b>¥0.14 – 10.2</b> /件</span>
+        <span class="btn dark">进入目录 →</span>
+      </a>
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">📱</div>
+        <h3>车载手机支架</h3>
+        <p>骑行、仪表台与重力感应支架——行车与骑行通用。</p>
+        <span class="band">采购价 <b>¥1.67 – 7.5</b> /件</span>
+        <span class="btn dark">进入目录 →</span>
+      </a>
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">💡</div>
+        <h3>LED 灯带</h3>
+        <p>防水 COB、硅胶灯带与 RGB 灯带——巴西市场公认高毛利品类。</p>
+        <span class="band">采购价 <b>¥1.88 – 11.88</b> /件</span>
+        <span class="btn dark">进入目录 →</span>
+      </a>
+      <a class="cat-card" href="#inquiry">
+        <div class="cat-icon">🧺</div>
+        <h3>更多品类</h3>
+        <p>全品类覆盖——告诉我们您需要什么，我们为您采购。</p>
+        <span class="band">任意产品 · 任意市场</span>
+        <span class="btn dark">联系我们 →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -563,32 +511,32 @@
         <div class="sd-item">
           <div class="sd-item-top"><h4>二合一自动宠物喂食器+饮水机</h4><span class="sd-tag">有现货</span></div>
           <p class="sd-meta">宠物用品 · ¥0.14/件起 · MOQ 100 件 · 5–10 天交货 · 小包 · 目标市场：巴西与马来西亚</p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
+          <a class="src" href="products.html#pet">查看产品目录 ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>不锈钢防滑猫碗</h4><span class="sd-tag">有现货</span></div>
           <p class="sd-meta">宠物用品 · ¥0.14–10.2/件 · MOQ 200 件 · 7–15 天交货 · 专线 · 目标市场：巴西</p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
+          <a class="src" href="products.html#pet">查看产品目录 ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>骑行 / 电动车手机支架</h4><span class="sd-tag mto">按单生产</span></div>
           <p class="sd-meta">车载手机支架 · ¥1.67–7.5/件 · MOQ 500 件 · 10–20 天交货 · 海运 · 目标市场：马来西亚</p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
+          <a class="src" href="products.html#mounts">查看产品目录 ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>吸盘重力感应手机支架</h4><span class="sd-tag">有现货</span></div>
           <p class="sd-meta">车载手机支架 · ¥1.67–7.5/件 · MOQ 100 件 · 7–12 天交货 · 小包 · 目标市场：巴西</p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
+          <a class="src" href="products.html#mounts">查看产品目录 ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>220V 防水 COB LED 灯带（户外）</h4><span class="sd-tag">有现货</span></div>
           <p class="sd-meta">LED 灯带 · ¥2.82/件起 · MOQ 50 卷 · 5–10 天交货 · 空运 · 目标市场：巴西与马来西亚</p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
+          <a class="src" href="products.html#led">查看产品目录 ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>防水硅胶 LED 灯带</h4><span class="sd-tag mto">按单生产</span></div>
           <p class="sd-meta">LED 灯带 · ¥10.74/件 · MOQ 100 卷 · 15–25 天交货 · 海运 · 目标市场：马来西亚</p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
+          <a class="src" href="products.html#led">查看产品目录 ↗</a>
         </div>
       </div>
     </div>

@@ -212,6 +212,28 @@
   .sd-msg.warn{color:#8A5A00;background:#FFF7E0;border:1px solid #E8B04B;padding:10px 14px;text-align:left}
   .compliance-warn{font-size:.85rem;color:#8A5A00;background:#FFF7E0;border-left:4px solid #E8B04B;padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0 6px;line-height:1.5}
 
+  /* Service entry buttons (hero) */
+  .quick-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:0 0 30px;max-width:780px}
+  .quick-services a{display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:14px 16px;color:#fff;transition:.2s}
+  .quick-services a:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+  .quick-services .qs-ic{font-size:1.3rem}
+  .quick-services .qs-t{font-weight:700;font-size:.95rem}
+  .quick-services .qs-s{font-size:.75rem;color:#CFE0EB}
+
+  /* Category entry cards (homepage) */
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .cat-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;transition:.2s;color:var(--text)}
+  .cat-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,154,170,.16)}
+  .cat-card .cat-icon{width:56px;height:56px;border-radius:14px;background:#EAF4F6;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:14px}
+  .cat-card h3{color:var(--navy);font-size:1.15rem;margin-bottom:6px}
+  .cat-card p{font-size:.88rem;color:var(--muted);flex:1;margin-bottom:16px}
+  .cat-card .btn{align-self:flex-start}
+  .cat-card .btn.dark{background:var(--navy)}
+  .cat-card .btn.dark:hover{background:var(--navy-dark)}
+  .cat-card .band{font-size:.8rem;color:var(--muted);margin-bottom:4px}
+  .cat-card .band b{color:var(--orange)}
+  .cat-card small{font-size:.78rem;color:var(--muted)}
+
 </style>
 <script type="application/ld+json">
 {
@@ -254,7 +276,7 @@
     <a class="logo" href="#top">Qiansi <span>Sourcing</span></a>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="#products">Produtos</a>
+        <a href="products.html">Produtos</a>
         <a href="#how">Como Trabalhamos</a>
         <a href="#logistics">Logística</a>
         <a href="#why">Por Que Nós</a>
@@ -281,9 +303,16 @@
       <span>✔ Pequenos pacotes e linha dedicada</span>
       <span>✔ Suporte em inglês · português · chinês</span>
     </div>
+    <div class="quick-services">
+      <a href="#products"><span class="qs-ic">🏭</span><span class="qs-t">Sourcing de Fábrica</span><span class="qs-s">Preços diretos 1688</span></a>
+      <a href="#inquiry"><span class="qs-ic">💬</span><span class="qs-t">Cotação</span><span class="qs-s">Lista de preços no atacado</span></a>
+      <a href="#logistics"><span class="qs-ic">🔍</span><span class="qs-t">Inspeção</span><span class="qs-s">Verificado antes do envio</span></a>
+      <a href="#logistics"><span class="qs-ic">📦</span><span class="qs-t">Logística</span><span class="qs-s">Linha dedicada até sua porta</span></a>
+      <a href="#sd"><span class="qs-ic">🤝</span><span class="qs-t">Oferta &amp; Demanda</span><span class="qs-s">Publique sua solicitação</span></a>
+    </div>
     <div class="actions">
       <a class="btn" href="#lead-form">Solicitar Cotação</a>
-      <a class="btn ghost" href="#products">Ver Produtos</a>
+      <a class="btn ghost" href="products.html">Ver Produtos</a>
     </div>
   </div>
 </section>
@@ -292,120 +321,39 @@
 <section id="products">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Linhas de Produtos Atuais</h2>
-      <p>Dados reais de sourcing no 1688 (coletados em 07/08/2026). Os preços são preços de fábrica em RMB (¥ / CNY). Clique em qualquer item para ver o anúncio original no 1688 — todos os links são verificáveis.</p>
+      <h2>Navegue por Categoria</h2>
+      <p>Três categorias ativas com preços de fábrica 1688. Abra o catálogo para ver todos os detalhes — todos os links do 1688 são verificáveis.</p>
     </div>
 
-    <!-- Category 1: Pet Supplies -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">🐾</div>
-          <div>
-            <h3>Suprimentos para Pets <small>itens essenciais para pets</small></h3>
-            <small>Comedouros automáticos, bebedouros e tigelas para exportação</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">Preço de sourcing</span>
-          <span class="val">¥0,14 – 10,2 /un</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>Comedouro e Bebedouro Automático 2 em 1 para Pets</h4>
-          <p class="spec">Estação combinada de comida e água — alimentação diária prática em um único produto, ideal para e-commerce de pets e revenda em pet shops.</p>
-          <p class="price">Sourcing: ¥0,14 – 10,2 <small>/un (faixa da categoria)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Tigela de Aço Inoxidável Antiderrapante para Gatos</h4>
-          <p class="spec">Aço inoxidável de grau exportação, base antiderrapante e própria para lava-louças. Best-seller no comércio internacional.</p>
-          <p class="price">Sourcing: ¥0,14 – 10,2 <small>/un (faixa da categoria)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Mais itens para pets disponíveis</h4>
-          <p class="spec">Comedouros automáticos, bebedouros por gravidade, tigelas e acessórios — peça a lista completa e cotações em volume.</p>
-          <p class="price">Sourcing: a partir de ¥0,14 <small>/un</small></p>
-          <a class="src" href="#inquiry">Solicitar catálogo completo →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category 2: Car Phone Mounts -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">📱</div>
-          <div>
-            <h3>Suportes de Celular para Carro <small>suportes para direção e bike</small></h3>
-            <small>Suportes para bike, painel e sensor de gravidade</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">Preço de sourcing</span>
-          <span class="val">¥1,67 – 7,5 /un</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>Suporte de Celular para Bike / E-Bike</h4>
-          <p class="spec">Suporte resistente a vibração para bicicletas, e-bikes e motos. Popular nas plataformas de comércio internacional.</p>
-          <p class="price">Sourcing: ¥1,67 – 7,5 <small>/un (faixa da categoria)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Suporte de Celular com Ventosa e Sensor de Gravidade</h4>
-          <p class="spec">Trava automática com uma mão por gravidade, rotação de 360° e forte sucção para painel ou para-brisa.</p>
-          <p class="price">Sourcing: ¥1,67 – 7,5 <small>/un (faixa da categoria)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Mais modelos de suporte disponíveis</h4>
-          <p class="spec">Modelos magnéticos, com clip de ventilação, de painel e de banco traseiro — peça a lista completa e cotações em volume.</p>
-          <p class="price">Sourcing: a partir de ¥1,67 <small>/un</small></p>
-          <a class="src" href="#inquiry">Solicitar catálogo completo →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category 3: LED Strip Lights -->
-    <div class="cat">
-      <div class="cat-head">
-        <div class="cat-title">
-          <div class="cat-icon">💡</div>
-          <div>
-            <h3>Fitas de LED <small>iluminação linear flexível</small></h3>
-            <small>COB à prova d'água, lineares de silicone e RGB</small>
-          </div>
-        </div>
-        <div class="price-band">
-          <span class="lbl">Preço de sourcing</span>
-          <span class="val">¥1,88 – 11,88 /un</span>
-        </div>
-      </div>
-      <div class="products">
-        <div class="prod">
-          <h4>Fita de LED COB À Prova d'Água — 220V (Uso Externo)</h4>
-          <p class="spec">Fita COB de 220V de alta tensão — à prova d'água para uso externo, ideal para iluminação de projetos, instalação fácil. Best-seller no comércio internacional.</p>
-          <p class="price">Sourcing: ¥2,82 <small>/un</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Fita Linear de LED de Silicone À Prova d'Água</h4>
-          <p class="spec">Silicone flexível para iluminação linear — instalação embutida ou aparente, à prova d'água, para uso interno e externo.</p>
-          <p class="price">Sourcing: ¥10,74 <small>/un</small></p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
-        </div>
-        <div class="prod">
-          <h4>Fita de LED RGB 5V WS2812B (Endereçável)</h4>
-          <p class="spec">Fita RGB endereçável de 5V de baixa tensão, 5,5 mm de largura com IC WS2812B integrado — para vitrines, salas de jogos e decoração.</p>
-          <p class="price">Sourcing: ¥4,00 <small>/un</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842879939840.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
-        </div>
-      </div>
-      <p class="note">📈 <strong>Exemplo de margem (Brasil):</strong> fitas de LED são vendidas no varejo por <strong>R$19,90 – 50</strong> no Brasil — cerca de <strong>2,5× – 6×</strong> o preço de sourcing. Uma categoria de alta margem comprovada para importadores brasileiros. A referência de varejo das outras categorias normalmente está na mesma faixa de 2,5× – 6× (verifique por produto).</p>
+    <div class="cat-grid">
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">🐾</div>
+        <h3>Suprimentos para Pets</h3>
+        <p>Comedouros automáticos, bebedouros e tigelas — essenciais para pets de grau exportação.</p>
+        <span class="band">Sourcing <b>¥0,14 – 10,2</b> /un</span>
+        <span class="btn dark">Abrir Catálogo →</span>
+      </a>
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">📱</div>
+        <h3>Suportes de Celular para Carro</h3>
+        <p>Suportes para bike, painel e sensor de gravidade — para dirigir e pedalar.</p>
+        <span class="band">Sourcing <b>¥1,67 – 7,5</b> /un</span>
+        <span class="btn dark">Abrir Catálogo →</span>
+      </a>
+      <a class="cat-card" href="products.html">
+        <div class="cat-icon">💡</div>
+        <h3>Fitas de LED</h3>
+        <p>COB à prova d'água, lineares de silicone e RGB — categoria de alta margem comprovada no Brasil.</p>
+        <span class="band">Sourcing <b>¥1,88 – 11,88</b> /un</span>
+        <span class="btn dark">Abrir Catálogo →</span>
+      </a>
+      <a class="cat-card" href="#inquiry">
+        <div class="cat-icon">🧺</div>
+        <h3>Mais Categorias</h3>
+        <p>Cobertura de todas as categorias — conte o que você precisa e nós fornecemos.</p>
+        <span class="band">Qualquer produto · Qualquer mercado</span>
+        <span class="btn dark">Fale Conosco →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -572,32 +520,32 @@
         <div class="sd-item">
           <div class="sd-item-top"><h4>Alimentador Automático e Bebedouro 2 em 1 para Pets</h4><span class="sd-tag">Em estoque</span></div>
           <p class="sd-meta">Suprimentos para Pets · a partir de ¥0,14/un · MOQ 100 un · entrega 5–10 dias · pequeno pacote · alvo: Brasil e Malásia</p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
+          <a class="src" href="products.html#pet">Ver no catálogo ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Tigela de Aço Inoxidável Antiderrapante para Gatos</h4><span class="sd-tag">Em estoque</span></div>
           <p class="sd-meta">Suprimentos para Pets · ¥0,14–10,2/un · MOQ 200 un · entrega 7–15 dias · linha dedicada · alvo: Brasil</p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
+          <a class="src" href="products.html#pet">Ver no catálogo ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Suporte de Celular para Bike / E-Bike</h4><span class="sd-tag mto">Sob encomenda</span></div>
           <p class="sd-meta">Suportes de Celular para Carro · ¥1,67–7,5/un · MOQ 500 un · entrega 10–20 dias · frete marítimo · alvo: Malásia</p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
+          <a class="src" href="products.html#mounts">Ver no catálogo ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Suporte com Ventosa e Sensor de Gravidade</h4><span class="sd-tag">Em estoque</span></div>
           <p class="sd-meta">Suportes de Celular para Carro · ¥1,67–7,5/un · MOQ 100 un · entrega 7–12 dias · pequeno pacote · alvo: Brasil</p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
+          <a class="src" href="products.html#mounts">Ver no catálogo ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Fita de LED COB 220V à Prova d'Água (Externa)</h4><span class="sd-tag">Em estoque</span></div>
           <p class="sd-meta">Fitas de LED · a partir de ¥2,82/un · MOQ 50 rolos · entrega 5–10 dias · frete aéreo · alvo: Brasil e Malásia</p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
+          <a class="src" href="products.html#led">Ver no catálogo ↗</a>
         </div>
         <div class="sd-item">
           <div class="sd-item-top"><h4>Fita Linear de LED de Silicone à Prova d'Água</h4><span class="sd-tag mto">Sob encomenda</span></div>
           <p class="sd-meta">Fitas de LED · ¥10,74/un · MOQ 100 rolos · entrega 15–25 dias · frete marítimo · alvo: Malásia</p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">Ver no 1688 ↗</a>
+          <a class="src" href="products.html#led">Ver no catálogo ↗</a>
         </div>
       </div>
     </div>
