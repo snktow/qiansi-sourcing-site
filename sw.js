@@ -6,6 +6,8 @@ const ASSETS = [
   "/index.html",
   "/pt/",
   "/pt/index.html",
+  "/zh/",
+  "/zh/index.html",
   "/manifest.json",
   "/manifest-pt.json",
   "/icons/icon-192.png",
@@ -46,8 +48,10 @@ self.addEventListener("fetch", (event) => {
       .catch(() =>
         caches.match(req).then((hit) => {
           if (hit) return hit;
-          // 语言感知兜底：/pt/ 开头回退葡语首页，否则英文首页
-          const fallback = req.url.indexOf("/pt/") >= 0 ? "/pt/index.html" : "/index.html";
+          // 语言感知兜底：/pt/ 开头回退葡语首页，/zh/ 开头回退中文首页，否则英文首页
+          const fallback = req.url.indexOf("/pt/") >= 0 ? "/pt/index.html"
+                         : req.url.indexOf("/zh/") >= 0 ? "/zh/index.html"
+                         : "/index.html";
           return caches.match(fallback);
         })
       )

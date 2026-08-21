@@ -3,11 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){
+  /* Auto-language: zh browsers land on the Chinese version unless a manual choice exists */
+  var pref = null;
+  try { pref = localStorage.getItem('qiansi_lang'); } catch (e) {}
+  if (!pref) {
+    var l = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    if (l.indexOf('zh') === 0) {
+      try { location.replace('../zh/'); } catch (e) {}
+      return;
+    }
+  }
+  /* Remember manual language choice from the .lang bar (event delegation) */
+  document.addEventListener('click', function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest('.lang a') : null;
+    if (!a) return;
+    var lang = a.getAttribute('data-lang');
+    if (lang) { try { localStorage.setItem('qiansi_lang', lang); } catch (e) {} }
+  }, true);
+})();
+</script>
 <title>Qiansi Sourcing — Seu Parceiro de Compras na China | Preço de Fábrica, Fornecedores 1688 Verificados</title>
-<meta name="description" content="A Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) ajuda importadores e atacadistas no Brasil e na Malásia a comprar direto de fábrica de fornecedores 1688 verificados — suprimentos para pets, suportes de celular para carro e fitas de LED. Inspeção antes do envio, pequenos pacotes e linha dedicada, resposta em até 24 horas.">
+<meta name="description" content="A Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) ajuda importadores e atacadistas ao redor do mundo a comprar direto de fábrica de fornecedores 1688 verificados — suprimentos para pets, suportes de celular para carro e fitas de LED. Inspeção antes do envio, pequenos pacotes e linha dedicada, resposta em até 24 horas. Foco atual: Brasil e Malásia.">
 <meta name="keywords" content="agente de compras na China, sourcing 1688, atacado da China, suprimentos para pets atacado, suporte de celular para carro, fita de LED, importador Brasil, importador Malásia, comércio internacional, direto de fábrica">
 <meta property="og:title" content="Qiansi Sourcing — Seu Parceiro de Compras na China">
-<meta property="og:description" content="Preço de fábrica 1688 · Inspeção antes do envio · Entrega na sua porta. Suprimentos para pets, suportes de celular para carro e fitas de LED para importadores no Brasil e na Malásia.">
+<meta property="og:description" content="Preço de fábrica 1688 · Inspeção antes do envio · Entrega na sua porta. Suprimentos para pets, suportes de celular para carro e fitas de LED para importadores ao redor do mundo — foco atual: Brasil e Malásia.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://snktow.github.io/qiansi-sourcing-site/pt/">
 <meta property="og:site_name" content="Qiansi Sourcing">
@@ -192,6 +213,7 @@
   .compliance-warn{font-size:.85rem;color:#8A5A00;background:#FFF7E0;border-left:4px solid #E8B04B;padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0 6px;line-height:1.5}
 
 </style>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "7744061a59064c35b1fdd7805b5188ee"}'></script>
 </head>
 <body>
 
@@ -207,8 +229,9 @@
         <a class="btn nav-cta" href="#inquiry">Enviar Consulta</a>
       </nav>
       <div class="lang">
-        <a href="../">EN</a>
-        <a class="on" href="./" aria-current="page">PT</a>
+        <a data-lang="en" href="../">EN</a>
+        <a data-lang="pt" class="on" href="./" aria-current="page">PT</a>
+        <a data-lang="zh" href="../zh/">中文</a>
       </div>
     </div>
   </div>
@@ -219,7 +242,7 @@
   <div class="wrap">
     <span class="tag">Seu parceiro de compras na China · Fornecedores 1688 com preço de fábrica · Dados coletados em 07/08/2026</span>
     <h1>Compre na China com Confiança.<br>Pequenos Pacotes. Grandes Margens.</h1>
-    <p class="lead">Ajudamos importadores e atacadistas no <strong>Brasil</strong> e na <strong>Malásia</strong> a comprar direto de fábrica de fornecedores 1688 verificados — suprimentos para pets, suportes de celular para carro e fitas de LED a preços de atacado, inspecionados antes do envio e entregues na sua porta.</p>
+    <p class="lead">Ajudamos importadores e atacadistas <strong>ao redor do mundo</strong> a comprar direto de fábrica de fornecedores 1688 verificados — suprimentos para pets, suportes de celular para carro e fitas de LED a preços de atacado, inspecionados antes do envio e entregues na sua porta. Nossos mercados em foco no momento são <strong>Brasil</strong> e <strong>Malásia</strong>.</p>
     <div class="chips">
       <span>✔ Preço de fábrica 1688</span>
       <span>✔ Inspeção antes do envio</span>

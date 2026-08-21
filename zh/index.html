@@ -1,21 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
 (function(){
-  /* Auto-language: zh browsers land on the Chinese version unless a manual choice exists */
-  var pref = null;
-  try { pref = localStorage.getItem('qiansi_lang'); } catch (e) {}
-  if (!pref) {
-    var l = (navigator.language || navigator.userLanguage || '').toLowerCase();
-    if (l.indexOf('zh') === 0) {
-      try { location.replace('zh/'); } catch (e) {}
-      return;
-    }
-  }
-  /* Remember manual language choice from the .lang bar (event delegation) */
+  /* zh page: no auto-redirect (avoids loop). Remember manual language choice from the .lang bar. */
   document.addEventListener('click', function (ev) {
     var a = ev.target && ev.target.closest ? ev.target.closest('.lang a') : null;
     if (!a) return;
@@ -24,17 +14,18 @@
   }, true);
 })();
 </script>
-<title>Qiansi Sourcing — Your China Sourcing Partner | Factory-Direct Prices, Verified 1688 Suppliers</title>
-<meta name="description" content="Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) helps importers and wholesalers worldwide buy factory-direct from verified 1688 suppliers — pet supplies, car phone mounts, LED strip lights. Inspection before shipping, small parcels & dedicated-line delivery, reply within 24 hours. Currently focused on Brazil & Malaysia.">
-<meta name="keywords" content="China sourcing agent, 1688 sourcing, wholesale from China, pet supplies wholesale, car phone mount supplier, LED strip lights, Brazil importer, Malaysia importer, cross-border trade, China factory direct">
-<meta property="og:title" content="Qiansi Sourcing — Your China Sourcing Partner">
-<meta property="og:description" content="Factory-direct 1688 prices · Inspection before shipping · Delivered to your door. Pet supplies, car phone mounts & LED strip lights for importers worldwide — currently focused on Brazil & Malaysia.">
+<title>千丝采购 — 您的中国采购合作伙伴 | 1688 工厂直采 · 供应商已验证</title>
+<meta name="description" content="千丝采购（昆明周标贸易有限责任公司）帮助全球各地的进口商与批发商，从经过验证的 1688 供应商工厂直采——宠物用品、车载手机支架、LED 灯带。发货前验货、小包与专线运输、24 小时内回复。当前重点服务巴西与马来西亚市场。">
+<meta name="keywords" content="中国采购代理,1688采购,中国代采,宠物用品批发,车载手机支架供应商,LED灯带,巴西进口,马来西亚进口,跨境电商,中国工厂直供">
+<meta property="og:title" content="千丝采购 — 您的中国采购合作伙伴">
+<meta property="og:description" content="1688 工厂直供价 · 发货前验货 · 送货上门。为全球各地的进口商提供宠物用品、车载手机支架与 LED 灯带采购服务——当前重点：巴西与马来西亚。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://snktow.github.io/qiansi-sourcing-site/">
+<meta property="og:url" content="https://snktow.github.io/qiansi-sourcing-site/zh/">
 <meta property="og:site_name" content="Qiansi Sourcing">
-<link rel="canonical" href="https://snktow.github.io/qiansi-sourcing-site/">
+<link rel="canonical" href="https://snktow.github.io/qiansi-sourcing-site/zh/">
 <link rel="alternate" hreflang="en" href="https://snktow.github.io/qiansi-sourcing-site/">
 <link rel="alternate" hreflang="pt-BR" href="https://snktow.github.io/qiansi-sourcing-site/pt/">
+<link rel="alternate" hreflang="zh-CN" href="https://snktow.github.io/qiansi-sourcing-site/zh/">
 <link rel="alternate" hreflang="x-default" href="https://snktow.github.io/qiansi-sourcing-site/">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0B3C5D">
@@ -222,16 +213,16 @@
     <a class="logo" href="#top">Qiansi <span>Sourcing</span></a>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="#products">Products</a>
-        <a href="#how">How We Work</a>
-        <a href="#logistics">Logistics</a>
-        <a href="#why">Why Us</a>
-        <a class="btn nav-cta" href="#inquiry">Send Inquiry</a>
+        <a href="#products">产品线</a>
+        <a href="#how">服务流程</a>
+        <a href="#logistics">物流运输</a>
+        <a href="#why">为什么选择我们</a>
+        <a class="btn nav-cta" href="#inquiry">发送询盘</a>
       </nav>
       <div class="lang">
-        <a data-lang="en" class="on" href="./" aria-current="page">EN</a>
-        <a data-lang="pt" href="pt/">PT</a>
-        <a data-lang="zh" href="zh/">中文</a>
+        <a data-lang="en" href="../">EN</a>
+        <a data-lang="pt" href="../pt/">PT</a>
+        <a data-lang="zh" class="on" href="./" aria-current="page">中文</a>
       </div>
     </div>
   </div>
@@ -240,18 +231,18 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap">
-    <span class="tag">Your China sourcing partner · Factory-direct 1688 suppliers · Data collected 2026-08-07</span>
-    <h1>Source From China With Confidence.<br>Small Parcels. Big Margins.</h1>
-    <p class="lead">We help importers and wholesalers <strong>worldwide</strong> buy factory-direct from verified 1688 suppliers — pet supplies, car phone mounts and LED strip lights at wholesale prices, inspected before shipping and delivered to your door. Our current focus markets are <strong>Brazil</strong> and <strong>Malaysia</strong>.</p>
+    <span class="tag">您的中国采购伙伴 · 1688 工厂直供 · 数据采集于 2026-08-07</span>
+    <h1>从中国采购，放心又划算。<br>小件包裹，高额利润。</h1>
+    <p class="lead">我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、出货质检、小包专线物流，目前开放巴西、马来西亚市场，支持中文/英文/葡萄牙语业务对接。</p>
     <div class="chips">
-      <span>✔ Factory-direct 1688 pricing</span>
-      <span>✔ Inspection before shipping</span>
-      <span>✔ Small parcel & dedicated-line delivery</span>
-      <span>✔ English · Português · 中文 support</span>
+      <span>✔ 1688 工厂直供价</span>
+      <span>✔ 发货前验货</span>
+      <span>✔ 小包与专线配送</span>
+      <span>✔ English · Português · 中文 服务支持</span>
     </div>
     <div class="actions">
-      <a class="btn" href="#lead-form">Get a Quote</a>
-      <a class="btn ghost" href="#products">Browse Products</a>
+      <a class="btn" href="#lead-form">获取报价</a>
+      <a class="btn ghost" href="#products">浏览产品</a>
     </div>
   </div>
 </section>
@@ -260,8 +251,8 @@
 <section id="products">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Current Product Lines</h2>
-      <p>Live 1688 sourcing data (collected 2026-08-07). Prices shown are ex-factory wholesale prices in RMB (¥ / CNY). Click any item to view the original 1688 listing — every link is verifiable.</p>
+      <h2>当前产品线</h2>
+      <p>实时 1688 采购数据（2026-08-07 采集）。所示价格为 1688 出厂批发价（人民币 ¥ / CNY）。点击任意商品可查看 1688 原始链接——每个链接均可验证。</p>
     </div>
 
     <!-- Category 1: Pet Supplies -->
@@ -270,33 +261,33 @@
         <div class="cat-title">
           <div class="cat-icon">🐾</div>
           <div>
-            <h3>Pet Supplies <small>pet essentials</small></h3>
-            <small>Auto feeders, water dispensers &amp; bowls for export</small>
+            <h3>宠物用品 <small>宠物必需品</small></h3>
+            <small>自动喂食器、饮水器与碗具（出口级）</small>
           </div>
         </div>
         <div class="price-band">
-          <span class="lbl">Sourcing price</span>
-          <span class="val">¥0.14 – 10.2 /pc</span>
+          <span class="lbl">采购价</span>
+          <span class="val">¥0.14 – 10.2 /件</span>
         </div>
       </div>
       <div class="products">
         <div class="prod">
-          <h4>2-in-1 Automatic Pet Feeder &amp; Water Dispenser</h4>
-          <p class="spec">Combined food and water station — convenient daily feeding in one unit, ideal for pet e-commerce and pet shop resale.</p>
-          <p class="price">Sourcing: ¥0.14 – 10.2 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <h4>二合一自动宠物喂食器+饮水机</h4>
+          <p class="spec">食物与水一体式喂养站——日常喂食一台搞定，适合宠物电商与宠物店转售。</p>
+          <p class="price">采购价：¥0.14 – 10.2 <small>/件（品类区间）</small></p>
+          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="prod">
-          <h4>Stainless Steel Non-Slip Cat Bowl</h4>
-          <p class="spec">Export-grade stainless steel, non-slip base, dishwasher safe. A cross-border bestseller.</p>
-          <p class="price">Sourcing: ¥0.14 – 10.2 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <h4>不锈钢防滑猫碗</h4>
+          <p class="spec">出口级不锈钢，防滑底座，可进洗碗机。跨境电商畅销款。</p>
+          <p class="price">采购价：¥0.14 – 10.2 <small>/件（品类区间）</small></p>
+          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="prod">
-          <h4>More pet items available</h4>
-          <p class="spec">Auto feeders, gravity water dispensers, pet bowls and accessories — ask us for the full list and bulk quotes.</p>
-          <p class="price">Sourcing: from ¥0.14 <small>/pc</small></p>
-          <a class="src" href="#inquiry">Request full catalog →</a>
+          <h4>更多宠物用品可询</h4>
+          <p class="spec">自动喂食器、重力饮水器、宠物碗与配件——欢迎索取完整清单与批量报价。</p>
+          <p class="price">采购价：¥0.14 起 <small>/件</small></p>
+          <a class="src" href="#inquiry">索取完整产品目录 →</a>
         </div>
       </div>
     </div>
@@ -307,33 +298,33 @@
         <div class="cat-title">
           <div class="cat-icon">📱</div>
           <div>
-            <h3>Car Phone Mounts <small>driving &amp; riding holders</small></h3>
-            <small>Riding, dashboard &amp; gravity-sensor holders</small>
+            <h3>车载手机支架 <small>行车与骑行支架</small></h3>
+            <small>骑行、仪表台与重力感应支架</small>
           </div>
         </div>
         <div class="price-band">
-          <span class="lbl">Sourcing price</span>
-          <span class="val">¥1.67 – 7.5 /pc</span>
+          <span class="lbl">采购价</span>
+          <span class="val">¥1.67 – 7.5 /件</span>
         </div>
       </div>
       <div class="products">
         <div class="prod">
-          <h4>Cycling / E-Bike Phone Mount</h4>
-          <p class="spec">Shock-resistant holder for bicycles, e-bikes and motorcycles. A hot seller on cross-border platforms.</p>
-          <p class="price">Sourcing: ¥1.67 – 7.5 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <h4>骑行 / 电动车手机支架</h4>
+          <p class="spec">减震设计，适用于自行车、电动车与摩托车。跨境电商热销款。</p>
+          <p class="price">采购价：¥1.67 – 7.5 <small>/件（品类区间）</small></p>
+          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="prod">
-          <h4>Suction Cup Gravity-Sensing Phone Holder</h4>
-          <p class="spec">One-hand gravity auto-lock with 360° rotation and strong suction for dashboard or windshield.</p>
-          <p class="price">Sourcing: ¥1.67 – 7.5 <small>/pc (category range)</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <h4>吸盘重力感应手机支架</h4>
+          <p class="spec">单手重力自动锁紧，360° 旋转，强力吸附，适用于仪表台或挡风玻璃。</p>
+          <p class="price">采购价：¥1.67 – 7.5 <small>/件（品类区间）</small></p>
+          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="prod">
-          <h4>More mount styles available</h4>
-          <p class="spec">Magnetic, air-vent clip, dashboard and rear-seat models — ask us for the full list and bulk quotes.</p>
-          <p class="price">Sourcing: from ¥1.67 <small>/pc</small></p>
-          <a class="src" href="#inquiry">Request full catalog →</a>
+          <h4>更多支架款式可询</h4>
+          <p class="spec">磁吸、出风口夹、仪表台与后座款——欢迎索取完整清单与批量报价。</p>
+          <p class="price">采购价：¥1.67 起 <small>/件</small></p>
+          <a class="src" href="#inquiry">索取完整产品目录 →</a>
         </div>
       </div>
     </div>
@@ -344,36 +335,36 @@
         <div class="cat-title">
           <div class="cat-icon">💡</div>
           <div>
-            <h3>LED Strip Lights <small>flexible linear lighting</small></h3>
-            <small>Waterproof COB, silicone linear &amp; RGB strips</small>
+            <h3>LED 灯带 <small>柔性线性照明</small></h3>
+            <small>防水 COB、硅胶灯带与 RGB 灯带</small>
           </div>
         </div>
         <div class="price-band">
-          <span class="lbl">Sourcing price</span>
-          <span class="val">¥1.88 – 11.88 /pc</span>
+          <span class="lbl">采购价</span>
+          <span class="val">¥1.88 – 11.88 /件</span>
         </div>
       </div>
       <div class="products">
         <div class="prod">
-          <h4>Waterproof COB LED Strip — 220V (Outdoor Grade)</h4>
-          <p class="spec">220V COB high-voltage strip — outdoor waterproof, built for architectural lighting projects, easy to install. A cross-border bestseller.</p>
-          <p class="price">Sourcing: ¥2.82 <small>/pc</small></p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <h4>220V 防水 COB LED 灯带（户外级）</h4>
+          <p class="spec">220V COB 高压灯带——户外防水，适合建筑照明工程，安装简单。跨境电商畅销款。</p>
+          <p class="price">采购价：¥2.82 <small>/件</small></p>
+          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="prod">
-          <h4>Waterproof Silicone LED Linear Strip</h4>
-          <p class="spec">Flexible silicone linear strip — recessed or surface mount, waterproof, for indoor and outdoor lighting.</p>
-          <p class="price">Sourcing: ¥10.74 <small>/pc</small></p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <h4>防水硅胶 LED 灯带</h4>
+          <p class="spec">柔性硅胶灯带——可嵌入或明装，防水设计，室内外皆宜。</p>
+          <p class="price">采购价：¥10.74 <small>/件</small></p>
+          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="prod">
-          <h4>5V RGB WS2812B LED Strip (Addressable)</h4>
-          <p class="spec">5V low-voltage addressable RGB strip, 5.5mm wide with built-in WS2812B IC — for display cases, gaming rooms and decoration.</p>
-          <p class="price">Sourcing: ¥4.00 <small>/pc</small></p>
-          <a class="src" href="https://detail.1688.com/offer/842879939840.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <h4>5V RGB WS2812B LED 灯带（可编程）</h4>
+          <p class="spec">5V 低压可编程 RGB 灯带，宽 5.5mm，内置 WS2812B IC——适用于展柜、电竞房与装饰。</p>
+          <p class="price">采购价：¥4.00 <small>/件</small></p>
+          <a class="src" href="https://detail.1688.com/offer/842879939840.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
       </div>
-      <p class="note">📈 <strong>Margin example (Brazil):</strong> LED strips retail at <strong>R$19.90 – 50</strong> in Brazil — roughly <strong>2.5× – 6×</strong> the sourcing price. A proven high-margin category for BR importers. Retail reference for other categories is typically in the same 2.5× – 6× range (verify per product).</p>
+      <p class="note">📈 <strong>巴西利润示例：</strong>LED 灯带在巴西零售价约 <strong>R$19.90 – 50</strong>——约为采购价的 <strong>2.5 – 6 倍</strong>，是巴西进口商公认的高毛利品类。其他品类零售倍率通常在 2.5 – 6 倍区间（请按具体产品核实）。</p>
     </div>
   </div>
 </section>
@@ -382,14 +373,14 @@
 <section id="how" style="background:#EEF3F7">
   <div class="wrap">
     <div class="sec-head">
-      <h2>How We Work</h2>
-      <p>One point of contact from factory to your door — no middlemen, no guesswork.</p>
+      <h2>我们的服务流程</h2>
+      <p>从工厂到您家门口，一个联系人全程对接——没有中间商，没有不确定。</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="num">1</div><h4>Send Your Requirements</h4><p>WhatsApp, email or the inquiry form — tell us the product, target price, quantity and destination city.</p></div>
-      <div class="step"><div class="num">2</div><h4>We Source on 1688</h4><p>We find the best factory deals on 1688 and send you a full quote (goods + service fee + shipping + tax).</p></div>
-      <div class="step"><div class="num">3</div><h4>Inspection Before Shipping</h4><p>Goods are inspected and photo/video-confirmed with you before dispatch. Only then do we ship.</p></div>
-      <div class="step"><div class="num">4</div><h4>Door-to-Door Delivery</h4><p>Small parcel or dedicated line, with tracking, customs handled. You receive what you ordered.</p></div>
+      <div class="step"><div class="num">1</div><h4>提交您的需求</h4><p>通过 WhatsApp、邮件或询盘表单告诉我们：产品、目标价、数量与目的城市。</p></div>
+      <div class="step"><div class="num">2</div><h4>我们在 1688 采购</h4><p>我们在 1688 帮您找到最优工厂货源，并给出完整报价（货款 + 服务费 + 运费 + 税费）。</p></div>
+      <div class="step"><div class="num">3</div><h4>发货前验货</h4><p>货物在发货前逐一检查，并与您照片/视频确认。确认无误后才会发货。</p></div>
+      <div class="step"><div class="num">4</div><h4>送货上门</h4><p>小包或专线运输，全程可跟踪，清关手续代办。您收到的就是您订的货。</p></div>
     </div>
   </div>
 </section>
@@ -398,29 +389,29 @@
 <section id="logistics">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Shipping &amp; Logistics</h2>
-      <p>We arrange everything from the factory to your warehouse — customs-friendly and trackable.</p>
+      <h2>运输与物流</h2>
+      <p>从工厂到仓库，全程由我们安排——清关友好、全程可查。</p>
     </div>
     <div class="logi-grid">
       <div class="logi">
-        <h3>Small Parcel Direct Mail <span>direct mail</span></h3>
+        <h3>小包直邮 <span>直邮</span></h3>
         <ul>
-          <li>Ideal for small trial orders &amp; e-commerce restock</li>
-          <li>Door-to-door with full tracking number</li>
-          <li>Good for low-value, lightweight goods</li>
-          <li>Delivery typically 10 – 20 days</li>
+          <li>适合小批量试单与电商补货</li>
+          <li>门到门派送，全程有跟踪号</li>
+          <li>适合低货值、轻量商品</li>
+          <li>通常 10 – 20 天送达</li>
         </ul>
-        <span class="lbl">Brazil</span><span class="lbl">Malaysia</span>
+        <span class="lbl">巴西</span><span class="lbl">马来西亚</span>
       </div>
       <div class="logi">
-        <h3>Dedicated Line Logistics <span>dedicated line</span></h3>
+        <h3>专线物流 <span>专线</span></h3>
         <ul>
-          <li>Consolidated sea/air freight for bulk orders</li>
-          <li>Lower per-kg cost as volumes grow</li>
-          <li>Customs clearance &amp; documentation handled</li>
-          <li>Best for 50kg+ regular shipments</li>
+          <li>大宗订单海运/空运拼柜运输</li>
+          <li>货量越大，每公斤成本越低</li>
+          <li>清关与单证手续全包</li>
+          <li>适合 50kg 以上的稳定出货</li>
         </ul>
-        <span class="lbl">Brazil</span><span class="lbl">Malaysia</span>
+        <span class="lbl">巴西</span><span class="lbl">马来西亚</span>
       </div>
     </div>
   </div>
@@ -430,16 +421,16 @@
 <section id="why" style="background:#EEF3F7">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Why Work With Qiansi Sourcing</h2>
-      <p>We are your boots on the ground in China's wholesale markets.</p>
+      <h2>为什么选择千丝采购</h2>
+      <p>我们就是您在中国批发市场的落地执行团队。</p>
     </div>
     <div class="why-grid">
-      <div class="why"><div class="ic">🏭</div><h4>Factory-Direct Prices</h4><p>We buy on 1688 and pass the wholesale price to you — no middleman markups.</p></div>
-      <div class="why"><div class="ic">📦</div><h4>Flexible MOQ</h4><p>Start with a small trial parcel; scale up as your sales grow.</p></div>
-      <div class="why"><div class="ic">🛡️</div><h4>Quality Check</h4><p>Goods are inspected and re-packed before shipping, so what arrives matches what you ordered.</p></div>
-      <div class="why"><div class="ic">🌐</div><h4>Full Export Handling</h4><p>Packing, consolidation, customs documents and shipping — one point of contact.</p></div>
+      <div class="why"><div class="ic">🏭</div><h4>工厂直供价</h4><p>我们直接在 1688 采购，把批发价原样给到您——没有中间商加价。</p></div>
+      <div class="why"><div class="ic">📦</div><h4>灵活起订量</h4><p>先从小批量试单开始，销量起来后再逐步放量。</p></div>
+      <div class="why"><div class="ic">🛡️</div><h4>品质把关</h4><p>发货前逐一验货、重新打包，保证到货与下单完全一致。</p></div>
+      <div class="why"><div class="ic">🌐</div><h4>出口全包</h4><p>打包、拼柜、清关单证与运输——一个联系人全程搞定。</p></div>
     </div>
-    <div class="trust-strip">✅ Registered company: Kunming Zhoubiao Trading Co., Ltd. · Verifiable in China's national enterprise credit system · Reply within 24 hours</div>
+    <div class="trust-strip">✅ 正规注册公司：昆明周标贸易有限责任公司 · 可在国家企业信用信息公示系统查证 · 24 小时内回复</div>
   </div>
 </section>
 
@@ -447,29 +438,29 @@
 <section class="app-cta" id="app">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Get the Qiansi App</h2>
-      <p>No app store, no install file — add Qiansi straight to your home screen and keep browsing even offline.</p>
+      <h2>获取千丝 App</h2>
+      <p>无需应用商店、无需安装文件——把千丝添加到主屏幕，离线也能浏览。</p>
     </div>
     <div class="app-grid">
       <div class="app-card">
         <div class="app-card-icon">📱</div>
-        <h3>Android &amp; Chrome</h3>
-        <p>Open this page in Chrome, tap <strong>Install App</strong> and confirm — the app lands on your home screen like any other app.</p>
-        <button id="install-app-btn" class="btn" hidden>Install App</button>
-        <p class="app-alt" id="install-app-alt" hidden>No install button? Open your browser menu (⋮) and choose <strong>Add to Home screen</strong>.</p>
+        <h3>Android 与 Chrome</h3>
+        <p>在 Chrome 中打开本页面，点击 <strong>安装应用</strong> 并确认——应用就像其他 App 一样出现在主屏幕。</p>
+        <button id="install-app-btn" class="btn" hidden>安装应用</button>
+        <p class="app-alt" id="install-app-alt" hidden>没有安装按钮？打开浏览器菜单（⋮），选择 <strong>添加到主屏幕</strong>。</p>
       </div>
       <div class="app-card">
         <div class="app-card-icon">🍎</div>
-        <h3>iPhone &amp; iPad</h3>
-        <p>This site works best as an app. In Safari, follow these 3 steps:</p>
+        <h3>iPhone 与 iPad</h3>
+        <p>本网站以 App 形式体验最佳。在 Safari 中按以下 3 步操作：</p>
         <ol class="ios-steps">
-          <li>Tap the <strong>Share</strong> button ⤴</li>
-          <li>Choose <strong>Add to Home Screen</strong></li>
-          <li>Tap <strong>Add</strong> — the app is now on your home screen</li>
+          <li>点击 <strong>分享</strong> 按钮 ⤴</li>
+          <li>选择 <strong>添加到主屏幕</strong></li>
+          <li>点击 <strong>添加</strong>——应用已出现在主屏幕</li>
         </ol>
       </div>
     </div>
-    <p class="app-note">📶 Works offline — product lines, prices and contact details stay available without an internet connection.</p>
+    <p class="app-note">📶 支持离线使用——产品线、价格与联系方式在无网络时依然可用。</p>
   </div>
 </section>
 
@@ -477,15 +468,15 @@
 <section class="sd" id="sd">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Supply &amp; Demand Board</h2>
-      <p>Chinese sellers post what they supply, international buyers post what they need — Qiansi matches both sides and handles the rest.</p>
+      <h2>供需对接板</h2>
+      <p>中国卖家发布供应，海外买家发布需求——千丝负责撮合双方，并处理后续所有环节。</p>
     </div>
 
     <!-- Sellers post supply -->
     <div class="sd-panel">
       <div class="sd-head">
-        <h3>📤 Chinese Sellers — Find Buyers</h3>
-        <p>Post your goods, stock type, delivery time and channel. Buyers contact you through the platform. Pre-sell crops or goods still in production — list them with an expected delivery date.</p>
+        <h3>📤 中国卖家——寻找买家</h3>
+        <p>发布您的商品、库存类型、交货时间与发货渠道，买家通过平台联系您。预售或生产中货物同样可以发布——请标注预计交货日期。</p>
       </div>
       <form id="supply-form" action="https://formsubmit.co/2103476619@qq.com" method="POST" novalidate>
         <input type="hidden" name="_captcha" value="false">
@@ -493,67 +484,67 @@
         <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="row">
           <div class="field">
-            <label for="sup-product">Product name *</label>
-            <input type="text" id="sup-product" name="product" required placeholder="e.g. Non-slip stainless steel cat bowl">
+            <label for="sup-product">产品名称 *</label>
+            <input type="text" id="sup-product" name="product" required placeholder="例如：不锈钢防滑猫碗">
           </div>
           <div class="field">
-            <label for="sup-cat">Category</label>
+            <label for="sup-cat">品类</label>
             <select id="sup-cat" name="category">
-              <option>Pet Supplies</option>
-              <option>Car Phone Mounts</option>
-              <option>LED Strip Lights</option>
-              <option>Other</option>
+              <option value="Pet Supplies">宠物用品</option>
+              <option value="Car Phone Mounts">车载手机支架</option>
+              <option value="LED Strip Lights">LED 灯带</option>
+              <option value="Other">其他</option>
             </select>
           </div>
         </div>
         <div class="row">
           <div class="field">
-            <label>In stock or made to order?</label>
+            <label>有现货还是按单生产？</label>
             <div class="radio-row">
-              <label class="radio"><input type="radio" name="stocktype" value="in stock" checked> In stock</label>
-              <label class="radio"><input type="radio" name="stocktype" value="made to order"> Made to order</label>
-              <label class="radio"><input type="radio" name="stocktype" value="Presale / Futures"> Presale / Futures</label>
+              <label class="radio"><input type="radio" name="stocktype" value="in stock" checked> 有现货</label>
+              <label class="radio"><input type="radio" name="stocktype" value="made to order"> 按单生产</label>
+              <label class="radio"><input type="radio" name="stocktype" value="Presale / Futures"> 预售 / 期货</label>
             </div>
           </div>
           <div class="field">
-            <label for="sup-moq">Minimum order (MOQ) *</label>
-            <input type="text" id="sup-moq" name="moq" required placeholder="e.g. 100 pcs">
+            <label for="sup-moq">起订量（MOQ）*</label>
+            <input type="text" id="sup-moq" name="moq" required placeholder="例如：100 件">
           </div>
         </div>
         <div class="row">
           <div class="field">
-            <label for="sup-delivery">Delivery time</label>
-            <input type="text" id="sup-delivery" name="delivery" placeholder="e.g. 7–15 days after order">
+            <label for="sup-delivery">交货时间</label>
+            <input type="text" id="sup-delivery" name="delivery" placeholder="例如：下单后 7–15 天">
           </div>
           <div class="field">
-            <label for="sup-channel">Shipping channel</label>
+            <label for="sup-channel">发货渠道</label>
             <select id="sup-channel" name="channel">
-              <option>Small parcel</option>
-              <option>Dedicated line</option>
-              <option>Sea freight</option>
-              <option>Air freight</option>
-              <option>Any</option>
+              <option value="Small parcel">小包</option>
+              <option value="Dedicated line">专线</option>
+              <option value="Sea freight">海运</option>
+              <option value="Air freight">空运</option>
+              <option value="Any">均可</option>
             </select>
           </div>
         </div>
         <div class="row">
           <div class="field">
-            <label for="sup-market">Target market</label>
-            <input type="text" id="sup-market" name="market" placeholder="e.g. Brazil, Malaysia, Global">
+            <label for="sup-market">目标市场</label>
+            <input type="text" id="sup-market" name="market" placeholder="例如：巴西、马来西亚、全球">
           </div>
           <div class="field">
-            <label for="sup-contact">Contact *</label>
-            <input type="text" id="sup-contact" name="contact" required placeholder="WeChat / WhatsApp / email">
+            <label for="sup-contact">联系方式 *</label>
+            <input type="text" id="sup-contact" name="contact" required placeholder="微信 / WhatsApp / 邮箱">
           </div>
         </div>
         <div class="field">
-          <label class="checkbox"><input type="checkbox" name="private" value="yes"> Keep private — do not show on the public board; the platform arranges the match privately</label>
+          <label class="checkbox"><input type="checkbox" name="private" value="yes"> 保持私密——不在公共版面展示，由平台私下安排对接</label>
         </div>
-        <div class="compliance-warn">⚠️ Listings involving restricted or prohibited goods (weapons, drugs, whole vehicles, rare earths, controlled dual-use items, etc.) are subject to platform review before being published.</div>
+        <div class="compliance-warn">⚠️ 涉及管制或违禁品的发布（武器、毒品、整车、稀土、受控两用物项等），发布前须经平台审核。</div>
         <div class="field">
-          <label class="checkbox"><input type="checkbox" name="compliance" required> I confirm this listing complies with China's export control regulations and the destination country's import regulations.</label>
+          <label class="checkbox"><input type="checkbox" name="compliance" required> 我确认本发布符合中国出口管制法规及目的国进口法规。</label>
         </div>
-        <button type="submit" class="btn dark">Post Supply</button>
+        <button type="submit" class="btn dark">发布供应</button>
         <div id="supply-msg" class="sd-msg" role="status"></div>
       </form>
     </div>
@@ -561,39 +552,39 @@
     <!-- Latest supply (real 1688 sourcing data) -->
     <div class="sd-list-wrap">
       <div class="sd-list-head">
-        <h3>Latest Supply</h3>
-        <span class="sd-badge">Live 1688 sourcing data</span>
+        <h3>最新供应</h3>
+        <span class="sd-badge">实时 1688 采购数据</span>
       </div>
       <div class="sd-list">
         <div class="sd-item">
-          <div class="sd-item-top"><h4>2-in-1 Automatic Pet Feeder &amp; Water Dispenser</h4><span class="sd-tag">In stock</span></div>
-          <p class="sd-meta">Pet Supplies · from ¥0.14/pc · MOQ 100 pcs · delivery 5–10 days · small parcel · target: Brazil &amp; Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <div class="sd-item-top"><h4>二合一自动宠物喂食器+饮水机</h4><span class="sd-tag">有现货</span></div>
+          <p class="sd-meta">宠物用品 · ¥0.14/件起 · MOQ 100 件 · 5–10 天交货 · 小包 · 目标市场：巴西与马来西亚</p>
+          <a class="src" href="https://detail.1688.com/offer/758327979016.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="sd-item">
-          <div class="sd-item-top"><h4>Stainless Steel Non-Slip Cat Bowl</h4><span class="sd-tag">In stock</span></div>
-          <p class="sd-meta">Pet Supplies · ¥0.14–10.2/pc · MOQ 200 pcs · delivery 7–15 days · dedicated line · target: Brazil</p>
-          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <div class="sd-item-top"><h4>不锈钢防滑猫碗</h4><span class="sd-tag">有现货</span></div>
+          <p class="sd-meta">宠物用品 · ¥0.14–10.2/件 · MOQ 200 件 · 7–15 天交货 · 专线 · 目标市场：巴西</p>
+          <a class="src" href="https://detail.1688.com/offer/1042514610886.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="sd-item">
-          <div class="sd-item-top"><h4>Cycling / E-Bike Phone Mount</h4><span class="sd-tag mto">Made to order</span></div>
-          <p class="sd-meta">Car Phone Mounts · ¥1.67–7.5/pc · MOQ 500 pcs · delivery 10–20 days · sea freight · target: Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <div class="sd-item-top"><h4>骑行 / 电动车手机支架</h4><span class="sd-tag mto">按单生产</span></div>
+          <p class="sd-meta">车载手机支架 · ¥1.67–7.5/件 · MOQ 500 件 · 10–20 天交货 · 海运 · 目标市场：马来西亚</p>
+          <a class="src" href="https://detail.1688.com/offer/1001897675831.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="sd-item">
-          <div class="sd-item-top"><h4>Suction Cup Gravity-Sensing Phone Holder</h4><span class="sd-tag">In stock</span></div>
-          <p class="sd-meta">Car Phone Mounts · ¥1.67–7.5/pc · MOQ 100 pcs · delivery 7–12 days · small parcel · target: Brazil</p>
-          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <div class="sd-item-top"><h4>吸盘重力感应手机支架</h4><span class="sd-tag">有现货</span></div>
+          <p class="sd-meta">车载手机支架 · ¥1.67–7.5/件 · MOQ 100 件 · 7–12 天交货 · 小包 · 目标市场：巴西</p>
+          <a class="src" href="https://detail.1688.com/offer/842828909366.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="sd-item">
-          <div class="sd-item-top"><h4>220V COB Waterproof LED Strip (Outdoor)</h4><span class="sd-tag">In stock</span></div>
-          <p class="sd-meta">LED Strip Lights · from ¥2.82/pc · MOQ 50 rolls · delivery 5–10 days · air freight · target: Brazil &amp; Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <div class="sd-item-top"><h4>220V 防水 COB LED 灯带（户外）</h4><span class="sd-tag">有现货</span></div>
+          <p class="sd-meta">LED 灯带 · ¥2.82/件起 · MOQ 50 卷 · 5–10 天交货 · 空运 · 目标市场：巴西与马来西亚</p>
+          <a class="src" href="https://detail.1688.com/offer/1067667524995.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
         <div class="sd-item">
-          <div class="sd-item-top"><h4>Silicone Waterproof LED Linear Strip</h4><span class="sd-tag mto">Made to order</span></div>
-          <p class="sd-meta">LED Strip Lights · ¥10.74/pc · MOQ 100 rolls · delivery 15–25 days · sea freight · target: Malaysia</p>
-          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">View on 1688 ↗</a>
+          <div class="sd-item-top"><h4>防水硅胶 LED 灯带</h4><span class="sd-tag mto">按单生产</span></div>
+          <p class="sd-meta">LED 灯带 · ¥10.74/件 · MOQ 100 卷 · 15–25 天交货 · 海运 · 目标市场：马来西亚</p>
+          <a class="src" href="https://detail.1688.com/offer/919185131217.html" target="_blank" rel="noopener">查看 1688 原链接 ↗</a>
         </div>
       </div>
     </div>
@@ -601,8 +592,8 @@
     <!-- Buyers post demand -->
     <div class="sd-panel">
       <div class="sd-head">
-        <h3>🛒 International Buyers — Post Your Demand</h3>
-        <p>Tell us what you want to buy — product, quantity, destination and budget. Chinese suppliers reach out to you.</p>
+        <h3>🛒 海外买家——发布您的需求</h3>
+        <p>告诉我们您想采购什么——产品、数量、目的港与预算。中国供应商会主动联系您。</p>
       </div>
       <form id="demand-form" action="https://formsubmit.co/2103476619@qq.com" method="POST" novalidate>
         <input type="hidden" name="_captcha" value="false">
@@ -610,35 +601,35 @@
         <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="row">
           <div class="field">
-            <label for="dem-product">What do you want to buy? *</label>
-            <input type="text" id="dem-product" name="product" required placeholder="e.g. Stainless steel cat bowls">
+            <label for="dem-product">您想买什么？*</label>
+            <input type="text" id="dem-product" name="product" required placeholder="例如：不锈钢猫碗">
           </div>
           <div class="field">
-            <label for="dem-qty">Quantity *</label>
-            <input type="text" id="dem-qty" name="quantity" required placeholder="e.g. 1,000 pcs">
+            <label for="dem-qty">数量 *</label>
+            <input type="text" id="dem-qty" name="quantity" required placeholder="例如：1,000 件">
           </div>
         </div>
         <div class="row">
           <div class="field">
-            <label for="dem-dest">Destination *</label>
-            <input type="text" id="dem-dest" name="destination" required placeholder="e.g. São Paulo, Brazil">
+            <label for="dem-dest">目的港/目的地 *</label>
+            <input type="text" id="dem-dest" name="destination" required placeholder="例如：巴西圣保罗">
           </div>
           <div class="field">
-            <label for="dem-budget">Budget</label>
-            <input type="text" id="dem-budget" name="budget" placeholder="e.g. US$0.50/pc CIF">
+            <label for="dem-budget">预算</label>
+            <input type="text" id="dem-budget" name="budget" placeholder="例如：US$0.50/件 CIF">
           </div>
         </div>
         <div class="field">
-          <label for="dem-contact">Contact *</label>
-          <input type="text" id="dem-contact" name="contact" required placeholder="WhatsApp / email">
+          <label for="dem-contact">联系方式 *</label>
+          <input type="text" id="dem-contact" name="contact" required placeholder="WhatsApp / 邮箱">
         </div>
         <div class="field">
-          <label class="checkbox"><input type="checkbox" name="private" value="yes"> Keep private — do not show on the public board; the platform arranges the match privately</label>
+          <label class="checkbox"><input type="checkbox" name="private" value="yes"> 保持私密——不在公共版面展示，由平台私下安排对接</label>
         </div>
         <div class="field">
-          <label class="checkbox"><input type="checkbox" name="compliance" required> I confirm this listing complies with China's export control regulations and the destination country's import regulations.</label>
+          <label class="checkbox"><input type="checkbox" name="compliance" required> 我确认本发布符合中国出口管制法规及目的国进口法规。</label>
         </div>
-        <button type="submit" class="btn dark">Post Demand</button>
+        <button type="submit" class="btn dark">发布需求</button>
         <div id="demand-msg" class="sd-msg" role="status"></div>
       </form>
     </div>
@@ -646,13 +637,13 @@
     <!-- Latest demand (manually curated by the platform) -->
     <div class="sd-list-wrap">
       <div class="sd-list-head">
-        <h3>Latest Demand</h3>
-        <span class="sd-badge">Posted by buyers</span>
+        <h3>最新需求</h3>
+        <span class="sd-badge">买家发布</span>
       </div>
       <div class="sd-list">
-        <p class="sd-empty">No public demand yet — post yours above. Private requests are matched offline by the platform.</p>
+        <p class="sd-empty">暂无公开需求——请在下方发布您自己的需求。私密需求由平台线下撮合。</p>
       </div>
-      <p class="sd-note">🔒 Checking "keep private" hides your listing from the public board; the platform introduces you to matched partners privately.</p>
+      <p class="sd-note">🔒 勾选"保持私密"后您的发布不会出现在公共版面；平台会私下为您对接匹配的合作伙伴。</p>
     </div>
   </div>
 </section>
@@ -661,8 +652,8 @@
 <section class="inquiry" id="inquiry">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Send Your Inquiry</h2>
-      <p>Tell us what you need — we reply within 24 hours with prices, shipping options and a quote.</p>
+      <h2>发送询盘</h2>
+      <p>告诉我们您需要什么——我们会在 24 小时内回复价格、运输方案与报价。</p>
     </div>
     <form id="lead-form" action="https://formsubmit.co/2103476619@qq.com" method="POST" novalidate>
       <input type="hidden" name="_captcha" value="false">
@@ -670,21 +661,21 @@
       <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="row">
         <div class="field">
-          <label for="name">Your Name *</label>
-          <input type="text" id="name" name="name" required placeholder="e.g. João Silva">
+          <label for="name">您的姓名 *</label>
+          <input type="text" id="name" name="name" required placeholder="例如：张三">
         </div>
         <div class="field">
-          <label for="whatsapp">WhatsApp or Email *</label>
-          <input type="text" id="whatsapp" name="whatsapp" required placeholder="WhatsApp number or email — how we reach you">
+          <label for="whatsapp">WhatsApp 或邮箱 *</label>
+          <input type="text" id="whatsapp" name="whatsapp" required placeholder="WhatsApp 号码或邮箱——我们通过它联系您">
         </div>
       </div>
       <div class="field">
-        <label for="message">Your Requirement</label>
-        <textarea id="message" name="message" placeholder="e.g. 500 cat bowls, target price R$…, ship to São Paulo"></textarea>
+        <label for="message">您的需求</label>
+        <textarea id="message" name="message" placeholder="例如：500 个猫碗，目标价 R$…，发往圣保罗"></textarea>
       </div>
-      <button type="submit" class="btn">Submit Inquiry</button>
+      <button type="submit" class="btn">提交询盘</button>
       <div id="form-msg" role="status"></div>
-      <p class="form-note">Your information is only used to respond to your inquiry.</p>
+      <p class="form-note">您的信息仅用于回复您的询盘。</p>
     </form>
   </div>
 </section>
@@ -694,35 +685,35 @@
   <div class="wrap">
     <div class="cols">
       <div>
-        <h5>Qiansi Sourcing <span class="zh">千丝采购</span></h5>
-        <p>Kunming Zhoubiao Trading Co., Ltd. <span class="zh">昆明周标贸易有限责任公司</span></p>
-        <p class="zh">Registered in Kunming, Yunnan, China · Verifiable in the national enterprise credit system</p>
-        <p class="zh">China sourcing partner for importers &amp; wholesalers</p>
+        <h5>千丝采购 <span class="zh">Qiansi Sourcing</span></h5>
+        <p>昆明周标贸易有限责任公司 <span class="zh">Kunming Zhoubiao Trading Co., Ltd.</span></p>
+        <p class="zh">注册于中国云南昆明 · 可在国家企业信用信息公示系统查证</p>
+        <p class="zh">面向进口商与批发商的中国采购合作伙伴</p>
       </div>
       <div>
-        <h5>Contact</h5>
-        <p>Email: <a href="mailto:zhoubiao@zhoubiaotrade.cn">zhoubiao@zhoubiaotrade.cn</a></p>
-        <p>Working hours: Mon – Sat (GMT+8) · 9:00–18:00</p>
+        <h5>联系方式</h5>
+        <p>邮箱：<a href="mailto:zhoubiao@zhoubiaotrade.cn">zhoubiao@zhoubiaotrade.cn</a></p>
+        <p>工作时间：周一至周六（GMT+8）· 9:00–18:00</p>
       </div>
       <div>
-        <h5>Quick Links</h5>
-        <p><a href="#products">Product Lines</a></p>
-        <p><a href="#how">How We Work</a></p>
-        <p><a href="#logistics">Shipping &amp; Logistics</a></p>
-        <p><a href="#inquiry">Send Inquiry</a></p>
+        <h5>快捷链接</h5>
+        <p><a href="#products">产品线</a></p>
+        <p><a href="#how">服务流程</a></p>
+        <p><a href="#logistics">运输与物流</a></p>
+        <p><a href="#inquiry">发送询盘</a></p>
       </div>
     </div>
     <div class="terms">
-      <p><strong>Our commitment:</strong> goods are photo/video-confirmed before shipping and dispatched after your confirmation; transit damage is covered by shipping insurance; quality issues are handled within 15 days with photos/videos (return, replacement or re-shipment per responsibility). Not satisfied with your first order? The service fee is refundable.</p>
+      <p><strong>我们的承诺：</strong>货物发货前经照片/视频确认，经您确认后才发货；运输途损由运输保险承保；质量问题凭照片/视频 15 天内处理（按责任退换或补发）。首单不满意？服务费可退。</p>
     </div>
-    <div class="copy">© 2026 Kunming Zhoubiao Trading Co., Ltd. · Qiansi Sourcing. All rights reserved.</div>
+    <div class="copy">© 2026 昆明周标贸易有限责任公司 · 千丝采购。保留所有权利。</div>
   </div>
 </footer>
 
 <script>
 (function(){
-  // Lead capture: native form POST to FormSubmit (free email endpoint for static hosting).
-  // First submission sends an activation email to 2103476619@qq.com; click the link to activate.
+  // 线索收集：原生表单 POST 到 FormSubmit（静态托管的免费邮件端点）。
+  // 首次提交会向 2103476619@qq.com 发送激活邮件；点击链接激活后即可正常收件。
 
   var form = document.getElementById('lead-form');
   var msg  = document.getElementById('form-msg');
@@ -734,8 +725,8 @@
   }
 
   form.addEventListener('submit', function(e){
-    // Honeypot — silently ignore bot submissions
-    if (form.company.value !== '') { show('Thank you! We will get back to you shortly.', true); form.reset(); e.preventDefault(); return; }
+    // Honeypot——静默忽略机器人提交
+    if (form.company.value !== '') { show('谢谢！我们会尽快回复您。', true); form.reset(); e.preventDefault(); return; }
 
     var payload = {
       name:     form.name.value.trim(),
@@ -745,12 +736,12 @@
 
     if (!payload.name || !payload.whatsapp) {
       e.preventDefault();
-      show('Please fill in your name and a contact (WhatsApp or email).', false);
+      show('请填写姓名和联系方式（WhatsApp 或邮箱）。', false);
       return;
     }
 
-    // If JS is available, submit via fetch to FormSubmit so we can show an inline result
-    // without leaving the page. Fall back to native form POST if fetch fails.
+    // JS 可用时通过 fetch 提交到 FormSubmit，以便页内显示结果、不跳转页面。
+    // fetch 失败时回退到原生表单 POST。
     e.preventDefault();
     var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
 
@@ -762,22 +753,22 @@
       if (!r.ok) throw new Error('bad status');
       return r.json();
     }).then(function(d){
-      done(true, '✓ Thank you, ' + payload.name.split(' ')[0] + '! Your inquiry has been received. We will reply within 24 hours.');
+      done(true, '✓ 谢谢，' + payload.name.split(' ')[0] + '！您的询盘已收到，我们将在 24 小时内回复。');
     }).catch(function(){
-      done(false, 'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn');
+      done(false, '抱歉，提交失败。请直接发邮件至 zhoubiao@zhoubiaotrade.cn');
     });
   });
 })();
 </script>
 <script>
 (function(){
-  // PWA install: show the native install prompt where supported (Android/Chrome),
-  // and fall back to a manual "add to home screen" hint for other browsers.
+  // PWA 安装：支持的环境（Android/Chrome）弹出原生安装提示，
+  // 其他浏览器回退到手动"添加到主屏幕"提示。
   var btn = document.getElementById('install-app-btn');
   var alt = document.getElementById('install-app-alt');
   var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  if (isIOS) return; // iOS has no install prompt — the Safari guide is shown instead
+  if (isIOS) return; // iOS 无安装提示——直接显示 Safari 操作指引
 
   var deferred = null;
   window.addEventListener('beforeinstallprompt', function (e) {
@@ -800,7 +791,7 @@
       });
     });
   }
-  // No install prompt fired (unsupported browser / desktop) — show manual steps
+  // 未触发安装提示（不支持的浏览器/桌面端）——显示手动步骤
   setTimeout(function () {
     if (!deferred && alt) alt.hidden = false;
   }, 3000);
@@ -808,8 +799,7 @@
 </script>
 <script>
 (function(){
-  // Supply & Demand forms: same FormSubmit flow as the lead form, with per-form
-  // inline success/error messages (no page reload).
+  // 供需表单：与询盘表单相同的 FormSubmit 流程，每个表单独立页内成功/错误提示（不刷新页面）。
   function wire(formId, msgId, okText, errText, warnList, warnText) {
     var form = document.getElementById(formId);
     var msg = document.getElementById(msgId);
@@ -820,10 +810,10 @@
       msg.style.display = 'block';
     }
     form.addEventListener('submit', function (e) {
-      // Honeypot — silently ignore bot submissions
+      // Honeypot——静默忽略机器人提交
       if (form.company.value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
       e.preventDefault();
-      // Restricted-goods keyword check: warn but never block the submission.
+      // 受限品类关键词检查：仅提示，绝不拦截提交。
       var flagged = false;
       if (warnList) {
         var cat = form.category && form.category.value ? form.category.value.toLowerCase() : '';
@@ -835,7 +825,7 @@
           if (hay.indexOf(warnList[i]) !== -1) { flagged = warnList[i]; break; }
         }
       }
-      if (flagged) show(warnText + ' (keyword: ' + flagged + ')', 'warn');
+      if (flagged) show(warnText + '（命中关键词：' + flagged + '）', 'warn');
       fetch(form.action, {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
@@ -844,7 +834,7 @@
         if (!r.ok) throw new Error('bad status');
         return r.json();
       }).then(function () {
-        show(flagged ? warnText + ' Submitted — the platform will review compliance before matching.' : okText, flagged ? 'warn' : true);
+        show(flagged ? warnText + ' 已提交——平台将在撮合前人工复核合规性。' : okText, flagged ? 'warn' : true);
         form.reset();
       }).catch(function () {
         show(errText, false);
@@ -852,13 +842,13 @@
     });
   }
   wire('supply-form', 'supply-msg',
-    '✓ Received! The platform will contact you within 24 hours.',
-    'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn',
-    ['weapon', 'arms', 'drug', 'narcotic', 'vehicle', 'car', 'rare earth', 'uranium', 'chemical weapon', 'explosive'],
-    '⚠️ This category may be subject to export controls or import restrictions — the platform will manually review compliance before connecting you.');
+    '✓ 已收到！平台将在 24 小时内联系您。',
+    '抱歉，提交失败。请直接发邮件至 zhoubiao@zhoubiaotrade.cn',
+    ['weapon', 'arms', 'drug', 'narcotic', 'vehicle', 'car', 'rare earth', 'uranium', 'chemical weapon', 'explosive', '武器', '军火', '毒品', '麻醉', '车辆', '汽车', '稀土', '铀', '化学武器', '爆炸'],
+    '⚠️ 该品类可能受出口管制或进口限制——平台将在对接前人工复核合规性。');
   wire('demand-form', 'demand-msg',
-    '✓ Received! Chinese suppliers will be matched to your request within 24 hours.',
-    'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn');
+    '✓ 已收到！平台将在 24 小时内为您匹配中国供应商。',
+    '抱歉，提交失败。请直接发邮件至 zhoubiao@zhoubiaotrade.cn');
 })();
 </script>
 <script>
