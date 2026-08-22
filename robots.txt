@@ -4,7 +4,10 @@
 # 只显式放行主流搜索引擎与 AI 助手的官方爬虫；未列入的 UA 一律禁止抓取，
 # 以阻止批量采集商业信息（产品线、市场、联系方式）与恶意爬虫。
 # 注意：robots.txt 是"君子协定"，真正的执行层在 Cloudflare Bot Fight Mode（见安全基线文档）。
-# Cloudflare 会在本文件后追加其托管管理段（CloudflareBrowserRenderingCrawler 等），不影响以上策略。
+# ⚠️ 若 Cloudflare 的「托管 robots.txt (Managed robots.txt)」开关被打开，它会在本文件【前置】插入
+#    一段含 AI 爬虫 Disallow: / 的托管段，且按 RFC 9309 等长路径冲突取 Disallow，会覆盖下方放行规则，
+#    导致 GPTBot/ClaudeBot/Google-Extended/CCBot/Bytespider/Amazonbot/Meta-ExternalAgent 被禁。
+#    要保持本站对 AI 爬虫放行，需保持该开关为「关闭」（2026-08-23 已在 Cloudflare 后台关闭并复验通过）。
 
 # --- 主流搜索引擎（索引 + 展示） ---
 User-agent: Googlebot
