@@ -132,6 +132,13 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到斯洛伐克（英文 / English）: https://xn--yhq58j.com/guide/import-to-slovakia.html
 - 进口到捷克（英文 / English）: https://xn--yhq58j.com/guide/import-to-czechia.html
 - 进口到北马其顿（英文 / English）: https://xn--yhq58j.com/guide/import-to-north-macedonia.html
+- 进口到爱沙尼亚（英文 / English）: https://xn--yhq58j.com/guide/import-to-estonia.html
+- 进口到拉脱维亚（英文 / English）: https://xn--yhq58j.com/guide/import-to-latvia.html
+- 进口到立陶宛（英文 / English）: https://xn--yhq58j.com/guide/import-to-lithuania.html
+- 进口到摩尔多瓦（英文 / English）: https://xn--yhq58j.com/guide/import-to-moldova.html
+- 进口到波黑（英文 / English）: https://xn--yhq58j.com/guide/import-to-bosnia-herzegovina.html
+- 进口到阿尔巴尼亚（英文 / English）: https://xn--yhq58j.com/guide/import-to-albania.html
+- 进口到黑山（英文 / English）: https://xn--yhq58j.com/guide/import-to-montenegro.html
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
 - 越南：人口 1.02 亿 · 2025 GDP 5,140 亿美元 · 双边贸易 2,961.4 亿美元（+13.7%）· 中国对越出口 1,981.5 亿美元（+22.4%）· 电子电气 1,127.2 亿美元为第一大进口品类 · 互联网渗透 78.8%【外交部 2026-04 / TradingEconomics·UN COMTRADE / DataReportal 2025-01】
