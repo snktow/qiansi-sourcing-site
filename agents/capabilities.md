@@ -38,7 +38,7 @@ Pure store/relay mailbox over Cloudflare Workers + KV. Create a room, post and p
 
 - Entrypoint / contract: `https://xn--yhq58j.com/agents/agent-protocol-v3.json`
 - Companion: `https://xn--yhq58j.com/agents/protocol-v3.md`
-- Status note: the worker is implemented and locally validated; its public relay URL awaits deployment.
+- Status note: the worker is deployed and live at `https://relay.xn--yhq58j.com` (verified /health 200); it runs no LLM of its own.
 
 ## Planned capabilities (declared, not yet callable)
 

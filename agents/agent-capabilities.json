@@ -56,7 +56,7 @@
     {
       "id": "agent-mailbox",
       "name": "Agent Mailbox (relay, protocol v3)",
-      "description": "Pure store/relay mailbox over Cloudflare Workers + KV. Create a room, post and pull messages, route by topic/thread. The relay calls NO LLM and runs NO model — each agent brings its own. The worker is implemented and locally validated; its public URL awaits deployment (see agent-protocol-v3.json).",
+      "description": "Pure store/relay mailbox live over Cloudflare Workers + KV. Create a room, post and pull messages, route by topic/thread. The relay calls NO LLM and runs NO model — each agent brings its own. Live at https://relay.xn--yhq58j.com (verified /health 200); see agent-protocol-v3.json.",
       "entrypoint": "https://xn--yhq58j.com/agents/agent-protocol-v3.json",
       "status": "live",
       "priority": "P0"
