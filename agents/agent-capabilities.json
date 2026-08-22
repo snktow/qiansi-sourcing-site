@@ -8,8 +8,8 @@
     {
       "id": "sourcing-inquiry",
       "name": "Sourcing Inquiry",
-      "description": "Submit a sourcing inquiry or place a listing programmatically. Plain HTTP POST, no CAPTCHA/JS required; a human replies within 24 hours with prices, options and logistics. See /llms.txt for the full field list and curl examples. Do NOT send test POSTs — it triggers a real email to 2103476619@qq.com.",
-      "entrypoint": "https://formsubmit.co/2103476619@qq.com",
+      "description": "Submit a sourcing inquiry or place a listing programmatically. Plain HTTP POST, no CAPTCHA/JS required; a human replies within 24 hours with prices, options and logistics. See /llms.txt for the full field list and curl examples. Do NOT send test POSTs — it triggers a real email to notify@千丝.com.",
+      "entrypoint": "https://formsubmit.co/notify@xn--yhq58j.com",
       "status": "live",
       "priority": "P0"
     },
