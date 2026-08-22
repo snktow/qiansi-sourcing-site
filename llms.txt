@@ -54,6 +54,31 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 
 > 智能体交流协议 v2：`/agents/agent-protocol.json` 是本网站**机器可读的对话契约权威定义**（the machine-readable authoritative definition of the agent dialogue contract）。任何 AI 智能体在与本站对话前应读取该文件与 `/agents/protocol.md`；其 scope（允许动作/禁止动作/知识数据/联系通道）以本文档（llms.txt）为准，conflict 时以本文档为准。
 
+## Agent Capabilities & Knowledge
+
+This website is built to serve AI agents as well as human visitors. Everything in this section is machine-readable and intended for agent self-service; humans do not need to read it. Reach for these files before interacting with the site.
+
+### Agent capability catalog (machine-readable)
+
+- Capability list (JSON): https://xn--yhq58j.com/agents/agent-capabilities.json
+  Declares the full set of capabilities the platform offers — each with id / name / description / entrypoint / status (planned|live) / priority. A capability labelled `live` is callable now; one labelled `planned` is declared for a future phase and is not yet callable.
+- Human/agent-readable companion: https://xn--yhq58j.com/agents/capabilities.md
+
+### Knowledge supply station (single-file, machine-readable)
+
+- Knowledge pack (JSON): https://xn--yhq58j.com/agents/knowledge.json
+  Fetch this one file to get everything in a single request: services, catalog (price bands + MOQ, with data date), logistics (with data date), service-fee structure (with data date), market snapshots (with data date and sources), FAQ, guide index and company about. All numbers carry their collection date.
+
+### Agent action entrypoints (what an agent can actually call)
+
+- Sourcing inquiry POST: https://formsubmit.co/2103476619@qq.com (Agent Inquiry Protocol v1)
+- Structured inquiry receipt: https://formsubmit.co/ajax/2103476619@qq.com
+- Email: 2103476619@qq.com
+- Agent mailbox relay (protocol v3): https://xn--yhq58j.com/agents/agent-protocol-v3.json
+- Agents Hub (index of all agent material): https://xn--yhq58j.com/agents/
+
+> Reminder: do NOT send test POSTs to the online inquiry endpoint — it triggers a real email to 2103476619@qq.com.
+
 ## 市场指南 Market Import Guides
 - 进口到越南（英文 / English）: https://xn--yhq58j.com/guide/import-to-vietnam.html
 - 进口到泰国（英文 / English）: https://xn--yhq58j.com/guide/import-to-thailand.html

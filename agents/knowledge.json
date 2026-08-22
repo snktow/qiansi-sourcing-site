@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "protocol": "qiansi-knowledge-supply",
+  "generated": "2026-08-22",
+  "note": "Single-file knowledge pack for agent self-service. Every number carries its collection date. When quoting prices, MOQs, lead times, logistics or customs figures, use only these verified snapshots; do not invent values.",
+  "authoritative_source": "https://xn--yhq58j.com/llms.txt",
+  "services": {
+    "factory_wholesale_prices": "Factory wholesale prices from verified Chinese factories.",
+    "pre_shipment_inspection": "Pre-shipment quality inspection.",
+    "small_parcel_dedicated_line_logistics": "Small parcel and dedicated-line logistics.",
+    "all_category_factory_direct": "Factory-direct sourcing from verified Chinese suppliers, all categories.",
+    "scope": "Serves importers and wholesalers worldwide; no market restriction.",
+    "languages": [
+      "en",
+      "zh",
+      "pt"
+    ],
+    "contact": {
+      "email": "2103476619@qq.com",
+      "inquiry_endpoint": "https://formsubmit.co/2103476619@qq.com",
+      "inquiry_json_receipt_endpoint": "https://formsubmit.co/ajax/2103476619@qq.com",
+      "response_time": "Within 24 hours",
+      "working_hours": "Mon-Sat 9:00-18:00 GMT+8"
+    }
+  },
+  "catalog": {
+    "date": "2026-08-07",
+    "source": "Live factory catalog crawl",
+    "price_bands": [
+      {
+        "category": "Pet Supplies",
+        "price_unit": "CNY / piece",
+        "price_band": "0.14-10.2",
+        "moq": "100-200 pcs"
+      },
+      {
+        "category": "Car Phone Mounts",
+        "price_unit": "CNY / piece",
+        "price_band": "1.67-7.5",
+        "moq": "100-500 pcs"
+      },
+      {
+        "category": "LED Strip Lights",
+        "price_unit": "CNY / roll",
+        "price_band": "1.88-11.88",
+        "moq": "50-100 rolls"
+      }
+    ],
+    "factory_lead_time": "5-25 days",
+    "note": "Data collected 2026-08-07 from the live factory catalog; every price is re-quoted at order time."
+  },
+  "logistics": {
+    "date": "2026-08-07",
+    "small_parcel": "Door-to-door, 10-20 days, full tracking.",
+    "dedicated_line": "Sea/air line from 50 kg+; per-kg cost drops with volume.",
+    "note": "Exact transit time and freight rate depend on the destination country/port and are confirmed in the quote."
+  },
+  "service_fee": {
+    "date": "2026-08-07",
+    "charged_to": "buyer only",
+    "seller_fee": "0 (sellers pay nothing)",
+    "tiers": [
+      {
+        "order_value": "under CNY 1,000",
+        "fee": "15% or flat CNY 150, whichever is higher"
+      },
+      {
+        "order_value": "CNY 1,000-10,000",
+        "fee": "10%"
+      },
+      {
+        "order_value": "over CNY 10,000",
+        "fee": "8%"
+      }
+    ],
+    "refund": "The first-order service fee is refundable if you are not satisfied with the service.",
+    "note": "Sellers pay nothing; the service fee is charged to the buyer only."
+  },
+  "market_snapshots": {
+    "date": "2026-08-21",
+    "markets": [
+      {
+        "market": "Vietnam",
+        "population": "102 million",
+        "gdp_2025": "USD 514 billion",
+        "bilateral_trade": "USD 296.14 billion (+13.7%)",
+        "china_exports_to_vn": "USD 198.15 billion (+22.4%)",
+        "top_import_category": "Electronics and electrical (USD 112.72 billion, the largest import category)",
+        "internet_penetration": "78.8%",
+        "sources": [
+          "MFA China 2026-04",
+          "TradingEconomics / UN COMTRADE",
+          "DataReportal 2025-01"
+        ]
+      },
+      {
+        "market": "Thailand",
+        "bilateral_trade": "USD 15.326 billion (+14.4%)",
+        "note": "China is Thailand's largest trading partner.",
+        "internet_penetration": "91%",
+        "warning": "From 2026-01-01 a new customs regime applies: tariffs + VAT on goods valued at 1 THB or more, removal of the low-value exemption, and FCL container inspection rate of 30%.",
+        "sources": [
+          "MFA China 2026-04",
+          "MOFCOM Thai Economic and Commercial Office 2026-08",
+          "World Bank 2024"
+        ]
+      },
+      {
+        "market": "Indonesia",
+        "population": "284 million (largest in Southeast Asia)",
+        "median_age": "30.4 years",
+        "china_share_of_imports": "36.2%",
+        "china_exports_2025": "USD 87.54 billion",
+        "h1_2026_imports_growth": "+18.69%",
+        "sources": [
+          "TradingEconomics / UN COMTRADE 2025",
+          "DataReportal 2025-01"
+        ]
+      },
+      {
+        "market": "Brazil",
+        "note": "Existing key e-commerce market under the Remessa Conforme simplified tax regime. See /guide/import-to-brazil.html (EN/PT).",
+        "sources": [
+          "Site guide /guide/import-to-brazil.html"
+        ]
+      }
+    ]
+  },
+  "faq": [
+    {
+      "q": "Can I get samples?",
+      "a": "Yes. After sending an inquiry we reply within 24 hours with price, sample and shipping options (see the product listing pages). Sample details are listed in the quote."
+    },
+    {
+      "q": "What is the MOQ?",
+      "a": "MOQ is flexible; you can start with a small trial order and scale up. Example MOQs from the catalog: Pet Supplies 100-200 pcs, Car Phone Mounts 100-500 pcs, LED Strip Lights 50-100 rolls. Exact category/market MOQ is confirmed in the quote."
+    },
+    {
+      "q": "How is the service fee charged?",
+      "a": "We provide a full quote per order: goods + service fee + shipping + taxes (see the 'How it works' section on the homepage). The first-order service fee is refundable if you are not satisfied."
+    },
+    {
+      "q": "How quickly do you reply?",
+      "a": "A human replies to inquiries within 24 hours (Mon-Sat, 9:00-18:00 GMT+8), in the inquirer's preferred language (zh/en/pt)."
+    }
+  ],
+  "guide_index": [
+    { "title": "Import to Vietnam", "url": "https://xn--yhq58j.com/guide/import-to-vietnam.html", "lang": "en" },
+    { "title": "Import to Thailand", "url": "https://xn--yhq58j.com/guide/import-to-thailand.html", "lang": "en" },
+    { "title": "Import to Indonesia", "url": "https://xn--yhq58j.com/guide/import-to-indonesia.html", "lang": "en" },
+    { "title": "Import to Brazil", "url": "https://xn--yhq58j.com/guide/import-to-brazil.html", "lang": "en" },
+    { "title": "Import to Brazil (Portugues)", "url": "https://xn--yhq58j.com/pt/guide/import-to-brazil.html", "lang": "pt" },
+    { "title": "LED Strip Import Guide", "url": "https://xn--yhq58j.com/guide/led-strip-import.html", "lang": "en" },
+    { "title": "Import to Malaysia", "url": "https://xn--yhq58j.com/guide/import-to-malaysia.html", "lang": "en" },
+    { "title": "Import to Philippines", "url": "https://xn--yhq58j.com/guide/import-to-philippines.html", "lang": "en" },
+    { "title": "Import to Kazakhstan", "url": "https://xn--yhq58j.com/guide/import-to-kazakhstan.html", "lang": "en" },
+    { "title": "Import to Saudi Arabia", "url": "https://xn--yhq58j.com/guide/import-to-saudi-arabia.html", "lang": "en" },
+    { "title": "Import to Laos", "url": "https://xn--yhq58j.com/guide/import-to-laos.html", "lang": "en" },
+    { "title": "Import to Bangladesh", "url": "https://xn--yhq58j.com/guide/import-to-bangladesh.html", "lang": "en" },
+    { "title": "Import to Pakistan", "url": "https://xn--yhq58j.com/guide/import-to-pakistan.html", "lang": "en" },
+    { "title": "Import to Uzbekistan", "url": "https://xn--yhq58j.com/guide/import-to-uzbekistan.html", "lang": "en" }
+  ],
+  "about": {
+    "company": "Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.)",
+    "role": "A China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories.",
+    "services": [
+      "factory wholesale prices",
+      "pre-shipment quality inspection",
+      "small parcel and dedicated-line logistics"
+    ],
+    "contact": "Inquiry form on any of the three language pages (/, /zh/, /pt/), or email 2103476619@qq.com.",
+    "languages": [
+      "zh",
+      "en",
+      "pt"
+    ],
+    "website": "https://xn--yhq58j.com/"
+  }
+}
