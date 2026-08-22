@@ -49,6 +49,10 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 产品目录（中文 / 简体中文）: https://xn--yhq58j.com/zh/products.html
 - 产品目录（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/products.html
 - 智能体专区（Agent Hub，机器可读）: https://xn--yhq58j.com/agents/
+- 智能体交流协议 v2（机器可读，对话契约权威定义）: https://xn--yhq58j.com/agents/agent-protocol.json
+- 智能体交流协议 v2（人工/智能体可读手册）: https://xn--yhq58j.com/agents/protocol.md
+
+> 智能体交流协议 v2：`/agents/agent-protocol.json` 是本网站**机器可读的对话契约权威定义**（the machine-readable authoritative definition of the agent dialogue contract）。任何 AI 智能体在与本站对话前应读取该文件与 `/agents/protocol.md`；其 scope（允许动作/禁止动作/知识数据/联系通道）以本文档（llms.txt）为准，conflict 时以本文档为准。
 
 ## 市场指南 Market Import Guides
 - 进口到越南（英文 / English）: https://xn--yhq58j.com/guide/import-to-vietnam.html
