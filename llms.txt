@@ -180,6 +180,8 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到马来西亚（马来语 / Bahasa Melayu）: https://xn--yhq58j.com/ms/guide/import-to-malaysia.html
 - 进口到菲律宾（菲律宾语 / Filipino）: https://xn--yhq58j.com/fil/guide/import-to-philippines.html
 - 进口到缅甸（缅甸语 / မြန်မာ）: https://xn--yhq58j.com/my/guide/import-to-myanmar.html
+- 进口到土耳其（土耳其语 / Türkçe）: https://xn--yhq58j.com/tr/guide/import-to-turkey.html
+- 进口到伊朗（波斯语 / فارسی）: https://xn--yhq58j.com/fa/guide/import-to-iran.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
