@@ -253,6 +253,27 @@
     .hero p.lead{max-width:820px}
   }
 
+
+  /* Qiansi Info Wall */
+  .wall-entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 18px}
+  .wall-entry{display:flex;flex-direction:column;gap:3px;background:#F0F4F8;border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:.2s}
+  .wall-entry:hover{background:#E7EEF4;transform:translateY(-2px)}
+  .wall-entry-ic{font-size:1.5rem}
+  .wall-entry-t{font-weight:700;color:var(--navy)}
+  .wall-entry-s{font-size:.8rem;color:var(--muted)}
+  .wall-filter{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .wall-filter .wf{font-size:.8rem;font-weight:600;padding:5px 14px;border-radius:14px;background:#EEF2F6;color:var(--navy)}
+  .wall-filter .wf.active{background:var(--navy);color:#fff}
+  .wall-filter input{flex:1;min-width:180px;margin:0}
+  .price-row{display:flex;gap:8px}
+  .price-row select{width:auto;flex:0 0 92px}
+  .price-row input{flex:1}
+  .wall-img{width:100%;height:150px;object-fit:cover;border-radius:8px;margin-bottom:8px;border:1px solid var(--line)}
+  .sd-desc{font-size:.85rem;color:var(--text);margin:0 0 8px}
+  .sd-item-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.78rem;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+  .wall-report{background:#FBEFEF;color:#C0392B;border:1px solid #E8C0C0;border-radius:8px;font-size:.75rem;padding:3px 10px;cursor:pointer}
+  .wall-report:disabled{opacity:.6;cursor:default}
+
 </style>
 <script type="application/ld+json">
 {
@@ -541,192 +562,121 @@
 </section>
 
 <!-- SUPPLY & DEMAND -->
+<!-- OFERTA E DEMANDA: Mural de Informações Qiansi -->
 <section class="sd" id="sd">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Painel de Oferta e Demanda</h2>
-      <p>Vendedores chineses publicam o que oferecem, compradores internacionais publicam o que precisam — a Qiansi faz a ponte entre os dois lados e cuida do resto.</p>
+      <h2>Mural de Oferta e Demanda</h2>
+      <p>Um quadro público onde vendedores chineses publicam o que oferecem e compradores internacionais publicam o que precisam. A Qiansi apresenta os dois lados — não recebemos pagamentos, não retemos fundos e não atuamos como intermediário de pagamento.</p>
     </div>
 
-    <!-- Sellers post supply -->
-    <div class="sd-panel">
+    <!-- Dois acessos visíveis: Publicar + Navegar -->
+    <div class="wall-entries">
+      <a href="#wall-publish" class="wall-entry">
+        <span class="wall-entry-ic">📤</span>
+        <span class="wall-entry-t">Publicar Oferta / Demanda</span>
+        <span class="wall-entry-s">Publique o que oferece ou precisa — alcance parceiros reais</span>
+      </a>
+      <a href="#wall-list" class="wall-entry">
+        <span class="wall-entry-ic">📋</span>
+        <span class="wall-entry-t">Navegar no Quadro Público</span>
+        <span class="wall-entry-s">Veja publicações em tempo real com dados de contato</span>
+      </a>
+    </div>
+
+    <div class="compliance-warn">ℹ️ Este é apenas um quadro de correspondência. A Qiansi conecta os dois lados e não recebe pagamentos, não retém fundos e não atua como intermediário. Os dados de contato são fornecidos por cada autor.</div>
+
+    <!-- Formulário de publicação -->
+    <div class="sd-panel" id="wall-publish">
       <div class="sd-head">
-        <h3>📤 Vendedores Chineses — Encontre Compradores</h3>
-        <p>Publique sua mercadoria, tipo de estoque, prazo de entrega e canal. Compradores entram em contato pela plataforma. Venda antecipada de safras ou produtos ainda em produção — publique com prazo de entrega previsto.</p>
+        <h3>📤 Publicar Oferta / Demanda</h3>
+        <p>Diga-nos o que você oferece ou precisa. Categorias restritas podem ser revisadas antes de aparecer publicamente.</p>
       </div>
-      <form id="supply-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="_blacklist" value="bitcoin,invest,casino,viagra,贷款,彩票,点击,click here">
-        <input type="hidden" name="_subject" value="Nova oferta de fornecimento — site Qiansi Sourcing">
-        <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <form id="wall-form" novalidate>
         <div class="row">
           <div class="field">
-            <label for="sup-product">Nome do produto *</label>
-            <input type="text" id="sup-product" name="product" required placeholder="ex.: Tigela de aço inoxidável antiderrapante para gatos">
-          </div>
-          <div class="field">
-            <label for="sup-cat">Categoria</label>
-            <select id="sup-cat" name="category">
-              <option>Suprimentos para Pets</option>
-              <option>Suportes de Celular para Carro</option>
-              <option>Fitas de LED</option>
-              <option>Outros</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label>Tem em estoque ou sob encomenda?</label>
+            <label>Eu sou… *</label>
             <div class="radio-row">
-              <label class="radio"><input type="radio" name="stocktype" value="em estoque" checked> Em estoque</label>
-              <label class="radio"><input type="radio" name="stocktype" value="sob encomenda"> Sob encomenda</label>
-              <label class="radio"><input type="radio" name="stocktype" value="Pré-venda"> Pré-venda</label>
+              <label class="radio"><input type="radio" name="wtype" value="seller" checked> Vendedor (eu ofereço)</label>
+              <label class="radio"><input type="radio" name="wtype" value="buyer"> Comprador (eu preciso)</label>
             </div>
           </div>
           <div class="field">
-            <label for="sup-moq">Quantidade mínima (MOQ) *</label>
-            <input type="text" id="sup-moq" name="moq" required placeholder="ex.: 100 unidades">
+            <label for="wall-name">Produto / item *</label>
+            <input type="text" id="wall-name" required placeholder="ex.: Fita LED 220V impermeável">
           </div>
         </div>
         <div class="row">
           <div class="field">
-            <label for="sup-delivery">Prazo de entrega</label>
-            <input type="text" id="sup-delivery" name="delivery" placeholder="ex.: 7–15 dias após o pedido">
+            <label for="wall-cat">Categoria *</label>
+            <input type="text" id="wall-cat" required placeholder="ex.: Luzes LED, artigos para pets">
           </div>
           <div class="field">
-            <label for="sup-channel">Canal de envio</label>
-            <select id="sup-channel" name="channel">
-              <option>Pequeno pacote</option>
-              <option>Linha dedicada</option>
-              <option>Frete marítimo</option>
-              <option>Frete aéreo</option>
-              <option>Qualquer</option>
-            </select>
+            <label for="wall-target">Mercado / destino</label>
+            <input type="text" id="wall-target" placeholder="ex.: Brasil, Polônia, mundo">
           </div>
         </div>
         <div class="row">
           <div class="field">
-            <label for="sup-market">Mercado-alvo</label>
-            <input type="text" id="sup-market" name="market" placeholder="ex.: Global (ou país específico)">
+            <label for="wall-price">Preço de referência</label>
+            <div class="price-row">
+              <select id="wall-currency">
+                <option>USD</option><option>EUR</option><option>BRL</option><option>CNY</option><option>RUB</option><option>PLN</option>
+              </select>
+              <input type="number" id="wall-price" min="0" step="any" placeholder="0.00">
+            </div>
           </div>
           <div class="field">
-            <label for="sup-contact">Contato *</label>
-            <input type="text" id="sup-contact" name="contact" required placeholder="WeChat / WhatsApp / e-mail">
+            <label for="wall-moq">MOQ / quantidade</label>
+            <input type="text" id="wall-moq" placeholder="ex.: 100 un.">
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="wall-delivery">Prazo de entrega</label>
+            <input type="text" id="wall-delivery" placeholder="ex.: 7–15 dias">
+          </div>
+          <div class="field">
+            <label for="wall-contact">Contato *</label>
+            <input type="text" id="wall-contact" required placeholder="WhatsApp / WeChat / e-mail">
           </div>
         </div>
         <div class="field">
-          <label class="checkbox"><input type="checkbox" name="private" value="sim"> Manter privado — não exibir no mural público; a plataforma faz a ponte em privado</label>
+          <label for="wall-desc">Detalhes</label>
+          <textarea id="wall-desc" rows="3" placeholder="Especificações, quantidade, embalagem, canal de envio…"></textarea>
         </div>
-        <div class="compliance-warn">⚠️ Publicações envolvendo mercadorias restritas ou proibidas (armas, drogas, veículos completos, terras raras, itens de uso duplo controlados etc.) estão sujeitas à revisão da plataforma antes da publicação.</div>
         <div class="field">
-          <label class="checkbox"><input type="checkbox" name="compliance" required> Confirmo que esta publicação está em conformidade com as regulamentações de controle de exportação da China e com as regulamentações de importação do país de destino.</label>
+          <label for="wall-image">Imagem do produto (opcional, ≤2MB, jpg/webp/png)</label>
+          <input type="file" id="wall-image" accept="image/jpeg,image/webp,image/png">
         </div>
-        <button type="submit" class="btn dark">Publicar Oferta</button>
-        <div id="supply-msg" class="sd-msg" role="status"></div>
+        <div class="compliance-warn">⚠️ Bens restritos ou proibidos (armas, drogas, veículos completos, terras raras, itens de duplo uso controlados etc.) são revisados antes da publicação.</div>
+        <div class="field">
+          <label class="checkbox"><input type="checkbox" id="wall-compliance" required> Confirmo que esta publicação está em conformidade com as normas de controle de exportação da China e com as normas de importação do país de destino.</label>
+        </div>
+        <button type="submit" class="btn dark">Publicar</button>
+        <div id="wall-form-msg" class="sd-msg" role="status"></div>
       </form>
     </div>
 
-    <!-- Latest supply (dados reais de sourcing de fábrica) -->
-    <div class="sd-list-wrap">
+    <!-- Lista pública -->
+    <div class="sd-list-wrap" id="wall-list">
       <div class="sd-list-head">
-        <h3>Últimas Ofertas</h3>
-        <span class="sd-badge">Dados reais de fábrica</span>
+        <h3>Quadro Público — Publicações Recentes</h3>
+        <span class="sd-badge" id="wall-count">…</span>
       </div>
-      <div class="sd-list">
-        <div class="sd-item">
-          <div class="sd-item-top"><h4>Alimentador Automático e Bebedouro 2 em 1 para Pets</h4><span class="sd-tag">Em estoque</span></div>
-          <p class="sd-meta">Suprimentos para Pets · a partir de ¥0,14/un · MOQ 100 un · entrega 5–10 dias · pequeno pacote · alvo: global</p>
-          <a class="src" href="products.html#pet">Ver no catálogo ↗</a>
-        </div>
-        <div class="sd-item">
-          <div class="sd-item-top"><h4>Tigela de Aço Inoxidável Antiderrapante para Gatos</h4><span class="sd-tag">Em estoque</span></div>
-          <p class="sd-meta">Suprimentos para Pets · ¥0,14–10,2/un · MOQ 200 un · entrega 7–15 dias · linha dedicada · alvo: global</p>
-          <a class="src" href="products.html#pet">Ver no catálogo ↗</a>
-        </div>
-        <div class="sd-item">
-          <div class="sd-item-top"><h4>Suporte de Celular para Bike / E-Bike</h4><span class="sd-tag mto">Sob encomenda</span></div>
-          <p class="sd-meta">Suportes de Celular para Carro · ¥1,67–7,5/un · MOQ 500 un · entrega 10–20 dias · frete marítimo · alvo: global</p>
-          <a class="src" href="products.html#mounts">Ver no catálogo ↗</a>
-        </div>
-        <div class="sd-item">
-          <div class="sd-item-top"><h4>Suporte com Ventosa e Sensor de Gravidade</h4><span class="sd-tag">Em estoque</span></div>
-          <p class="sd-meta">Suportes de Celular para Carro · ¥1,67–7,5/un · MOQ 100 un · entrega 7–12 dias · pequeno pacote · alvo: global</p>
-          <a class="src" href="products.html#mounts">Ver no catálogo ↗</a>
-        </div>
-        <div class="sd-item">
-          <div class="sd-item-top"><h4>Fita de LED COB 220V à Prova d'Água (Externa)</h4><span class="sd-tag">Em estoque</span></div>
-          <p class="sd-meta">Fitas de LED · a partir de ¥2,82/un · MOQ 50 rolos · entrega 5–10 dias · frete aéreo · alvo: global</p>
-          <a class="src" href="products.html#led">Ver no catálogo ↗</a>
-        </div>
-        <div class="sd-item">
-          <div class="sd-item-top"><h4>Fita Linear de LED de Silicone à Prova d'Água</h4><span class="sd-tag mto">Sob encomenda</span></div>
-          <p class="sd-meta">Fitas de LED · ¥10,74/un · MOQ 100 rolos · entrega 15–25 dias · frete marítimo · alvo: global</p>
-          <a class="src" href="products.html#led">Ver no catálogo ↗</a>
-        </div>
+      <div class="wall-filter">
+        <a href="#" data-f="all" class="wf active">Tudo</a>
+        <a href="#" data-f="seller" class="wf">Oferta</a>
+        <a href="#" data-f="buyer" class="wf">Demanda</a>
+        <input type="text" id="wall-q" placeholder="Buscar nome / categoria…">
       </div>
-    </div>
-
-    <!-- Buyers post demand -->
-    <div class="sd-panel">
-      <div class="sd-head">
-        <h3>🛒 Compradores Internacionais — Publique seu Pedido</h3>
-        <p>Diga o que você quer comprar — produto, quantidade, destino e orçamento. Fornecedores chineses entram em contato com você.</p>
+      <div class="sd-list" id="wall-list-items">
+        <p class="sd-empty" id="wall-fallback">O backend do mural de informações estará disponível em breve. Por favor, volte mais tarde.</p>
       </div>
-      <form id="demand-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="_blacklist" value="bitcoin,invest,casino,viagra,贷款,彩票,点击,click here">
-        <input type="hidden" name="_subject" value="Nova solicitação de compra — site Qiansi Sourcing">
-        <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="row">
-          <div class="field">
-            <label for="dem-product">O que você quer comprar? *</label>
-            <input type="text" id="dem-product" name="product" required placeholder="ex.: Tigelas de aço inoxidável para gatos">
-          </div>
-          <div class="field">
-            <label for="dem-qty">Quantidade *</label>
-            <input type="text" id="dem-qty" name="quantity" required placeholder="ex.: 1.000 unidades">
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="dem-dest">Destino *</label>
-            <input type="text" id="dem-dest" name="destination" required placeholder="ex.: São Paulo, Brasil">
-          </div>
-          <div class="field">
-            <label for="dem-budget">Orçamento</label>
-            <input type="text" id="dem-budget" name="budget" placeholder="ex.: US$ 0,50/un CIF">
-          </div>
-        </div>
-        <div class="field">
-          <label for="dem-contact">Contato *</label>
-          <input type="text" id="dem-contact" name="contact" required placeholder="WhatsApp / e-mail">
-        </div>
-        <div class="field">
-          <label class="checkbox"><input type="checkbox" name="private" value="sim"> Manter privado — não exibir no mural público; a plataforma faz a ponte em privado</label>
-        </div>
-        <div class="field">
-          <label class="checkbox"><input type="checkbox" name="compliance" required> Confirmo que esta publicação está em conformidade com as regulamentações de controle de exportação da China e com as regulamentações de importação do país de destino.</label>
-        </div>
-        <button type="submit" class="btn dark">Publicar Pedido</button>
-        <div id="demand-msg" class="sd-msg" role="status"></div>
-      </form>
-    </div>
-
-    <!-- Latest demand (manually curated by the platform) -->
-    <div class="sd-list-wrap">
-      <div class="sd-list-head">
-        <h3>Últimos Pedidos</h3>
-        <span class="sd-badge">Publicados por compradores</span>
-      </div>
-      <div class="sd-list">
-        <p class="sd-empty">Nenhum pedido público ainda — publique o seu acima. Pedidos privados são tratados offline pela plataforma.</p>
-      </div>
-      <p class="sd-note">🔒 Marcar "manter privado" oculta sua publicação do mural público; a plataforma apresenta você a parceiros correspondentes em privado.</p>
     </div>
   </div>
 </section>
+
 
 <!-- INQUIRY FORM -->
 <section class="inquiry" id="inquiry">
@@ -903,6 +853,155 @@
       console.warn('SW register failed:', e);
     });
   }
+</script>
+
+<script>
+(function(){
+  // ---- Qiansi Info Wall (supply & demand board) ----
+  // Set WALL_API_BASE to the deployed Worker URL (no trailing slash) at deploy time.
+  var WALL_API_BASE = "https://qiansi-sd-wall.qiansi.workers.dev";
+  var WALL_LANG = 'pt';
+  var STRINGS = {
+    online: 'O backend do mural de informações estará disponível em breve. Por favor, volte mais tarde.',
+    submitting: 'Publicando…',
+    ok: '✓ Publicado! Navegue no quadro para ver a sua publicação.',
+    err: 'Falha no envio. Tente novamente ou escreva para zhoubiao@zhoubiaotrade.cn.',
+    imgErr: 'Falha no envio da imagem (jpg/webp/png, ≤2MB).',
+    needName: 'Preencha o nome do produto/item, a categoria e um contato.',
+    needCompliance: 'Confirme a caixa de conformidade.',
+    reported: 'Obrigado — denunciado. Será analisado.',
+    reportFail: 'Falha na denúncia.',
+    report: 'Denunciar',
+    defaultReason: 'Denunciado no quadro público',
+    loadFail: 'Não foi possível carregar o quadro agora. Atualize ou tente mais tarde.',
+    empty: 'Ainda não há publicações. Seja o primeiro a publicar acima.',
+    seller: 'Oferta',
+    buyer: 'Demanda',
+};
+  var configured = /^https?:\/\//.test(WALL_API_BASE);
+  var form = document.getElementById('wall-form');
+  var msg = document.getElementById('wall-form-msg');
+  var listEl = document.getElementById('wall-list-items');
+  var countEl = document.getElementById('wall-count');
+  var qInput = document.getElementById('wall-q');
+  var filter = 'all', q = '';
+  function show(txt, ok){ if(!msg) return; msg.textContent = txt; msg.className = ok==='warn' ? 'sd-msg warn' : (ok ? 'sd-msg ok' : 'sd-msg err'); msg.style.display='block'; }
+  function esc(s){ var d=document.createElement('div'); d.textContent = (s==null?'':String(s)); return d.innerHTML; }
+  function uploadImage(file){
+    if(!file) return Promise.resolve([]);
+    var fd = new FormData(); fd.append('file', file);
+    return fetch(WALL_API_BASE + '/upload', {method:'POST', body:fd}).then(function(r){
+      if(!r.ok) throw new Error('upload');
+      return r.json();
+    }).then(function(d){ return d.url ? [d.url] : []; });
+  }
+  function render(items){
+    var html = '';
+    for(var i=0;i<items.length;i++){
+      var it = items[i];
+      var typeLabel = it.type === 'buyer' ? STRINGS.buyer : STRINGS.seller;
+      var img = (it.images && it.images.length) ? '<img class="wall-img" loading="lazy" alt="" src="'+esc(it.images[0])+'">' : '';
+      var price = (it.price!=null && it.price!=='') ? esc(it.currency||'USD')+' '+esc(it.price) : '';
+      var meta = esc(it.category||'');
+      if(price) meta += ' · '+price;
+      if(it.MOQ) meta += ' · MOQ '+esc(it.MOQ);
+      if(it.delivery) meta += ' · '+esc(it.delivery);
+      if(it.target) meta += ' · →'+esc(it.target);
+      var origin = '';
+      if(it.source==='agent' && it.origin) origin = ' <a class="src" href="'+esc(it.origin)+'" target="_blank" rel="noopener">source ↗</a>';
+      var contactHtml = (it.contact) ? '<span>📞 '+esc(it.contact)+'</span>' : '';
+      html += '<div class="sd-item">'
+        + img
+        + '<div class="sd-item-top"><h4>'+esc(it.name)+'</h4><span class="sd-tag">'+typeLabel+'</span></div>'
+        + '<p class="sd-meta">'+meta+'</p>'
+        + ((it.desc) ? '<p class="sd-desc">'+esc(it.desc)+'</p>' : '')
+        + '<div class="sd-item-foot">'
+        + contactHtml
+        + '<span>'+esc(it.verified||'')+origin+'</span>'
+        + '<button class="wall-report" data-id="'+esc(it.id)+'">'+STRINGS.report+'</button>'
+        + '</div>'
+        + '</div>';
+    }
+    listEl.innerHTML = html;
+    if(countEl) countEl.textContent = String(items.length);
+  }
+  function loadList(){
+    if(!configured) return;
+    var url = WALL_API_BASE + '/wall?limit=20';
+    if(filter && filter!=='all') url += '&type=' + encodeURIComponent(filter);
+    if(q) url += '&q=' + encodeURIComponent(q);
+    fetch(url).then(function(r){ if(!r.ok) throw new Error('list'); return r.json(); })
+      .then(function(d){ var items = (d && d.items) || [];
+        if(!items.length){ listEl.innerHTML = '<p class="sd-empty">'+STRINGS.empty+'</p>'; if(countEl) countEl.textContent='0'; return; }
+        render(items); })
+      .catch(function(){ listEl.innerHTML = '<p class="sd-empty">'+STRINGS.loadFail+'</p>'; });
+  }
+  if(listEl) listEl.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.wall-report') : null;
+    if(!btn) return;
+    var id = btn.getAttribute('data-id');
+    fetch(WALL_API_BASE + '/wall/' + encodeURIComponent(id) + '/report', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({reason: STRINGS.defaultReason})
+    }).then(function(r){ if(!r.ok) throw new Error('report'); return r.json(); })
+      .then(function(){ btn.disabled = true; btn.textContent = STRINGS.reported; })
+      .catch(function(){ btn.disabled = false; btn.textContent = STRINGS.reportFail; });
+  });
+  if(document.querySelectorAll){
+    var wfs = document.querySelectorAll('.wall-filter .wf');
+    for(var i=0;i<wfs.length;i++){
+      (function(a){ a.addEventListener('click', function(e){
+        e.preventDefault();
+        for(var j=0;j<wfs.length;j++) wfs[j].classList.remove('active');
+        a.classList.add('active'); filter = a.getAttribute('data-f'); loadList();
+      }); })(wfs[i]);
+    }
+  }
+  if(qInput) qInput.addEventListener('input', function(){ q = qInput.value.trim(); clearTimeout(window.__wq); window.__wq = setTimeout(loadList, 300); });
+  if(form) form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!configured){ show(STRINGS.online, false); return; }
+    var name = (document.getElementById('wall-name').value||'').trim();
+    var cat = (document.getElementById('wall-cat').value||'').trim();
+    var contact = (document.getElementById('wall-contact').value||'').trim();
+    var radio = form.querySelector('input[name="wtype"]:checked');
+    var type = radio ? radio.value : 'seller';
+    var compliance = document.getElementById('wall-compliance').checked;
+    var priceEl = document.getElementById('wall-price');
+    var priceVal = priceEl ? priceEl.value : '';
+    if(!name || !cat || !contact){ show(STRINGS.needName, false); return; }
+    if(!compliance){ show(STRINGS.needCompliance, false); return; }
+    var file = document.getElementById('wall-image').files[0];
+    var phase = 'upload';
+    show(STRINGS.submitting, true);
+    uploadImage(file).then(function(images){
+      phase = 'submit';
+      var payload = {
+        name: name, type: type, category: cat,
+        desc: (document.getElementById('wall-desc').value||'').trim(),
+        currency: document.getElementById('wall-currency').value,
+        price: priceVal !== '' ? Number(priceVal) : undefined,
+        MOQ: (document.getElementById('wall-moq').value||'').trim(),
+        delivery: (document.getElementById('wall-delivery').value||'').trim(),
+        target: (document.getElementById('wall-target').value||'').trim(),
+        contact: contact,
+        images: images,
+        lang: WALL_LANG
+      };
+      return fetch(WALL_API_BASE + '/wall', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+    }).then(function(r){
+      if(!r.ok) return r.json().then(function(j){ throw new Error(j && j.message ? j.message : ('HTTP '+r.status)); });
+      return r.json();
+    }).then(function(){
+      show(STRINGS.ok, true); form.reset();
+      var c = document.getElementById('wall-compliance'); if(c) c.checked = false;
+      if(filter==='all') loadList();
+    }).catch(function(){
+      show(phase==='submit' ? STRINGS.err : STRINGS.imgErr || STRINGS.err, false);
+    });
+  });
+  loadList();
+})();
 </script>
 </body>
 </html>
