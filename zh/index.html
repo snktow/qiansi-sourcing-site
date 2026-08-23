@@ -225,6 +225,24 @@
   .cat-card .band b{color:var(--orange)}
   .cat-card small{font-size:.78rem;color:var(--muted)}
 
+  /* Desktop enhancement (>=1080px): roomier hero & sections */
+  @media(min-width:1080px){
+    .wrap{max-width:1200px}
+    .hero{padding:124px 0 108px}
+    .hero h1{max-width:900px}
+    .hero p.lead{max-width:780px}
+    .sec-head{max-width:720px}
+    form{max-width:700px}
+    section{padding:88px 0}
+    .steps{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .why-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  }
+  @media(min-width:1280px){
+    .wrap{max-width:1220px}
+    .hero h1{max-width:960px}
+    .hero p.lead{max-width:820px}
+  }
+
 </style>
 <script type="application/ld+json">
 {
