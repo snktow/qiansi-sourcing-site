@@ -163,6 +163,17 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到吉布提（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-djibouti.html
 - 进口到约旦（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-jordan.html
 - 进口到伊拉克（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-iraq.html
+- 进口到俄罗斯（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-russia.html
+- 进口到哈萨克斯坦（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-kazakhstan.html
+- 进口到乌兹别克斯坦（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-uzbekistan.html
+- 进口到土库曼斯坦（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-turkmenistan.html
+- 进口到吉尔吉斯斯坦（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-kyrgyzstan.html
+- 进口到塔吉克斯坦（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-tajikistan.html
+- 进口到白俄罗斯（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-belarus.html
+- 进口到乌克兰（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-ukraine.html
+- 进口到亚美尼亚（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-armenia.html
+- 进口到格鲁吉亚（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-georgia.html
+- 进口到阿塞拜疆（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-azerbaijan.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
