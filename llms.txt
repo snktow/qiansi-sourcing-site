@@ -174,6 +174,12 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到亚美尼亚（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-armenia.html
 - 进口到格鲁吉亚（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-georgia.html
 - 进口到阿塞拜疆（俄语 / Русский）: https://xn--yhq58j.com/ru/guide/import-to-azerbaijan.html
+- 进口到越南（越南语 / Tiếng Việt）: https://xn--yhq58j.com/vi/guide/import-to-vietnam.html
+- 进口到泰国（泰语 / ไทย）: https://xn--yhq58j.com/th/guide/import-to-thailand.html
+- 进口到印度尼西亚（印尼语 / Bahasa Indonesia）: https://xn--yhq58j.com/id/guide/import-to-indonesia.html
+- 进口到马来西亚（马来语 / Bahasa Melayu）: https://xn--yhq58j.com/ms/guide/import-to-malaysia.html
+- 进口到菲律宾（菲律宾语 / Filipino）: https://xn--yhq58j.com/fil/guide/import-to-philippines.html
+- 进口到缅甸（缅甸语 / မြန်မာ）: https://xn--yhq58j.com/my/guide/import-to-myanmar.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
