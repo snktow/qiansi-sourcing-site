@@ -71,7 +71,11 @@ This website is built to serve AI agents as well as human visitors. Everything i
 
 ### Agent action entrypoints (what an agent can actually call)
 
-- Sourcing inquiry POST: https://formsubmit.co/notify@xn--yhq58j.com (Agent Inquiry Protocol v1)
+> 本网站提供**工具级可调用 API（tool-capable）**。完整 OpenAPI 规范见 `/openapi.json`；ChatGPT 等 AI 助手可经 `/.well-known/ai-plugin.json` 发现并调用。所有写操作均为审核制；本站**仅撮合、不经手资金**。
+
+- 开放 API 规范（OpenAPI 3.0，工具可调用契约）: https://xn--yhq58j.com/openapi.json
+- AI 插件清单（ChatGPT 发现层）: https://xn--yhq58j.com/.well-known/ai-plugin.json
+- Sourcing inquiry (state machine, P1): POST https://qiansi-sd-wall.qiansi.workers.dev/inquiries -> { inquiry_id, status:'pending' }; GET /inquiries/{id} 回查; 状态机 pending->matched->quoted->closed; POST /inquiries/{id}/status 更新需 X-Room-Token。契约见 /openapi.json
 - Structured inquiry receipt: https://formsubmit.co/ajax/notify@xn--yhq58j.com
 - Email: notify@千丝.com
 - Agent mailbox relay (protocol v3): https://xn--yhq58j.com/agents/agent-protocol-v3.json
@@ -146,6 +150,19 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到阿尔及利亚（英文 / English）: https://xn--yhq58j.com/guide/import-to-algeria.html
 - 进口到突尼斯（英文 / English）: https://xn--yhq58j.com/guide/import-to-tunisia.html
 - 进口到吉布提（英文 / English）: https://xn--yhq58j.com/guide/import-to-djibouti.html
+- 进口到沙特阿拉伯（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-saudi-arabia.html
+- 进口到阿联酋（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-uae.html
+- 进口到卡塔尔（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-qatar.html
+- 进口到科威特（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-kuwait.html
+- 进口到巴林（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-bahrain.html
+- 进口到阿曼（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-oman.html
+- 进口到埃及（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-egypt.html
+- 进口到摩洛哥（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-morocco.html
+- 进口到阿尔及利亚（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-algeria.html
+- 进口到突尼斯（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-tunisia.html
+- 进口到吉布提（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-djibouti.html
+- 进口到约旦（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-jordan.html
+- 进口到伊拉克（阿拉伯语 / العربية）: https://xn--yhq58j.com/ar/guide/import-to-iraq.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
