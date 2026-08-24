@@ -204,6 +204,9 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到尼泊尔（尼泊尔语 / नेपाली）: https://xn--yhq58j.com/ne/guide/import-to-nepal.html
 - 进口到斯里兰卡（僧伽罗语 / සිංහල）: https://xn--yhq58j.com/si/guide/import-to-sri-lanka.html
 - 进口到马尔代夫（迪维希语 / ދިވެހި）: https://xn--yhq58j.com/dv/guide/import-to-maldives.html
+- 进口到蒙古（蒙古语 / Монгол）: https://xn--yhq58j.com/mn/guide/import-to-mongolia.html
+- 进口到柬埔寨（高棉语 / ខ្មែរ）: https://xn--yhq58j.com/km/guide/import-to-cambodia.html
+- 进口到老挝（老挝语 / ລາວ）: https://xn--yhq58j.com/lo/guide/import-to-laos.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
