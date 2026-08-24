@@ -210,6 +210,24 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到肯尼亚（斯瓦希里语 / Kiswahili）: https://xn--yhq58j.com/sw/guide/import-to-kenya.html
 - 进口到坦桑尼亚（斯瓦希里语 / Kiswahili）: https://xn--yhq58j.com/sw/guide/import-to-tanzania.html
 - 进口到埃塞俄比亚（阿姆哈拉语 / አማርኛ）: https://xn--yhq58j.com/am/guide/import-to-ethiopia.html
+- 进口到阿尔巴尼亚（阿尔巴尼亚语 / Shqip）: https://xn--yhq58j.com/sq/guide/import-to-albania.html
+- 进口到波斯尼亚和黑塞哥维那（波斯尼亚语 / Bosanski）: https://xn--yhq58j.com/bs/guide/import-to-bosnia-herzegovina.html
+- 进口到保加利亚（保加利亚语 / Български）: https://xn--yhq58j.com/bg/guide/import-to-bulgaria.html
+- 进口到克罗地亚（克罗地亚语 / Hrvatski）: https://xn--yhq58j.com/hr/guide/import-to-croatia.html
+- 进口到捷克（捷克语 / Čeština）: https://xn--yhq58j.com/cs/guide/import-to-czechia.html
+- 进口到爱沙尼亚（爱沙尼亚语 / Eesti）: https://xn--yhq58j.com/et/guide/import-to-estonia.html
+- 进口到希腊（希腊语 / Ελληνικά）: https://xn--yhq58j.com/el/guide/import-to-greece.html
+- 进口到匈牙利（匈牙利语 / Magyar）: https://xn--yhq58j.com/hu/guide/import-to-hungary.html
+- 进口到拉脱维亚（拉脱维亚语 / Latviešu）: https://xn--yhq58j.com/lv/guide/import-to-latvia.html
+- 进口到立陶宛（立陶宛语 / Lietuvių）: https://xn--yhq58j.com/lt/guide/import-to-lithuania.html
+- 进口到摩尔多瓦（罗马尼亚语 / Română）: https://xn--yhq58j.com/ro/guide/import-to-moldova.html
+- 进口到黑山（黑山语 / Crnogorski）: https://xn--yhq58j.com/cnr/guide/import-to-montenegro.html
+- 进口到北马其顿（马其顿语 / Македонски）: https://xn--yhq58j.com/mk/guide/import-to-north-macedonia.html
+- 进口到波兰（波兰语 / Polski）: https://xn--yhq58j.com/pl/guide/import-to-poland.html
+- 进口到罗马尼亚（罗马尼亚语 / Română）: https://xn--yhq58j.com/ro/guide/import-to-romania.html
+- 进口到塞尔维亚（塞尔维亚语 / Српски）: https://xn--yhq58j.com/sr/guide/import-to-serbia.html
+- 进口到斯洛伐克（斯洛伐克语 / Slovenčina）: https://xn--yhq58j.com/sk/guide/import-to-slovakia.html
+- 进口到斯洛文尼亚（斯洛文尼亚语 / Slovenščina）: https://xn--yhq58j.com/sl/guide/import-to-slovenia.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
