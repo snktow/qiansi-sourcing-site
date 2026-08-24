@@ -1,6 +1,6 @@
 # 千丝 Qiansi Sourcing
 
-> 我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、出货质检、小包专线物流，支持中文/英文/葡萄牙语业务对接。
+> 我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、发货前按订单核对（供应商照片/视频确认）、小包/专线物流（由合作物流承运），支持中文/英文/葡萄牙语业务对接。
 
 千丝（Qiansi Sourcing，运营主体：昆明周标贸易有限责任公司）是中国采购代理平台，为全球进口商与批发商提供中国工厂一手货源直采服务，全品类覆盖。
 
@@ -17,8 +17,8 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 
 ## 服务内容
 - 出厂批发价（Factory wholesale prices）
-- 出货质检（Pre-shipment quality inspection）
-- 小包专线物流（Small parcel & dedicated-line logistics）
+- 发货前按订单核对（Pre-dispatch order check with supplier photo/video confirmation）
+- 小包/专线物流，由合作物流承运（Small parcel & dedicated-line logistics via partner carriers）
 - 全品类中国工厂供应商货源（Factory-direct sourcing from verified Chinese suppliers, all categories）
 
 ## 服务范围
@@ -32,7 +32,7 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 来源：实时工厂目录抓取（2026-08-07）；实际价格以下单时报价为准
 
 ## 物流时效（Logistics，数据日期 2026-08-07）
-- 小包直邮（门到门）：10–20 天，全程跟踪
+- 小包直邮：10–20 天，全程跟踪（由合作物流承运）
 - 专线（海/空）：50kg+ 起，单公斤成本随货量下降
 - 具体时效与运费取决于目的国/目的港，以报价为准
 
@@ -223,7 +223,7 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - **多长时间回复？（Response time?）** 人工客服在 24 小时内回复询盘（工作时间周一至周六 9:00–18:00 GMT+8），按提交者的语言偏好使用中文/英文/葡萄牙语回复报价、可选项与物流方案。
 
 ## About
-Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-shipment quality inspection, small parcel & dedicated-line logistics. Contact via the inquiry form on any of the three language pages, or email notify@千丝.com. Chinese, English and Portuguese supported.
+Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-dispatch order check with supplier photo/video confirmation, small parcel & dedicated-line logistics via partner carriers. Contact via the inquiry form on any of the three language pages, or email notify@千丝.com. Chinese, English and Portuguese supported.
 
 ## Agent 询盘协议 v1（Agent Inquiry Protocol v1）/ 智能体可操作方式（原 Agent Actions 段）
 

@@ -32,10 +32,10 @@ window.QIANSI_KB = {
           id: "contact",
           q: { en: "How do I contact Qiansi?", pt: "Como entro em contato com a Qiansi?", ar: "كيف أتواصل مع Qiansi؟", zh: "怎么联系千丝？" },
           a: {
-            en: "Use the inquiry form on the site, email notify@xn--yhq58j.com, or reach us on WhatsApp. Hours: Monday–Saturday, 09:00–18:00 (GMT+8). We answer inquiries within 24 hours.",
-            pt: "Use o formulário de contato no site, envie e-mail para notify@xn--yhq58j.com ou fale conosco no WhatsApp. Horário: segunda a sábado, 09:00–18:00 (GMT+8). Respondemos em até 24 horas.",
-            ar: "استخدم نموذج الاستفسار في الموقع، أو أرسل بريدًا إلى notify@xn--yhq58j.com، أو تواصل معنا عبر واتساب. ساعات العمل: الاثنين إلى السبت، 09:00–18:00 (بتوقيت غرينتش+8). نرد على الاستفسارات خلال 24 ساعة.",
-            zh: "使用网站询盘表单、发送邮件至 notify@xn--yhq58j.com，或通过 WhatsApp 联系。工作时间：周一至周六 09:00–18:00（GMT+8）。我们会在 24 小时内回复询盘。"
+            en: "Use the inquiry form on the site or email notify@xn--yhq58j.com. Hours: Monday–Saturday, 09:00–18:00 (GMT+8). We answer inquiries within 24 hours.",
+            pt: "Use o formulário de contato no site ou envie e-mail para notify@xn--yhq58j.com. Horário: segunda a sábado, 09:00–18:00 (GMT+8). Respondemos em até 24 horas.",
+            ar: "استخدم نموذج الاستفسار في الموقع، أو أرسل بريدًا إلى notify@xn--yhq58j.com. ساعات العمل: الاثنين إلى السبت، 09:00–18:00 (بتوقيت غرينتش+8). نرد على الاستفسارات خلال 24 ساعة.",
+            zh: "使用网站询盘表单或发送邮件至 notify@xn--yhq58j.com。工作时间：周一至周六 09:00–18:00（GMT+8）。我们会在 24 小时内回复询盘。"
           },
           keywords: ["contact", "email", "email", "whatsapp", "reach", "inquiry", "联系", "邮箱", "询盘", "contato", "تواصل", "بريد"]
         },
@@ -43,10 +43,10 @@ window.QIANSI_KB = {
           id: "service-model",
           q: { en: "How does the service work? Do you hold stock?", pt: "Como funciona o serviço? Vocês têm estoque?", ar: "كيف تعمل الخدمة؟ هل لديكم مخزون؟", zh: "服务怎么运作？你们有现货吗？" },
           a: {
-            en: "We are a sourcing intermediary: we find the best factory on 1688 for your product, quote the full breakdown (goods + service fee + shipping + tax), inspect before shipping, and handle customs. We do not hold stock.",
-            pt: "Somos um intermediário de sourcing: encontramos a melhor fábrica no 1688 para o seu produto, orçamos o custo completo (mercadorias + taxa de serviço + frete + impostos), inspecionamos antes do envio e cuidamos da alfândega. Não mantemos estoque.",
-            ar: "نحن وسيط توريد: نجد أفضل مصنع على 1688 لمنتجك، ونقدّم عرض سعر كامل (البضائع + رسوم الخدمة + الشحن + الضرائب)، ونفحص قبل الشحن، ونتولى الجمارك. لا نحتفظ بمخزون.",
-            zh: "我们是采购中介：为您的产品在 1688 上找到最优工厂货源，给出完整报价（货款 + 服务费 + 运费 + 税费），发货前验货，清关由我们处理。我们不囤货。"
+            en: "We are a sourcing intermediary: we find the best factory on 1688 for your product, quote the full breakdown (goods + service fee + shipping + tax), check the order against your specification and share photos/videos for your confirmation before dispatch, and arrange shipping with partner agents who handle customs clearance. We do not hold stock.",
+            pt: "Somos um intermediário de sourcing: encontramos a melhor fábrica no 1688 para o seu produto, orçamos o custo completo (mercadorias + taxa de serviço + frete + impostos), conferimos o pedido conforme sua especificação e compartilhamos fotos/vídeos para sua confirmação antes do despacho, e organizamos o envio com agentes parceiros que cuidam do desembaraço aduaneiro. Não mantemos estoque.",
+            ar: "نحن وسيط توريد: نجد أفضل مصنع على 1688 لمنتجك، ونقدّم عرض سعر كامل (البضائع + رسوم الخدمة + الشحن + الضرائب)، ونتحقق من الطلب وفق مواصفاتك ونشارك صورًا/فيديوهات لتأكيدك قبل الشحن، وننظّم الشحن مع وكلاء شركاء يتولون التخليص الجمركي. لا نحتفظ بمخزون.",
+            zh: "我们是采购中介：为您的产品在 1688 上找到最优工厂货源，给出完整报价（货款 + 服务费 + 运费 + 税费），发货前按订单核对并上传供应商照片/视频与您确认，物流与清关由合作代理安排。我们不囤货。"
           },
           keywords: ["model", "stock", "service", "intermediary", "模式", "服务", "不囤货", "中介", "modelo"]
         }
@@ -127,10 +127,10 @@ window.QIANSI_KB = {
           id: "shipping-channels",
           q: { en: "What shipping options do you offer?", pt: "Quais opções de envio vocês oferecem?", ar: "ما هي خيارات الشحن التي تقدمونها؟", zh: "你们提供哪些物流方式？" },
           a: {
-            en: "Two standard lanes: small parcel direct mail (10–20 days, door-to-door with tracking, ideal for trial orders) and dedicated line (50kg+ consolidated sea/air freight, cheaper per kg, customs handled by us). Options: small parcel / dedicated / sea / air / any.",
-            pt: "Duas rotas padrão: encomenda postal pequena (10–20 dias, porta a porta com rastreio, ideal para pedidos de teste) e linha dedicada (frete marítimo/aéreo consolidado acima de 50kg, mais barato por kg, alfândega por nossa conta). Opções: encomenda pequena / dedicada / marítimo / aéreo / qualquer.",
-            ar: "مساران قياسيان: البريد الصغير المباشر (10–20 يومًا، من الباب إلى الباب مع تتبع، مثالي للطلبات التجريبية) والخط المخصص (شحن بحري/جوي مجمّع فوق 50 كجم، أرخص لكل كجم، ونتولى الجمارك). الخيارات: بريد صغير/مخصص/بحري/جوي/أي.",
-            zh: "两条标准通道：小包直邮（10–20 天，门到门带追踪号，适合试单）和专线物流（50kg 以上集中海运/空运，每公斤成本更低，清关我们代办）。选项：小包/专线/海运/空运/任意。"
+            en: "Two standard lanes: small parcel direct mail (10–20 days, tracked, ideal for trial orders) and dedicated line (50kg+ consolidated sea/air freight, cheaper per kg, customs clearance handled by our partner agents). Options: small parcel / dedicated / sea / air / any.",
+            pt: "Duas rotas padrão: encomenda postal pequena (10–20 dias, com rastreio, ideal para pedidos de teste) e linha dedicada (frete marítimo/aéreo consolidado acima de 50kg, mais barato por kg, desembaraço aduaneiro feito por nossos agentes parceiros). Opções: encomenda pequena / dedicada / marítimo / aéreo / qualquer.",
+            ar: "مساران قياسيان: البريد الصغير المباشر (10–20 يومًا، مع تتبع، مثالي للطلبات التجريبية) والخط المخصص (شحن بحري/جوي مجمّع فوق 50 كجم، أرخص لكل كجم، والتخليص الجمركي يتولاه وكلاؤنا الشركاء). الخيارات: بريد صغير/مخصص/بحري/جوي/أي.",
+            zh: "两条标准通道：小包直邮（10–20 天，全程可跟踪，适合试单）和专线物流（50kg 以上集中海运/空运，每公斤成本更低，清关由合作代理办理）。选项：小包/专线/海运/空运/任意。"
           },
           keywords: ["ship", "shipping", "delivery", "parcel", "logistics", "物流", "发货", "小包", "专线", "envio", "frete", "شحن", "توصيل"]
         },
@@ -194,10 +194,10 @@ window.QIANSI_KB = {
           id: "process-4steps",
           q: { en: "What is your process?", pt: "Qual é o seu processo?", ar: "ما هي العملية لديكم؟", zh: "你们是怎么运作的？" },
           a: {
-            en: "1) Send your requirements (product, target price, quantity, destination city). 2) We source on 1688 and give a full quote (goods + service fee + shipping + tax). 3) Inspection before shipping, confirmed with you. 4) Door-to-door delivery with tracking, customs handled by us.",
-            pt: "1) Envie seus requisitos (produto, preço-alvo, quantidade, cidade de destino). 2) Buscamos no 1688 e damos um orçamento completo (mercadorias + taxa de serviço + frete + impostos). 3) Inspeção antes do envio, confirmada com você. 4) Entrega porta a porta com rastreio, alfândega por nossa conta.",
-            ar: "1) أرسل متطلباتك (المنتج، السعر المستهدف، الكمية، مدينة الوجهة). 2) نبحث على 1688 ونقدم عرض سعر كامل (البضائع + رسوم الخدمة + الشحن + الضرائب). 3) فحص قبل الشحن مع تأكيد منك. 4) توصيل من الباب إلى الباب مع تتبع، ونتولى الجمارك.",
-            zh: "1) 提交需求（产品、目标价、数量、目的城市）；2) 我们在 1688 找货源并给出完整报价（货款+服务费+运费+税费）；3) 发货前验货并与您确认；4) 门到门直邮带追踪，清关我们处理。"
+            en: "1) Send your requirements (product, target price, quantity, destination city). 2) We source on 1688 and give a full quote (goods + service fee + shipping + tax). 3) Order checked against your specification, confirmed with you via supplier photos/videos. 4) We help arrange small parcel/dedicated-line shipping with tracking; customs clearance handled by our partner agents.",
+            pt: "1) Envie seus requisitos (produto, preço-alvo, quantidade, cidade de destino). 2) Buscamos no 1688 e damos um orçamento completo (mercadorias + taxa de serviço + frete + impostos). 3) Pedido conferido conforme sua especificação, confirmado com você por fotos/vídeos do fornecedor. 4) Ajudamos a organizar envio por pequenos pacotes/linha dedicada com rastreio; desembaraço aduaneiro feito por nossos agentes parceiros.",
+            ar: "1) أرسل متطلباتك (المنتج، السعر المستهدف، الكمية، مدينة الوجهة). 2) نبحث على 1688 ونقدم عرض سعر كامل (البضائع + رسوم الخدمة + الشحن + الضرائب). 3) التحقق من الطلب وفق مواصفاتك، مع تأكيد منك عبر صور/فيديوهات المورد. 4) نساعد في ترتيب الشحن عبر البريد الصغير/الخط المخصص مع التتبع؛ ويقوم وكلاؤنا الشركاء بالتخليص الجمركي.",
+            zh: "1) 提交需求（产品、目标价、数量、目的城市）；2) 我们在 1688 找货源并给出完整报价（货款+服务费+运费+税费）；3) 发货前按订单核对，并与您通过供应商照片/视频确认；4) 我们协助安排小包/专线物流并可跟踪，清关由合作物流/清关代理办理。"
           },
           keywords: ["process", "steps", "how we work", "flow", "requirement", "流程", "步骤", "processo", "عملية", "خطوات"]
         }
