@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qiansi Support Concierge — Help &amp; Answers</title>
+<meta name="description" content="Qiansi Sourcing support concierge. Get instant answers about our sourcing service, products, logistics, markets and compliance. No account needed — type a question and we'll match it to our knowledge base. Human support: notify@xn--yhq58j.com.">
+<link rel="canonical" href="https://xn--yhq58j.com/support/">
+<link rel="alternate" hreflang="en" href="https://xn--yhq58j.com/support/">
+<meta name="theme-color" content="#0B3C5D">
+<style>
+  :root{
+    --navy:#0B3C5D; --navy-dark:#082B44; --teal:#1B9AAA; --orange:#E85D2F;
+    --bg:#F7F9FB; --card:#FFFFFF; --text:#1F2A36; --muted:#5A6B7B;
+    --line:#E3EAF0; --radius:14px; --shadow:0 6px 24px rgba(11,60,93,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
+  a{color:var(--teal);text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+  /* Header */
+  header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{font-size:1.15rem;font-weight:800;letter-spacing:.3px;color:#fff}
+  .logo span{color:#FFB85C}
+  .nav a.back{color:#D7E3EC;font-size:.9rem;font-weight:500}
+  .nav a.back:hover{color:#fff}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,#0E4A75 55%,var(--teal) 130%);color:#fff;padding:52px 0 56px;position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.05)}
+  .hero .wrap{position:relative;z-index:1}
+  .hero .tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:22px;font-size:.8rem;font-weight:600;margin-bottom:14px}
+  .hero h1{font-size:2.05rem;line-height:1.18;margin-bottom:10px;letter-spacing:-.4px}
+  .hero p.lead{font-size:1.02rem;max-width:620px;color:#CFE0EB;margin-bottom:26px}
+
+  /* Search */
+  .searchbar{display:flex;gap:10px;background:#fff;border:2px solid transparent;box-shadow:0 10px 30px rgba(0,0,0,.18);border-radius:var(--radius);padding:8px;max-width:720px;transition:.2s}
+  .searchbar:focus-within{border-color:var(--teal)}
+  .searchbar input{flex:1;border:0;outline:0;padding:12px 14px;font-size:1.02rem;font-family:inherit;color:var(--text);background:transparent}
+  .searchbar button{background:var(--orange);color:#fff;border:0;border-radius:10px;padding:0 24px;font-size:.98rem;font-weight:600;cursor:pointer;transition:.2s;white-space:nowrap}
+  .searchbar button:hover{background:#d14f24}
+
+  /* Language toggle */
+  .langs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+  .langs button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;padding:6px 15px;border-radius:18px;font-size:.82rem;font-weight:600;cursor:pointer;transition:.2s}
+  .langs button.on{background:#fff;color:var(--navy);border-color:#fff}
+  .langs button:hover{background:rgba(255,255,255,.22)}
+
+  /* Suggested chips */
+  .sugs{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .sugs button{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);color:#fff;padding:7px 14px;border-radius:20px;font-size:.84rem;cursor:pointer;transition:.2s}
+  .sugs button:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+
+  main{padding:40px 0 70px}
+
+  /* Answer card */
+  .answer{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 28px;margin-bottom:34px;display:none}
+  .answer.show{display:block;animation:fadeIn .25s ease}
+  .answer .a-q{font-size:1.12rem;color:var(--navy);font-weight:700;margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .answer .a-q .cat-tag{flex-shrink:0;background:#EAF4F6;color:var(--navy);font-size:.72rem;font-weight:700;padding:3px 12px;border-radius:14px;white-space:nowrap}
+  .answer .a-body{font-size:.98rem;color:#2C3A48;line-height:1.7;white-space:pre-line}
+  .answer .a-meta{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .answer .a-meta .copy{background:none;border:1px solid var(--line);color:var(--teal);font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:14px;cursor:pointer;transition:.2s}
+  .answer .a-meta .copy:hover{background:#EAF4F6}
+
+  /* Fallback (human) */
+  .fallback{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 28px;margin-bottom:34px;display:none}
+  .fallback.show{display:block;animation:fadeIn .25s ease}
+  .fallback h3{color:var(--navy);font-size:1.12rem;margin-bottom:8px}
+  .fallback p{font-size:.95rem;color:var(--muted);margin-bottom:16px}
+  .fallback .actions{display:flex;flex-wrap:wrap;gap:12px}
+  .fallback .btn{display:inline-block;background:var(--teal);color:#fff;font-weight:600;padding:11px 22px;border-radius:9px;font-size:.92rem;transition:.2s}
+  .fallback .btn:hover{background:#14808f;transform:translateY(-1px)}
+  .fallback .btn.ghost{background:transparent;border:2px solid var(--line);color:var(--teal)}
+  .fallback .btn.ghost:hover{border-color:var(--teal)}
+
+  /* Category chips */
+  .cats{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px}
+  .cats button{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:20px;font-size:.86rem;font-weight:600;cursor:pointer;transition:.2s}
+  .cats button:hover{border-color:var(--teal);color:var(--navy)}
+  .cats button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  /* FAQ accordion */
+  .faq{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .faq .fq{border-bottom:1px solid var(--line)}
+  .faq .fq:last-child{border-bottom:0}
+  .faq .fq .fq-h{width:100%;text-align:left;background:none;border:0;padding:16px 20px;font-size:.97rem;font-weight:600;color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;font-family:inherit}
+  .faq .fq .fq-h:hover{background:#F5F9FB}
+  .faq .fq .fq-h .plus{color:var(--teal);font-size:1.3rem;font-weight:700;transition:.2s;flex-shrink:0}
+  .faq .fq.open .fq-h .plus{transform:rotate(45deg)}
+  .faq .fq .fq-b{display:none;padding:0 20px 18px;font-size:.93rem;color:#3A4A58;white-space:pre-line;line-height:1.7}
+  .faq .fq.open .fq-b{display:block;animation:fadeIn .2s ease}
+  .faq .fq .fq-b a{font-weight:600}
+  .faq-cat{background:#F1F5F8;color:var(--muted);font-size:.75rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:8px 20px;border-bottom:1px solid var(--line)}
+
+  footer{background:var(--navy-dark);color:#B9C9D6;padding:34px 0 26px;font-size:.85rem}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+  footer .contact a{color:#FFB85C;font-weight:600}
+  footer .copy{font-size:.78rem;color:#8FA8BA}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* RTL for Arabic answers */
+  [dir="rtl"]{text-align:right}
+
+  @media(max-width:640px){
+    .hero{padding:40px 0 44px}
+    .hero h1{font-size:1.55rem}
+    .searchbar{flex-direction:column}
+    .searchbar button{padding:12px}
+    .answer .a-q{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="logo">Qiansi <span>Support</span></div>
+    <a class="back" href="https://xn--yhq58j.com/">← Back to site</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="tag">Support Concierge · Knowledge Base</span>
+    <h1>How can we help you today?</h1>
+    <p class="lead">Ask about our sourcing service, fees, products, logistics, markets or compliance. Instant answers from our knowledge base — no account, no waiting.</p>
+    <form class="searchbar" id="search-form" autocomplete="off" onsubmit="return false;">
+      <input id="q" type="text" placeholder="Type a question, e.g. “shipping time”, “service fee”, “LED light price”…" aria-label="Search the knowledge base">
+      <button type="submit" id="search-btn">Search</button>
+    </form>
+    <div class="langs" id="langs"></div>
+    <div class="sugs" id="sugs"></div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="answer" id="answer"></div>
+
+    <div class="fallback" id="fallback"></div>
+
+    <div class="cats" id="cats"></div>
+
+    <div class="faq" id="faq"></div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <div><strong>Qiansi Sourcing</strong> · Kunming Zhoubiao Trading Co., Ltd.</div>
+      <div>Email: <a href="mailto:notify@xn--yhq58j.com">notify@xn--yhq58j.com</a> · Hours: Monday–Saturday, 09:00–18:00 (GMT+8)</div>
+    </div>
+    <div class="copy">Knowledge Base v0.1 · updated 2026-08-24 · <a href="https://xn--yhq58j.com/">xn--yhq58j.com</a></div>
+  </div>
+</footer>
+
+<script src="kb.js"></script>
+<script src="kb-match.js"></script>
+<script>
+(function(){
+  var KB = window.QIANSI_KB;
+  if (!KB || !KB.categories) { document.getElementById('faq').innerHTML = '<div style="padding:20px">Knowledge base failed to load.</div>'; return; }
+
+  var langs = KB.meta.languages;                 // ["en","pt","ar","zh"]
+  var LANG_NAMES = { en:'English', pt:'Português', ar:'العربية', zh:'中文' };
+  var lang = localStorage.getItem('qiansi_kb_lang') || 'en';
+  if (langs.indexOf(lang) < 0) lang = 'en';
+
+  var ENDPOINT_MAIL = 'mailto:' + KB.meta.contact;
+
+  // Keyword matching lives in kb-match.js (shared with the self-test);
+  // the window keeps only its UI helpers here.
+  function isRTL(s){ return /[\u0600-\u06FF]/.test(s||''); }
+
+  function categoryName(cat){ return cat.name[lang] || cat.name.en; }
+  function itemQ(item){ return item.q[lang] || item.q.en; }
+  function itemA(item){ return item.a[lang] || item.a.en; }
+
+  // ---- renderers ----
+  var curCat = 'all';
+  var curItemId = null;
+
+  function renderLangs(){
+    var box = document.getElementById('langs');
+    box.innerHTML = '';
+    for (var i=0;i<langs.length;i++){
+      var b = document.createElement('button');
+      b.textContent = LANG_NAMES[langs[i]] || langs[i];
+      b.className = (langs[i]===lang) ? 'on' : '';
+      b.setAttribute('data-lang', langs[i]);
+      b.onclick = function(){ lang = this.getAttribute('data-lang'); try{localStorage.setItem('qiansi_kb_lang',lang);}catch(e){} renderLangs(); renderSugs(); renderCats(); renderFaq(); if(curItemId){ showById(curItemId); } };
+      box.appendChild(b);
+    }
+  }
+
+  function renderSugs(){
+    var box = document.getElementById('sugs');
+    box.innerHTML = '';
+    var sug = ['service fee','shipping time','led light','brazil','restricted goods','contact'];
+    for (var i=0;i<sug.length;i++){
+      var b = document.createElement('button');
+      b.textContent = sug[i];
+      b.onclick = function(){ document.getElementById('q').value = this.textContent; doSearch(this.textContent); };
+      box.appendChild(b);
+    }
+  }
+
+  function renderCats(){
+    var box = document.getElementById('cats');
+    box.innerHTML = '';
+    var all = document.createElement('button');
+    all.textContent = 'All';
+    all.className = (curCat==='all')?'on':'';
+    all.onclick = function(){ curCat='all'; renderCats(); renderFaq(); };
+    box.appendChild(all);
+    for (var i=0;i<KB.categories.length;i++){
+      var cat = KB.categories[i];
+      var b = document.createElement('button');
+      b.textContent = categoryName(cat);
+      b.className = (curCat===cat.id)?'on':'';
+      b.onclick = function(){ curCat = cat.id; renderCats(); renderFaq(); };
+      box.appendChild(b);
+    }
+  }
+
+  function showAnswer(item, query){
+    hideAlerts();
+    var box = document.getElementById('answer');
+    var dir = isRTL(itemQ(item)) ? ' dir="rtl"' : '';
+    var catTag='', catName='';
+    for (var c=0;c<KB.categories.length;c++){ if (KB.categories[c].items.indexOf(item)>=0){ catName = categoryName(KB.categories[c]); break; } }
+    catTag = catName ? '<span class="cat-tag">'+esc(catName)+'</span>' : '';
+    box.innerHTML =
+      '<div class="a-q"><div>'+esc(itemQ(item))+'</div>'+catTag+'</div>'+
+      '<div class="a-body"'+dir+'>'+esc(itemA(item))+'</div>'+
+      '<div class="a-meta"><span>'+(query?('Matched from “'+esc(query)+'”'):'')+'</span>'+
+      '<button class="copy" data-copy="'+escAttr(itemA(item))+'">Copy</button>'+
+      '<span>Still need help? <a href="'+ENDPOINT_MAIL+'">Email a human</a> · '+(query?'':'')+'</span></div>';
+    box.querySelector('.copy').onclick = function(){
+      var t = this.getAttribute('data-copy');
+      (navigator.clipboard&&navigator.clipboard.writeText) ? navigator.clipboard.writeText(t) : prompt('Copy:', t);
+    };
+    box.classList.add('show');
+    box.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  function showFallback(query){
+    hideAlerts();
+    var box = document.getElementById('fallback');
+    var dir = isRTL(query)?' dir="rtl"':'';
+    box.innerHTML =
+      '<h3'+dir+'>We couldn’t match that to our knowledge base yet.</h3>'+
+      '<p'+dir+'>Our automated concierge knows answers about the company, service &amp; fees, products, logistics, markets and compliance — but it’s still learning. For the most accurate help, reach a human directly.</p>'+
+      '<div class="actions">'+
+        '<a class="btn" href="'+ENDPOINT_MAIL+'">Email us — '+esc(KB.meta.contact)+'</a>'+
+        '<a class="btn ghost" href="https://xn--yhq58j.com/">Back to site</a>'+
+      '</div>'+
+      '<p style="margin:14px 0 0;font-size:.8rem;color:var(--muted)">We answer inquiries within 24 hours. Hours: '+esc(KB.meta.hours)+'.</p>';
+    box.classList.add('show');
+    box.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  function hideAlerts(){
+    document.getElementById('answer').classList.remove('show');
+    document.getElementById('answer').innerHTML='';
+    document.getElementById('fallback').classList.remove('show');
+    document.getElementById('fallback').innerHTML='';
+  }
+
+  function showById(id){
+    curItemId = id;
+    for (var c=0;c<KB.categories.length;c++){
+      var items = KB.categories[c].items;
+      for (var i=0;i<items.length;i++){
+        if (items[i].id===id){
+          var dir = isRTL(itemQ(items[i])) ? ' dir="rtl"' : '';
+          showAnswer(items[i], '');
+          // close accordion others, open this
+          var fqs = document.querySelectorAll('.fq');
+          for (var f=0;f<fqs.length;f++) fqs[f].classList.remove('open');
+          var qnode = document.querySelector('.fq[data-id="'+id+'"]');
+          if (qnode) qnode.classList.add('open');
+          return;
+        }
+      }
+    }
+  }
+
+  function renderFaq(){
+    var box = document.getElementById('faq');
+    box.innerHTML = '';
+    var any = false;
+    for (var c=0;c<KB.categories.length;c++){
+      var cat = KB.categories[c];
+      if (curCat!=='all' && curCat!==cat.id) continue;
+      var hdr = document.createElement('div');
+      hdr.className = 'faq-cat';
+      hdr.textContent = categoryName(cat);
+      box.appendChild(hdr);
+      var items = cat.items;
+      for (var i=0;i<items.length;i++){
+        (function(item){
+          var div = document.createElement('div');
+          div.className = 'fq';
+          div.setAttribute('data-id', item.id);
+          var qq = itemQ(item);
+          div.innerHTML = '<button class="fq-h"><span'+(isRTL(qq)?' dir="rtl"':'')+'>'+esc(qq)+'</span><span class="plus">+</span></button><div class="fq-b" dir="auto">'+esc(itemA(item))+'</div>';
+          div.querySelector('.fq-h').onclick = function(){ showById(item.id); };
+          box.appendChild(div);
+          any = true;
+        })(items[i]);
+      }
+    }
+    if (!any) box.innerHTML = '<div class="fq"><div class="fq-b" style="display:block;padding:20px;color:var(--muted)">No questions in this category.</div></div>';
+  }
+
+  function doSearch(q){
+    var r = QIANSI_MATCH.findBest(KB, q, lang);
+    if (r){ curItemId = r.item.id; showAnswer(r.item, q); }
+    else { curItemId = null; showFallback(q); }
+  }
+
+  // ---- events ----
+  document.getElementById('search-form').addEventListener('submit', function(e){ e.preventDefault(); doSearch(document.getElementById('q').value); });
+  document.getElementById('q').addEventListener('keydown', function(e){ if (e.key==='Enter'){ e.preventDefault(); doSearch(this.value); } });
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]; }); }
+  function escAttr(s){ return esc(s).replace(/'/g,'&#39;'); }
+
+  // ---- init ----
+  renderLangs();
+  renderSugs();
+  renderCats();
+  renderFaq();
+  document.getElementById('q').focus();
+})();
+</script>
+</body>
+</html>

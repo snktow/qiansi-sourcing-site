@@ -48,9 +48,10 @@
   .nav-links a:hover,.nav-links a.on{color:#fff}
   .nav-cta{font-size:.88rem;padding:9px 18px}
   .lang{display:flex;gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px}
-  .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
-  .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
-  .lang a:hover{color:#fff}
+  .lang-label{color:#FFB85C;font-weight:800;font-size:.75rem;letter-spacing:.4px;white-space:nowrap;margin-inline-end:6px;pointer-events:none}
+  .lang-select{background:rgba(255,255,255,.12);color:#fff;font-size:.8rem;font-weight:700;padding:6px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.4);cursor:pointer;font-family:inherit}
+  .lang-select:hover{background:rgba(255,255,255,.2)}
+  .lang-select:focus{outline:none;border-color:#FFB85C;box-shadow:0 0 0 2px rgba(255,184,92,.35)}
   @media(max-width:820px){.nav-links{display:none}.nav-right{gap:14px}}
 
   /* Hero */
@@ -216,8 +217,28 @@
         <a href="/llms.txt">llms.txt</a>
         <a class="btn nav-cta" href="#inquiry">Send Inquiry</a>
       </nav>
-      <div class="lang">
-        <a class="on" href="/agents/" aria-current="page">EN</a>
+            <div class="lang">
+        <span class="lang-label">🌐</span>
+        <select id="qiansi-lang" class="lang-select" aria-label="Language">
+          <option value="/" data-lang="en" selected>English</option>
+          <option value="/zh/" data-lang="zh">中文</option>
+          <option value="/pt/" data-lang="pt">Português</option>
+          <option value="/ar/" data-lang="ar">العربية</option>
+          <option value="/ru/" data-lang="ru">Русский</option>
+          <option value="/vi/" data-lang="vi">Tiếng Việt</option>
+          <option value="/th/" data-lang="th">ไทย</option>
+          <option value="/id/" data-lang="id">Bahasa Indonesia</option>
+          <option value="/ms/" data-lang="ms">Bahasa Melayu</option>
+          <option value="/fil/" data-lang="fil">Filipino</option>
+          <option value="/my/" data-lang="my">မြန်မာ</option>
+          <option value="/tr/" data-lang="tr">Türkçe</option>
+          <option value="/fa/" data-lang="fa">فارسی</option>
+          <option value="/hi/" data-lang="hi">हिन्दी</option>
+          <option value="/bn/" data-lang="bn">বাংলা</option>
+          <option value="/ur/" data-lang="ur">اردو</option>
+          <option value="/ne/" data-lang="ne">नेपाली</option>
+          <option value="/si/" data-lang="si">සිංහල</option>
+        </select>
       </div>
     </div>
   </div>
@@ -501,7 +522,7 @@
       </div>
       <div>
         <h5>Contact</h5>
-        <p>Email: <a href="mailto:zhoubiao@zhoubiaotrade.cn">zhoubiao@zhoubiaotrade.cn</a></p>
+        <p>Email: <a href="mailto:notify@xn--yhq58j.com">notify@xn--yhq58j.com</a></p>
         <p>Inquiry endpoint: <a href="https://formsubmit.co/notify@xn--yhq58j.com">formsubmit.co/notify@xn--yhq58j.com</a></p>
         <p>Working hours: Mon – Sat (GMT+8) · 9:00–18:00</p>
       </div>
@@ -562,9 +583,22 @@
     }).then(function(d){
       done(true, '✓ Received. A human will reply to ' + payload.contact + ' within 24 hours.');
     }).catch(function(){
-      done(false, 'Sorry, submission failed. Please email us directly at zhoubiao@zhoubiaotrade.cn');
+      done(false, 'Sorry, submission failed. Please email us directly at notify@xn--yhq58j.com');
     });
   });
+})();
+</script>
+<script>
+(function(){
+  document.addEventListener('change', function (ev) {
+    var sel = ev.target;
+    if (!sel || !sel.classList || !sel.classList.contains('lang-select')) return;
+    var opt = sel.options[sel.selectedIndex];
+    var lang = opt ? (opt.getAttribute('data-lang') || '') : '';
+    if (lang) { try { localStorage.setItem('qiansi_lang', lang); } catch (e) {} }
+    var url = sel.value || '';
+    if (url) { try { location.href = url; } catch (e) {} }
+  }, true);
 })();
 </script>
 </body>

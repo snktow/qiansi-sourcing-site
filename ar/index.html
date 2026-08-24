@@ -8,11 +8,14 @@
   /* Remember manual language choice from the .lang bar (event delegation) */
   var pref = null;
   try { pref = localStorage.getItem('qiansi_lang'); } catch (e) {}
-  document.addEventListener('click', function (ev) {
-    var a = ev.target && ev.target.closest ? ev.target.closest('.lang a') : null;
-    if (!a) return;
-    var lang = a.getAttribute('data-lang');
+  document.addEventListener('change', function (ev) {
+    var sel = ev.target;
+    if (!sel || !sel.classList || !sel.classList.contains('lang-select')) return;
+    var opt = sel.options[sel.selectedIndex];
+    var lang = opt ? (opt.getAttribute('data-lang') || '') : '';
     if (lang) { try { localStorage.setItem('qiansi_lang', lang); } catch (e) {} }
+    var url = sel.value || '';
+    if (url) { try { location.href = url; } catch (e) {} }
   }, true);
 })();
 </script>
@@ -62,10 +65,11 @@
   .nav-links a{color:#D7E3EC;font-size:.92rem;font-weight:500}
   .nav-links a:hover{color:#fff}
   .nav-cta{font-size:.88rem;padding:9px 18px}
-  .lang{display:flex;flex-wrap:wrap;gap:4px;row-gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px;max-width:520px}
-  .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
-  .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
-  .lang a:hover{color:#fff}
+  .lang{display:flex;flex-wrap:wrap;gap:4px;row-gap:5px;align-items:center;border-right:1px solid rgba(255,255,255,.25);padding-right:18px;max-width:520px}
+  .lang-label{color:#FFB85C;font-weight:800;font-size:.75rem;letter-spacing:.4px;white-space:nowrap;margin-inline-end:6px;pointer-events:none}
+  .lang-select{background:rgba(255,255,255,.12);color:#fff;font-size:.8rem;font-weight:700;padding:6px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.4);cursor:pointer;font-family:inherit}
+  .lang-select:hover{background:rgba(255,255,255,.2)}
+  .lang-select:focus{outline:none;border-color:#FFB85C;box-shadow:0 0 0 2px rgba(255,184,92,.35)}
   @media(max-width:820px){.nav-links{display:none}.nav-right{gap:14px}}
 
   /* Hero */
@@ -282,27 +286,30 @@
         <a href="#how">كيف نعمل</a>
         <a href="#logistics">الشحن</a>
         <a href="#why">لماذا نحن</a>
-        <a class="btn nav-cta" href="#inquiry">أرسل استفساراً</a>
+        <a class="btn nav-cta" href="/support/">أرسل استفساراً</a>
       </nav>
       <div class="lang">
-        <a data-lang="en" href="../">EN</a>
-        <a data-lang="pt" href="../pt/">PT</a>
-        <a data-lang="zh" href="../zh/">中文</a>
-        <a data-lang="ar" class="on" aria-current="page" href="../ar/">العربية</a>
-        <a data-lang="ru" href="../ru/">Русский</a>
-        <a data-lang="vi" href="../vi/">Tiếng Việt</a>
-        <a data-lang="th" href="../th/">ไทย</a>
-        <a data-lang="id" href="../id/">Bahasa</a>
-        <a data-lang="ms" href="../ms/">Melayu</a>
-        <a data-lang="fil" href="../fil/">Filipino</a>
-        <a data-lang="my" href="../my/">မြန်မာ</a>
-        <a data-lang="tr" href="../tr/">Türkçe</a>
-        <a data-lang="fa" href="../fa/">فارسی</a>
-        <a data-lang="hi" href="../hi/">हिन्दी</a>
-        <a data-lang="bn" href="../bn/">বাংলা</a>
-        <a data-lang="ur" href="../ur/">اردو</a>
-        <a data-lang="ne" href="../ne/">नेपाली</a>
-        <a data-lang="si" href="../si/">සිංහල</a>
+        <span class="lang-label">🌐</span>
+        <select id="qiansi-lang" class="lang-select" aria-label="Language">
+          <option value="../" data-lang="en">EN</option>
+          <option value="../pt/" data-lang="pt">PT</option>
+          <option value="../zh/" data-lang="zh">中文</option>
+          <option value="../ar/" data-lang="ar" selected>العربية</option>
+          <option value="../ru/" data-lang="ru">Русский</option>
+          <option value="../vi/" data-lang="vi">Tiếng Việt</option>
+          <option value="../th/" data-lang="th">ไทย</option>
+          <option value="../id/" data-lang="id">Bahasa</option>
+          <option value="../ms/" data-lang="ms">Melayu</option>
+          <option value="../fil/" data-lang="fil">Filipino</option>
+          <option value="../my/" data-lang="my">မြန်မာ</option>
+          <option value="../tr/" data-lang="tr">Türkçe</option>
+          <option value="../fa/" data-lang="fa">فارسی</option>
+          <option value="../hi/" data-lang="hi">हिन्दी</option>
+          <option value="../bn/" data-lang="bn">বাংলা</option>
+          <option value="../ur/" data-lang="ur">اردو</option>
+          <option value="../ne/" data-lang="ne">नेपाली</option>
+          <option value="../si/" data-lang="si">සිංහල</option>
+        </select>
       </div>
     </div>
   </div>
@@ -322,13 +329,13 @@
     </div>
     <div class="quick-services">
       <a href="#products"><span class="qs-ic">🏭</span><span class="qs-t">توريد المصنع</span><span class="qs-s">أسعار صينية مباشرة</span></a>
-      <a href="#inquiry"><span class="qs-ic">💬</span><span class="qs-t">احصل على عرض سعر</span><span class="qs-s">قائمة أسعار الجملة</span></a>
+      <a href="/support/"><span class="qs-ic">💬</span><span class="qs-t">احصل على عرض سعر</span><span class="qs-s">قائمة أسعار الجملة</span></a>
       <a href="#logistics"><span class="qs-ic">🔍</span><span class="qs-t">فحص الجودة</span><span class="qs-s">يُفحص قبل الشحن</span></a>
       <a href="#logistics"><span class="qs-ic">📦</span><span class="qs-t">شحن الطرود الصغيرة</span><span class="qs-s">طرود وخط مخصص</span></a>
       <a href="#products"><span class="qs-ic">🤝</span><span class="qs-t">العرض والطلب</span><span class="qs-s">قدّم طلبك</span></a>
     </div>
     <div class="actions">
-      <a class="btn" href="#inquiry">أرسل استفساراً</a>
+      <a class="btn" href="/support/">أرسل استفساراً</a>
       <a class="btn ghost" href="../products.html">تصفح المنتجات</a>
     </div>
   </div>
@@ -363,7 +370,7 @@
         <span class="band">التوريد <b>¥1.88–11.88</b> /قطعة</span>
         <span class="btn dark">افتح الكتالوج ←</span>
       </a>
-      <a class="cat-card" href="#inquiry">
+      <a class="cat-card" href="/support/">
         <div class="cat-icon">🧺</div>
         <h3>فئات أخرى</h3>
         <p>تغطية جميع الفئات — أخبرنا بما تحتاجه وسنوفّره لك.</p>
@@ -514,7 +521,7 @@
         <p><a href="#products">المنتجات</a></p>
         <p><a href="#how">كيف نعمل</a></p>
         <p><a href="#logistics">الشحن</a></p>
-        <p><a href="#inquiry">أرسل استفساراً</a></p>
+        <p><a href="/support/">أرسل استفساراً</a></p>
         <p><a href="../privacy.html">سياسة الخصوصية</a></p>
         <p>للعملاء الأذكياء (AI): <a href="../agents/">Agent Hub</a> · <a href="../llms.txt">/llms.txt</a></p>
       </div>

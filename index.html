@@ -28,11 +28,14 @@
     }
   }
   /* Remember manual language choice from the .lang bar (event delegation) */
-  document.addEventListener('click', function (ev) {
-    var a = ev.target && ev.target.closest ? ev.target.closest('.lang a') : null;
-    if (!a) return;
-    var lang = a.getAttribute('data-lang');
+  document.addEventListener('change', function (ev) {
+    var sel = ev.target;
+    if (!sel || !sel.classList || !sel.classList.contains('lang-select')) return;
+    var opt = sel.options[sel.selectedIndex];
+    var lang = opt ? (opt.getAttribute('data-lang') || '') : '';
     if (lang) { try { localStorage.setItem('qiansi_lang', lang); } catch (e) {} }
+    var url = sel.value || '';
+    if (url) { try { location.href = url; } catch (e) {} }
   }, true);
 })();
 </script>
@@ -85,9 +88,10 @@
   .nav-links a:hover{color:#fff}
   .nav-cta{font-size:.88rem;padding:9px 18px}
   .lang{display:flex;flex-wrap:wrap;gap:4px;row-gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px;max-width:520px}
-  .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
-  .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
-  .lang a:hover{color:#fff}
+  .lang-label{color:#FFB85C;font-weight:800;font-size:.75rem;letter-spacing:.4px;white-space:nowrap;margin-inline-end:6px;pointer-events:none}
+  .lang-select{background:rgba(255,255,255,.12);color:#fff;font-size:.8rem;font-weight:700;padding:6px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.4);cursor:pointer;font-family:inherit}
+  .lang-select:hover{background:rgba(255,255,255,.2)}
+  .lang-select:focus{outline:none;border-color:#FFB85C;box-shadow:0 0 0 2px rgba(255,184,92,.35)}
   @media(max-width:820px){.nav-links{display:none}.nav-right{gap:14px}}
 
   /* Hero */
@@ -265,7 +269,6 @@
     .hero p.lead{max-width:820px}
   }
 
-
   /* Qiansi Info Wall */
   .wall-entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 18px}
   .wall-entry{display:flex;flex-direction:column;gap:3px;background:#F0F4F8;border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:.2s}
@@ -334,27 +337,30 @@
         <a href="#how">How We Work</a>
         <a href="#logistics">Logistics</a>
         <a href="#why">Why Us</a>
-        <a class="btn nav-cta" href="#inquiry">Send Inquiry</a>
+        <a class="btn nav-cta" href="/support/">Send Inquiry</a>
       </nav>
       <div class="lang">
-        <a data-lang="en" class="on" href="/" aria-current="page">EN</a>
-        <a data-lang="zh" href="/zh/">中文</a>
-        <a data-lang="pt" href="/pt/">PT</a>
-        <a data-lang="ar" href="/ar/">العربية</a>
-        <a data-lang="ru" href="/ru/">RU</a>
-        <a data-lang="vi" href="/vi/">VI</a>
-        <a data-lang="th" href="/th/">TH</a>
-        <a data-lang="id" href="/id/">ID</a>
-        <a data-lang="ms" href="/ms/">MS</a>
-        <a data-lang="fil" href="/fil/">FIL</a>
-        <a data-lang="my" href="/my/">MY</a>
-        <a data-lang="tr" href="/tr/">TR</a>
-        <a data-lang="fa" href="/fa/">فارسی</a>
-        <a data-lang="hi" href="/hi/">हिन्दी</a>
-        <a data-lang="bn" href="/bn/">বাংলা</a>
-        <a data-lang="ur" href="/ur/">اردو</a>
-        <a data-lang="ne" href="/ne/">नेपाली</a>
-        <a data-lang="si" href="/si/">සිංහල</a>
+        <span class="lang-label">🌐</span>
+        <select id="qiansi-lang" class="lang-select" aria-label="Language">
+          <option value="/" data-lang="en" selected>EN</option>
+          <option value="/zh/" data-lang="zh">中文</option>
+          <option value="/pt/" data-lang="pt">PT</option>
+          <option value="/ar/" data-lang="ar">العربية</option>
+          <option value="/ru/" data-lang="ru">RU</option>
+          <option value="/vi/" data-lang="vi">VI</option>
+          <option value="/th/" data-lang="th">TH</option>
+          <option value="/id/" data-lang="id">ID</option>
+          <option value="/ms/" data-lang="ms">MS</option>
+          <option value="/fil/" data-lang="fil">FIL</option>
+          <option value="/my/" data-lang="my">MY</option>
+          <option value="/tr/" data-lang="tr">TR</option>
+          <option value="/fa/" data-lang="fa">فارسی</option>
+          <option value="/hi/" data-lang="hi">हिन्दी</option>
+          <option value="/bn/" data-lang="bn">বাংলা</option>
+          <option value="/ur/" data-lang="ur">اردو</option>
+          <option value="/ne/" data-lang="ne">नेपाली</option>
+          <option value="/si/" data-lang="si">සිංහල</option>
+        </select>
       </div>
     </div>
   </div>
@@ -374,55 +380,14 @@
     </div>
     <div class="quick-services">
       <a href="#products"><span class="qs-ic">🏭</span><span class="qs-t">Factory Sourcing</span><span class="qs-s">Factory-direct China prices</span></a>
-      <a href="#inquiry"><span class="qs-ic">💬</span><span class="qs-t">Get a Quote</span><span class="qs-s">Wholesale price list (per final quote)</span></a>
+      <a href="/support/"><span class="qs-ic">💬</span><span class="qs-t">Get a Quote</span><span class="qs-s">Wholesale price list (per final quote)</span></a>
       <a href="#logistics"><span class="qs-ic">🔍</span><span class="qs-t">Quality Inspection</span><span class="qs-s">Checked before shipping</span></a>
       <a href="#logistics"><span class="qs-ic">📦</span><span class="qs-t">Small-Parcel Logistics</span><span class="qs-s">Small parcel &amp; dedicated-line delivery</span></a>
       <a href="#sd"><span class="qs-ic">🤝</span><span class="qs-t">Supply &amp; Demand</span><span class="qs-s">Post your request</span></a>
     </div>
     <div class="actions">
-      <a class="btn" href="#lead-form">Get a Quote</a>
+      <a class="btn" href="/support/">Get a Quote</a>
       <a class="btn ghost" href="products.html">Browse Products</a>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="products">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>Browse by Category</h2>
-      <p>Three live categories with factory-direct China prices. Open the catalog for full product details — every link is verifiable.</p>
-    </div>
-
-    <div class="cat-grid">
-      <a class="cat-card" href="products.html">
-        <div class="cat-icon">🐾</div>
-        <h3>Pet Supplies</h3>
-        <p>Auto feeders, water dispensers &amp; bowls — export-grade pet essentials.</p>
-        <span class="band">Sourcing <b>¥0.14 – 10.2</b> /pc</span>
-        <span class="btn dark">Open Catalog →</span>
-      </a>
-      <a class="cat-card" href="products.html">
-        <div class="cat-icon">📱</div>
-        <h3>Car Phone Mounts</h3>
-        <p>Riding, dashboard &amp; gravity-sensor holders for driving and biking.</p>
-        <span class="band">Sourcing <b>¥1.67 – 7.5</b> /pc</span>
-        <span class="btn dark">Open Catalog →</span>
-      </a>
-      <a class="cat-card" href="products.html">
-        <div class="cat-icon">💡</div>
-        <h3>LED Strip Lights</h3>
-        <p>Waterproof COB, silicone linear &amp; RGB strips — a proven high-margin BR bestseller.</p>
-        <span class="band">Sourcing <b>¥1.88 – 11.88</b> /pc</span>
-        <span class="btn dark">Open Catalog →</span>
-      </a>
-      <a class="cat-card" href="#inquiry">
-        <div class="cat-icon">🧺</div>
-        <h3>More Categories</h3>
-        <p>All-category coverage — tell us what you need and we source it for you.</p>
-        <span class="band">Any product · Any market</span>
-        <span class="btn dark">Ask Us →</span>
-      </a>
     </div>
   </div>
 </section>
@@ -959,125 +924,6 @@
   </div>
 </section>
 
-<!-- SUPPLY & DEMAND -->
-<!-- SUPPLY & DEMAND: Qiansi Info Wall -->
-<section class="sd" id="sd">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>Supply &amp; Demand Info Wall</h2>
-      <p>A public board where Chinese sellers post what they supply and international buyers post what they need. Qiansi introduces the two sides — we do not collect payments, hold funds, or act as escrow.</p>
-    </div>
-
-    <!-- Two visible entries: Publish + Browse -->
-    <div class="wall-entries">
-      <a href="#wall-publish" class="wall-entry">
-        <span class="wall-entry-ic">📤</span>
-        <span class="wall-entry-t">Publish a Supply / Demand</span>
-        <span class="wall-entry-s">Post what you supply or need — reach real partners</span>
-      </a>
-      <a href="#wall-list" class="wall-entry">
-        <span class="wall-entry-ic">📋</span>
-        <span class="wall-entry-t">Browse the Public Board</span>
-        <span class="wall-entry-s">See live posts with contact details</span>
-      </a>
-    </div>
-
-    <div class="compliance-warn">ℹ️ This is a matching board only. Qiansi connects the two sides and does not collect payments, hold funds, or offer escrow. Contact details are provided by each poster.</div>
-
-    <!-- Publish form -->
-    <div class="sd-panel" id="wall-publish">
-      <div class="sd-head">
-        <h3>📤 Publish a Supply / Demand</h3>
-        <p>Tell us what you offer or need. Restricted categories are reviewed before a post appears publicly.</p>
-      </div>
-      <form id="wall-form" novalidate>
-        <div class="row">
-          <div class="field">
-            <label>I am a… *</label>
-            <div class="radio-row">
-              <label class="radio"><input type="radio" name="wtype" value="seller" checked> Seller (I supply)</label>
-              <label class="radio"><input type="radio" name="wtype" value="buyer"> Buyer (I need)</label>
-            </div>
-          </div>
-          <div class="field">
-            <label for="wall-name">Product / item name *</label>
-            <input type="text" id="wall-name" required placeholder="e.g. 220V waterproof LED strip">
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="wall-cat">Category *</label>
-            <input type="text" id="wall-cat" required placeholder="e.g. LED lights, pet supplies">
-          </div>
-          <div class="field">
-            <label for="wall-target">Target market / destination</label>
-            <input type="text" id="wall-target" placeholder="e.g. Brazil, Poland, worldwide">
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="wall-price">Reference price</label>
-            <div class="price-row">
-              <select id="wall-currency">
-                <option>USD</option><option>EUR</option><option>BRL</option><option>CNY</option><option>RUB</option><option>PLN</option>
-              </select>
-              <input type="number" id="wall-price" min="0" step="any" placeholder="0.00">
-            </div>
-          </div>
-          <div class="field">
-            <label for="wall-moq">MOQ / quantity</label>
-            <input type="text" id="wall-moq" placeholder="e.g. 100 pcs">
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="wall-delivery">Delivery time</label>
-            <input type="text" id="wall-delivery" placeholder="e.g. 7–15 days">
-          </div>
-          <div class="field">
-            <label for="wall-contact">Contact *</label>
-            <input type="text" id="wall-contact" required placeholder="WhatsApp / WeChat / email">
-          </div>
-        </div>
-        <div class="field">
-          <label for="wall-desc">Details</label>
-          <textarea id="wall-desc" rows="3" placeholder="Specs, quantity, packaging, shipping channel…"></textarea>
-        </div>
-        <div class="field">
-          <label for="wall-image">Product image (optional, ≤2MB, jpg/webp/png)</label>
-          <input type="file" id="wall-image" accept="image/jpeg,image/webp,image/png">
-          <p class="form-note">Do not upload images containing other people's personal information, faces, license plates, addresses or similar sensitive details.</p>
-        </div>
-        <div class="compliance-warn">⚠️ Restricted or prohibited goods (weapons, drugs, whole vehicles, rare earths, controlled dual-use items, etc.) are reviewed before being published.</div>
-        <div class="field">
-          <label class="checkbox"><input type="checkbox" id="wall-compliance" required> I confirm this post complies with China's export-control regulations and the destination country's import regulations.</label>
-        </div>
-        <div class="compliance-warn">By submitting, you agree that we process the above information to publish your supply/demand post and connect the two sides. Your information may be transferred across borders to our processing partners. See our <a href="privacy.html">Privacy Policy</a>.</div>
-        <button type="submit" class="btn dark">Publish</button>
-        <div id="wall-form-msg" class="sd-msg" role="status"></div>
-      </form>
-    </div>
-
-    <!-- Public echo list -->
-    <div class="sd-list-wrap" id="wall-list">
-      <div class="sd-list-head">
-        <h3>Public Board — Latest Posts</h3>
-        <span class="sd-badge" id="wall-count">…</span>
-      </div>
-      <div class="wall-filter">
-        <a href="#" data-f="all" class="wf active">All</a>
-        <a href="#" data-f="seller" class="wf">Supply</a>
-        <a href="#" data-f="buyer" class="wf">Demand</a>
-        <input type="text" id="wall-q" placeholder="Search name / category…">
-      </div>
-      <div class="sd-list" id="wall-list-items">
-        <p class="sd-empty" id="wall-fallback">The Info Wall backend is coming online. Please check back shortly.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <!-- INQUIRY FORM -->
 <section class="inquiry" id="inquiry">
   <div class="wrap">
@@ -1132,7 +978,7 @@
         <p><a href="#products">Product Lines</a></p>
         <p><a href="#how">How We Work</a></p>
         <p><a href="#logistics">Shipping &amp; Logistics</a></p>
-        <p><a href="#inquiry">Send Inquiry</a></p>
+        <p><a href="/support/">Send Inquiry</a></p>
         <p><a href="privacy.html">Privacy Policy</a></p>
         <p>For AI Agents: <a href="/agents/">Agent Hub</a> · Machine-readable brief: <a href="/llms.txt">/llms.txt</a></p>
       </div>
@@ -1248,153 +1094,5 @@
   }
 </script>
 
-<script>
-(function(){
-  // ---- Qiansi Info Wall (supply & demand board) ----
-  // Set WALL_API_BASE to the deployed Worker URL (no trailing slash) at deploy time.
-  var WALL_API_BASE = "https://qiansi-sd-wall.qiansi.workers.dev";
-  var WALL_LANG = 'en';
-  var STRINGS = {
-    online: 'The Info Wall backend is coming online. Please check back shortly.',
-    submitting: 'Publishing…',
-    ok: '✓ Published! Browse the board to see your post.',
-    err: 'Submission failed. Please try again or email us at notify@xn--yhq58j.com.',
-    imgErr: 'Image upload failed (jpg/webp/png, ≤2MB).',
-    needName: 'Please fill in the product/item name, a category, and a contact.',
-    needCompliance: 'Please confirm the compliance checkbox.',
-    reported: 'Thanks — reported. It will be reviewed.',
-    reportFail: 'Report failed.',
-    report: 'Report',
-    defaultReason: 'Reported from the public board',
-    loadFail: 'Could not load the board right now. Please refresh or check back later.',
-    empty: 'No posts yet. Be the first to publish one above.',
-    seller: 'Supply',
-    buyer: 'Demand',
-};
-  var configured = /^https?:\/\//.test(WALL_API_BASE);
-  var form = document.getElementById('wall-form');
-  var msg = document.getElementById('wall-form-msg');
-  var listEl = document.getElementById('wall-list-items');
-  var countEl = document.getElementById('wall-count');
-  var qInput = document.getElementById('wall-q');
-  var filter = 'all', q = '';
-  function show(txt, ok){ if(!msg) return; msg.textContent = txt; msg.className = ok==='warn' ? 'sd-msg warn' : (ok ? 'sd-msg ok' : 'sd-msg err'); msg.style.display='block'; }
-  function esc(s){ var d=document.createElement('div'); d.textContent = (s==null?'':String(s)); return d.innerHTML; }
-  function uploadImage(file){
-    if(!file) return Promise.resolve([]);
-    var fd = new FormData(); fd.append('file', file);
-    return fetch(WALL_API_BASE + '/upload', {method:'POST', body:fd}).then(function(r){
-      if(!r.ok) throw new Error('upload');
-      return r.json();
-    }).then(function(d){ return d.url ? [d.url] : []; });
-  }
-  function render(items){
-    var html = '';
-    for(var i=0;i<items.length;i++){
-      var it = items[i];
-      var typeLabel = it.type === 'buyer' ? STRINGS.buyer : STRINGS.seller;
-      var img = (it.images && it.images.length) ? '<img class="wall-img" loading="lazy" alt="" src="'+esc(it.images[0])+'">' : '';
-      var price = (it.price!=null && it.price!=='') ? esc(it.currency||'USD')+' '+esc(it.price) : '';
-      var meta = esc(it.category||'');
-      if(price) meta += ' · '+price;
-      if(it.MOQ) meta += ' · MOQ '+esc(it.MOQ);
-      if(it.delivery) meta += ' · '+esc(it.delivery);
-      if(it.target) meta += ' · →'+esc(it.target);
-      var origin = '';
-      if(it.source==='agent' && it.origin) origin = ' <a class="src" href="'+esc(it.origin)+'" target="_blank" rel="noopener">source ↗</a>';
-      var contactHtml = (it.contact) ? '<span>📞 '+esc(it.contact)+'</span>' : '';
-      html += '<div class="sd-item">'
-        + img
-        + '<div class="sd-item-top"><h4>'+esc(it.name)+'</h4><span class="sd-tag">'+typeLabel+'</span></div>'
-        + '<p class="sd-meta">'+meta+'</p>'
-        + ((it.desc) ? '<p class="sd-desc">'+esc(it.desc)+'</p>' : '')
-        + '<div class="sd-item-foot">'
-        + contactHtml
-        + '<span>'+esc(it.verified||'')+origin+'</span>'
-        + '<button class="wall-report" data-id="'+esc(it.id)+'">'+STRINGS.report+'</button>'
-        + '</div>'
-        + '</div>';
-    }
-    listEl.innerHTML = html;
-    if(countEl) countEl.textContent = String(items.length);
-  }
-  function loadList(){
-    if(!configured) return;
-    var url = WALL_API_BASE + '/wall?limit=20';
-    if(filter && filter!=='all') url += '&type=' + encodeURIComponent(filter);
-    if(q) url += '&q=' + encodeURIComponent(q);
-    fetch(url).then(function(r){ if(!r.ok) throw new Error('list'); return r.json(); })
-      .then(function(d){ var items = (d && d.items) || [];
-        if(!items.length){ listEl.innerHTML = '<p class="sd-empty">'+STRINGS.empty+'</p>'; if(countEl) countEl.textContent='0'; return; }
-        render(items); })
-      .catch(function(){ listEl.innerHTML = '<p class="sd-empty">'+STRINGS.loadFail+'</p>'; });
-  }
-  if(listEl) listEl.addEventListener('click', function(e){
-    var btn = e.target.closest ? e.target.closest('.wall-report') : null;
-    if(!btn) return;
-    var id = btn.getAttribute('data-id');
-    fetch(WALL_API_BASE + '/wall/' + encodeURIComponent(id) + '/report', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({reason: STRINGS.defaultReason})
-    }).then(function(r){ if(!r.ok) throw new Error('report'); return r.json(); })
-      .then(function(){ btn.disabled = true; btn.textContent = STRINGS.reported; })
-      .catch(function(){ btn.disabled = false; btn.textContent = STRINGS.reportFail; });
-  });
-  if(document.querySelectorAll){
-    var wfs = document.querySelectorAll('.wall-filter .wf');
-    for(var i=0;i<wfs.length;i++){
-      (function(a){ a.addEventListener('click', function(e){
-        e.preventDefault();
-        for(var j=0;j<wfs.length;j++) wfs[j].classList.remove('active');
-        a.classList.add('active'); filter = a.getAttribute('data-f'); loadList();
-      }); })(wfs[i]);
-    }
-  }
-  if(qInput) qInput.addEventListener('input', function(){ q = qInput.value.trim(); clearTimeout(window.__wq); window.__wq = setTimeout(loadList, 300); });
-  if(form) form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(!configured){ show(STRINGS.online, false); return; }
-    var name = (document.getElementById('wall-name').value||'').trim();
-    var cat = (document.getElementById('wall-cat').value||'').trim();
-    var contact = (document.getElementById('wall-contact').value||'').trim();
-    var radio = form.querySelector('input[name="wtype"]:checked');
-    var type = radio ? radio.value : 'seller';
-    var compliance = document.getElementById('wall-compliance').checked;
-    var priceEl = document.getElementById('wall-price');
-    var priceVal = priceEl ? priceEl.value : '';
-    if(!name || !cat || !contact){ show(STRINGS.needName, false); return; }
-    if(!compliance){ show(STRINGS.needCompliance, false); return; }
-    var file = document.getElementById('wall-image').files[0];
-    var phase = 'upload';
-    show(STRINGS.submitting, true);
-    uploadImage(file).then(function(images){
-      phase = 'submit';
-      var payload = {
-        name: name, type: type, category: cat,
-        desc: (document.getElementById('wall-desc').value||'').trim(),
-        currency: document.getElementById('wall-currency').value,
-        price: priceVal !== '' ? Number(priceVal) : undefined,
-        MOQ: (document.getElementById('wall-moq').value||'').trim(),
-        delivery: (document.getElementById('wall-delivery').value||'').trim(),
-        target: (document.getElementById('wall-target').value||'').trim(),
-        contact: contact,
-        images: images,
-        lang: WALL_LANG
-      };
-      return fetch(WALL_API_BASE + '/wall', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
-    }).then(function(r){
-      if(!r.ok) return r.json().then(function(j){ throw new Error(j && j.message ? j.message : ('HTTP '+r.status)); });
-      return r.json();
-    }).then(function(){
-      show(STRINGS.ok, true); form.reset();
-      var c = document.getElementById('wall-compliance'); if(c) c.checked = false;
-      if(filter==='all') loadList();
-    }).catch(function(){
-      show(phase==='submit' ? STRINGS.err : STRINGS.imgErr || STRINGS.err, false);
-    });
-  });
-  loadList();
-})();
-</script>
 </body>
 </html>

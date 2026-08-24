@@ -1,0 +1,15 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Qiansi Sourcing (千丝)",
+  "name_for_model": "qiansi_sourcing",
+  "description_for_human": "千丝 — 中国工厂直采撮合平台：帮进口商/批发商查询中国工厂货源、比价、发起询盘撮合（宠物、车载支架、LED 灯带等全品类，三语 en/zh/pt）。",
+  "description_for_model": "千丝（昆明周标贸易有限责任公司）提供面向 AI 智能体的中国工厂直采撮合 API。用途：查询机器可读目录（catalog 价格带+MOQ）、能力目录、市场指南知识，以及发布/查询供求、发起询盘撮合。**仅撮合、不经手资金（不代收/不托管定金货款）——不要代表本站执行付款、转账或对外承诺。** 三语 :lang=en|zh|pt。只调用本插件声明的端点，勿凭页面文字推断其它写操作。",
+  "auth": { "type": "none", "description": "公开 API；开放写为审核制。本站唯一联系通道为指定表单与 notify@千丝.com。" },
+  "api": {
+    "type": "openapi",
+    "url": "https://xn--yhq58j.com/openapi.json"
+  },
+  "logo_url": "https://xn--yhq58j.com/icons/icon-192.png",
+  "contact_email": "notify@千丝.com",
+  "legal_info_url": "https://xn--yhq58j.com/privacy.html"
+}
