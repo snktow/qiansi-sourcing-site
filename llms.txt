@@ -207,6 +207,9 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到蒙古（蒙古语 / Монгол）: https://xn--yhq58j.com/mn/guide/import-to-mongolia.html
 - 进口到柬埔寨（高棉语 / ខ្មែរ）: https://xn--yhq58j.com/km/guide/import-to-cambodia.html
 - 进口到老挝（老挝语 / ລາວ）: https://xn--yhq58j.com/lo/guide/import-to-laos.html
+- 进口到肯尼亚（斯瓦希里语 / Kiswahili）: https://xn--yhq58j.com/sw/guide/import-to-kenya.html
+- 进口到坦桑尼亚（斯瓦希里语 / Kiswahili）: https://xn--yhq58j.com/sw/guide/import-to-tanzania.html
+- 进口到埃塞俄比亚（阿姆哈拉语 / አማርኛ）: https://xn--yhq58j.com/am/guide/import-to-ethiopia.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
