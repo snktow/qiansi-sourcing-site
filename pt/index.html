@@ -5,14 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
 (function(){
-  /* Auto-language: zh browsers land on the Chinese version unless a manual choice exists */
+  /* Multi-language auto-detect: browser language -> its homepage, unless a manual
+     choice exists (localStorage 'qiansi_lang'). Loop-safe (no redirect if already there). */
+  var DIRS = {zh:'zh',pt:'pt',ar:'ar',ru:'ru',vi:'vi',th:'th',id:'id',ms:'ms',fil:'fil',my:'my',tr:'tr',fa:'fa',hi:'hi',bn:'bn',ur:'ur',ne:'ne',si:'si'};
+  var ORDER = ['fil','zh','pt','ar','ru','vi','th','id','ms','my','tr','fa','hi','bn','ur','ne','si'];
   var pref = null;
   try { pref = localStorage.getItem('qiansi_lang'); } catch (e) {}
-  if (!pref) {
+  var target = null;
+  if (pref) {
+    if (DIRS.hasOwnProperty(pref)) target = DIRS[pref];
+  } else {
     var l = (navigator.language || navigator.userLanguage || '').toLowerCase();
-    if (l.indexOf('zh') === 0) {
-      try { location.replace('../zh/'); } catch (e) {}
-      return;
+    for (var i = 0; i < ORDER.length; i++) {
+      if (l.indexOf(ORDER[i]) === 0) { target = DIRS[ORDER[i]]; break; }
+    }
+  }
+  if (target) {
+    var m = location.pathname.match(/^\/([a-z]{2,3})\//i);
+    var cur = m ? m[1] : '';
+    if (cur !== target) {
+      try { location.replace(location.origin + '/' + target + '/'); } catch (e) {}
     }
   }
   /* Remember manual language choice from the .lang bar (event delegation) */
@@ -72,7 +84,7 @@
   .nav-links a{color:#D7E3EC;font-size:.92rem;font-weight:500}
   .nav-links a:hover{color:#fff}
   .nav-cta{font-size:.88rem;padding:9px 18px}
-  .lang{display:flex;gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px}
+  .lang{display:flex;flex-wrap:wrap;gap:4px;row-gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px;max-width:520px}
   .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
   .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
   .lang a:hover{color:#fff}
@@ -325,9 +337,24 @@
         <a class="btn nav-cta" href="#inquiry">Enviar Consulta</a>
       </nav>
       <div class="lang">
-        <a data-lang="en" href="../">EN</a>
-        <a data-lang="pt" class="on" href="./" aria-current="page">PT</a>
-        <a data-lang="zh" href="../zh/">中文</a>
+        <a data-lang="en" href="/">EN</a>
+        <a data-lang="zh" href="/zh/">中文</a>
+        <a data-lang="pt" class="on" href="/pt/" aria-current="page">PT</a>
+        <a data-lang="ar" href="/ar/">العربية</a>
+        <a data-lang="ru" href="/ru/">RU</a>
+        <a data-lang="vi" href="/vi/">VI</a>
+        <a data-lang="th" href="/th/">TH</a>
+        <a data-lang="id" href="/id/">ID</a>
+        <a data-lang="ms" href="/ms/">MS</a>
+        <a data-lang="fil" href="/fil/">FIL</a>
+        <a data-lang="my" href="/my/">MY</a>
+        <a data-lang="tr" href="/tr/">TR</a>
+        <a data-lang="fa" href="/fa/">فارسی</a>
+        <a data-lang="hi" href="/hi/">हिन्दी</a>
+        <a data-lang="bn" href="/bn/">বাংলা</a>
+        <a data-lang="ur" href="/ur/">اردو</a>
+        <a data-lang="ne" href="/ne/">नेपाली</a>
+        <a data-lang="si" href="/si/">සිංහල</a>
       </div>
     </div>
   </div>
@@ -338,12 +365,12 @@
   <div class="wrap">
     <span class="tag">Seu parceiro de compras na China · Fornecedores de fábrica na China com preço direto · Instantâneo de preços 07/08/2026</span>
     <h1>Compre na China com Confiança.<br>Pequenos Pacotes. Grandes Margens.</h1>
-    <p class="lead">Ajudamos importadores e atacadistas <strong>ao redor do mundo</strong> a comprar direto de fábrica de fornecedores de fábrica na China verificados — suprimentos para pets, suportes de celular para carro e fitas de LED a preços de atacado, inspecionados antes do envio, com logística e desembaraço aduaneiro. Cobrimos guias de mercado de importação de <strong>64 países da Iniciativa Cinturão e Rota</strong>, com atendimento em português, inglês e chinês.</p>
+    <p class="lead">Ajudamos importadores e atacadistas <strong>ao redor do mundo</strong> a comprar direto de fábrica de fornecedores de fábrica na China verificados — suprimentos para pets, suportes de celular para carro e fitas de LED a preços de atacado, inspecionados antes do envio, com logística e desembaraço aduaneiro. Cobrimos guias de mercado de importação de <strong>65 países da Iniciativa Cinturão e Rota</strong>, com atendimento em português, inglês e chinês.</p>
     <div class="chips">
       <span>✔ Preço direto de fábrica</span>
       <span>✔ Inspeção antes do envio</span>
       <span>✔ Pequenos pacotes e linha dedicada</span>
-      <span>✔ Guias de 64 países da Iniciativa Cinturão &amp; Rota · Atendimento trilingue</span>
+      <span>✔ Guias de 65 países da Iniciativa Cinturão &amp; Rota · Atendimento trilingue</span>
     </div>
     <div class="quick-services">
       <a href="#products"><span class="qs-ic">🏭</span><span class="qs-t">Sourcing de Fábrica</span><span class="qs-s">Preços diretos de fábrica na China</span></a>
@@ -726,7 +753,7 @@
       </div>
       <div>
         <h5>Contato</h5>
-        <p>E-mail: <a href="mailto:zhoubiao@zhoubiaotrade.cn">zhoubiao@zhoubiaotrade.cn</a></p>
+        <p>E-mail: <a href="mailto:notify@xn--yhq58j.com">notify@xn--yhq58j.com</a></p>
         <p>Horário: Seg – Sáb (GMT+8) · 9:00–18:00</p>
       </div>
       <div>
@@ -791,7 +818,7 @@
     }).then(function(d){
       done(true, '✓ Obrigado, ' + payload.name.split(' ')[0] + '! Sua consulta foi recebida. Responderemos em até 24 horas.');
     }).catch(function(){
-      done(false, 'Desculpe, o envio falhou. Envie um e-mail direto para zhoubiao@zhoubiaotrade.cn');
+      done(false, 'Desculpe, o envio falhou. Envie um e-mail direto para notify@xn--yhq58j.com');
     });
   });
 })();
@@ -841,14 +868,6 @@
       });
     });
   }
-  wire('supply-form', 'supply-msg',
-    '✓ Recebido! A plataforma entrará em contato em até 24 horas.',
-    'Falha no envio. Envie um e-mail direto para zhoubiao@zhoubiaotrade.cn',
-    ['arma', 'droga', 'entorpecente', 'veículo', 'carro', 'terra rara', 'urânio', 'explosivo'],
-    '⚠️ Esta categoria pode estar sujeita a controle de exportação ou restrições de importação — a plataforma revisará a conformidade antes de conectar você.');
-  wire('demand-form', 'demand-msg',
-    '✓ Recebido! Fornecedores chineses serão apresentados à sua solicitação em até 24 horas.',
-    'Falha no envio. Envie um e-mail direto para zhoubiao@zhoubiaotrade.cn');
 })();
 </script>
 <script>
@@ -869,7 +888,7 @@
     online: 'O backend do mural de informações estará disponível em breve. Por favor, volte mais tarde.',
     submitting: 'Publicando…',
     ok: '✓ Publicado! Navegue no quadro para ver a sua publicação.',
-    err: 'Falha no envio. Tente novamente ou escreva para zhoubiao@zhoubiaotrade.cn.',
+    err: 'Falha no envio. Tente novamente ou escreva para notify@xn--yhq58j.com.',
     imgErr: 'Falha no envio da imagem (jpg/webp/png, ≤2MB).',
     needName: 'Preencha o nome do produto/item, a categoria e um contato.',
     needCompliance: 'Confirme a caixa de conformidade.',

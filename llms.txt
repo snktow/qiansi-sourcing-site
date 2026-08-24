@@ -41,10 +41,25 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - &lt;¥1K：15% 或固定 ¥150（取高）；¥1K–10K：10%；&gt;¥10K：8%
 - 首单不满意，服务费可退
 
-## 三语入口
+## 多语言入口
 - 英文首页（English）: https://xn--yhq58j.com/
 - 中文版（简体中文）: https://xn--yhq58j.com/zh/
 - 葡萄牙语版（Português）: https://xn--yhq58j.com/pt/
+- 阿拉伯语版（العربية）: https://xn--yhq58j.com/ar/
+- 俄语版（Русский）: https://xn--yhq58j.com/ru/
+- 越南语版（Tiếng Việt）: https://xn--yhq58j.com/vi/
+- 泰语版（ไทย）: https://xn--yhq58j.com/th/
+- 印尼语版（Bahasa Indonesia）: https://xn--yhq58j.com/id/
+- 马来语版（Bahasa Melayu）: https://xn--yhq58j.com/ms/
+- 菲律宾语版（Filipino）: https://xn--yhq58j.com/fil/
+- 缅甸语版（မြန်မာ）: https://xn--yhq58j.com/my/
+- 土耳其语版（Türkçe）: https://xn--yhq58j.com/tr/
+- 波斯语版（فارسی）: https://xn--yhq58j.com/fa/
+- 印地语版（हिन्दी）: https://xn--yhq58j.com/hi/
+- 孟加拉语版（বাংলা）: https://xn--yhq58j.com/bn/
+- 乌尔都语版（اردو）: https://xn--yhq58j.com/ur/
+- 尼泊尔语版（नेपाली）: https://xn--yhq58j.com/ne/
+- 僧伽罗语版（සිංහල）: https://xn--yhq58j.com/si/
 - 产品目录（英文 / English）: https://xn--yhq58j.com/products.html
 - 产品目录（中文 / 简体中文）: https://xn--yhq58j.com/zh/products.html
 - 产品目录（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/products.html
@@ -182,6 +197,11 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到缅甸（缅甸语 / မြန်မာ）: https://xn--yhq58j.com/my/guide/import-to-myanmar.html
 - 进口到土耳其（土耳其语 / Türkçe）: https://xn--yhq58j.com/tr/guide/import-to-turkey.html
 - 进口到伊朗（波斯语 / فارسی）: https://xn--yhq58j.com/fa/guide/import-to-iran.html
+- 进口到印度（印地语 / हिन्दी）: https://xn--yhq58j.com/hi/guide/import-to-india.html
+- 进口到孟加拉（孟加拉语 / বাংলা）: https://xn--yhq58j.com/bn/guide/import-to-bangladesh.html
+- 进口到巴基斯坦（乌尔都语 / اردو）: https://xn--yhq58j.com/ur/guide/import-to-pakistan.html
+- 进口到尼泊尔（尼泊尔语 / नेपाली）: https://xn--yhq58j.com/ne/guide/import-to-nepal.html
+- 进口到斯里兰卡（僧伽罗语 / සිංහල）: https://xn--yhq58j.com/si/guide/import-to-sri-lanka.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
@@ -191,7 +211,7 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 巴西：现有电商重点市场（Remessa Conforme 简化税制），详见 /guide/import-to-brazil.html（EN/PT）
 
 ## 询盘方式
-- 网站首页询盘表单（/、/zh/、/pt/ 均有表单）
+- 网站首页询盘表单（各语言首页均有表单）
 - 邮箱（Email）: notify@千丝.com
 - 支持中文 / 英文 / 葡萄牙语业务对接
 

@@ -5,7 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
 (function(){
-  /* zh page: no auto-redirect (avoids loop). Remember manual language choice from the .lang bar. */
+  /* Multi-language auto-detect: browser language -> its homepage, unless a manual
+     choice exists (localStorage 'qiansi_lang'). Loop-safe (no redirect if already there). */
+  var DIRS = {zh:'zh',pt:'pt',ar:'ar',ru:'ru',vi:'vi',th:'th',id:'id',ms:'ms',fil:'fil',my:'my',tr:'tr',fa:'fa',hi:'hi',bn:'bn',ur:'ur',ne:'ne',si:'si'};
+  var ORDER = ['fil','zh','pt','ar','ru','vi','th','id','ms','my','tr','fa','hi','bn','ur','ne','si'];
+  var pref = null;
+  try { pref = localStorage.getItem('qiansi_lang'); } catch (e) {}
+  var target = null;
+  if (pref) {
+    if (DIRS.hasOwnProperty(pref)) target = DIRS[pref];
+  } else {
+    var l = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    for (var i = 0; i < ORDER.length; i++) {
+      if (l.indexOf(ORDER[i]) === 0) { target = DIRS[ORDER[i]]; break; }
+    }
+  }
+  if (target) {
+    var m = location.pathname.match(/^\/([a-z]{2,3})\//i);
+    var cur = m ? m[1] : '';
+    if (cur !== target) {
+      try { location.replace(location.origin + '/' + target + '/'); } catch (e) {}
+    }
+  }
+  /* Remember manual language choice from the .lang bar (event delegation) */
   document.addEventListener('click', function (ev) {
     var a = ev.target && ev.target.closest ? ev.target.closest('.lang a') : null;
     if (!a) return;
@@ -62,7 +84,7 @@
   .nav-links a{color:#D7E3EC;font-size:.92rem;font-weight:500}
   .nav-links a:hover{color:#fff}
   .nav-cta{font-size:.88rem;padding:9px 18px}
-  .lang{display:flex;gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px}
+  .lang{display:flex;flex-wrap:wrap;gap:4px;row-gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px;max-width:520px}
   .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
   .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
   .lang a:hover{color:#fff}
@@ -315,9 +337,24 @@
         <a class="btn nav-cta" href="#inquiry">发送询盘</a>
       </nav>
       <div class="lang">
-        <a data-lang="en" href="../">EN</a>
-        <a data-lang="pt" href="../pt/">PT</a>
-        <a data-lang="zh" class="on" href="./" aria-current="page">中文</a>
+        <a data-lang="en" href="/">EN</a>
+        <a data-lang="zh" class="on" href="/zh/" aria-current="page">中文</a>
+        <a data-lang="pt" href="/pt/">PT</a>
+        <a data-lang="ar" href="/ar/">العربية</a>
+        <a data-lang="ru" href="/ru/">RU</a>
+        <a data-lang="vi" href="/vi/">VI</a>
+        <a data-lang="th" href="/th/">TH</a>
+        <a data-lang="id" href="/id/">ID</a>
+        <a data-lang="ms" href="/ms/">MS</a>
+        <a data-lang="fil" href="/fil/">FIL</a>
+        <a data-lang="my" href="/my/">MY</a>
+        <a data-lang="tr" href="/tr/">TR</a>
+        <a data-lang="fa" href="/fa/">فارسی</a>
+        <a data-lang="hi" href="/hi/">हिन्दी</a>
+        <a data-lang="bn" href="/bn/">বাংলা</a>
+        <a data-lang="ur" href="/ur/">اردو</a>
+        <a data-lang="ne" href="/ne/">नेपाली</a>
+        <a data-lang="si" href="/si/">සිංහල</a>
       </div>
     </div>
   </div>
@@ -328,12 +365,12 @@
   <div class="wrap">
     <span class="tag">您的中国采购伙伴 · 中国工厂直供 · 价目快照 2026-08-07</span>
     <h1>千丝采购 · 从中国工厂直采，放心又划算。<br>小件包裹，高额利润。</h1>
-    <p class="lead">我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、出货质检、小包专线物流；覆盖一带一路 64 国进口市场指南，支持中文/English/Português 多语业务对接。</p>
+    <p class="lead">我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、出货质检、小包专线物流；覆盖一带一路 65 国进口市场指南，支持中文/English/Português 多语业务对接。</p>
     <div class="chips">
       <span>✔ 中国工厂直供价</span>
       <span>✔ 发货前验货</span>
       <span>✔ 小包与专线配送</span>
-      <span>✔ 一带一路 64 国市场指南 · 三语业务对接</span>
+      <span>✔ 一带一路 65 国市场指南 · 三语业务对接</span>
     </div>
     <div class="quick-services">
       <a href="#products"><span class="qs-ic">🏭</span><span class="qs-t">工厂货源直采</span><span class="qs-s">工厂出厂价直供</span></a>
@@ -717,7 +754,7 @@
       </div>
       <div>
         <h5>联系方式</h5>
-        <p>邮箱：<a href="mailto:zhoubiao@zhoubiaotrade.cn">zhoubiao@zhoubiaotrade.cn</a></p>
+        <p>邮箱：<a href="mailto:notify@xn--yhq58j.com">notify@xn--yhq58j.com</a></p>
         <p>工作时间：周一至周六（GMT+8）· 9:00–18:00</p>
       </div>
       <div>
@@ -781,7 +818,7 @@
     }).then(function(d){
       done(true, '✓ 谢谢，' + payload.name.split(' ')[0] + '！您的询盘已收到，我们将在 24 小时内回复。');
     }).catch(function(){
-      done(false, '抱歉，提交失败。请直接发邮件至 zhoubiao@zhoubiaotrade.cn');
+      done(false, '抱歉，提交失败。请直接发邮件至 notify@xn--yhq58j.com');
     });
   });
 })();
@@ -830,14 +867,6 @@
       });
     });
   }
-  wire('supply-form', 'supply-msg',
-    '✓ 已收到！平台将在 24 小时内联系您。',
-    '抱歉，提交失败。请直接发邮件至 zhoubiao@zhoubiaotrade.cn',
-    ['weapon', 'arms', 'drug', 'narcotic', 'vehicle', 'car', 'rare earth', 'uranium', 'chemical weapon', 'explosive', '武器', '军火', '毒品', '麻醉', '车辆', '汽车', '稀土', '铀', '化学武器', '爆炸'],
-    '⚠️ 该品类可能受出口管制或进口限制——平台将在对接前人工复核合规性。');
-  wire('demand-form', 'demand-msg',
-    '✓ 已收到！平台将在 24 小时内为您匹配中国供应商。',
-    '抱歉，提交失败。请直接发邮件至 zhoubiao@zhoubiaotrade.cn');
 })();
 </script>
 <script>
@@ -858,7 +887,7 @@
     online: '信息墙后端待上线，请稍后再来查看。',
     submitting: '发布中…',
     ok: '✓ 已发布！可在信息墙查看您的发布。',
-    err: '提交失败，请重试或直接邮件联系 zhoubiao@zhoubiaotrade.cn。',
+    err: '提交失败，请重试或直接邮件联系 notify@xn--yhq58j.com。',
     imgErr: '图片上传失败（仅支持 jpg/webp/png，≤2MB）。',
     needName: '请填写产品/商品名称、类目和联系方式。',
     needCompliance: '请勾选合规确认。',
