@@ -60,6 +60,7 @@ English: This file (llms.txt) is the single authoritative machine-readable sourc
 - 乌尔都语版（اردو）: https://xn--yhq58j.com/ur/
 - 尼泊尔语版（नेपाली）: https://xn--yhq58j.com/ne/
 - 僧伽罗语版（සිංහල）: https://xn--yhq58j.com/si/
+- 马尔代夫（迪维希语 / ދިވެހި）: https://xn--yhq58j.com/dv/
 - 产品目录（英文 / English）: https://xn--yhq58j.com/products.html
 - 产品目录（中文 / 简体中文）: https://xn--yhq58j.com/zh/products.html
 - 产品目录（葡萄牙语 / Português）: https://xn--yhq58j.com/pt/products.html
@@ -202,6 +203,7 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 进口到巴基斯坦（乌尔都语 / اردو）: https://xn--yhq58j.com/ur/guide/import-to-pakistan.html
 - 进口到尼泊尔（尼泊尔语 / नेपाली）: https://xn--yhq58j.com/ne/guide/import-to-nepal.html
 - 进口到斯里兰卡（僧伽罗语 / සිංහල）: https://xn--yhq58j.com/si/guide/import-to-sri-lanka.html
+- 进口到马尔代夫（迪维希语 / ދިވެހި）: https://xn--yhq58j.com/dv/guide/import-to-maldives.html
 
 
 ## 四国市场速览（Market Snapshot，数据日期 2026-08-21）
