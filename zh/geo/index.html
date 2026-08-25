@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>免费目标市场优先级报告 — 你的产品在哪增长最快（联合国 Comtrade 数据）</title>
+<meta name="description" content="输入 HS 编码或品类关键词，免费领取一份《目标市场优先级报告》——基于联合国 Comtrade 真实贸易数据，告诉你哪个市场增长最快。无需注册。也可先看下方 HS 9405 真实样例。">
+<meta name="keywords" content="目标市场优先级报告, HS 编码 市场报告, 联合国 Comtrade, 增长市场, 选市场, 中国出口市场分析">
+<meta property="og:title" content="免费目标市场优先级报告 — 千丝采购">
+<meta property="og:description" content="告诉我们你的 HS 编码或品类关键词及目标市场偏好，我们基于真实的联合国 Comtrade 数据生成一份优先级报告——Top 3 增长市场 + 一句趋势结论。免费，无需注册，邮件发送。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xn--yhq58j.com/zh/geo/">
+<meta property="og:site_name" content="千丝采购 Qiansi Sourcing">
+<link rel="canonical" href="https://xn--yhq58j.com/zh/geo/">
+<link rel="alternate" hreflang="en" href="https://xn--yhq58j.com/geo/">
+<link rel="alternate" hreflang="zh" href="https://xn--yhq58j.com/zh/geo/">
+<link rel="alternate" hreflang="x-default" href="https://xn--yhq58j.com/geo/">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<meta name="theme-color" content="#0B3C5D">
+<style>
+  :root{
+    --navy:#0B3C5D; --navy-dark:#082B44; --teal:#1B9AAA; --orange:#E85D2F;
+    --bg:#F7F9FB; --card:#FFFFFF; --text:#1F2A36; --muted:#5A6B7B;
+    --line:#E3EAF0; --radius:14px; --shadow:0 6px 24px rgba(11,60,93,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+  a{color:var(--teal);text-decoration:none}
+  img{max-width:100%}
+  .btn{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:14px 30px;border-radius:8px;border:0;cursor:pointer;font-size:1.02rem;transition:.2s}
+  .btn:hover{background:#d14f24;transform:translateY(-1px)}
+  .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.85);color:#fff}
+  .btn.ghost:hover{background:rgba(255,255,255,.12)}
+  .btn.dark{background:var(--navy);color:#fff}
+  .btn.dark:hover{background:var(--navy-dark)}
+  .tag{display:inline-block;background:#EAF4F6;color:var(--navy);font-size:.8rem;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.3px}
+
+  /* Header */
+  header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-size:1.25rem;font-weight:800;letter-spacing:.3px;color:#fff}
+  .logo span{color:#FFB85C}
+  .nav-right{display:flex;align-items:center;gap:24px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:#D7E3EC;font-size:.92rem;font-weight:500}
+  .nav-links a:hover,.nav-links a.on{color:#fff}
+  .lang{display:flex;gap:5px;align-items:center;border-left:1px solid rgba(255,255,255,.25);padding-left:18px}
+  .lang a{color:#D7E3EC;font-size:.8rem;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid transparent}
+  .lang a.on{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
+  .lang a:hover{color:#fff}
+  @media(max-width:820px){.nav-links{display:none}.nav-right{gap:14px}}
+
+  /* Hero */
+  .guide-hero{background:linear-gradient(135deg,var(--navy) 0%,#0E4A75 55%,var(--teal) 130%);color:#fff;padding:72px 0 64px;position:relative;overflow:hidden}
+  .guide-hero:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.05)}
+  .guide-hero .wrap{position:relative;z-index:1}
+  .guide-hero h1{font-size:2.4rem;line-height:1.18;max-width:820px;margin-bottom:16px;letter-spacing:-.5px}
+  .guide-hero p.lead{font-size:1.12rem;max-width:720px;color:#CFE0EB;margin-bottom:26px}
+  .guide-hero .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+  .guide-hero .chips span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:8px 15px;border-radius:24px;font-size:.86rem}
+  .guide-hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+  @media(max-width:700px){.guide-hero h1{font-size:1.8rem}}
+
+  section{padding:64px 0}
+  .sec-head{max-width:760px;margin:0 auto 38px}
+  .sec-head h2{font-size:1.8rem;color:var(--navy);margin-bottom:10px;letter-spacing:-.3px}
+  .sec-head p{color:var(--muted)}
+
+  /* Lead form */
+  form#lead-form{max-width:640px;margin:0 auto;background:#fff;color:var(--text);border-radius:var(--radius);padding:34px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.row{grid-template-columns:1fr}}
+  .field{margin-bottom:16px}
+  label{display:block;font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+  input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:.95rem;font-family:inherit;background:#FCFDFE;color:var(--text)}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--teal);outline-offset:0;border-color:var(--teal)}
+  textarea{min-height:110px;resize:vertical}
+  form#lead-form .btn{width:100%;margin-top:6px;font-size:1.05rem}
+  #form-msg{margin-top:14px;text-align:center;font-weight:600;display:none}
+  #form-msg.ok{color:#1B7A43}
+  #form-msg.err{color:#C0392B}
+  .form-note{text-align:center;font-size:.82rem;color:var(--muted);margin-top:12px}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+  .step .n{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .step h3{font-size:1.05rem;color:var(--navy);margin-bottom:6px}
+  .step p{font-size:.92rem;color:var(--muted)}
+
+  /* Compliance warning */
+  .compliance-warn{max-width:860px;margin:0 auto;background:#FFF8EC;border:1px solid #F0D9A8;border-left:5px solid var(--orange);border-radius:12px;padding:18px 22px;color:#6B4E1B;font-size:.9rem}
+  .compliance-warn strong{color:#8A5A12}
+  .compliance-warn p{margin:0 0 8px}
+  .compliance-warn p:last-child{margin:0}
+
+  /* Data table */
+  .data-card{max-width:860px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+  .data-card h3{color:var(--navy);margin-bottom:6px}
+  .data-card .src-note{font-size:.82rem;color:var(--muted);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:.92rem}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#EAF4F6;color:var(--navy);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+  tr:last-child td{border-bottom:0}
+  td b{color:var(--navy)}
+  .up{color:#1B7A43;font-weight:700}
+  .down{color:#C0392B;font-weight:700}
+
+  /* CTA band */
+  .cta-band{background:linear-gradient(160deg,var(--navy) 0%,#0E4A75 100%);color:#fff;text-align:center}
+  .cta-band .sec-head h2{color:#fff}
+  .cta-band p{color:#CFE0EB;max-width:640px;margin:0 auto}
+
+  /* Footer */
+  footer{background:var(--navy-dark);color:#B9C9D6;padding:46px 0 30px;font-size:.9rem}
+  footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-bottom:26px}
+  footer h5{color:#fff;margin-bottom:10px;font-size:.98rem}
+  footer p{margin:4px 0}
+  footer .terms{margin-top:14px;border-left:3px solid var(--teal);padding-left:14px}
+  footer .terms p{font-size:.83rem;margin:5px 0;color:#A9BBC9}
+  footer .copy{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;text-align:center;font-size:.8rem}
+  .zh{color:#8FA8BA;font-size:.8rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/zh/">千丝 <span>采购</span></a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="/zh/#products">产品</a>
+        <a href="/zh/#how">我们如何运作</a>
+        <a href="/zh/#logistics">物流</a>
+        <a href="/guide/import-to-uae.html">进口指南</a>
+      </nav>
+      <div class="lang">
+        <a class="on" href="/zh/geo/">中文</a>
+        <a href="/geo/">EN</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="guide-hero">
+  <div class="wrap">
+    <span class="tag">免费试用 · 联合国 Comtrade 数据 · 无需注册</span>
+    <h1>免费领取《目标市场优先级报告》</h1>
+    <p class="lead">输入 HS 编码或品类关键词，我们基于真实的联合国 Comtrade 贸易数据，告诉你哪个市场增长最快。现在就试，无需注册。</p>
+    <div class="chips">
+      <span>📈 Top 3 增长市场</span>
+      <span>🌍 一句趋势结论</span>
+      <span>📊 真实 Comtrade 数据</span>
+      <span>🕒 每个数字都带来源与查询时间</span>
+    </div>
+    <div class="actions">
+      <a class="btn" href="#request">领取我的免费报告</a>
+      <a class="btn ghost" href="#sample">查看真实样例（HS 9405）</a>
+    </div>
+  </div>
+</section>
+
+<section id="howitworks">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>免费试用如何运作</h2>
+      <p>我们使用公开的联合国 Comtrade 数据库，在千丝一侧完成分析。您免费获得核心内容；完整矩阵可按需提供。</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>告诉我们您的产品</h3><p>您的 HS 编码或品类关键词（例如"9405"或"LED 照明"）。若只有关键词，我们为您映射到 HS 编码。</p></div>
+      <div class="step"><div class="n">2</div><h3>告诉我们您的目标市场</h3><p>选择您关注的区域（或由我们全局排序）。您的偏好让报告更聚焦。</p></div>
+      <div class="step"><div class="n">3</div><h3>邮件收到报告</h3><p>我们在收到请求后为您生成，发送到您的邮箱——Top 3 增长市场、一句趋势结论、以及如实的数据说明。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="request">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>申请您的免费报告</h2>
+      <p>免费版：Top 3 增长市场 + 一句趋势结论。想要完整矩阵（10+ 市场、国家×年份货值、竞争洞察）？在备注里提一下，我们的团队会回复您。</p>
+    </div>
+    <form id="lead-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="_blacklist" value="bitcoin,invest,casino,viagra,贷款,彩票,点击,click here">
+      <input type="hidden" name="_subject" value="免费目标市场优先级报告申请 — 千丝采购">
+      <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="row">
+        <div class="field">
+          <label for="name">您的姓名 *</label>
+          <input type="text" id="name" name="name" required placeholder="例如 王丽">
+        </div>
+        <div class="field">
+          <label for="whatsapp">WhatsApp 或邮箱 *</label>
+          <input type="text" id="whatsapp" name="whatsapp" required placeholder="WhatsApp 号码或邮箱">
+        </div>
+      </div>
+      <div class="field">
+        <label for="hs_keyword">HS 编码或品类关键词 *</label>
+        <input type="text" id="hs_keyword" name="hs_keyword" required placeholder="例如 9405（灯具照明）或【LED 照明】">
+      </div>
+      <div class="field">
+        <label for="target_market">目标市场偏好</label>
+        <select id="target_market" name="target_market">
+          <option value="">全局排序（最相关）</option>
+          <option value="Middle East / Gulf">中东 / 海湾</option>
+          <option value="Southeast Asia">东南亚</option>
+          <option value="Latin America">拉丁美洲</option>
+          <option value="Western Europe">西欧</option>
+          <option value="North America">北美</option>
+          <option value="Africa">非洲</option>
+          <option value="Central Asia / CIS">中亚 / 独联体</option>
+          <option value="Not sure yet">还不确定——帮我推荐</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">其他补充？（选填）</label>
+        <textarea id="message" name="message" placeholder="例如 我卖 LED 灯条，想拓展海湾市场，也想要完整市场矩阵。"></textarea>
+      </div>
+      <button type="submit" class="btn">领取我的免费报告</button>
+      <div id="form-msg" role="status"></div>
+      <p class="form-note">您的信息仅用于准备报告并回复您的咨询。报告由我们的团队在收到请求后生成，通过邮件发送。</p>
+    </form>
+  </div>
+</section>
+
+<section id="sample">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>一份真实报告样例 — HS 9405（灯具照明）</h2>
+      <p>这是我们 GEO 分析引擎针对某个示例产品产出的真实结果，让您清楚知道能拿到什么。每个数字都对应栏目中标注的来源与查询时间。</p>
+    </div>
+    <div class="data-card">
+      <h3>中国 HS 9405 出口——增长在哪里</h3>
+      <p class="src-note">来源：UN Comtrade public preview API（<code>comtradeapi.un.org/public/v1/preview/C/A/HS</code>，reporterCode=156 中国，flowCode=X，cmdCode=9405）。查询时间：2026-08-25 19:39–19:44（Asia/Shanghai）。</p>
+      <table>
+        <thead>
+          <tr><th>目的国</th><th>增速（2021→2024）</th><th>2023→2024 变化</th><th>判定</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🇦🇪 阿联酋</td><td class="up">+5.8% / 年</td><td>-2.4%</td><td>🟢 持续高增长——海湾再出口枢纽</td></tr>
+          <tr><td>🇻🇳 越南</td><td class="up">+2.1% / 年</td><td class="up">+11.4%</td><td>🟢 长期正增长 + 2024 强势反弹</td></tr>
+          <tr><td>🇲🇽 墨西哥</td><td class="up">+3.6% / 年</td><td>-6.7%</td><td>🟡 正增长但 2024 回落（北美再出口）</td></tr>
+          <tr><td>🇸🇦 沙特</td><td>+0.1% / 年</td><td>-0.5%</td><td>🟡 大体量稳定（约 10.3 亿/年）</td></tr>
+          <tr><td>🇩🇪 德国</td><td class="down">-7.5% / 年</td><td class="up">+10.1%</td><td>🟠 结构走弱但 2024 反弹</td></tr>
+          <tr><td>🇯🇵 日本</td><td class="down">-7.5% / 年</td><td>-0.6%</td><td>🟠 走弱</td></tr>
+          <tr><td>🇦🇺 澳大利亚</td><td class="down">-5.6% / 年</td><td class="down">-19.6%</td><td>🔴 明显走弱</td></tr>
+          <tr><td>🇨🇦 加拿大</td><td class="down">-12.4% / 年</td><td>-2.7%</td><td>🔴 明显走弱</td></tr>
+          <tr><td>🇬🇧 英国</td><td class="down">-13.3% / 年</td><td>-1.2%</td><td>🔴 最弱</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px"><strong>趋势结论：</strong>中国 HS 9405 出口总量约<strong>420 亿美元/年</strong>（2024 年），较 2023 年基本持平，但已从 2021 年峰值（466 亿）回落。结构性机会不在"总量增长"，而在<strong>从走弱的欧美市场（英国、加拿大、日本、澳大利亚）转向新兴的海湾、东盟与拉美需求</strong>（阿联酋、越南、墨西哥）。</p>
+    </div>
+  </div>
+</section>
+
+<section id="honesty">
+  <div class="wrap">
+    <div class="compliance-warn">
+      <p><strong>数据来源如实说明（能力边界）：</strong>我们使用的免费 UN Comtrade preview API <strong>无法返回美国（840）与印度（356）</strong>作为目的国——这两者在完整数据中通常是最大买家，因此在上述样例中刻意不出现。竞争对手出口值也<strong>只有部分可靠</strong>（免费预览下多国返回异常或缺失值）。</p>
+      <p><strong>绝不虚构：</strong>上方每个数字都标注来源与查询时间。数据不可用或置信度低时，我们如实说明，而非估算。要得到完整可靠的全景（含美国 / 印度与可靠竞争量化）需付费 Comtrade key——联系我们，我们为您评估。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>千丝采购 <span class="zh">Qiansi Sourcing</span></h5>
+        <p class="zh">China sourcing partner for importers &amp; wholesalers</p>
+        <p class="zh">English · Português · 中文</p>
+      </div>
+      <div>
+        <h5>联系方式</h5>
+        <p>邮箱：<a href="mailto:notify@xn--yhq58j.com">notify@xn--yhq58j.com</a></p>
+        <p>工作时间：周一至周六（GMT+8）9:00–18:00</p>
+      </div>
+      <div>
+        <h5>快速链接</h5>
+        <p><a href="/products.html">产品目录</a></p>
+        <p><a href="/support/">客服百事通</a></p>
+        <p><a href="/guide/import-to-uae.html">阿联酋进口指南</a></p>
+        <p><a href="/guide/import-to-vietnam.html">越南进口指南</a></p>
+        <p><a href="/zh/#how">我们如何运作</a></p>
+      </div>
+    </div>
+    <div class="terms">
+      <p><strong>我们的承诺：</strong>货物在发货前经照片/视频确认，确认后方可发出；运输损坏由运输保险覆盖；质量问题凭照片/视频在 15 天内处理（按责任退货、换货或补发）。首单不满意？服务费可退还。</p>
+    </div>
+    <div class="copy">© 2026 昆明周标贸易有限公司 · 千丝采购。保留所有权利。</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('lead-form');
+  var msg  = document.getElementById('form-msg');
+  function show(txt, ok){
+    msg.textContent = txt;
+    msg.className = ok ? 'ok' : 'err';
+    msg.style.display = 'block';
+  }
+  form.addEventListener('submit', function(e){
+    if (form.company.value !== '') { show('感谢！我们会尽快与您联系。', true); form.reset(); e.preventDefault(); return; }
+    var payload = {
+      name:     form.name.value.trim(),
+      whatsapp: form.whatsapp.value.trim(),
+      hs_keyword: form.hs_keyword.value.trim()
+    };
+    if (!payload.name || !payload.whatsapp || !payload.hs_keyword) {
+      e.preventDefault();
+      show('请填写您的姓名、联系方式（WhatsApp 或邮箱）、以及 HS 编码 / 品类关键词。', false);
+      return;
+    }
+    e.preventDefault();
+    var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
+    fetch(form.action, {
+      method: 'POST',
+      headers: {'Accept': 'application/json'},
+      body: new FormData(form)
+    }).then(function(r){
+      if (!r.ok) throw new Error('bad status');
+      return r.json();
+    }).then(function(d){
+      done(true, '✓ 感谢您，' + payload.name + '！您的市场报告申请已收到，我们会在 24 小时内发送到您的联系方式。');
+    }).catch(function(){
+      done(false, '抱歉，提交失败。请直接发邮件至 notify@xn--yhq58j.com');
+    });
+  });
+})();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function (e) {
+      console.warn('SW register failed:', e);
+    });
+  }
+</script>
+</body>
+</html>
