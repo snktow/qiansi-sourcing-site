@@ -7,7 +7,7 @@
 <meta name="description" content="Enter an HS code or product keyword, get a free Target-Market Priority Report — which markets are growing fastest for your product, ranked by real UN Comtrade trade data. No account needed. Not ready to try it? See a real HS 9405 sample below.">
 <meta name="keywords" content="target market priority report, HS code market report, UN Comtrade, growing markets, market selection, China export market analysis">
 <meta property="og:title" content="Free Target-Market Priority Report — Qiansi Sourcing">
-<meta property="og:description" content="Tell us your HS code or product keyword and target market preference. We generate a priority report — Top 3 growing markets + a trend conclusion — from real UN Comtrade data. Free, no account. Delivered by email.">
+<meta property="og:description" content="Get the Top-3 fastest-growing markets for your product — instantly — plus one trend conclusion, straight from real UN Comtrade data. Enter an HS code or product keyword; no account needed. Leave your contact for the full market matrix.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xn--yhq58j.com/geo/">
 <meta property="og:site_name" content="Qiansi Sourcing">
@@ -84,6 +84,19 @@
   #form-msg.err{color:#C0392B}
   .form-note{text-align:center;font-size:.82rem;color:var(--muted);margin-top:12px}
 
+  /* Instant GEO result */
+  .geo-box{max-width:640px;margin:0 auto;background:#fff;color:var(--text);border-radius:var(--radius);padding:26px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+  .geo-query{display:flex;gap:12px}
+  .geo-query input{flex:1}
+  .geo-query .btn{white-space:nowrap}
+  @media(max-width:560px){.geo-query{flex-direction:column}.geo-query .btn{width:100%}}
+  .geo-result{margin-top:18px;background:#FCFDFE;border:1px solid var(--line);border-radius:10px;padding:18px;text-align:left}
+  .geo-result h4{color:var(--navy);font-size:1.08rem;margin-bottom:12px}
+  .geo-result table{font-size:.9rem}
+  .geo-result .gr-concl{font-size:.95rem;color:var(--text);border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+  .geo-result .gr-meta{font-size:.78rem;color:var(--muted);margin-top:10px}
+  .geo-result .gr-err{color:#C0392B;font-weight:600}
+
   /* Steps */
   .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
   .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
@@ -147,16 +160,16 @@
 <section class="guide-hero">
   <div class="wrap">
     <span class="tag">Free Trial · UN Comtrade Data · No Account</span>
-    <h1>Get a Free Target-Market Priority Report</h1>
-    <p class="lead">Enter an HS code or product keyword — we'll tell you where your product is growing fastest, ranked by real UN Comtrade trade data. Try it now, no account needed.</p>
+    <h1>Get Your Top-3 Growing Markets — Instantly</h1>
+    <p class="lead">Enter an HS code or product keyword and get the Top-3 fastest-growing markets for your product in seconds, ranked by real UN Comtrade data. No account, no wait — then leave your contact for the full report.</p>
     <div class="chips">
-      <span>📈 Top-3 growing markets</span>
+      <span>⚡ Instant Top-3 markets</span>
       <span>🌍 One trend conclusion</span>
       <span>📊 Real UN Comtrade data</span>
       <span>🕒 Every figure dated &amp; sourced</span>
     </div>
     <div class="actions">
-      <a class="btn" href="#request">Get My Free Report</a>
+      <a class="btn" href="#request">Try It Now</a>
       <a class="btn ghost" href="#sample">See a Real Sample (HS 9405)</a>
     </div>
   </div>
@@ -166,12 +179,12 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>How the Free Trial Works</h2>
-      <p>We run the analysis on our side using the public UN Comtrade database. You get the essentials free — the full matrix is available on request.</p>
+      <p>You get the instant Top-3 right here. The full matrix is prepared by our team and emailed on request.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h3>Tell us your product</h3><p>Your HS code or a category keyword (e.g. "9405" or "LED lighting"). If you only have a keyword, we map it to an HS code for you.</p></div>
-      <div class="step"><div class="n">2</div><h3>Tell us your target market</h3><p>Pick the region you care about (or let us rank globally). Your preference sharpens the report.</p></div>
-      <div class="step"><div class="n">3</div><h3>Get your report by email</h3><p>We generate it on request and send it to your inbox — Top-3 growing markets, a trend conclusion, and honest data notes.</p></div>
+      <div class="step"><div class="n">1</div><h3>Type your product</h3><p>An HS code (e.g. "9405") or a category keyword (e.g. "LED lighting"). If you only have a keyword, we map it to an HS code for you.</p></div>
+      <div class="step"><div class="n">2</div><h3>Get instant Top-3</h3><p>Our GEO engine queries the live UN Comtrade database and returns the Top-3 fastest-growing destination markets, ranked by real data.</p></div>
+      <div class="step"><div class="n">3</div><h3>Leave contact for the full report</h3><p>Want the full matrix? Leave your contact and the HS you queried — our team emails you the detailed report.</p></div>
     </div>
   </div>
 </section>
@@ -179,14 +192,29 @@
 <section class="cta-band" id="request">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Request Your Free Report</h2>
-      <p>Free tier: Top-3 growing markets + one trend conclusion. Want the full matrix (10+ markets, country × year values, competitor insight)? Mention it in your note — our team will reply.</p>
+      <h2>Try It Now — Instant Top-3</h2>
+      <p>Type an HS code (e.g. 9405) or a product keyword (e.g. "LED lighting"). You get the Top-3 growing markets + one trend conclusion in seconds, straight from UN Comtrade. Then leave your contact for the full matrix.</p>
     </div>
+
+    <div class="geo-box">
+      <div class="geo-query">
+        <input type="text" id="geo-input" placeholder="e.g. 9405 (lamps &amp; lighting) or 'LED lighting'">
+        <button type="button" id="geo-go" class="btn">Generate Top-3</button>
+      </div>
+      <div id="geo-status" role="status"></div>
+      <div id="geo-result" class="geo-result" hidden></div>
+    </div>
+
+    <div class="sec-head" style="margin-top:46px">
+      <h2>Want the Full Market Matrix?</h2>
+      <p>Free tier = Top-3 growing markets + one trend conclusion. The full matrix (10+ markets, country × year values, competitor insight) is prepared by our team and sent to your inbox. Leave your contact and the HS you queried — we'll follow up.</p>
+    </div>
+
     <form id="lead-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>
       <input type="hidden" name="_captcha" value="false">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="hidden" name="_blacklist" value="bitcoin,invest,casino,viagra,贷款,彩票,点击,click here">
-      <input type="hidden" name="_subject" value="Free Target-Market Priority Report Request — Qiansi Sourcing">
+      <input type="hidden" name="_subject" value="Full Market Matrix Request — Qiansi Sourcing">
       <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="row">
         <div class="field">
@@ -220,9 +248,9 @@
         <label for="message">Anything else? (optional)</label>
         <textarea id="message" name="message" placeholder="e.g. I sell LED strips, want to grow in the Gulf. Also interested in the full market matrix."></textarea>
       </div>
-      <button type="submit" class="btn">Get My Free Report</button>
+      <button type="submit" class="btn">Get the Full Report</button>
       <div id="form-msg" role="status"></div>
-      <p class="form-note">Your information is only used to prepare your report and respond to your inquiry. The report is generated by our team on request and sent by email.</p>
+      <p class="form-note">The instant Top-3 above is generated automatically by our GEO engine from UN Comtrade data. The full report is prepared by our team and sent to your contact. Your information is only used to prepare your report and reply to your inquiry.</p>
     </form>
   </div>
 </section>
@@ -332,6 +360,48 @@
       done(false, 'Sorry, submission failed. Please email us directly at notify@xn--yhq58j.com');
     });
   });
+})();
+</script>
+<script>
+(function(){
+  var API='https://geo.xn--yhq58j.com/api/geo';
+  var input=document.getElementById('geo-input');
+  var go=document.getElementById('geo-go');
+  var status=document.getElementById('geo-status');
+  var result=document.getElementById('geo-result');
+  var hsField=document.getElementById('hs_keyword');
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function render(d){
+    result.hidden=false; result.className='geo-result';
+    var html='';
+    if(d && d.ok){
+      var rows=d.top3_growing.map(function(m){return '<tr><td>'+esc(m.flag+' '+m.name)+'</td><td class="up">'+(m.cagr_2021_2024==null?'—':'+'+m.cagr_2021_2024.toFixed(1)+'% / yr')+'</td><td>'+esc(m.name_zh||'')+'</td></tr>';}).join('');
+      html='<h4>Top-3 growing markets for HS '+esc(d.hs_code)+'</h4>'
+        +'<table><thead><tr><th>Destination</th><th>Growth (2021→2024)</th><th>GEO</th></tr></thead><tbody>'+rows+'</tbody></table>';
+      if(d.world && d.world.value_2024!=null){ html+='<div class="gr-meta">World exports '+fmt(d.world.value_2024)+' (2024)</div>'; }
+      html+='<div class="gr-concl">'+esc(d.trend_conclusion)+'</div>';
+      html+='<div class="gr-meta">Source: '+esc(d.source_url||d.source||'')+' · Query time: '+esc(d.query_time||'')+'</div>';
+      if(hsField){hsField.value=d.hs_code;}
+    } else {
+      html='<div class="gr-err">'+esc((d&&d.message)||'Could not generate a report right now.')+'</div>';
+      if(d && (d.error==='data_insufficient'||d.error==='source_unavailable')){ html+='<div class="gr-meta">Source: '+esc(d.source||'')+' · Query time: '+esc(d.query_time||'')+'</div>'; }
+    }
+    result.innerHTML=html;
+  }
+  function fmt(v){ if(v==null) return '—'; if(v>=1e9) return '$'+(v/1e9).toFixed(2)+'B'; if(v>=1e6) return '$'+(v/1e6).toFixed(1)+'M'; return '$'+Math.round(v).toLocaleString('en-US'); }
+  function setStatus(txt, ok){ status.textContent=txt; status.style.color=ok?'#1B7A43':'#C0392B'; status.style.display='block'; }
+  function run(){
+    var v=(input.value||'').trim();
+    if(!v){ setStatus('Please enter an HS code or keyword.',false); result.hidden=true; return; }
+    setStatus('Generating from UN Comtrade…',true); result.hidden=true;
+    if(hsField){hsField.value=v;}
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hs:v,lang:'en'})})
+      .then(function(r){return r.json();})
+      .then(function(d){status.style.display='none'; render(d);})
+      .catch(function(){setStatus('Network error. Please try again, or email notify@xn--yhq58j.com.',false);});
+  }
+  go.addEventListener('click',run);
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter'){e.preventDefault();run();} });
 })();
 </script>
 <script>
