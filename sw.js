@@ -1,24 +1,63 @@
-/* Qiansi Sourcing PWA service worker — qiansi-v2 (2026-08-21)
- * 网络优先 + 5s 超时竞速（挂起即回退缓存）+ 离线兜底；语言感知回退；不拦截外域表单 POST。 */
-const CACHE = "qiansi-v2";
+/* Qiansi Sourcing PWA service worker — qiansi-v3 (2026-08-26)
+ * 语言修复：预缓存全部语言首页；网络优先 + 5s 超时竞速；离线兜底按路径语言回退，
+ * 不再把 /ar/ 等非 pt/zh 路径统一回退到英文首页；不拦截外域表单 POST。 */
+const CACHE = "qiansi-v3";
 const ASSETS = [
   "/",
   "/index.html",
-  "/pt/",
-  "/pt/index.html",
-  "/zh/",
-  "/zh/index.html",
+  "/zh/", "/zh/index.html",
+  "/pt/", "/pt/index.html",
+  "/ar/", "/ar/index.html",
+  "/ru/", "/ru/index.html",
+  "/vi/", "/vi/index.html",
+  "/th/", "/th/index.html",
+  "/id/", "/id/index.html",
+  "/ms/", "/ms/index.html",
+  "/fil/", "/fil/index.html",
+  "/my/", "/my/index.html",
+  "/tr/", "/tr/index.html",
+  "/fa/", "/fa/index.html",
+  "/hi/", "/hi/index.html",
+  "/bn/", "/bn/index.html",
+  "/ur/", "/ur/index.html",
+  "/ne/", "/ne/index.html",
+  "/si/", "/si/index.html",
+  "/dv/", "/dv/index.html",
   "/manifest.json",
   "/manifest-pt.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png"
 ];
 
+// 语言代码 -> 首页路径（离线兜底用）。未知/英文回退英文首页。
+const LANG_HOME = {
+  en: "/index.html",
+  zh: "/zh/index.html",
+  pt: "/pt/index.html",
+  ar: "/ar/index.html",
+  ru: "/ru/index.html",
+  vi: "/vi/index.html",
+  th: "/th/index.html",
+  id: "/id/index.html",
+  ms: "/ms/index.html",
+  fil: "/fil/index.html",
+  my: "/my/index.html",
+  tr: "/tr/index.html",
+  fa: "/fa/index.html",
+  hi: "/hi/index.html",
+  bn: "/bn/index.html",
+  ur: "/ur/index.html",
+  ne: "/ne/index.html",
+  si: "/si/index.html",
+  dv: "/dv/index.html"
+};
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE)
-      .then((cache) => cache.addAll(ASSETS))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE).then((cache) =>
+      // 单个资源失败只跳过该项，不因某一语言页 404 拖垮整个 SW 安装。
+      Promise.all(ASSETS.map((a) => cache.add(a).catch(() => null)))
+    ).then(() => self.skipWaiting())
   );
 });
 
@@ -36,12 +75,11 @@ self.addEventListener("fetch", (event) => {
   if (req.url.indexOf("formsubmit.co") >= 0) return;
 
   event.respondWith(
-    // 网络优先 + 5 秒超时竞速：网络挂起（不报错、TLS 黑洞/QUIC 丢包）时不再无限转圈，
-    // 超时立即回退缓存；无缓存则走语言感知离线兜底。
+    // 网络优先 + 5 秒超时竞速：网络挂起时不再无限转圈，超时立即回退缓存；
+    // 无缓存则按路径语言做感知兜底。
     Promise.race([
       fetch(req)
         .then((res) => {
-          // 网络优先：同源 GET 成功时顺手更新缓存
           if (res && res.ok && req.url.indexOf(self.location.origin) === 0) {
             const copy = res.clone();
             caches.open(CACHE).then((cache) => cache.put(req, copy));
@@ -53,10 +91,14 @@ self.addEventListener("fetch", (event) => {
       .catch(() =>
         caches.match(req).then((hit) => {
           if (hit) return hit;
-          // 语言感知兜底：/pt/ 开头回退葡语首页，/zh/ 开头回退中文首页，否则英文首页
-          const fallback = req.url.indexOf("/pt/") >= 0 ? "/pt/index.html"
-                         : req.url.indexOf("/zh/") >= 0 ? "/zh/index.html"
-                         : "/index.html";
+          // 按路径首段识别语言，回退到对应语言首页；未知语言回退英文首页。
+          let seg = "";
+          try {
+            const pn = new URL(req.url).pathname;
+            const m = pn.match(/^\/([a-z]{2,3})\//i);
+            if (m) seg = m[1].toLowerCase();
+          } catch (e) { seg = ""; }
+          const fallback = LANG_HOME[seg] || "/index.html";
           return caches.match(fallback);
         })
       )
