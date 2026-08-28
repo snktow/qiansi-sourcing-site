@@ -27,18 +27,11 @@
       try { location.replace(location.origin + '/' + target + '/'); } catch (e) {}
     }
   }
-  /* Remember manual language choice from the .lang bar (event delegation) */
-  document.addEventListener('change', function (ev) {
-    var sel = ev.target;
-    if (!sel || !sel.classList || !sel.classList.contains('lang-select')) return;
-    var opt = sel.options[sel.selectedIndex];
-    var lang = opt ? (opt.getAttribute('data-lang') || '') : '';
-    if (lang) { try { localStorage.setItem('qiansi_lang', lang); } catch (e) {} }
-    var url = sel.value || '';
-    if (url) { try { location.href = url; } catch (e) {} }
-  }, true);
+  /* Manual language choice is handled by the shared component
+     /sd-shared/lang-selector.js (unifies the dropdown + anchor bar). */
 })();
 </script>
+<script src="/sd-shared/lang-selector.js" defer></script>
 <title>千丝采购 — 您的中国采购合作伙伴 | 中国工厂直采 · 供应商已验证</title>
 <meta name="description" content="千丝采购（昆明周标贸易有限责任公司）服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、发货前按订单核对（供应商照片/视频确认）、小包/专线物流（由合作物流承运），支持中文/英文/葡萄牙语业务对接。">
 <meta name="keywords" content="中国采购代理,中国工厂采购,中国代采,宠物用品批发,车载手机支架供应商,LED灯带,巴西进口,马来西亚进口,跨境电商,中国工厂直供">
@@ -289,6 +282,25 @@
   .wall-report{background:#FBEFEF;color:#C0392B;border:1px solid #E8C0C0;border-radius:8px;font-size:.75rem;padding:3px 10px;cursor:pointer}
   .wall-report:disabled{opacity:.6;cursor:default}
 
+  /* 底部意见反馈留言箱（试运营状态） */
+  .qsfb{max-width:1100px;margin:34px auto;padding:32px 22px;background:#fff;border:1px solid #E5ECF1;border-radius:14px;box-shadow:0 6px 24px rgba(11,60,93,.06)}
+  .qsfb-inner{max-width:720px;margin:0 auto}
+  .qsfb h2{font-size:1.4rem;font-weight:800;color:var(--navy);margin:0 0 6px}
+  .qsfb .qsfb-sub{color:#5A7482;font-size:.95rem;margin:0 0 14px}
+  .qsfb .qsfb-badge{display:inline-block;background:#EAF4F6;color:var(--navy);font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+  .qsfb .qsfb-disc{font-size:.82rem;color:#5A7482;background:#FBF6EF;border-left:3px solid #E8B04B;padding:9px 12px;border-radius:0 8px 8px 0;margin:0 0 18px;line-height:1.5}
+  .qsfb .qsfb-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.qsfb .qsfb-row{grid-template-columns:1fr}}
+  .qsfb .qsfb-field{margin-bottom:14px}
+  .qsfb .qsfb-field label{display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+  .qsfb .qsfb-field input,.qsfb .qsfb-field select,.qsfb .qsfb-field textarea{width:100%;padding:10px 12px;border:1px solid #E3EAF0;border-radius:8px;font-size:.95rem;font-family:inherit;background:#FCFDFE;color:#1F2A36;box-sizing:border-box}
+  .qsfb .qsfb-field textarea{min-height:100px;resize:vertical}
+  .qsfb .qsfb-btn{background:var(--orange);color:#fff;font-weight:700;border:none;border-radius:8px;padding:11px 22px;cursor:pointer;font-size:.95rem}
+  .qsfb .qsfb-btn:hover{background:#d14f24}
+  .qsfb .qsfb-msg{margin-top:12px;text-align:center;font-weight:600;display:none}
+  .qsfb .qsfb-msg.ok{color:#1B7A43}
+  .qsfb .qsfb-msg.err{color:#C0392B}
+
 </style>
 <script type="application/ld+json">
 {
@@ -350,7 +362,7 @@
           <option value="/vi/" data-lang="vi">Tiếng Việt</option>
           <option value="/th/" data-lang="th">ไทย</option>
           <option value="/id/" data-lang="id">Bahasa Indonesia</option>
-          <option value="/ms/" data-lang="ms">Melayu</option>
+          <option value="/ms/" data-lang="ms">Bahasa Melayu</option>
           <option value="/fil/" data-lang="fil">Filipino</option>
           <option value="/my/" data-lang="my">မြန်မာ</option>
           <option value="/tr/" data-lang="tr">Türkçe</option>
@@ -369,7 +381,7 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap">
-    <span class="tag">您的中国采购伙伴 · 中国工厂直供 · 价目快照 2026-08-07</span>
+    <span class="tag">试运营 · Beta</span>
     <h1>千丝采购 · 从中国工厂直采，放心又划算。<br>小件包裹，高额利润。</h1>
     <p class="lead">我们服务全球进口商与批发商，严选中国国内工厂供应商一手货源，全品类覆盖。可提供出厂批发价、发货前按订单核对（供应商照片/视频确认）、小包/专线物流（由合作物流承运）；覆盖一带一路 65 国进口市场指南，支持中文/English/Português 多语业务对接。</p>
     <div class="chips">
@@ -385,6 +397,8 @@
       <a href="#logistics"><span class="qs-ic">🔍</span><span class="qs-t">按订单核对</span><span class="qs-s">发货前照片/视频确认</span></a>
       <a href="#logistics"><span class="qs-ic">📦</span><span class="qs-t">小包专线物流</span><span class="qs-s">小包与专线配送</span></a>
       <a href="#sd"><span class="qs-ic">🤝</span><span class="qs-t">供需对接</span><span class="qs-s">发布您的需求</span></a>
+      <a href="#sd"><span class="qs-ic">📢</span><span class="qs-t">发布供应 · Supply/Sell</span><span class="qs-s">向买家提供您的货源</span></a>
+      <a href="#sd"><span class="qs-ic">🇨🇳</span><span class="qs-t">我是中国供应商/买家</span><span class="qs-s">发布需求或供应</span></a>
     </div>
     <div class="actions">
       <a class="btn" href="/support/">获取报价</a>
@@ -597,6 +611,37 @@
           <input type="text" id="whatsapp" name="whatsapp" required placeholder="WhatsApp 号码或邮箱——我们通过它联系您">
         </div>
       </div>
+      <div class="row">
+        <div class="field">
+          <label for="category">产品品类</label>
+          <select id="category" name="category">
+            <option value="">请选择品类（可选）</option>
+            <option value="led_lighting">LED 照明 / 灯带</option>
+            <option value="pet_products">宠物用品</option>
+            <option value="home_kitchen">家居厨房</option>
+            <option value="consumer_electronics">消费电子</option>
+            <option value="apparel">服装纺织</option>
+            <option value="machinery">工业机械</option>
+            <option value="auto_parts">汽车配件</option>
+            <option value="packaging">包装材料</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="quantity">预计数量</label>
+          <input type="text" id="quantity" name="quantity" placeholder="例如：500 件 / 2 个集装箱">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="target_country">目标国家 / 市场</label>
+          <input type="text" id="target_country" name="target_country" placeholder="例如：巴西、迪拜、泰国">
+        </div>
+        <div class="field">
+          <label for="budget">预计预算</label>
+          <input type="text" id="budget" name="budget" placeholder="例如：USD 3,000 – 5,000">
+        </div>
+      </div>
       <div class="field">
         <label for="message">您的需求</label>
         <textarea id="message" name="message" placeholder="例如：500 个猫碗，目标价 R$…，发往圣保罗"></textarea>
@@ -605,6 +650,38 @@
       <button type="submit" class="btn">提交询盘</button>
       <div id="form-msg" role="status"></div>
       <p class="form-note">您的信息仅用于回复您的询盘。</p>
+    </form>
+  </div>
+</section>
+
+<!-- 底部意见反馈留言箱（试运营状态） -->
+<section class="qsfb" data-qiansi-feedback="1">
+  <div class="qsfb-inner">
+    <span class="qsfb-badge">试运营 · Beta</span>
+    <h2>意见反馈</h2>
+    <p class="qsfb-sub">您的反馈有助于我们改进这项试运营服务。</p>
+    <p class="qsfb-disc">本站目前处于试运营阶段 &mdash; 功能与内容正在持续完善。我们会在工作时间内处理您的反馈。</p>
+    <form id="feedback-form" class="qsfb-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="_subject" value="New Feedback from Qiansi Sourcing Website">
+      <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="qsfb-row">
+        <div class="qsfb-field"><label for="fb-nickname">您的称呼 *</label><input type="text" id="fb-nickname" name="nickname" required placeholder="例如：张三"></div>
+        <div class="qsfb-field"><label for="fb-email">邮箱</label><input type="email" id="fb-email" name="email" placeholder="以便我们回复您"></div>
+      </div>
+      <div class="qsfb-field"><label for="fb-type">反馈类型</label>
+        <select id="fb-type" name="feedback_type">
+          <option value="">请选择类型</option>
+          <option value="site">网站体验</option>
+          <option value="service">服务咨询</option>
+          <option value="translation">翻译 / 语言</option>
+          <option value="other">其他</option>
+        </select>
+      </div>
+      <div class="qsfb-field"><label for="fb-message">留言内容 *</label><textarea id="fb-message" name="message" required placeholder="请分享您的想法或建议…"></textarea></div>
+      <button type="submit" class="qsfb-btn">发送反馈</button>
+      <div id="fb-msg" class="qsfb-msg" role="status"></div>
     </form>
   </div>
 </section>
@@ -634,6 +711,10 @@
       </div>
       <div class="terms">
       <p><strong>我们的承诺：</strong>货物发货前经照片/视频确认，经您确认后才发货；运输途损由运输保险承保；对经您确认、且属于我司责任的质量问题，我们凭照片/视频在 15 个工作日内按责任退换或补发；首单对服务质量不满意，服务费可退（货款与运费除外）。</p>
+      <p><strong>服务范围：</strong>千丝采购提供供应商核实、合规与关税信息、买供双方撮合协调，以及单据与流程协助。</p>
+      <p><strong>我们不承担：</strong>超出我们控制范围的事项，包括但不限于单批货物的品质担保、供应商违约、清关或海关裁决、市场价波动与汇率波动。</p>
+      <p><strong>责任上限：</strong>我们仅对自身提供的核实与服务负责，赔偿总额以您所付的服务费为限（或退款）；我们不担保任何交易的商业结果。</p>
+      <p><strong>身份定位：</strong>千丝是服务商与撮合者，买家与供应商之间的交易以双方及平台（如 Trade Assurance）的约定为准。</p>
     </div>
     <div class="copy">© 2026 昆明周标贸易有限责任公司 · 千丝采购。保留所有权利。</div>
   </div>
@@ -733,6 +814,34 @@
       });
     });
   }
+})();
+</script>
+<script>
+(function(){
+  // 底部意见反馈留言箱：通过 FormSubmit 提交并内联显示结果（无刷新）。
+  var form = document.getElementById('feedback-form');
+  var msg  = document.getElementById('fb-msg');
+  if (!form || !msg) return;
+  function show(txt, ok){
+    msg.textContent = txt;
+    msg.className = 'qsfb-msg ' + (ok ? 'ok' : 'err');
+    msg.style.display = 'block';
+  }
+  form.addEventListener('submit', function(e){
+    // Honeypot — 静默忽略机器人提交
+    if (form.company.value !== '') { show('感谢您的反馈！', true); form.reset(); e.preventDefault(); return; }
+    var nick = form.nickname.value.trim();
+    var message = form.message.value.trim();
+    if (!nick || !message) { e.preventDefault(); show('请填写您的称呼和留言内容。', false); return; }
+    e.preventDefault();
+    fetch(form.action, {
+      method: 'POST',
+      headers: {'Accept':'application/json'},
+      body: new FormData(form)
+    }).then(function(r){ if(!r.ok) throw new Error('bad status'); return r.json(); })
+      .then(function(){ show('✓ 感谢您，' + nick.split(' ')[0] + '！您的反馈已收到。', true); form.reset(); })
+      .catch(function(){ show('很抱歉，提交失败。请发送邮件至 notify@xn--yhq58j.com', false); });
+  });
 })();
 </script>
 <script>

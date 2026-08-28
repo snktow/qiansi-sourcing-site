@@ -554,6 +554,7 @@
         inp = el('select', null);
         var os = el('option', null, U.typeSeller); os.setAttribute('value', 'seller');
         var ob = el('option', null, U.typeBuyer); ob.setAttribute('value', 'buyer');
+        os.selected = true;   // default the shared publish form to "Supply · Seller"
         inp.appendChild(os); inp.appendChild(ob);
       } else {
         inp = el('input', null);
@@ -732,6 +733,128 @@
   }
 
   /* ------------------------------------------------------------------ *
+   * Build a bottom feedback box (trial-mode message box) injected just
+   * before the <footer> of every landing page. Self-injects its own
+   * scoped CSS (the module CSS array is declared for reference but is not
+   * injected at runtime), posts to FormSubmit via fetch so the page does
+   * not reload, and always surfaces the trial status + a short disclaimer.
+   * ------------------------------------------------------------------ */
+  var FB_CSS = [
+    '.qsfb{max-width:1100px;margin:34px auto;padding:32px 22px;background:#fff;border:1px solid #E5ECF1;border-radius:14px;box-shadow:0 6px 24px rgba(11,60,93,.06);}',
+    '.qsfb-inner{max-width:720px;margin:0 auto;}',
+    '.qsfb h2{font-size:1.4rem;font-weight:800;color:var(--navy,#0B3C5D);margin:0 0 6px;}',
+    '.qsfb .qsfb-sub{color:#5A7482;font-size:.95rem;margin:0 0 14px;}',
+    '.qsfb .qsfb-badge{display:inline-block;background:#EAF4F6;color:#0B3C5D;font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:12px;}',
+    '.qsfb .qsfb-disc{font-size:.82rem;color:#5A7482;background:#FBF6EF;border-left:3px solid #E8B04B;padding:9px 12px;border-radius:0 8px 8px 0;margin:0 0 18px;line-height:1.5;}',
+    '.qsfb .qsfb-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}',
+    '@media(max-width:640px){.qsfb .qsfb-row{grid-template-columns:1fr;}}',
+    '.qsfb .qsfb-field{margin-bottom:14px;}',
+    '.qsfb .qsfb-field label{display:block;font-size:.85rem;font-weight:600;color:var(--navy,#0B3C5D);margin-bottom:6px;}',
+    '.qsfb .qsfb-field input,.qsfb .qsfb-field select,.qsfb .qsfb-field textarea{width:100%;padding:10px 12px;border:1px solid #E3EAF0;border-radius:8px;font-size:.95rem;font-family:inherit;background:#FCFDFE;color:#1F2A36;box-sizing:border-box;}',
+    '.qsfb .qsfb-field textarea{min-height:100px;resize:vertical;}',
+    '.qsfb .qsfb-btn{background:var(--orange,#E85D2F);color:#fff;font-weight:700;border:none;border-radius:8px;padding:11px 22px;cursor:pointer;font-size:.95rem;}',
+    '.qsfb .qsfb-btn:hover{background:#d14f24;}',
+    '.qsfb .qsfb-msg{margin-top:12px;text-align:center;font-weight:600;display:none;}',
+    '.qsfb .qsfb-msg.ok{color:#1B7A43;}',
+    '.qsfb .qsfb-msg.err{color:#C0392B;}'
+  ].join('\n');
+
+  function buildFeedback(U) {
+    U = U || uiText();
+    var zh = U.lang === 'zh';
+    var t = {
+      trial: zh ? '试运营 · Beta' : 'Beta · Trial operation',
+      title: zh ? '意见反馈' : 'Feedback',
+      sub: zh ? '您的意见能帮助我们改进这项试运营服务。' : 'Your feedback helps us improve this trial service.',
+      disc: zh ? '本站点目前处于试运营状态，功能与内容持续完善中；我们会尽量在工作时间内处理您的反馈。'
+        : 'This site is currently in trial operation — features and content are being refined. We aim to address feedback during working hours.',
+      nick: zh ? '昵称 *' : 'Your name *',
+      nickPh: zh ? '怎么称呼您' : 'e.g. João Silva',
+      email: zh ? '邮箱' : 'Email',
+      emailPh: zh ? '方便回信的邮箱' : 'so we can reply',
+      type: zh ? '反馈类型' : 'Feedback type',
+      typePlease: zh ? '请选择反馈类型' : 'Select a type',
+      typeSite: zh ? '网站使用体验' : 'Website experience',
+      typeService: zh ? '服务咨询' : 'Service inquiry',
+      typeTranslation: zh ? '翻译 / 语言' : 'Translation / language',
+      typeOther: zh ? '其他' : 'Other',
+      msg: zh ? '留言内容 *' : 'Message *',
+      msgPh: zh ? '请写下您的意见或建议…' : 'Share your thoughts or suggestions…',
+      submit: zh ? '发送反馈' : 'Send Feedback',
+      ok: zh ? '感谢您的反馈！我们会尽快处理。' : 'Thank you! Your feedback has been received.',
+      err: zh ? '抱歉，提交失败。请直接发送邮件至 notify@xn--yhq58j.com'
+        : 'Sorry, submission failed. Please email us at notify@xn--yhq58j.com',
+      req: zh ? '请填写昵称和留言内容' : 'Please fill in your name and message'
+    };
+
+    // Inject scoped CSS once.
+    if (!document.querySelector('#qsfb-style')) {
+      var st = el('style', null);
+      st.id = 'qsfb-style';
+      st.textContent = FB_CSS;
+      document.head.appendChild(st);
+    }
+
+    var sec = el('section', 'qsfb');
+    sec.setAttribute('data-qiansi-feedback', '1');
+    var div = el('div', 'qsfb-inner');
+    div.innerHTML =
+      '<span class="qsfb-badge">' + esc(t.trial) + '</span>' +
+      '<h2>' + esc(t.title) + '</h2>' +
+      '<p class="qsfb-sub">' + esc(t.sub) + '</p>' +
+      '<p class="qsfb-disc">' + esc(t.disc) + '</p>' +
+      '<form class="qsfb-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>' +
+      '<input type="hidden" name="_captcha" value="false">' +
+      '<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+      '<input type="hidden" name="_subject" value="New Feedback from Qiansi Sourcing Website">' +
+      '<input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+      '<div class="qsfb-row">' +
+      '<div class="qsfb-field"><label>' + esc(t.nick) + '</label><input type="text" name="nickname" required placeholder="' + esc(t.nickPh) + '"></div>' +
+      '<div class="qsfb-field"><label>' + esc(t.email) + '</label><input type="email" name="email" placeholder="' + esc(t.emailPh) + '"></div>' +
+      '</div>' +
+      '<div class="qsfb-field"><label>' + esc(t.type) + '</label><select name="feedback_type">' +
+      '<option value="">' + esc(t.typePlease) + '</option>' +
+      '<option value="site">' + esc(t.typeSite) + '</option>' +
+      '<option value="service">' + esc(t.typeService) + '</option>' +
+      '<option value="translation">' + esc(t.typeTranslation) + '</option>' +
+      '<option value="other">' + esc(t.typeOther) + '</option>' +
+      '</select></div>' +
+      '<div class="qsfb-field"><label>' + esc(t.msg) + '</label><textarea name="message" required placeholder="' + esc(t.msgPh) + '"></textarea></div>' +
+      '<button type="submit" class="qsfb-btn">' + esc(t.submit) + '</button>' +
+      '<div class="qsfb-msg" role="status"></div>' +
+      '</form>';
+    sec.appendChild(div);
+
+    var form = div.querySelector('form');
+    var msg = div.querySelector('.qsfb-msg');
+    function show(txt, ok) {
+      msg.textContent = txt;
+      msg.className = 'qsfb-msg ' + (ok ? 'ok' : 'err');
+      msg.style.display = 'block';
+    }
+    form.addEventListener('submit', function (e) {
+      // Honeypot — silently ignore bot submissions
+      if (form.company.value !== '') { show(t.ok, true); form.reset(); e.preventDefault(); return; }
+      var nick = form.nickname.value.trim();
+      var message = form.message.value.trim();
+      if (!nick || !message) { e.preventDefault(); show(t.req, false); return; }
+      e.preventDefault();
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function (r) { if (!r.ok) throw new Error('bad status'); return r.json(); })
+        .then(function () { show(t.ok, true); form.reset(); })
+        .catch(function () { show(t.err, false); });
+    });
+
+    var footer = document.querySelector('footer');
+    if (footer && footer.parentNode) footer.parentNode.insertBefore(sec, footer);
+    else document.body.appendChild(sec);
+    return sec;
+  }
+
+  /* ------------------------------------------------------------------ *
    * init + module namespace.
    * ------------------------------------------------------------------ */
   function init() {
@@ -739,6 +862,7 @@
     var U = uiText();
     buildModules(U);
     buildFloat(U, document.body);
+    buildFeedback(U);
   }
 
   var ROOT = (typeof window !== 'undefined') ? window : globalThis;
@@ -751,6 +875,7 @@
     buildQuery: buildQuery,
     parseItems: parseItems,
     uiText: uiText,
+    buildFeedback: buildFeedback,
     init: init
   };
 

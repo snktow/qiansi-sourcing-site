@@ -27,18 +27,11 @@
       try { location.replace(location.origin + '/' + target + '/'); } catch (e) {}
     }
   }
-  /* Remember manual language choice from the .lang bar (event delegation) */
-  document.addEventListener('change', function (ev) {
-    var sel = ev.target;
-    if (!sel || !sel.classList || !sel.classList.contains('lang-select')) return;
-    var opt = sel.options[sel.selectedIndex];
-    var lang = opt ? (opt.getAttribute('data-lang') || '') : '';
-    if (lang) { try { localStorage.setItem('qiansi_lang', lang); } catch (e) {} }
-    var url = sel.value || '';
-    if (url) { try { location.href = url; } catch (e) {} }
-  }, true);
+  /* Manual language choice is handled by the shared component
+     /sd-shared/lang-selector.js (unifies the dropdown + anchor bar). */
 })();
 </script>
+<script src="/sd-shared/lang-selector.js" defer></script>
 <title>Qiansi Sourcing — Seu Parceiro de Compras na China | Preço de Fábrica, Fornecedores de Fábrica na China Verificados</title>
 <meta name="description" content="A Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) atende importadores e atacadistas do mundo todo, com fornecimento direto de fornecedores verificados de fábricas chinesas — todas as categorias. Preço de fábrica, conferência do pedido com fotos/vídeos do fornecedor e envio por pequenos pacotes/linha dedicada com agentes de logística parceiros. Com suporte em chinês, inglês e português.">
 <meta name="keywords" content="agente de compras na China, sourcing na China, atacado da China, suprimentos para pets atacado, suporte de celular para carro, fita de LED, importador Brasil, importador Malásia, comércio internacional, direto de fábrica">
@@ -289,6 +282,25 @@
   .wall-report{background:#FBEFEF;color:#C0392B;border:1px solid #E8C0C0;border-radius:8px;font-size:.75rem;padding:3px 10px;cursor:pointer}
   .wall-report:disabled{opacity:.6;cursor:default}
 
+  /* Caixa de feedback inferior (modo de operação experimental) */
+  .qsfb{max-width:1100px;margin:34px auto;padding:32px 22px;background:#fff;border:1px solid #E5ECF1;border-radius:14px;box-shadow:0 6px 24px rgba(11,60,93,.06)}
+  .qsfb-inner{max-width:720px;margin:0 auto}
+  .qsfb h2{font-size:1.4rem;font-weight:800;color:var(--navy);margin:0 0 6px}
+  .qsfb .qsfb-sub{color:#5A7482;font-size:.95rem;margin:0 0 14px}
+  .qsfb .qsfb-badge{display:inline-block;background:#EAF4F6;color:var(--navy);font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+  .qsfb .qsfb-disc{font-size:.82rem;color:#5A7482;background:#FBF6EF;border-left:3px solid #E8B04B;padding:9px 12px;border-radius:0 8px 8px 0;margin:0 0 18px;line-height:1.5}
+  .qsfb .qsfb-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.qsfb .qsfb-row{grid-template-columns:1fr}}
+  .qsfb .qsfb-field{margin-bottom:14px}
+  .qsfb .qsfb-field label{display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+  .qsfb .qsfb-field input,.qsfb .qsfb-field select,.qsfb .qsfb-field textarea{width:100%;padding:10px 12px;border:1px solid #E3EAF0;border-radius:8px;font-size:.95rem;font-family:inherit;background:#FCFDFE;color:#1F2A36;box-sizing:border-box}
+  .qsfb .qsfb-field textarea{min-height:100px;resize:vertical}
+  .qsfb .qsfb-btn{background:var(--orange);color:#fff;font-weight:700;border:none;border-radius:8px;padding:11px 22px;cursor:pointer;font-size:.95rem}
+  .qsfb .qsfb-btn:hover{background:#d14f24}
+  .qsfb .qsfb-msg{margin-top:12px;text-align:center;font-weight:600;display:none}
+  .qsfb .qsfb-msg.ok{color:#1B7A43}
+  .qsfb .qsfb-msg.err{color:#C0392B}
+
 </style>
 <script type="application/ld+json">
 {
@@ -350,7 +362,7 @@
           <option value="/vi/" data-lang="vi">Tiếng Việt</option>
           <option value="/th/" data-lang="th">ไทย</option>
           <option value="/id/" data-lang="id">Bahasa Indonesia</option>
-          <option value="/ms/" data-lang="ms">Melayu</option>
+          <option value="/ms/" data-lang="ms">Bahasa Melayu</option>
           <option value="/fil/" data-lang="fil">Filipino</option>
           <option value="/my/" data-lang="my">မြန်မာ</option>
           <option value="/tr/" data-lang="tr">Türkçe</option>
@@ -369,7 +381,7 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap">
-    <span class="tag">Seu parceiro de compras na China · Fornecedores de fábrica na China com preço direto · Instantâneo de preços 07/08/2026</span>
+    <span class="tag">Operação Experimental · Beta</span>
     <h1>Compre na China com Confiança.<br>Pequenos Pacotes. Grandes Margens.</h1>
     <p class="lead">Ajudamos importadores e atacadistas <strong>ao redor do mundo</strong> a comprar direto de fábrica de fornecedores de fábrica na China verificados — suprimentos para pets, suportes de celular para carro e fitas de LED a preços de atacado, conferidos conforme seu pedido com fotos/vídeos do fornecedor antes do despacho, com transporte e desembaraço aduaneiro feitos por agentes parceiros. Cobrimos guias de mercado de importação de <strong>65 países da Iniciativa Cinturão e Rota</strong>, com atendimento em português, inglês e chinês.</p>
     <div class="chips">
@@ -384,6 +396,8 @@
       <a href="#logistics"><span class="qs-ic">🔍</span><span class="qs-t">Conferência do Pedido</span><span class="qs-s">Fotos/vídeos do fornecedor antes do despacho</span></a>
       <a href="#logistics"><span class="qs-ic">📦</span><span class="qs-t">Logística</span><span class="qs-s">Entrega por pacotes e linha dedicada</span></a>
       <a href="#sd"><span class="qs-ic">🤝</span><span class="qs-t">Oferta &amp; Demanda</span><span class="qs-s">Publique sua solicitação</span></a>
+      <a href="#sd"><span class="qs-ic">📢</span><span class="qs-t">Publicar Oferta · Vender</span><span class="qs-s">Ofereça seus produtos a compradores</span></a>
+      <a href="#sd"><span class="qs-ic">🇨🇳</span><span class="qs-t">Sou Fornecedor / Comprador da China</span><span class="qs-s">Publique demanda ou oferta</span></a>
     </div>
     <div class="actions">
       <a class="btn" href="/support/">Solicitar Cotação</a>
@@ -576,6 +590,37 @@
           <input type="text" id="whatsapp" name="whatsapp" required placeholder="Número de WhatsApp ou e-mail — como entramos em contato">
         </div>
       </div>
+      <div class="row">
+        <div class="field">
+          <label for="category">Categoria de Produto</label>
+          <select id="category" name="category">
+            <option value="">Selecione uma categoria (opcional)</option>
+            <option value="led_lighting">Iluminação LED / fitas</option>
+            <option value="pet_products">Produtos para pets</option>
+            <option value="home_kitchen">Casa &amp; cozinha</option>
+            <option value="consumer_electronics">Eletrônicos de consumo</option>
+            <option value="apparel">Vestuário &amp; têxteis</option>
+            <option value="machinery">Máquinas industriais</option>
+            <option value="auto_parts">Peças automotivas</option>
+            <option value="packaging">Embalagens &amp; materiais</option>
+            <option value="other">Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="quantity">Quantidade Estimada</label>
+          <input type="text" id="quantity" name="quantity" placeholder="ex.: 500 unidades / 2 contêineres">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="target_country">País / Mercado de Destino</label>
+          <input type="text" id="target_country" name="target_country" placeholder="ex.: Brasil, Dubai, Tailândia">
+        </div>
+        <div class="field">
+          <label for="budget">Orçamento Estimado</label>
+          <input type="text" id="budget" name="budget" placeholder="ex.: USD 3.000 – 5.000">
+        </div>
+      </div>
       <div class="field">
         <label for="message">Sua Necessidade</label>
         <textarea id="message" name="message" placeholder="ex.: 500 tigelas para gatos, preço-alvo R$…, enviar para São Paulo"></textarea>
@@ -584,6 +629,38 @@
       <button type="submit" class="btn">Enviar Consulta</button>
       <div id="form-msg" role="status"></div>
       <p class="form-note">Suas informações são usadas apenas para responder à sua consulta.</p>
+    </form>
+  </div>
+</section>
+
+<!-- CAIXA DE FEEDBACK INFERIOR (modo de operação experimental) -->
+<section class="qsfb" data-qiansi-feedback="1">
+  <div class="qsfb-inner">
+    <span class="qsfb-badge">Operação Experimental · Beta</span>
+    <h2>Feedback</h2>
+    <p class="qsfb-sub">Seu feedback nos ajuda a melhorar este serviço em teste.</p>
+    <p class="qsfb-disc">Este site está atualmente em operação experimental &mdash; recursos e conteúdo estão em refinamento. Procuramos responder aos comentários durante o horário comercial.</p>
+    <form id="feedback-form" class="qsfb-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="_subject" value="New Feedback from Qiansi Sourcing Website">
+      <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="qsfb-row">
+        <div class="qsfb-field"><label for="fb-nickname">Seu nome *</label><input type="text" id="fb-nickname" name="nickname" required placeholder="ex.: João Silva"></div>
+        <div class="qsfb-field"><label for="fb-email">E-mail</label><input type="email" id="fb-email" name="email" placeholder="para podermos responder"></div>
+      </div>
+      <div class="qsfb-field"><label for="fb-type">Tipo de feedback</label>
+        <select id="fb-type" name="feedback_type">
+          <option value="">Selecione um tipo</option>
+          <option value="site">Experiência do site</option>
+          <option value="service">Consulta de serviço</option>
+          <option value="translation">Tradução / idioma</option>
+          <option value="other">Outro</option>
+        </select>
+      </div>
+      <div class="qsfb-field"><label for="fb-message">Mensagem *</label><textarea id="fb-message" name="message" required placeholder="Compartilhe suas ideias ou sugestões…"></textarea></div>
+      <button type="submit" class="qsfb-btn">Enviar Feedback</button>
+      <div id="fb-msg" class="qsfb-msg" role="status"></div>
     </form>
   </div>
 </section>
@@ -714,6 +791,34 @@
       });
     });
   }
+})();
+</script>
+<script>
+(function(){
+  // Caixa de feedback inferior: envia via FormSubmit e mostra o status inline (sem recarregar).
+  var form = document.getElementById('feedback-form');
+  var msg  = document.getElementById('fb-msg');
+  if (!form || !msg) return;
+  function show(txt, ok){
+    msg.textContent = txt;
+    msg.className = 'qsfb-msg ' + (ok ? 'ok' : 'err');
+    msg.style.display = 'block';
+  }
+  form.addEventListener('submit', function(e){
+    // Honeypot — ignora silenciosamente envios de bots
+    if (form.company.value !== '') { show('Obrigado! Seu feedback foi recebido.', true); form.reset(); e.preventDefault(); return; }
+    var nick = form.nickname.value.trim();
+    var message = form.message.value.trim();
+    if (!nick || !message) { e.preventDefault(); show('Por favor, preencha seu nome e mensagem.', false); return; }
+    e.preventDefault();
+    fetch(form.action, {
+      method: 'POST',
+      headers: {'Accept':'application/json'},
+      body: new FormData(form)
+    }).then(function(r){ if(!r.ok) throw new Error('bad status'); return r.json(); })
+      .then(function(){ show('✓ Obrigado, ' + nick.split(' ')[0] + '! Seu feedback foi recebido.', true); form.reset(); })
+      .catch(function(){ show('Desculpe, falha no envio. Envie um e-mail para notify@xn--yhq58j.com', false); });
+  });
 })();
 </script>
 <script>
