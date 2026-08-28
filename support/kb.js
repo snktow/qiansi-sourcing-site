@@ -110,10 +110,10 @@ window.QIANSI_KB = {
           id: "led-strips",
           q: { en: "What LED strips do you offer?", pt: "Quais fitas de LED vocês oferecem?", ar: "ما هي شرائط LED التي تقدمونها؟", zh: "你们有哪些 LED 灯带？" },
           a: {
-            en: "LED strips (220V COB outdoor waterproof, silicone linear, 5V RGB WS2812B): factory price band ¥1.88–11.88/pc, MOQ from 50 rolls, lead time 5–25 days. In Brazil, the local market price reference is around R$19.90–50 — shown for reference only; we do not promise any resale margin. Re-quote before ordering.",
-            pt: "Fitas de LED (COB 220V à prova d'água para exteriores, linear de silicone, RGB 5V WS2812B): faixa de preço de fábrica ¥1,88–11,88/un., MOQ a partir de 50 rolos, prazo de 5–25 dias. No Brasil, a referência de preço de mercado local é cerca de R$19,90–50 — apenas para referência; não prometemos nenhuma margem de revenda. Reorçar antes de pedir.",
-            ar: "شرائط LED (COB 220 فولت مقاومة للماء للخارج، سيليكون خطي، RGB 5V WS2812B): نطاق سعر المصنع 1.88–11.88 يوان/قطعة، الحد الأدنى للطلب من 50 لفة، مدة التسليم 5–25 يومًا. في البرازيل، المرجع لسعر السوق المحلي حوالي 19.90–50 ريالًا — للإشارة فقط؛ لا نَعِد بأي هامش إعادة بيع. يُعيد عرض السعر قبل الطلب.",
-            zh: "LED 灯带（220V COB 户外防水、防水硅胶线性、5V RGB WS2812B）：拿货价带 ¥1.88–11.88/件，MOQ 50 卷起，交付周期 5–25 天。巴西当地市场参考价约 R$19.90–50，仅作参考，不承诺转售利润。下单前需重新询价。"
+            en: "LED strips (220V COB outdoor waterproof, silicone linear, 5V RGB WS2812B): factory price band ¥1.88–11.88/pc, MOQ from 50 rolls, lead time 5–25 days. In Brazil, the local market price reference is around R$19.90–50 — shown for reference only; we do not promise a specific profit margin. Re-quote before ordering.",
+            pt: "Fitas de LED (COB 220V à prova d'água para exteriores, linear de silicone, RGB 5V WS2812B): faixa de preço de fábrica ¥1,88–11,88/un., MOQ a partir de 50 rolos, prazo de 5–25 dias. No Brasil, a referência de preço de mercado local é cerca de R$19,90–50 — apenas para referência; não prometemos nenhuma margem de lucro específica. Reorçar antes de pedir.",
+            ar: "شرائط LED (COB 220 فولت مقاومة للماء للخارج، سيليكون خطي، RGB 5V WS2812B): نطاق سعر المصنع 1.88–11.88 يوان/قطعة، الحد الأدنى للطلب من 50 لفة، مدة التسليم 5–25 يومًا. في البرازيل، المرجع لسعر السوق المحلي حوالي 19.90–50 ريالًا — للإشارة فقط؛ لا نَعِد بهامش ربح محدد. يُعيد عرض السعر قبل الطلب.",
+            zh: "LED 灯带（220V COB 户外防水、防水硅胶线性、5V RGB WS2812B）：拿货价带 ¥1.88–11.88/件，MOQ 50 卷起，交付周期 5–25 天。巴西当地市场参考价约 R$19.90–50，仅作参考，不承诺具体利润。下单前需重新询价。"
           },
           keywords: ["led", "light", "strip", "rgb", "cob", "灯带", "LED", "fita", "luz", "شريط", "إضاءة"]
         }
@@ -166,10 +166,10 @@ window.QIANSI_KB = {
           id: "brazil-market",
           q: { en: "Do you support Brazil? What's the market like?", pt: "Vocês atendem o Brasil? Como é o mercado?", ar: "هل تخدمون البرازيل؟ وكيف هو السوق؟", zh: "你们支持巴西吗？市场情况如何？" },
           a: {
-            en: "Yes — Brazil is a core market we serve (Mercado Livre, Shopee BR). As a local market reference and for information only: LED strips typically list around R$19.90–50 and yoga tapa bumbum sets around R$76.55 — these are reference prices, not a promise of resale margin. Small parcels can use the Remessa Conforme framework.",
-            pt: "Sim — o Brasil é um mercado central que atendemos (Mercado Livre, Shopee BR). Como referência de mercado local e apenas informativa: fitas de LED costumam estar em torno de R$19,90–50 e kits de yoga tapa bumbum em torno de R$76,55 — são preços de referência, não uma promessa de margem de revenda. Encomendas pequenas podem usar o regime Remessa Conforme.",
-            ar: "نعم — البرازيل سوق رئيسي نخدمه (Mercado Livre وShopee BR). كمرجع للسوق المحلي وللإعلام فقط: تُباع شرائط LED عادةً بنحو 19.90–50 ريالًا، وأطقم اليوغا tapa bumbum بنحو 76.55 ريالًا — وهي أسعار مرجعية، وليست وعدًا بهامش إعادة بيع. يمكن أن تستخدم الطرود الصغيرة إطار Remessa Conforme.",
-            zh: "是的——巴西是我们服务的核心市场（Mercado Livre、Shopee BR）。作为当地市场参考、仅供了解：LED 灯带当地市场价约 R$19.90–50，瑜伽遮臀裙套装约 R$76.55——仅作参考，不承诺转售利润。小包可走 Remessa Conforme 计划。"
+            en: "Yes — Brazil is a core market we serve (Mercado Livre, Shopee BR). As a local market reference and for information only: LED strips typically list around R$19.90–50 and yoga tapa bumbum sets around R$76.55 — these are reference prices, not a promise of a specific profit margin. Small parcels can use the Remessa Conforme framework.",
+            pt: "Sim — o Brasil é um mercado central que atendemos (Mercado Livre, Shopee BR). Como referência de mercado local e apenas informativa: fitas de LED costumam estar em torno de R$19,90–50 e kits de yoga tapa bumbum em torno de R$76,55 — são preços de referência, não uma promessa de margem de lucro específica. Encomendas pequenas podem usar o regime Remessa Conforme.",
+            ar: "نعم — البرازيل سوق رئيسي نخدمه (Mercado Livre وShopee BR). كمرجع للسوق المحلي وللإعلام فقط: تُباع شرائط LED عادةً بنحو 19.90–50 ريالًا، وأطقم اليوغا tapa bumbum بنحو 76.55 ريالًا — وهي أسعار مرجعية، وليست وعدًا بهامش ربح محدد. يمكن أن تستخدم الطرود الصغيرة إطار Remessa Conforme.",
+            zh: "是的——巴西是我们服务的核心市场（Mercado Livre、Shopee BR）。作为当地市场参考、仅供了解：LED 灯带当地市场价约 R$19.90–50，瑜伽遮臀裙套装约 R$76.55——仅作参考，不承诺具体利润。小包可走 Remessa Conforme 计划。"
           },
           keywords: ["brazil", "brasil", "mercado livre", "shopee br", "巴西", "mercado", "البرازيل"]
         },
