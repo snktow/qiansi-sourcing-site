@@ -505,9 +505,14 @@
     var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
     fetch(form.action, { method: 'POST', headers: {'Accept': 'application/json'}, body: new FormData(form) })
       .then(function(r){ if (!r.ok) throw new Error('bad status'); return r.json(); })
-      .then(function(d){ done(true, (form.dataset.okDone || 'Thank you!')); })
+      .then(function(d){ done(true, (form.dataset.okDone || 'Thank you!')); fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){}); })
       .catch(function(){ done(false, (form.dataset.okErr || 'Sorry, submission failed. Please email us directly at notify@xn--yhq58j.com')); });
   });
+})();
+(function(){
+  // Qiansi self-check traffic ping (additive, privacy-friendly, fire-and-forget).
+  // One visit per page load, tagged by page path; country via CF-IPCountry.
+  fetch('https://geo.xn--yhq58j.com/api/hit?page=' + encodeURIComponent(location.pathname || '/'), {method:'GET', mode:'cors'}).catch(function(){});
 })();
 </script>
 </body>
