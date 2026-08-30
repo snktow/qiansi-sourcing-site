@@ -770,6 +770,8 @@
       return r.json();
     }).then(function(d){
       done(true, '✓ Obrigado, ' + payload.name.split(' ')[0] + '! Sua consulta foi recebida. Responderemos em até 24 horas.');
+      // Qiansi self-check: count a real inquiry submission (fire-and-forget).
+      fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){});
     }).catch(function(){
       done(false, 'Desculpe, o envio falhou. Envie um e-mail direto para notify@xn--yhq58j.com');
     });
@@ -859,5 +861,12 @@
   }
 </script>
 
+<script>
+(function(){
+  // Qiansi self-check traffic ping (additive, privacy-friendly, fire-and-forget).
+  // One visit per page load, tagged by page path; country via CF-IPCountry.
+  fetch('https://geo.xn--yhq58j.com/api/hit?page=' + encodeURIComponent(location.pathname || '/'), {method:'GET', mode:'cors'}).catch(function(){});
+})();
+</script>
 </body>
 </html>

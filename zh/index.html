@@ -794,6 +794,8 @@
       return r.json();
     }).then(function(d){
       done(true, '✓ 谢谢，' + payload.name.split(' ')[0] + '！您的询盘已收到，我们将在 24 小时内回复。');
+      // Qiansi self-check: count a real inquiry submission (fire-and-forget).
+      fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){});
     }).catch(function(){
       done(false, '抱歉，提交失败。请直接发邮件至 notify@xn--yhq58j.com');
     });
@@ -882,5 +884,12 @@
   }
 </script>
 
+<script>
+(function(){
+  // Qiansi self-check traffic ping (additive, privacy-friendly, fire-and-forget).
+  // One visit per page load, tagged by page path; country via CF-IPCountry.
+  fetch('https://geo.xn--yhq58j.com/api/hit?page=' + encodeURIComponent(location.pathname || '/'), {method:'GET', mode:'cors'}).catch(function(){});
+})();
+</script>
 </body>
 </html>
