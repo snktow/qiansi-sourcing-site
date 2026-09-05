@@ -9,7 +9,7 @@
   },
   "servers": [
     { "url": "https://xn--yhq58j.com", "description": "主站（静态资源：knowledge / capabilities / protocol）" },
-    { "url": "https://qiansi-sd-wall.qiansi.workers.dev", "description": "供需信息墙（Info Wall，撮合服务。契约已定，后端部署上线后可用）" }
+    { "url": "https://greet.xn--yhq58j.com", "description": "供需信息墙（Info Wall，撮合服务。契约已定，后端部署上线后可用）" }
   ],
   "tags": [
     { "name": "Knowledge", "description": "机器可读知识包与能力目录（主站静态）" },
