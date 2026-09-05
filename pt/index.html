@@ -765,12 +765,12 @@
 
   form.addEventListener('submit', function(e){
     // Honeypot — silently ignore bot submissions
-    if (form.company.value !== '') { show('Obrigado! Retornaremos em breve.', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('Obrigado! Retornaremos em breve.', true); form.reset(); e.preventDefault(); return; }
 
     var payload = {
-      name:     form.name.value.trim(),
-      whatsapp: form.whatsapp.value.trim(),
-      message:  form.message.value.trim()
+      name:     form.elements['name'].value.trim(),
+      whatsapp: form.elements['whatsapp'].value.trim(),
+      message:  form.elements['message'].value.trim()
     };
 
     if (!payload.name || !payload.whatsapp) {
@@ -816,7 +816,7 @@
     }
     form.addEventListener('submit', function (e) {
       // Honeypot — ignora silenciosamente envios de bots
-      if (form.company.value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
+      if (form.elements['company'].value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
       e.preventDefault();
       // Verificação de palavras-chave de mercadorias restritas: alerta sem bloquear o envio.
       var flagged = false;
@@ -861,9 +861,9 @@
   }
   form.addEventListener('submit', function(e){
     // Honeypot — ignora silenciosamente envios de bots
-    if (form.company.value !== '') { show('Obrigado! Seu feedback foi recebido.', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('Obrigado! Seu feedback foi recebido.', true); form.reset(); e.preventDefault(); return; }
     var nick = form.nickname.value.trim();
-    var message = form.message.value.trim();
+    var message = form.elements['message'].value.trim();
     if (!nick || !message) { e.preventDefault(); show('Por favor, preencha seu nome e mensagem.', false); return; }
     e.preventDefault();
     fetch(form.action, {

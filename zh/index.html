@@ -789,12 +789,12 @@
 
   form.addEventListener('submit', function(e){
     // Honeypot——静默忽略机器人提交
-    if (form.company.value !== '') { show('谢谢！我们会尽快回复您。', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('谢谢！我们会尽快回复您。', true); form.reset(); e.preventDefault(); return; }
 
     var payload = {
-      name:     form.name.value.trim(),
-      whatsapp: form.whatsapp.value.trim(),
-      message:  form.message.value.trim()
+      name:     form.elements['name'].value.trim(),
+      whatsapp: form.elements['whatsapp'].value.trim(),
+      message:  form.elements['message'].value.trim()
     };
 
     if (!payload.name || !payload.whatsapp) {
@@ -839,7 +839,7 @@
     }
     form.addEventListener('submit', function (e) {
       // Honeypot——静默忽略机器人提交
-      if (form.company.value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
+      if (form.elements['company'].value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
       e.preventDefault();
       // 受限品类关键词检查：仅提示，绝不拦截提交。
       var flagged = false;
@@ -884,9 +884,9 @@
   }
   form.addEventListener('submit', function(e){
     // Honeypot — 静默忽略机器人提交
-    if (form.company.value !== '') { show('感谢您的反馈！', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('感谢您的反馈！', true); form.reset(); e.preventDefault(); return; }
     var nick = form.nickname.value.trim();
-    var message = form.message.value.trim();
+    var message = form.elements['message'].value.trim();
     if (!nick || !message) { e.preventDefault(); show('请填写您的称呼和留言内容。', false); return; }
     e.preventDefault();
     fetch(form.action, {

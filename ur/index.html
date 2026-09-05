@@ -564,8 +564,8 @@
   }
   if(!form) return;
   form.addEventListener('submit', function(e){
-    if (form.company.value !== '') { show(form.dataset.okDone || 'Thank you!', true); form.reset(); e.preventDefault(); return; }
-    var payload = { name: form.name.value.trim(), whatsapp: form.whatsapp.value.trim(), message: form.message.value.trim() };
+    if (form.elements['company'].value !== '') { show(form.dataset.okDone || 'Thank you!', true); form.reset(); e.preventDefault(); return; }
+    var payload = { name: form.elements['name'].value.trim(), whatsapp: form.elements['whatsapp'].value.trim(), message: form.elements['message'].value.trim() };
     if (!payload.name || !payload.whatsapp) {
       e.preventDefault(); show(form.dataset.okReq || 'Please fill in your name and a contact.', false); return;
     }

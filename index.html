@@ -1159,12 +1159,12 @@
 
   form.addEventListener('submit', function(e){
     // Honeypot — silently ignore bot submissions
-    if (form.company.value !== '') { show('Thank you! We will get back to you shortly.', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('Thank you! We will get back to you shortly.', true); form.reset(); e.preventDefault(); return; }
 
     var payload = {
-      name:     form.name.value.trim(),
-      whatsapp: form.whatsapp.value.trim(),
-      message:  form.message.value.trim()
+      name:     form.elements['name'].value.trim(),
+      whatsapp: form.elements['whatsapp'].value.trim(),
+      message:  form.elements['message'].value.trim()
     };
 
     if (!payload.name || !payload.whatsapp) {
@@ -1210,7 +1210,7 @@
     }
     form.addEventListener('submit', function (e) {
       // Honeypot — silently ignore bot submissions
-      if (form.company.value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
+      if (form.elements['company'].value !== '') { show(okText, true); form.reset(); e.preventDefault(); return; }
       e.preventDefault();
       // Restricted-goods keyword check: warn but never block the submission.
       var flagged = false;
@@ -1255,9 +1255,9 @@
   }
   form.addEventListener('submit', function(e){
     // Honeypot — silently ignore bot submissions
-    if (form.company.value !== '') { show('Thank you! Your feedback has been received.', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('Thank you! Your feedback has been received.', true); form.reset(); e.preventDefault(); return; }
     var nick = form.nickname.value.trim();
-    var message = form.message.value.trim();
+    var message = form.elements['message'].value.trim();
     if (!nick || !message) { e.preventDefault(); show('Please fill in your name and message.', false); return; }
     e.preventDefault();
     fetch(form.action, {

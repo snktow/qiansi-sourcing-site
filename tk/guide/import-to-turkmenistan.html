@@ -403,11 +403,11 @@
     msg.style.display = 'block';
   }
   form.addEventListener('submit', function(e){
-    if (form.company.value !== '') { show('Sag boluň! Ýakyn wagtda size yza gaýdarys.', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('Sag boluň! Ýakyn wagtda size yza gaýdarys.', true); form.reset(); e.preventDefault(); return; }
     var payload = {
-      name:     form.name.value.trim(),
-      whatsapp: form.whatsapp.value.trim(),
-      message:  form.message.value.trim()
+      name:     form.elements['name'].value.trim(),
+      whatsapp: form.elements['whatsapp'].value.trim(),
+      message:  form.elements['message'].value.trim()
     };
     if (!payload.name || !payload.whatsapp) {
       e.preventDefault();

@@ -626,12 +626,12 @@
 
   form.addEventListener('submit', function(e){
     // 蜜罐——静默忽略机器人提交
-    if (form.company.value !== '') { show('感谢您！我们会尽快与您联系。', true); form.reset(); e.preventDefault(); return; }
+    if (form.elements['company'].value !== '') { show('感谢您！我们会尽快与您联系。', true); form.reset(); e.preventDefault(); return; }
 
     var payload = {
-      name:     form.name.value.trim(),
-      whatsapp: form.whatsapp.value.trim(),
-      message:  form.message.value.trim()
+      name:     form.elements['name'].value.trim(),
+      whatsapp: form.elements['whatsapp'].value.trim(),
+      message:  form.elements['message'].value.trim()
     };
 
     if (!payload.name || !payload.whatsapp) {
