@@ -560,17 +560,48 @@
   if(!form) return;
   form.addEventListener('submit', function(e){
     if (form.elements['company'].value !== '') { show(form.dataset.okDone || 'Thank you!', true); form.reset(); e.preventDefault(); return; }
-    var payload = { name: form.elements['name'].value.trim(), whatsapp: form.elements['whatsapp'].value.trim(), message: form.elements['message'].value.trim() };
-    if (!payload.name || !payload.whatsapp) {
+    var nameVal     = form.elements['name'].value.trim();
+    var whatsappVal = form.elements['whatsapp'].value.trim();
+    if (!nameVal || !whatsappVal) {
       e.preventDefault(); show(form.dataset.okReq || 'Please fill in your name and a contact.', false); return;
     }
     e.preventDefault();
     var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
-    fetch(form.action, { method: 'POST', headers: {'Accept': 'application/json'}, body: new FormData(form) })
-      .then(function(r){ if (!r.ok) throw new Error('bad status'); return r.json(); })
-      .then(function(d){ done(true, (form.dataset.okDone || 'Thank you!')); fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){}); })
-      .catch(function(){ done(false, (form.dataset.okErr || 'Sorry, submission failed. Please email us directly at notify@xn--yhq58j.com')); });
-  });
+
+    show("आपकी पूछताछ भेजी जा रही है…", true);
+
+    // Primary path: register on the state-machine worker so the buyer gets an inquiry_id + tracking link.
+    // FormSubmit + geo beacon kept as fallback (double-write). Fields absent in this variant are omitted.
+    var fv = function(n){ var el = form.elements[n]; return (el && el.value) ? el.value.trim() : ''; };
+    var payload = {
+      product: fv('category') || 'General sourcing inquiry',
+      language: "hi",
+      company: nameVal,
+      contact: nameVal + ' / ' + whatsappVal,
+      note: fv('message')
+    };
+
+    fetch('https://greet.xn--yhq58j.com/inquiries', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    })
+    .then(function(res){ return res.json().catch(function(){ return {}; }); })
+    .then(function(data){
+      if (data && data.inquiry_id) {
+        var link = data.get_url || ('https://greet.xn--yhq58j.com/inquiries/' + data.inquiry_id);
+        done(true, (form.dataset.okDone || 'Thank you!') + ' ' + "संदर्भ आईडी" + ': ' + data.inquiry_id + '. ' + "अपनी बातचीत की स्थिति जानने के लिए यह आईडी रखें; जल्द ही एक कोटेशन मिलेगा।" + ' — ' + link);
+      } else {
+        done(false, form.dataset.okErr || "क्षमा करें, अभी आपकी पूछताछ पंजीकृत नहीं हो सकी। कृपया थोड़ी देर में पुनः प्रयास करें या notify@xn--yhq58j.com पर ईमेल करें।");
+      }
+    })
+    .catch(function(){
+      done(false, form.dataset.okErr || "क्षमा करें, अभी आपकी पूछताछ पंजीकृत नहीं हो सकी। कृपया थोड़ी देर में पुनः प्रयास करें या notify@xn--yhq58j.com पर ईमेल करें।");
+    });
+
+    fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){});
+    fetch(form.action, { method: 'POST', headers: {'Accept': 'application/json'}, body: new FormData(form) }).catch(function(){});
+});
 })();
 (function(){
   // Qiansi self-check traffic ping (additive, privacy-friendly, fire-and-forget).

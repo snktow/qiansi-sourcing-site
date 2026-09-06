@@ -766,39 +766,64 @@
   form.addEventListener('submit', function(e){
     // Honeypot — silently ignore bot submissions
     if (form.elements['company'].value !== '') { show('Obrigado! Retornaremos em breve.', true); form.reset(); e.preventDefault(); return; }
-
-    var payload = {
-      name:     form.elements['name'].value.trim(),
-      whatsapp: form.elements['whatsapp'].value.trim(),
-      message:  form.elements['message'].value.trim()
-    };
-
-    if (!payload.name || !payload.whatsapp) {
+    
+    // Use form.elements to read controls, avoiding the name / HTMLFormElement.name conflict.
+    var nameVal     = form.elements['name'].value.trim();
+    var whatsappVal = form.elements['whatsapp'].value.trim();
+    
+    if (!nameVal || !whatsappVal) {
       e.preventDefault();
       show('Por favor, preencha seu nome e um contato (WhatsApp ou e-mail).', false);
       return;
     }
-
-    // If JS is available, submit via fetch to FormSubmit so we can show an inline result
-    // without leaving the page. Fall back to native form POST if fetch fails.
+    
     e.preventDefault();
     var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
 
+    show('Enviando sua consulta…', true);
+
+    // Caminho principal: POST para o worker de máquina de estados `/inquiries`. O comprador recebe
+    // um inquiry_id e um link para verificar o status. Em caso de falha, mostra erro amigável.
+    var fieldVal = function(name){ var el = form.elements[name]; return el ? (el.value||'').trim() : ''; };
+    var payload = {
+      product: fieldVal('category') || 'General sourcing inquiry',
+      quantity: fieldVal('quantity'),
+      destination: fieldVal('target_country'),
+      budget: fieldVal('budget'),
+      language: 'pt',
+      company: nameVal,
+      contact: nameVal + ' / ' + whatsappVal,
+      note: fieldVal('message')
+    };
+
+    fetch('https://greet.xn--yhq58j.com/inquiries', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    })
+    .then(function(res){ return res.json().catch(function(){ return {}; }); })
+    .then(function(data){
+      if (data && data.inquiry_id) {
+        var link = data.get_url || ('https://greet.xn--yhq58j.com/inquiries/' + data.inquiry_id);
+        done(true, '✓ Obrigado, ' + nameVal.split(' ')[0] + '! Sua consulta foi registrada. ID de referência: ' + data.inquiry_id + '. Guarde este ID para acompanhar o status; um orçamento chegará em breve — ' + link + '');
+      } else {
+        done(false, 'Desculpe, não foi possível registrar sua consulta agora. Tente novamente em instantes ou envie um e-mail para notify@xn--yhq58j.com.');
+      }
+    })
+    .catch(function(){
+      done(false, 'Desculpe, não foi possível registrar sua consulta agora. Tente novamente em instantes ou envie um e-mail para notify@xn--yhq58j.com.');
+    });
+
+    // Mantém os canais de notificação existentes (double-write) para preservar as cadeias de backend:
+    //  - geo beacon ainda dispara a notificação do DingTalk (fire-and-forget)
+    //  - FormSubmit ainda alimenta o pipeline /_webhook de auto-recepção (fire-and-forget)
+    fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){});
     fetch(form.action, {
       method: 'POST',
       headers: {'Accept': 'application/json'},
       body: new FormData(form)
-    }).then(function(r){
-      if (!r.ok) throw new Error('bad status');
-      return r.json();
-    }).then(function(d){
-      done(true, '✓ Obrigado, ' + payload.name.split(' ')[0] + '! Sua consulta foi recebida. Responderemos em até 24 horas.');
-      // Qiansi self-check: count a real inquiry submission (fire-and-forget).
-      fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){});
-    }).catch(function(){
-      done(false, 'Desculpe, o envio falhou. Envie um e-mail direto para notify@xn--yhq58j.com');
-    });
-  });
+    }).catch(function(){});
+});
 })();
 </script>
 <script>
