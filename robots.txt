@@ -92,6 +92,36 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
+User-agent: meta-webindexer
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Anthropic 搜索型爬虫（与 ClaudeBot 训练型区分）
+User-agent: Claude-SearchBot
+Allow: /
+
+# OpenAI 广告/检索类爬虫
+User-agent: OAI-AdsBot
+Allow: /
+
+# DuckDuckGo AI 助手
+User-agent: DuckAssistBot
+Allow: /
+
+# You.com（AI 搜索）
+User-agent: YouBot
+Allow: /
+
+# Mistral AI
+User-agent: MistralAI-User
+Allow: /
+
+# 机器可读商务契约（供支持 llms.txt 约定的智能体读取）
+# https://xn--yhq58j.com/llms.txt
+# https://xn--yhq58j.com/agents/
+
 # --- SEO / 分析爬虫（抓取公开页面做排名分析，非商业数据采集） ---
 User-agent: AhrefsBot
 Allow: /
