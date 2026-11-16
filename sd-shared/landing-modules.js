@@ -839,13 +839,15 @@
       var message = form.message.value.trim();
       if (!nick || !message) { e.preventDefault(); show(t.req, false); return; }
       e.preventDefault();
-      fetch(form.action, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      }).then(function (r) { if (!r.ok) throw new Error('bad status'); return r.json(); })
-        .then(function () { show(t.ok, true); form.reset(); })
-        .catch(function () { show(t.err, false); });
+      postInquiry({
+        name: nick,
+        contact: (form.contact && form.contact.value ? String(form.contact.value).trim() : ''),
+        message: message,
+        language: (document.documentElement && document.documentElement.lang) || 'en'
+      }).then(function (row) {
+        if (!row || !row.id) throw new Error('no id');
+        show(t.ok, true); form.reset();
+      }).catch(function () { show(t.err, false); });
     });
 
     var footer = document.querySelector('footer');
@@ -878,6 +880,77 @@
     buildFeedback: buildFeedback,
     init: init
   };
+
+  /* ------------------------------------------------------------------ *
+   * Inquiry submit: write straight to Supabase.
+   * FormSubmit was never activated (activation mail lost in mail routing),
+   * and the old worker endpoint greet.../inquiries answers 401.
+   * ------------------------------------------------------------------ */
+  var SB_URL = 'https://zrpovyybwkarwizcicwz.supabase.co/rest/v1/rpc/submit_inquiry';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
+
+  function postInquiry(data) {
+    return fetch(SB_URL, {
+      method: 'POST',
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        p_name: data.name || '',
+        p_contact: data.contact || '',
+        p_country: data.country || '',
+        p_product: data.product || '',
+        p_quantity: data.quantity || '',
+        p_budget: data.budget || '',
+        p_message: data.message || '',
+        p_language: data.language || 'en'
+      })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('status ' + r.status);
+      return r.json();
+    }).then(function (id) { return id ? { id: id } : null; });
+  }
+
+  // Intercept native POSTs to formsubmit.co (per-country inquiry forms).
+  if (typeof document !== 'undefined') {
+    document.addEventListener('submit', function (e) {
+      var form = e.target;
+      if (!form || form.tagName !== 'FORM') return;
+      var action = form.getAttribute('action') || '';
+      if (action.indexOf('formsubmit.co') === -1) return;
+      if (form.classList && form.classList.contains('qsfb-form')) return;
+      e.preventDefault();
+      var val = function (n) { var el = form.elements[n]; return el ? String(el.value || '').trim() : ''; };
+      if (val('company') !== '') return; // honeypot
+      var name = val('name');
+      var contact = val('whatsapp') || val('email') || val('contact');
+      var msg = document.getElementById('form-msg');
+      var showMsg = function (txt, ok) {
+        if (msg) { msg.textContent = txt; msg.className = ok ? 'ok' : 'err'; msg.style.display = 'block'; }
+      };
+      if (!name || !contact) { showMsg('Please fill in your name and a contact (WhatsApp or email).', false); return; }
+      showMsg('Submitting your inquiry…', true);
+      postInquiry({
+        name: name,
+        contact: contact,
+        company: '',
+        country: val('target_country') || val('country'),
+        product: val('category') || val('product') || 'General sourcing inquiry',
+        quantity: val('quantity'),
+        budget: val('budget'),
+        message: val('message'),
+        language: (document.documentElement && document.documentElement.lang) || 'en'
+      }).then(function (row) {
+        if (!row || !row.id) { showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false); return; }
+        showMsg('✓ Thank you! Your inquiry has been registered. Reference ID: QS-' + row.id + '. We will reply to ' + contact + ' shortly.', true);
+        form.reset();
+      }).catch(function () {
+        showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false);
+      });
+    }, true);
+  }
 
   // Auto-init in a browser; safe no-op in Node (tests).
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {

@@ -1191,16 +1191,31 @@
       note: fieldVal('message')
     };
 
-    fetch('https://greet.xn--yhq58j.com/inquiries', {
+    // Primary submit path: write straight to Supabase (anon key + RLS insert-only policy).
+    // The previous worker endpoint greet.../inquiries returns 401 and is no longer used.
+    fetch('https://zrpovyybwkarwizcicwz.supabase.co/rest/v1/rpc/submit_inquiry', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        p_name: nameVal,
+        p_contact: whatsappVal,
+        p_country: payload.destination,
+        p_product: payload.product,
+        p_quantity: payload.quantity,
+        p_budget: payload.budget,
+        p_message: payload.note,
+        p_language: payload.language
+      })
     })
-    .then(function(res){ return res.json().catch(function(){ return {}; }); })
-    .then(function(data){
-      if (data && data.inquiry_id) {
-        var link = data.get_url || ('https://greet.xn--yhq58j.com/inquiries/' + data.inquiry_id);
-        done(true, '✓ Thank you, ' + nameVal.split(' ')[0] + '! Your inquiry has been registered. Reference ID: ' + data.inquiry_id + '. Keep this ID to check your request status; a quote will follow soon — ' + link + '');
+    .then(function(res){ return res.json().catch(function(){ return null; }); })
+    .then(function(id){
+      if (id) {
+        done(true, '✓ Thank you, ' + nameVal.split(' ')[0] + '! Your inquiry has been registered. Reference ID: QS-' + id + '. We will reply to ' + whatsappVal + ' shortly.');
       } else {
         done(false, 'Sorry, we could not register your inquiry right now. Please try again in a moment or email us at notify@xn--yhq58j.com.');
       }
