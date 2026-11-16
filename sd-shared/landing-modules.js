@@ -839,13 +839,15 @@
       var message = form.message.value.trim();
       if (!nick || !message) { e.preventDefault(); show(t.req, false); return; }
       e.preventDefault();
-      fetch(form.action, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      }).then(function (r) { if (!r.ok) throw new Error('bad status'); return r.json(); })
-        .then(function () { show(t.ok, true); form.reset(); })
-        .catch(function () { show(t.err, false); });
+      postInquiry({
+        name: nick,
+        contact: (form.contact && form.contact.value ? String(form.contact.value).trim() : ''),
+        message: message,
+        language: (document.documentElement && document.documentElement.lang) || 'en'
+      }).then(function (row) {
+        if (!row || !row.id) throw new Error('no id');
+        show(t.ok, true); form.reset();
+      }).catch(function () { show(t.err, false); });
     });
 
     var footer = document.querySelector('footer');
@@ -878,6 +880,106 @@
     buildFeedback: buildFeedback,
     init: init
   };
+
+  /* ------------------------------------------------------------------ *
+   * Inquiry submit, two independent legs:
+   *   1) Supabase  -> durable record (source of truth, never lost)
+   *   2) FormSubmit -> e-mail alert to notify@ (form is activated; do not
+   *      rely on it for storage, it only serves as the "phone rings" leg)
+   * The old worker endpoint greet.../inquiries answers 401, unused.
+   * ------------------------------------------------------------------ */
+  var MAIL_URL = 'https://formsubmit.co/ajax/notify@xn--yhq58j.com';
+  var SB_URL = 'https://zrpovyybwkarwizcicwz.supabase.co/rest/v1/rpc/submit_inquiry';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
+
+  // Fire-and-forget e-mail alert. Never blocks or breaks the submit path:
+  // whatever happens here, the Supabase leg still decides the UI result.
+  function notifyByEmail(data) {
+    try {
+      fetch(MAIL_URL, {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '[新询盘] ' + (data.country || '-') + ' / ' + (data.name || '-'),
+          _template: 'table',
+          Name: data.name || '',
+          Contact: data.contact || '',
+          Country: data.country || '',
+          Product: data.product || '',
+          Quantity: data.quantity || '',
+          Budget: data.budget || '',
+          Message: data.message || '',
+          Language: data.language || 'en',
+          Page: (typeof location !== 'undefined' ? location.href : '')
+        })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function postInquiry(data) {
+    notifyByEmail(data);
+    return fetch(SB_URL, {
+      method: 'POST',
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        p_name: data.name || '',
+        p_contact: data.contact || '',
+        p_country: data.country || '',
+        p_product: data.product || '',
+        p_quantity: data.quantity || '',
+        p_budget: data.budget || '',
+        p_message: data.message || '',
+        p_language: data.language || 'en'
+      })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('status ' + r.status);
+      return r.json();
+    }).then(function (id) { return id ? { id: id } : null; });
+  }
+
+  // Intercept native POSTs to formsubmit.co (per-country inquiry forms).
+  if (typeof document !== 'undefined') {
+    document.addEventListener('submit', function (e) {
+      var form = e.target;
+      if (!form || form.tagName !== 'FORM') return;
+      var action = form.getAttribute('action') || '';
+      if (action.indexOf('formsubmit.co') === -1) return;
+      if (form.classList && form.classList.contains('qsfb-form')) return;
+      e.preventDefault();
+      var val = function (n) { var el = form.elements[n]; return el ? String(el.value || '').trim() : ''; };
+      if (val('company') !== '') return; // honeypot
+      var name = val('name');
+      var contact = val('whatsapp') || val('email') || val('contact');
+      var msg = document.getElementById('form-msg');
+      var showMsg = function (txt, ok) {
+        if (msg) { msg.textContent = txt; msg.className = ok ? 'ok' : 'err'; msg.style.display = 'block'; }
+      };
+      if (!name || !contact) { showMsg('Please fill in your name and a contact (WhatsApp or email).', false); return; }
+      showMsg('Submitting your inquiry…', true);
+      postInquiry({
+        name: name,
+        contact: contact,
+        company: '',
+        country: val('target_country') || val('country'),
+        product: val('category') || val('product') || 'General sourcing inquiry',
+        quantity: val('quantity'),
+        budget: val('budget'),
+        message: val('message'),
+        language: (document.documentElement && document.documentElement.lang) || 'en'
+      }).then(function (row) {
+        if (!row || !row.id) { showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false); return; }
+        showMsg('✓ Thank you! Your inquiry has been registered. Reference ID: QS-' + row.id + '. We will reply to ' + contact + ' shortly.', true);
+        form.reset();
+      }).catch(function () {
+        showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false);
+      });
+    }, true);
+  }
 
   // Auto-init in a browser; safe no-op in Node (tests).
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {

@@ -1,145 +1,103 @@
-/* Qiansi Account (register/login) — self-contained auth UI.
+/* Qiansi Account — passwordless email sign-in (Supabase Auth, email OTP).
  *
- * Wires the site to the backend identity loop at /api/auth/*:
- *   POST /api/auth/register  { username, password, email?, securityQuestions } -> { ok, user, session:{token,expires_at} }
- *   POST /api/auth/login     { username, password }                            -> { ok, user, session:{token,expires_at} }
- *   GET  /api/auth/me        (Bearer <token>)                                  -> { ok, user, session:{expires_at} }
- *   POST /api/auth/forgot    { username }                                      -> { ok, questions:[{index,question}] }
- *   POST /api/auth/reset     { username, answers:[{index,answer}], password }  -> { ok }
+ * Replaces the old username/password + security-question loop (which pointed at
+ * /api/auth/* and always 404'd on GitHub Pages). Now talks straight to Supabase:
+ *   POST {SUPABASE_URL}/auth/v1/otp                     { email, create_user } -> send verification code
+ *   POST {SUPABASE_URL}/auth/v1/verify                  { type:'email', email, token } -> session
+ *   POST {SUPABASE_URL}/auth/v1/token?grant_type=refresh_token                    -> session
+ *   GET  {SUPABASE_URL}/auth/v1/user                    (Bearer access_token) -> user
+ *   POST {SUPABASE_URL}/auth/v1/logout                  (Bearer access_token)
  *
  * Design:
- *   - The visible entry is a small container (<div id="qiansi-auth">) in the header.
- *     Pages place a static login link there; this script re-renders it based on state
- *     (logged out -> "Login", logged in -> "<username> · Log out").
- *   - A modal (injected here) holds a Log-in tab, a Create-account tab, and a
- *     Forgot-password flow (opened from the "Forgot password?" link, not a tab).
- *   - Account key is the USERNAME (normalized to lowercase by the backend); email is
- *     optional. Registration collects 1-2 self-set security questions, used to recover
- *     the password. There is NO email verification.
- *   - Token is kept in localStorage (key 'qiansi_token'); on load we call /me and,
- *     for an expired session, clear the token.
- *   - Text follows the page language (lang attr): en / zh / pt, falling back to en.
+ *   - Visible entry is <div id="qiansi-auth"> in the header. Pages can ship a static
+ *     link; this script re-renders it (logged out -> "Login", logged in -> "<email> · Log out").
+ *   - One modal, two panes: email -> code. Register and login are the same action:
+ *     the first successful code verification creates the account.
+ *   - No password, no security questions, no email-and-password reset flow.
+ *   - Session lives in localStorage ('qiansi_session_v1'); access token is refreshed
+ *     automatically when it is close to expiry.
+ *   - Magic-link fallback: if the user opens a link whose hash carries
+ *     #access_token=..., the session is adopted and the hash is cleared.
+ *   - Text follows <html lang> (en / zh / pt), falling back to en.
  */
 (function () {
   'use strict';
 
-  var BASE = 'https://greet.xn--yhq58j.com';
-  var TOKEN_KEY = 'qiansi_token';
+  var SUPABASE_URL = 'https://zrpovyybwkarwizcicwz.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_xyPncXK1nC-UAaKaIuVyug_NuqDbXvS';
+
+  var SESS_KEY = 'qiansi_session_v1';
+  var LEGACY_TOKEN_KEY = 'qiansi_token'; // from the old backend; cleaned up on init
 
   var I18N = {
     en: {
       entry: 'Login',
-      loginTab: 'Log in',
-      registerTab: 'Create account',
-      loginTitle: 'Welcome back',
-      registerTitle: 'Create your account',
-      username: 'Username',
-      password: 'Password',
-      optionalEmail: 'Email (optional)',
-      securityQuestion: 'Security question',
-      securityAnswer: 'Answer',
-      securitySection: 'Set security questions',
-      securityNote: 'Set 1-2 security questions. You will use them to recover your password.',
-      loginSubmit: 'Log in',
-      registerSubmit: 'Create account',
-      forgotLink: 'Forgot password?',
-      forgotTitle: 'Reset password',
-      forgotFind: 'Find account',
-      forgotResetSubmit: 'Reset password',
-      forgotBack: 'Back to login',
-      forgotSuccess: 'Password reset. Please log in with your new password.',
-      optional: 'optional',
-      switchToRegister: 'New here? Create an account',
-      switchToLogin: 'Already have an account? Log in',
+      panelTitle: 'Sign in or create account',
+      emailLabel: 'Email address',
+      sendCode: 'Send code',
+      codeTitle: 'Enter your code',
+      codeLabel: 'Verification code',
+      codeSent: 'We sent a verification code to {email}. It may take a minute — please check the spam folder too.',
+      verify: 'Verify and sign in',
+      resend: 'Resend code',
+      resendIn: 'Resend in {s}s',
+      changeEmail: 'Use another email',
       logout: 'Log out',
       close: 'Close',
+      note: 'No password needed. We email you a verification code, and the first sign-in creates your account.',
+      errEmail: 'Please enter a valid email address.',
+      errCode: 'That code is invalid or has expired. Please try again or resend.',
       errNetwork: 'Network error. Please check your connection and try again.',
-      errGeneric: 'Something went wrong. Please try again.',
-      errLoginFail: 'Username or password is incorrect.',
-      errRateLimited: 'Too many attempts. Please try again later.',
-      errUsernameTaken: 'This username is already taken.',
-      errSecurityQuestion: 'Please set at least one complete security question.',
-      errInvalidAnswers: 'Security answers are incorrect.',
-      errNoAccount: 'Account not found.',
-      minNote: 'Use 8 or more characters for your password.'
+      errRateLimited: 'Too many attempts. Please wait a minute and try again.',
+      errGeneric: 'Something went wrong. Please try again.'
     },
     zh: {
       entry: '登录',
-      loginTab: '登录',
-      registerTab: '注册',
-      loginTitle: '欢迎回来',
-      registerTitle: '创建账号',
-      username: '用户名',
-      password: '密码',
-      optionalEmail: '邮箱（可选）',
-      securityQuestion: '安全提问',
-      securityAnswer: '答案',
-      securitySection: '设置安全问题',
-      securityNote: '设置 1-2 个安全问题，用于找回密码。',
-      loginSubmit: '登录',
-      registerSubmit: '注册',
-      forgotLink: '忘记密码？',
-      forgotTitle: '重置密码',
-      forgotFind: '查找账号',
-      forgotResetSubmit: '重置密码',
-      forgotBack: '返回登录',
-      forgotSuccess: '密码已重置，请使用新密码登录。',
-      optional: '可选',
-      switchToRegister: '还没有账号？注册一个',
-      switchToLogin: '已有账号？去登录',
+      panelTitle: '登录 / 注册',
+      emailLabel: '邮箱地址',
+      sendCode: '发送验证码',
+      codeTitle: '输入验证码',
+      codeLabel: '验证码',
+      codeSent: '验证码已发送到 {email}。可能需要一分钟，请同时检查垃圾邮件文件夹。',
+      verify: '验证并登录',
+      resend: '重新发送',
+      resendIn: '{s} 秒后可重发',
+      changeEmail: '换个邮箱',
       logout: '退出',
       close: '关闭',
+      note: '无需密码。我们会发送验证码到你的邮箱，首次登录即自动创建账号。',
+      errEmail: '请输入有效的邮箱地址。',
+      errCode: '验证码无效或已过期，请重试或重新发送。',
       errNetwork: '网络错误，请检查连接后重试。',
-      errGeneric: '出错了，请重试。',
-      errLoginFail: '用户名或密码错误。',
-      errRateLimited: '尝试次数过多，请稍后再试。',
-      errUsernameTaken: '用户名已被占用。',
-      errSecurityQuestion: '请至少完整设置一个安全问题。',
-      errInvalidAnswers: '安全问题答案错误。',
-      errNoAccount: '账号不存在。',
-      minNote: '密码至少 8 位。'
+      errRateLimited: '尝试次数过多，请等一分钟后再试。',
+      errGeneric: '出错了，请重试。'
     },
     pt: {
       entry: 'Entrar',
-      loginTab: 'Entrar',
-      registerTab: 'Criar conta',
-      loginTitle: 'Bem-vindo de volta',
-      registerTitle: 'Crie sua conta',
-      username: 'Nome de usuário',
-      password: 'Senha',
-      optionalEmail: 'E-mail (opcional)',
-      securityQuestion: 'Pergunta de segurança',
-      securityAnswer: 'Resposta',
-      securitySection: 'Defina perguntas de segurança',
-      securityNote: 'Defina 1-2 perguntas de segurança. Você as usará para recuperar sua senha.',
-      loginSubmit: 'Entrar',
-      registerSubmit: 'Criar conta',
-      forgotLink: 'Esqueceu a senha?',
-      forgotTitle: 'Redefinir senha',
-      forgotFind: 'Encontrar conta',
-      forgotResetSubmit: 'Redefinir senha',
-      forgotBack: 'Voltar ao login',
-      forgotSuccess: 'Senha redefinida. Faça login com sua nova senha.',
-      optional: 'opcional',
-      switchToRegister: 'Novo aqui? Crie uma conta',
-      switchToLogin: 'Já tem conta? Entrar',
+      panelTitle: 'Entrar ou criar conta',
+      emailLabel: 'E-mail',
+      sendCode: 'Enviar código',
+      codeTitle: 'Digite seu código',
+      codeLabel: 'Código de verificação',
+      codeSent: 'Enviamos um código de verificação para {email}. Pode levar um minuto — verifique também a pasta de spam.',
+      verify: 'Verificar e entrar',
+      resend: 'Reenviar código',
+      resendIn: 'Reenviar em {s}s',
+      changeEmail: 'Usar outro e-mail',
       logout: 'Sair',
       close: 'Fechar',
+      note: 'Sem senha. Enviamos um código de verificação por e-mail e o primeiro acesso cria sua conta.',
+      errEmail: 'Digite um e-mail válido.',
+      errCode: 'Código inválido ou expirado. Tente novamente ou reenvie.',
       errNetwork: 'Erro de rede. Verifique sua conexão e tente novamente.',
-      errGeneric: 'Algo deu errado. Tente novamente.',
-      errLoginFail: 'Nome de usuário ou senha incorretos.',
-      errRateLimited: 'Muitas tentativas. Tente novamente mais tarde.',
-      errUsernameTaken: 'Este nome de usuário já está em uso.',
-      errSecurityQuestion: 'Responda pelo menos uma pergunta de segurança completa.',
-      errInvalidAnswers: 'Respostas de segurança incorretas.',
-      errNoAccount: 'Conta não encontrada.',
-      minNote: 'Use 8 ou mais caracteres para sua senha.'
+      errRateLimited: 'Muitas tentativas. Aguarde um minuto e tente novamente.',
+      errGeneric: 'Algo deu errado. Tente novamente.'
     }
   };
 
   function normLang() {
     var l = (document.documentElement.lang || 'en').toLowerCase();
-    l = l.split('-')[0]; // 'pt-BR' -> 'pt', 'zh-CN' -> 'zh'
+    l = l.split('-')[0];
     return I18N[l] ? l : 'en';
   }
   var t = I18N[normLang()];
@@ -147,21 +105,146 @@
   var currentUser = null;
   var authRoot = null;
   var modal = null;
-  // Forgot flow state machine: username step -> questions step -> done.
-  var forgotState = { step: 'username', username: '', questions: [] };
+  var pendingEmail = '';
+  var resendLeft = 0;
+  var resendTimer = null;
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-  function getToken() {
-    try { return localStorage.getItem(TOKEN_KEY); } catch (e) { return null; }
-  }
-  function setToken(v) {
-    try { if (v) localStorage.setItem(TOKEN_KEY, v); else localStorage.removeItem(TOKEN_KEY); } catch (e) { /* ignore */ }
+  function fmt(tpl, vars) {
+    return String(tpl).replace(/\{(\w+)\}/g, function (m, k) {
+      return vars[k] !== undefined ? String(vars[k]) : m;
+    });
   }
 
+  // ---- session storage ----
+  function readSession() {
+    try {
+      var raw = localStorage.getItem(SESS_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+  function writeSession(s) {
+    try {
+      if (s) localStorage.setItem(SESS_KEY, JSON.stringify(s));
+      else localStorage.removeItem(SESS_KEY);
+    } catch (e) { /* ignore */ }
+  }
+  function sessionEmail() {
+    var s = readSession();
+    return s && s.email ? s.email : '';
+  }
+
+  // ---- supabase REST helpers ----
+  function authHeaders(extra) {
+    var h = { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY };
+    if (extra) for (var k in extra) if (extra.hasOwnProperty(k)) h[k] = extra[k];
+    return h;
+  }
+  function parseErr(body, status) {
+    var msg = '';
+    if (body) msg = body.msg || body.message || body.error_description || body.error || '';
+    if (status === 429 || /rate.?limit/i.test(msg)) return t.errRateLimited;
+    if (/email/i.test(msg) && /invalid|valid/i.test(msg)) return t.errEmail;
+    if (/expired|invalid/i.test(msg) && /token|otp|code/i.test(msg)) return t.errCode;
+    return t.errGeneric;
+  }
+  function sendOtp(email, done) {
+    fetch(SUPABASE_URL + '/auth/v1/otp', {
+      method: 'POST',
+      mode: 'cors',
+      headers: authHeaders(),
+      body: JSON.stringify({ email: email, create_user: true })
+    }).then(function (r) {
+      return r.json().catch(function () { return null; }).then(function (d) {
+        return { status: r.status, body: d };
+      });
+    }).then(function (res) {
+      if (res.status >= 200 && res.status < 300) done(null);
+      else done(parseErr(res.body, res.status));
+    }).catch(function () { done(t.errNetwork); });
+  }
+  function verifyOtp(email, token, done) {
+    fetch(SUPABASE_URL + '/auth/v1/verify', {
+      method: 'POST',
+      mode: 'cors',
+      headers: authHeaders(),
+      body: JSON.stringify({ type: 'email', email: email, token: token })
+    }).then(function (r) {
+      return r.json().catch(function () { return null; }).then(function (d) {
+        return { status: r.status, body: d };
+      });
+    }).then(function (res) {
+      if (res.status >= 200 && res.status < 300 && res.body && res.body.access_token) {
+        adoptSession(res.body, email);
+        done(null);
+      } else {
+        done(parseErr(res.body, res.status));
+      }
+    }).catch(function () { done(t.errNetwork); });
+  }
+  function adoptSession(d, email) {
+    writeSession({
+      access_token: d.access_token,
+      refresh_token: d.refresh_token || (readSession() || {}).refresh_token || '',
+      expires_at: d.expires_at || (Math.floor(Date.now() / 1000) + (d.expires_in || 3600)),
+      email: (d.user && d.user.email) || email || ''
+    });
+  }
+  function refreshSession(sess, done) {
+    if (!sess || !sess.refresh_token) { done(false); return; }
+    fetch(SUPABASE_URL + '/auth/v1/token?grant_type=refresh_token', {
+      method: 'POST',
+      mode: 'cors',
+      headers: authHeaders(),
+      body: JSON.stringify({ refresh_token: sess.refresh_token })
+    }).then(function (r) {
+      return r.json().catch(function () { return null; }).then(function (d) {
+        return { status: r.status, body: d };
+      });
+    }).then(function (res) {
+      if (res.status >= 200 && res.status < 300 && res.body && res.body.access_token) {
+        adoptSession(res.body, sess.email);
+        done(true);
+      } else {
+        writeSession(null);
+        done(false);
+      }
+    }).catch(function () { done(false); });
+  }
+  function fetchUser(done) {
+    var s = readSession();
+    if (!s || !s.access_token) { done(null); return; }
+    fetch(SUPABASE_URL + '/auth/v1/user', {
+      method: 'GET',
+      mode: 'cors',
+      headers: authHeaders({ 'Authorization': 'Bearer ' + s.access_token })
+    }).then(function (r) {
+      return r.json().catch(function () { return null; }).then(function (d) {
+        return { status: r.status, body: d };
+      });
+    }).then(function (res) {
+      if (res.status >= 200 && res.status < 300 && res.body && res.body.id) done(res.body);
+      else if (res.status === 401) {
+        // Token rejected: try one silent refresh before giving up.
+        refreshSession(readSession(), function (ok) {
+          if (ok) {
+            fetchUser(done);
+          } else {
+            writeSession(null);
+            done(null);
+          }
+        });
+      } else {
+        done(null);
+      }
+    }).catch(function () { done(s && s.email ? { email: s.email } : null); });
+  }
+
+  // ---- styles ----
   function injStyle() {
     var css =
       '.nav-auth{display:flex;align-items:center;gap:10px}' +
@@ -177,15 +260,13 @@
       '.qamodal-card{position:relative;background:#fff;color:#1F2A36;width:100%;max-width:420px;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.3);padding:26px 24px 24px;max-height:90vh;overflow:auto}' +
       '.qamodal-close{position:absolute;top:12px;right:14px;background:none;border:0;font-size:1.6rem;line-height:1;color:#5A6B7B;cursor:pointer;padding:2px 6px}' +
       '.qamodal-close:hover{color:#0B3C5D}' +
-      '.qamodal-tabs{display:flex;gap:6px;margin-bottom:18px;background:#EAF4F6;border-radius:10px;padding:4px}' +
-      '.qamodal-tab{flex:1;background:none;border:0;padding:9px 8px;border-radius:8px;font-weight:700;font-size:.92rem;color:#5A6B7B;cursor:pointer;font-family:inherit}' +
-      '.qamodal-tab.active{background:#0B3C5D;color:#fff}' +
       '.qamodal-pane h2{font-size:1.25rem;color:#0B3C5D;margin-bottom:6px}' +
       '.qamodal-pane .qamodal-note{color:#8A9AA8;font-size:.8rem;line-height:1.4;margin-top:12px}' +
       '.qamodal-field{margin-bottom:14px}' +
       '.qamodal-field label{display:block;font-size:.8rem;font-weight:700;color:#0B3C5D;margin-bottom:5px}' +
       '.qamodal-field input{width:100%;padding:11px 12px;border:1px solid #D9E2EB;border-radius:8px;font-size:1rem;font-family:inherit;box-sizing:border-box}' +
       '.qamodal-field input:focus{outline:none;border-color:#1B9AAA;box-shadow:0 0 0 2px rgba(27,154,170,.25)}' +
+      '.qamodal-field input#qa-code{letter-spacing:.35em;font-size:1.3rem;text-align:center;font-weight:700}' +
       '.qamodal-err{background:#FDECEA;color:#C0392B;border:1px solid #F5C6C1;border-radius:8px;padding:9px 12px;font-size:.85rem;margin-bottom:14px}' +
       '.qamodal-err[hidden]{display:none}' +
       '.qamodal-submit{width:100%;background:#E85D2F;color:#fff;font-weight:700;padding:12px;border:0;border-radius:8px;cursor:pointer;font-size:1rem;font-family:inherit;transition:.2s}' +
@@ -194,14 +275,10 @@
       '.qamodal-switch{margin-top:14px;text-align:center;font-size:.86rem;color:#5A6B7B}' +
       '.qamodal-switch button{background:none;border:0;color:#1B9AAA;font-weight:600;cursor:pointer;font-size:.86rem;font-family:inherit;padding:0}' +
       '.qamodal-switch button:hover{text-decoration:underline}' +
-      '.qamodal-forgot{margin:6px 0 4px;text-align:right;font-size:.84rem}' +
-      '.qamodal-forgot button{background:none;border:0;color:#1B9AAA;font-weight:600;cursor:pointer;font-size:.84rem;font-family:inherit;padding:0}' +
-      '.qamodal-forgot button:hover{text-decoration:underline}' +
-      '.qamodal-sec{border-top:1px solid #EAF4F6;margin-top:16px;padding-top:14px}' +
-      '.qamodal-sec-head{font-size:.86rem;font-weight:700;color:#0B3C5D;margin-bottom:2px}' +
-      '.qamodal-sec-note{color:#8A9AA8;font-size:.78rem;line-height:1.4;margin-bottom:12px}' +
-      '.qamodal-forgot-note{color:#8A9AA8;font-size:.8rem;line-height:1.4;margin-bottom:12px}' +
-      '.qamodal-forgot-done{color:#1B7A5A;background:#E8F6F0;border:1px solid #B9E2D1;border-radius:8px;padding:10px 12px;font-size:.88rem;margin-bottom:14px}';
+      '.qamodal-switch button[disabled]{color:#8A9AA8;cursor:not-allowed;text-decoration:none}' +
+      '.qamodal-switch .sep{color:#C6D2DC;padding:0 6px}' +
+      '.qamodal-forgot-note{color:#8A9AA8;font-size:.8rem;line-height:1.45;margin-bottom:14px}' +
+      '.qamodal-forgot-note b{color:#0B3C5D;word-break:break-all}';
     var st = document.createElement('style');
     st.textContent = css;
     document.head.appendChild(st);
@@ -215,60 +292,41 @@
       '<div class="qamodal-backdrop" data-qa-close></div>' +
       '<div class="qamodal-card" role="dialog" aria-modal="true">' +
         '<button class="qamodal-close" data-qa-close aria-label="' + esc(t.close) + '">&times;</button>' +
-        '<div class="qamodal-tabs">' +
-          '<button class="qamodal-tab active" data-qa-tab="login">' + esc(t.loginTab) + '</button>' +
-          '<button class="qamodal-tab" data-qa-tab="register">' + esc(t.registerTab) + '</button>' +
-        '</div>' +
-        '<div class="qamodal-pane" data-qa-pane="login">' +
-          '<h2>' + esc(t.loginTitle) + '</h2>' +
-          '<form data-qa-form="login" novalidate>' +
-            '<div class="qamodal-field"><label for="qa-user-login">' + esc(t.username) + '</label><input id="qa-user-login" name="username" type="text" autocomplete="username" required></div>' +
-            '<div class="qamodal-field"><label for="qa-pass-login">' + esc(t.password) + '</label><input id="qa-pass-login" name="password" type="password" autocomplete="current-password" required></div>' +
+        '<div class="qamodal-pane" data-qa-pane="email">' +
+          '<h2>' + esc(t.panelTitle) + '</h2>' +
+          '<form data-qa-form="email" novalidate>' +
+            '<div class="qamodal-field"><label for="qa-email">' + esc(t.emailLabel) + '</label>' +
+              '<input id="qa-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required></div>' +
             '<p class="qamodal-err" data-qa-err hidden></p>' +
-            '<button type="submit" class="qamodal-submit">' + esc(t.loginSubmit) + '</button>' +
-            '<p class="qamodal-forgot"><button type="button" data-qa-go="forgot">' + esc(t.forgotLink) + '</button></p>' +
+            '<button type="submit" class="qamodal-submit">' + esc(t.sendCode) + '</button>' +
           '</form>' +
-          '<p class="qamodal-switch"><button type="button" data-qa-go="register">' + esc(t.switchToRegister) + '</button></p>' +
+          '<p class="qamodal-note">' + esc(t.note) + '</p>' +
         '</div>' +
-        '<div class="qamodal-pane" data-qa-pane="register" hidden>' +
-          '<h2>' + esc(t.registerTitle) + '</h2>' +
-          '<form data-qa-form="register" novalidate>' +
-            '<div class="qamodal-field"><label for="qa-user-reg">' + esc(t.username) + '</label><input id="qa-user-reg" name="username" type="text" autocomplete="username" required></div>' +
-            '<div class="qamodal-field"><label for="qa-pass-reg">' + esc(t.password) + '</label><input id="qa-pass-reg" name="password" type="password" autocomplete="new-password" minlength="8" required></div>' +
-            '<div class="qamodal-field"><label for="qa-email-reg">' + esc(t.optionalEmail) + '</label><input id="qa-email-reg" name="email" type="email" autocomplete="email"></div>' +
-            '<div class="qamodal-sec">' +
-              '<div class="qamodal-sec-head">' + esc(t.securitySection) + '</div>' +
-              '<p class="qamodal-sec-note">' + esc(t.securityNote) + '</p>' +
-              '<div class="qamodal-field"><label for="qa-sq1q">' + esc(t.securityQuestion) + ' 1</label><input id="qa-sq1q" name="sq1q" type="text" autocomplete="off"></div>' +
-              '<div class="qamodal-field"><label for="qa-sq1a">' + esc(t.securityAnswer) + ' 1</label><input id="qa-sq1a" name="sq1a" type="text" autocomplete="off"></div>' +
-              '<div class="qamodal-field"><label for="qa-sq2q">' + esc(t.securityQuestion) + ' 2 <span style="font-weight:400;color:#8A9AA8">(' + esc(t.optional) + ')</span></label><input id="qa-sq2q" name="sq2q" type="text" autocomplete="off"></div>' +
-              '<div class="qamodal-field"><label for="qa-sq2a">' + esc(t.securityAnswer) + ' 2</label><input id="qa-sq2a" name="sq2a" type="text" autocomplete="off"></div>' +
-            '</div>' +
+        '<div class="qamodal-pane" data-qa-pane="code" hidden>' +
+          '<h2>' + esc(t.codeTitle) + '</h2>' +
+          '<p class="qamodal-forgot-note" data-qa-sent></p>' +
+          '<form data-qa-form="code" novalidate>' +
+            '<div class="qamodal-field"><label for="qa-code">' + esc(t.codeLabel) + '</label>' +
+              '<input id="qa-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="10" pattern="[0-9]*" required></div>' +
             '<p class="qamodal-err" data-qa-err hidden></p>' +
-            '<button type="submit" class="qamodal-submit">' + esc(t.registerSubmit) + '</button>' +
+            '<button type="submit" class="qamodal-submit">' + esc(t.verify) + '</button>' +
           '</form>' +
-          '<p class="qamodal-switch"><button type="button" data-qa-go="login">' + esc(t.switchToLogin) + '</button></p>' +
-          '<p class="qamodal-note">' + esc(t.minNote) + '</p>' +
-        '</div>' +
-        '<div class="qamodal-pane" data-qa-pane="forgot" hidden>' +
-          '<h2>' + esc(t.forgotTitle) + '</h2>' +
-          '<form data-qa-form="forgot" novalidate>' +
-            '<div data-qa-forgot-body></div>' +
-            '<p class="qamodal-err" data-qa-err hidden></p>' +
-          '</form>' +
-          '<p class="qamodal-switch"><button type="button" data-qa-go="login">' + esc(t.forgotBack) + '</button></p>' +
+          '<p class="qamodal-switch">' +
+            '<button type="button" data-qa-resend>' + esc(t.resend) + '</button>' +
+            '<span class="sep">&middot;</span>' +
+            '<button type="button" data-qa-change>' + esc(t.changeEmail) + '</button>' +
+          '</p>' +
         '</div>' +
       '</div>';
     document.body.appendChild(el);
     modal = el;
-    // tab / close / go switching (delegated on the card)
     el.addEventListener('click', function (e) {
       var close = e.target.closest('[data-qa-close]');
-      var tabBtn = e.target.closest('[data-qa-tab]');
-      var goBtn = e.target.closest('[data-qa-go]');
       if (close) { e.preventDefault(); closeModal(); return; }
-      if (tabBtn) setTab(tabBtn.getAttribute('data-qa-tab'));
-      else if (goBtn) setTab(goBtn.getAttribute('data-qa-go'));
+      var resend = e.target.closest('[data-qa-resend]');
+      if (resend) { e.preventDefault(); if (!resend.disabled) doResend(); return; }
+      var change = e.target.closest('[data-qa-change]');
+      if (change) { e.preventDefault(); setPane('email'); return; }
     });
     el.addEventListener('submit', function (e) {
       var form = e.target.closest('form');
@@ -281,7 +339,6 @@
   function ensureHeaderEntry() {
     authRoot = document.getElementById('qiansi-auth');
     if (authRoot) return;
-    // Fallback for pages that did not add the static container: inject one.
     var navRight = document.querySelector('.nav-right');
     var holder = navRight || document.querySelector('header .wrap') || document.querySelector('header');
     if (holder) {
@@ -296,9 +353,10 @@
 
   function renderAuth() {
     if (!authRoot) return;
-    if (currentUser) {
+    var email = sessionEmail();
+    if (currentUser && email) {
       authRoot.innerHTML =
-        '<span class="nav-login logged" title="' + esc(currentUser.username) + '">\u2713 ' + esc(currentUser.username) + '</span>' +
+        '<span class="nav-login logged" title="' + esc(email) + '">\u2713 ' + esc(email) + '</span>' +
         '<a class="nav-logout" data-auth-logout href="#">' + esc(t.logout) + '</a>';
     } else {
       authRoot.innerHTML = '<a class="nav-login" data-auth-open href="#">' + esc(t.entry) + '</a>';
@@ -312,37 +370,39 @@
       if (!el) return;
       e.preventDefault();
       if (el.hasAttribute('data-auth-logout')) doLogout();
-      else openModal('login');
+      else openModal('email');
     });
   }
 
-  function openModal(tab) {
+  function openModal(pane) {
     ensureModal();
     if (!modal) return;
     modal.hidden = false;
-    setTab(tab || 'login');
-    var pane = modal.querySelector('.qamodal-pane:not([hidden])');
-    var first = pane && pane.querySelector('input');
+    setPane(pane || (pendingEmail ? 'code' : 'email'));
+    var p = modal.querySelector('.qamodal-pane:not([hidden])');
+    var first = p && p.querySelector('input');
     if (first) first.focus();
   }
-  function closeModal() { if (modal) modal.hidden = true; }
+  function closeModal() {
+    if (modal) modal.hidden = true;
+    stopResendTimer();
+  }
   function ensureModal() { if (!modal) injectModal(); }
 
-  function setTab(tab) {
+  function setPane(name) {
     if (!modal) return;
-    var tabs = modal.querySelectorAll('[data-qa-tab]');
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].classList.toggle('active', tabs[i].getAttribute('data-qa-tab') === tab);
-    }
     var panes = modal.querySelectorAll('[data-qa-pane]');
-    for (var j = 0; j < panes.length; j++) {
-      panes[j].hidden = panes[j].getAttribute('data-qa-pane') !== tab;
-    }
-    if (tab === 'forgot') {
-      forgotState = { step: 'username', username: '', questions: [] };
-      renderForgotUsername();
+    for (var i = 0; i < panes.length; i++) {
+      panes[i].hidden = panes[i].getAttribute('data-qa-pane') !== name;
     }
     clearErr();
+    if (name === 'code') {
+      var sent = modal.querySelector('[data-qa-sent]');
+      if (sent) sent.innerHTML = fmt(esc(t.codeSent), { email: '<b>' + esc(pendingEmail) + '</b>' });
+      var codeInput = modal.querySelector('#qa-code');
+      if (codeInput) { codeInput.value = ''; codeInput.focus(); }
+      startResendTimer();
+    }
   }
 
   function activePane() {
@@ -359,229 +419,138 @@
 
   function handleSubmit(form) {
     var mode = form.getAttribute('data-qa-form');
-    if (mode === 'login') return submitLogin(form);
-    if (mode === 'register') return submitRegister(form);
-    if (mode === 'forgot') return submitForgot(form);
+    if (mode === 'email') return submitEmail(form);
+    if (mode === 'code') return submitCode(form);
   }
 
-  function submitLogin(form) {
-    var username = form.username.value.trim();
-    var password = form.password.value;
+  function submitEmail(form) {
+    var input = form.querySelector('input[name="email"]');
+    var email = input ? input.value.trim() : '';
     var btn = form.querySelector('button[type="submit"]');
     clearErr();
-    if (!username || !password) { showErr(t.errGeneric); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr(t.errEmail); return; }
     if (btn) btn.disabled = true;
-    fetch(BASE + '/api/auth/login', {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username, password: password })
-    }).then(function (r) {
-      return r.json().then(function (d) { return { status: r.status, body: d }; }).catch(function () { return { status: r.status, body: null }; });
-    }).then(function (res) {
+    sendOtp(email, function (err) {
       if (btn) btn.disabled = false;
-      if (res.body && res.body.ok) {
-        setToken((res.body.session && res.body.session.token) || null);
-        currentUser = res.body.user || null;
-        closeModal();
-        renderAuth();
-      } else if (res.status === 401) {
-        showErr(t.errLoginFail);
-      } else if (res.status === 429) {
-        showErr(t.errRateLimited);
-      } else {
-        showErr((res.body && res.body.message) ? res.body.message : t.errGeneric);
-      }
-    }).catch(function () {
-      if (btn) btn.disabled = false;
-      showErr(t.errNetwork);
+      if (err) { showErr(err); return; }
+      pendingEmail = email;
+      setPane('code');
     });
   }
 
-  function submitRegister(form) {
-    var username = form.username.value.trim();
-    var password = form.password.value;
-    var email = form.email.value.trim();
-    var sq1q = form.sq1q.value.trim();
-    var sq1a = form.sq1a.value.trim();
-    var sq2q = form.sq2q.value.trim();
-    var sq2a = form.sq2a.value.trim();
-    var securityQuestions = [];
-    if (sq1q || sq1a) {
-      if (!sq1q || !sq1a) { showErr(t.errSecurityQuestion); return; }
-      securityQuestions.push({ question: sq1q, answer: sq1a });
-    }
-    if (sq2q || sq2a) {
-      if (!sq2q || !sq2a) { showErr(t.errSecurityQuestion); return; }
-      securityQuestions.push({ question: sq2q, answer: sq2a });
-    }
+  function submitCode(form) {
+    var input = form.querySelector('input[name="code"]');
+    var code = input ? input.value.replace(/\D/g, '') : '';
     var btn = form.querySelector('button[type="submit"]');
     clearErr();
-    if (!username || !password) { showErr(t.errGeneric); return; }
-    if (password.length < 8) { showErr(t.minNote); return; }
-    if (securityQuestions.length === 0) { showErr(t.errSecurityQuestion); return; }
-    if (securityQuestions.length > 2) { showErr(t.errSecurityQuestion); return; }
-    var payload = { username: username, password: password, securityQuestions: securityQuestions };
-    if (email) payload.email = email;
+    if (!/^\d{6,10}$/.test(code)) { showErr(t.errCode); return; }
     if (btn) btn.disabled = true;
-    fetch(BASE + '/api/auth/register', {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (r) {
-      return r.json().then(function (d) { return { status: r.status, body: d }; }).catch(function () { return { status: r.status, body: null }; });
-    }).then(function (res) {
+    verifyOtp(pendingEmail, code, function (err) {
       if (btn) btn.disabled = false;
-      if (res.status === 201 && res.body && res.body.ok) {
-        setToken((res.body.session && res.body.session.token) || null);
-        currentUser = res.body.user || null;
+      if (err) { showErr(err); return; }
+      stopResendTimer();
+      fetchUser(function (u) {
+        currentUser = u || { email: pendingEmail };
         closeModal();
         renderAuth();
-      } else if (res.status === 409) {
-        showErr(t.errUsernameTaken);
-      } else {
-        showErr((res.body && res.body.message) ? res.body.message : t.errGeneric);
-      }
-    }).catch(function () {
-      if (btn) btn.disabled = false;
-      showErr(t.errNetwork);
+      });
     });
   }
 
-  // ---- forgot / reset flow ----
-  function renderForgotBody(html) {
-    var body = modal && modal.querySelector('[data-qa-forgot-body]');
-    if (body) body.innerHTML = html;
-  }
-  function renderForgotUsername() {
-    forgotState.step = 'username';
-    renderForgotBody(
-      '<div class="qamodal-field"><label for="qa-fg-user">' + esc(t.username) + '</label>' +
-      '<input id="qa-fg-user" name="fguser" type="text" autocomplete="username" required></div>' +
-      '<button type="submit" class="qamodal-submit">' + esc(t.forgotFind) + '</button>'
-    );
-    var i = modal && modal.querySelector('#qa-fg-user');
-    if (i) i.focus();
-  }
-  function renderForgotQuestions() {
-    forgotState.step = 'questions';
-    var html = '<div class="qamodal-forgot-note">' + esc(t.securityNote) + '</div>';
-    for (var i = 0; i < forgotState.questions.length; i++) {
-      html += '<div class="qamodal-field"><label>' + esc(forgotState.questions[i].question) + '</label>' +
-              '<input data-qindex="' + i + '" type="text" autocomplete="off" required></div>';
-    }
-    html += '<div class="qamodal-field"><label for="qa-fg-pass">' + esc(t.password) + '</label>' +
-            '<input id="qa-fg-pass" name="fgpass" type="password" autocomplete="new-password" minlength="8" required></div>' +
-            '<button type="submit" class="qamodal-submit">' + esc(t.forgotResetSubmit) + '</button>';
-    renderForgotBody(html);
-  }
-  function renderForgotDone() {
-    forgotState.step = 'done';
-    renderForgotBody(
-      '<p class="qamodal-forgot-done">' + esc(t.forgotSuccess) + '</p>' +
-      '<button type="button" class="qamodal-submit" data-qa-go="login">' + esc(t.forgotBack) + '</button>'
-    );
-  }
-  function submitForgot(form) {
-    var btn = form.querySelector('button[type="submit"]');
-    var step = forgotState.step || 'username';
+  function doResend() {
+    var btn = modal && modal.querySelector('[data-qa-resend]');
+    if (!pendingEmail || (btn && btn.disabled)) return;
     clearErr();
-    if (step === 'username') {
-      var username = form.fguser.value.trim();
-      if (!username) { showErr(t.errGeneric); return; }
-      if (btn) btn.disabled = true;
-      fetch(BASE + '/api/auth/forgot', {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username })
-      }).then(function (r) {
-        return r.json().then(function (d) { return { status: r.status, body: d }; }).catch(function () { return { status: r.status, body: null }; });
-      }).then(function (res) {
-        if (btn) btn.disabled = false;
-        if (res.body && res.body.ok) {
-          forgotState.username = username;
-          forgotState.questions = res.body.questions || [];
-          renderForgotQuestions();
-        } else if (res.status === 404) {
-          showErr(t.errNoAccount);
-        } else if (res.status === 429) {
-          showErr(t.errRateLimited);
-        } else {
-          showErr((res.body && res.body.message) ? res.body.message : t.errGeneric);
-        }
-      }).catch(function () {
-        if (btn) btn.disabled = false;
-        showErr(t.errNetwork);
-      });
-      return;
-    }
-    if (step === 'questions') {
-      var answers = [];
-      for (var i = 0; i < forgotState.questions.length; i++) {
-        var a = form.querySelector('[data-qindex="' + i + '"]');
-        answers.push({ index: i, answer: a ? a.value.trim() : '' });
-      }
-      var newPassword = form.fgpass.value;
-      if (newPassword.length < 8) { showErr(t.minNote); return; }
-      if (btn) btn.disabled = true;
-      fetch(BASE + '/api/auth/reset', {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: forgotState.username, answers: answers, password: newPassword })
-      }).then(function (r) {
-        return r.json().then(function (d) { return { status: r.status, body: d }; }).catch(function () { return { status: r.status, body: null }; });
-      }).then(function (res) {
-        if (btn) btn.disabled = false;
-        if (res.body && res.body.ok) {
-          renderForgotDone();
-        } else if (res.status === 400) {
-          showErr((res.body && res.body.message) ? res.body.message : t.errInvalidAnswers);
-        } else if (res.status === 429) {
-          showErr(t.errRateLimited);
-        } else {
-          showErr((res.body && res.body.message) ? res.body.message : t.errGeneric);
-        }
-      }).catch(function () {
-        if (btn) btn.disabled = false;
-        showErr(t.errNetwork);
-      });
-      return;
-    }
-    // step === 'done': "Back to login" is a data-qa-go button; nothing to submit.
-    setTab('login');
+    if (btn) btn.disabled = true;
+    sendOtp(pendingEmail, function (err) {
+      if (err) { showErr(err); if (btn) btn.disabled = false; return; }
+      startResendTimer();
+    });
   }
 
-  function refreshMe() {
-    var tk = getToken();
-    if (!tk) { renderAuth(); return; }
-    fetch(BASE + '/api/auth/me', { method: 'GET', mode: 'cors', headers: { 'Authorization': 'Bearer ' + tk } })
-      .then(function (r) {
-        return r.json().then(function (d) { return { status: r.status, body: d }; }).catch(function () { return { status: r.status, body: null }; });
-      })
-      .then(function (res) {
-        if (res.status === 401) { setToken(null); currentUser = null; renderAuth(); return; }
-        if (res.body && res.body.ok) { currentUser = res.body.user || null; renderAuth(); }
-        else { renderAuth(); }
-      })
-      .catch(function () {
-        // Network hiccup: keep the token, but don't claim to be logged in.
-        currentUser = null;
-        renderAuth();
-      });
+  function startResendTimer() {
+    stopResendTimer();
+    resendLeft = 60;
+    var btn = modal && modal.querySelector('[data-qa-resend]');
+    function tick() {
+      var b = modal && modal.querySelector('[data-qa-resend]');
+      if (!b) { stopResendTimer(); return; }
+      if (resendLeft <= 0) {
+        b.disabled = false;
+        b.textContent = t.resend;
+        stopResendTimer();
+        return;
+      }
+      b.disabled = true;
+      b.textContent = fmt(t.resendIn, { s: resendLeft });
+      resendLeft--;
+    }
+    tick();
+    resendTimer = setInterval(tick, 1000);
+  }
+  function stopResendTimer() {
+    if (resendTimer) { clearInterval(resendTimer); resendTimer = null; }
   }
 
   function doLogout() {
-    setToken(null);
+    var s = readSession();
+    if (s && s.access_token) {
+      fetch(SUPABASE_URL + '/auth/v1/logout', {
+        method: 'POST',
+        mode: 'cors',
+        headers: authHeaders({ 'Authorization': 'Bearer ' + s.access_token })
+      }).catch(function () { /* best effort */ });
+    }
+    writeSession(null);
     currentUser = null;
+    pendingEmail = '';
     renderAuth();
   }
 
+  // Magic-link fallback: adopt a session delivered in the URL hash.
+  function consumeUrlSession() {
+    var h = window.location.hash || '';
+    if (h.indexOf('access_token=') < 0) return false;
+    var parts = h.replace(/^#/, '').split('&');
+    var d = {};
+    for (var i = 0; i < parts.length; i++) {
+      var kv = parts[i].split('=');
+      if (kv.length === 2) d[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1]);
+    }
+    if (!d.access_token) return false;
+    adoptSession({
+      access_token: d.access_token,
+      refresh_token: d.refresh_token,
+      expires_at: parseInt(d.expires_at, 10) || 0,
+      expires_in: parseInt(d.expires_in, 10) || 3600
+    }, '');
+    try {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    } catch (e) { /* ignore */ }
+    return true;
+  }
+
+  function refreshMe() {
+    var s = readSession();
+    if (!s) { renderAuth(); return; }
+    if (s.expires_at && s.expires_at - 60 < Math.floor(Date.now() / 1000)) {
+      refreshSession(s, function (ok) {
+        if (!ok) { currentUser = null; renderAuth(); return; }
+        fetchUser(function (u) { currentUser = u; renderAuth(); });
+      });
+      return;
+    }
+    fetchUser(function (u) {
+      currentUser = u;
+      renderAuth();
+    });
+  }
+
   function init() {
+    try { localStorage.removeItem(LEGACY_TOKEN_KEY); } catch (e) { /* ignore */ }
     injStyle();
     ensureHeaderEntry();
+    consumeUrlSession();
     renderAuth();
     wireHeader();
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
