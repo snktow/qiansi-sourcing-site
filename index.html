@@ -1191,10 +1191,11 @@
       note: fieldVal('message')
     };
 
-    // E-mail alert leg (fire-and-forget): FormSubmit is activated, so a new inquiry
-    // also lands in notify@... inbox. Never blocks the Supabase write or the UI.
+    // E-mail alert leg: FormSubmit is activated, so a new inquiry also lands in the
+    // notify@... inbox. Its result is only used as a fallback if the DB write fails.
+    var mailed = Promise.resolve(false);
     try {
-      fetch('https://formsubmit.co/ajax/notify@xn--yhq58j.com', {
+      mailed = fetch('https://formsubmit.co/ajax/notify@xn--yhq58j.com', {
         method: 'POST',
         keepalive: true,
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -1211,7 +1212,9 @@
           Language: payload.language,
           Page: location.href
         })
-      }).catch(function(){});
+      }).then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(j){ return !!(j && String(j.success) === 'true'); })
+        .catch(function(){ return false; });
     } catch (e) {}
 
     // Primary submit path: write straight to Supabase (anon key + RLS insert-only policy).
@@ -1240,11 +1243,16 @@
       if (id) {
         done(true, '✓ Thank you, ' + nameVal.split(' ')[0] + '! Your inquiry has been registered. Reference ID: QS-' + id + '. We will reply to ' + whatsappVal + ' shortly.');
       } else {
-        done(false, 'Sorry, we could not register your inquiry right now. Please try again in a moment or email us at notify@xn--yhq58j.com.');
+        throw new Error('empty id');
       }
     })
     .catch(function(){
-      done(false, 'Sorry, we could not register your inquiry right now. Please try again in a moment or email us at notify@xn--yhq58j.com.');
+      // DB leg failed (e.g. the RPC has not been created yet). If the e-mail copy
+      // went through, the inquiry is not lost, so do not turn the buyer away.
+      mailed.then(function(ok){
+        if (ok) done(true, '✓ Thank you, ' + nameVal.split(' ')[0] + '! Your inquiry has been received. We will reply to ' + whatsappVal + ' shortly.');
+        else done(false, 'Sorry, we could not register your inquiry right now. Please try again in a moment or email us at notify@xn--yhq58j.com.');
+      });
     });
 
     // Keep existing notification channels (double-write) so backend chains stay intact:

@@ -845,7 +845,7 @@
         message: message,
         language: (document.documentElement && document.documentElement.lang) || 'en'
       }).then(function (row) {
-        if (!row || !row.id) throw new Error('no id');
+        if (!row) throw new Error('no result');
         show(t.ok, true); form.reset();
       }).catch(function () { show(t.err, false); });
     });
@@ -893,10 +893,10 @@
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
 
   // Fire-and-forget e-mail alert. Never blocks or breaks the submit path:
-  // whatever happens here, the Supabase leg still decides the UI result.
+  // Resolves true only when FormSubmit accepted the mail (success === "true").
   function notifyByEmail(data) {
     try {
-      fetch(MAIL_URL, {
+      return fetch(MAIL_URL, {
         method: 'POST',
         keepalive: true,
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -913,12 +913,14 @@
           Language: data.language || 'en',
           Page: (typeof location !== 'undefined' ? location.href : '')
         })
-      }).catch(function () {});
-    } catch (e) {}
+      }).then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { return !!(j && String(j.success) === 'true'); })
+        .catch(function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
   }
 
   function postInquiry(data) {
-    notifyByEmail(data);
+    var mailed = notifyByEmail(data);
     return fetch(SB_URL, {
       method: 'POST',
       headers: {
@@ -939,7 +941,17 @@
     }).then(function (r) {
       if (!r.ok) throw new Error('status ' + r.status);
       return r.json();
-    }).then(function (id) { return id ? { id: id } : null; });
+    }).then(function (id) {
+      if (!id) throw new Error('empty id');
+      return { id: id, via: 'db' };
+    }).catch(function (err) {
+      // Database leg failed (e.g. RPC not created yet). The inquiry is still
+      // safely in the inbox, so do not turn the buyer away.
+      return mailed.then(function (ok) {
+        if (ok) return { id: null, via: 'email' };
+        throw err;
+      });
+    });
   }
 
   // Intercept native POSTs to formsubmit.co (per-country inquiry forms).
@@ -972,8 +984,12 @@
         message: val('message'),
         language: (document.documentElement && document.documentElement.lang) || 'en'
       }).then(function (row) {
-        if (!row || !row.id) { showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false); return; }
-        showMsg('✓ Thank you! Your inquiry has been registered. Reference ID: QS-' + row.id + '. We will reply to ' + contact + ' shortly.', true);
+        if (!row) { showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false); return; }
+        if (row.id) {
+          showMsg('✓ Thank you! Your inquiry has been registered. Reference ID: QS-' + row.id + '. We will reply to ' + contact + ' shortly.', true);
+        } else {
+          showMsg('✓ Thank you! Your inquiry has been received. We will reply to ' + contact + ' shortly.', true);
+        }
         form.reset();
       }).catch(function () {
         showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false);
