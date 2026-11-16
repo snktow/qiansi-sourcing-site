@@ -1195,23 +1195,27 @@
     // notify@... inbox. Its result is only used as a fallback if the DB write fails.
     var mailed = Promise.resolve(false);
     try {
+      // Body fields arrive empty on this channel, so the subject carries the data.
+      var mailSubject = '[询盘] ' + [payload.destination, nameVal, whatsappVal, payload.product, payload.quantity].filter(Boolean).join(' | ');
+      if (mailSubject.length > 140) mailSubject = mailSubject.slice(0, 137) + '...';
+      var mailBody = new URLSearchParams();
+      mailBody.set('_subject', mailSubject);
+      mailBody.set('_template', 'basic');
+      mailBody.set('Name', nameVal);
+      mailBody.set('Contact', whatsappVal);
+      mailBody.set('Country', payload.destination);
+      mailBody.set('Product', payload.product);
+      mailBody.set('Quantity', payload.quantity);
+      mailBody.set('Budget', payload.budget);
+      mailBody.set('Message', payload.note);
+      mailBody.set('Language', payload.language);
+      mailBody.set('Page', location.href);
+      if (whatsappVal.indexOf('@') > 0) mailBody.set('_replyto', whatsappVal);
       mailed = fetch('https://formsubmit.co/ajax/notify@xn--yhq58j.com', {
         method: 'POST',
         keepalive: true,
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: '[新询盘] ' + (payload.destination || '-') + ' / ' + (nameVal || '-'),
-          _template: 'table',
-          Name: nameVal,
-          Contact: whatsappVal,
-          Country: payload.destination,
-          Product: payload.product,
-          Quantity: payload.quantity,
-          Budget: payload.budget,
-          Message: payload.note,
-          Language: payload.language,
-          Page: location.href
-        })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+        body: mailBody.toString()
       }).then(function(r){ return r.ok ? r.json() : null; })
         .then(function(j){ return !!(j && String(j.success) === 'true'); })
         .catch(function(){ return false; });

@@ -893,26 +893,40 @@
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
 
   // Fire-and-forget e-mail alert. Never blocks or breaks the submit path:
+  // Email bodies from this channel arrive empty (only the subject and the
+  // timestamp survive), so the subject carries everything needed to reply.
+  function subjectFor(data) {
+    var parts = [];
+    if (data.country) parts.push(data.country);
+    if (data.name) parts.push(data.name);
+    if (data.contact) parts.push(data.contact);
+    if (data.product) parts.push(data.product);
+    if (data.quantity) parts.push(data.quantity);
+    var s = '[询盘] ' + parts.join(' | ');
+    return s.length > 140 ? s.slice(0, 137) + '...' : s;
+  }
+
   // Resolves true only when FormSubmit accepted the mail (success === "true").
   function notifyByEmail(data) {
     try {
+      var body = new URLSearchParams();
+      body.set('_subject', subjectFor(data));
+      body.set('_template', 'basic');
+      body.set('Name', data.name || '');
+      body.set('Contact', data.contact || '');
+      body.set('Country', data.country || '');
+      body.set('Product', data.product || '');
+      body.set('Quantity', data.quantity || '');
+      body.set('Budget', data.budget || '');
+      body.set('Message', data.message || '');
+      body.set('Language', data.language || 'en');
+      body.set('Page', (typeof location !== 'undefined' ? location.href : ''));
+      if (data.contact && data.contact.indexOf('@') > 0) body.set('_replyto', data.contact);
       return fetch(MAIL_URL, {
         method: 'POST',
         keepalive: true,
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: '[新询盘] ' + (data.country || '-') + ' / ' + (data.name || '-'),
-          _template: 'table',
-          Name: data.name || '',
-          Contact: data.contact || '',
-          Country: data.country || '',
-          Product: data.product || '',
-          Quantity: data.quantity || '',
-          Budget: data.budget || '',
-          Message: data.message || '',
-          Language: data.language || 'en',
-          Page: (typeof location !== 'undefined' ? location.href : '')
-        })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+        body: body.toString()
       }).then(function (r) { return r.ok ? r.json() : null; })
         .then(function (j) { return !!(j && String(j.success) === 'true'); })
         .catch(function () { return false; });
