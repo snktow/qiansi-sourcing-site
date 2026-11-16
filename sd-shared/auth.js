@@ -2,7 +2,7 @@
  *
  * Replaces the old username/password + security-question loop (which pointed at
  * /api/auth/* and always 404'd on GitHub Pages). Now talks straight to Supabase:
- *   POST {SUPABASE_URL}/auth/v1/otp                     { email, create_user } -> send 6-digit code
+ *   POST {SUPABASE_URL}/auth/v1/otp                     { email, create_user } -> send verification code
  *   POST {SUPABASE_URL}/auth/v1/verify                  { type:'email', email, token } -> session
  *   POST {SUPABASE_URL}/auth/v1/token?grant_type=refresh_token                    -> session
  *   GET  {SUPABASE_URL}/auth/v1/user                    (Bearer access_token) -> user
@@ -36,15 +36,15 @@
       emailLabel: 'Email address',
       sendCode: 'Send code',
       codeTitle: 'Enter your code',
-      codeLabel: '6-digit code',
-      codeSent: 'We sent a 6-digit code to {email}. It may take a minute — please check the spam folder too.',
+      codeLabel: 'Verification code',
+      codeSent: 'We sent a verification code to {email}. It may take a minute — please check the spam folder too.',
       verify: 'Verify and sign in',
       resend: 'Resend code',
       resendIn: 'Resend in {s}s',
       changeEmail: 'Use another email',
       logout: 'Log out',
       close: 'Close',
-      note: 'No password needed. We email you a 6-digit code, and the first sign-in creates your account.',
+      note: 'No password needed. We email you a verification code, and the first sign-in creates your account.',
       errEmail: 'Please enter a valid email address.',
       errCode: 'That code is invalid or has expired. Please try again or resend.',
       errNetwork: 'Network error. Please check your connection and try again.',
@@ -57,7 +57,7 @@
       emailLabel: '邮箱地址',
       sendCode: '发送验证码',
       codeTitle: '输入验证码',
-      codeLabel: '6 位验证码',
+      codeLabel: '验证码',
       codeSent: '验证码已发送到 {email}。可能需要一分钟，请同时检查垃圾邮件文件夹。',
       verify: '验证并登录',
       resend: '重新发送',
@@ -65,7 +65,7 @@
       changeEmail: '换个邮箱',
       logout: '退出',
       close: '关闭',
-      note: '无需密码。我们会发送 6 位验证码到你的邮箱，首次登录即自动创建账号。',
+      note: '无需密码。我们会发送验证码到你的邮箱，首次登录即自动创建账号。',
       errEmail: '请输入有效的邮箱地址。',
       errCode: '验证码无效或已过期，请重试或重新发送。',
       errNetwork: '网络错误，请检查连接后重试。',
@@ -78,15 +78,15 @@
       emailLabel: 'E-mail',
       sendCode: 'Enviar código',
       codeTitle: 'Digite seu código',
-      codeLabel: 'Código de 6 dígitos',
-      codeSent: 'Enviamos um código de 6 dígitos para {email}. Pode levar um minuto — verifique também a pasta de spam.',
+      codeLabel: 'Código de verificação',
+      codeSent: 'Enviamos um código de verificação para {email}. Pode levar um minuto — verifique também a pasta de spam.',
       verify: 'Verificar e entrar',
       resend: 'Reenviar código',
       resendIn: 'Reenviar em {s}s',
       changeEmail: 'Usar outro e-mail',
       logout: 'Sair',
       close: 'Fechar',
-      note: 'Sem senha. Enviamos um código de 6 dígitos por e-mail e o primeiro acesso cria sua conta.',
+      note: 'Sem senha. Enviamos um código de verificação por e-mail e o primeiro acesso cria sua conta.',
       errEmail: 'Digite um e-mail válido.',
       errCode: 'Código inválido ou expirado. Tente novamente ou reenvie.',
       errNetwork: 'Erro de rede. Verifique sua conexão e tente novamente.',
@@ -307,7 +307,7 @@
           '<p class="qamodal-forgot-note" data-qa-sent></p>' +
           '<form data-qa-form="code" novalidate>' +
             '<div class="qamodal-field"><label for="qa-code">' + esc(t.codeLabel) + '</label>' +
-              '<input id="qa-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" required></div>' +
+              '<input id="qa-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="10" pattern="[0-9]*" required></div>' +
             '<p class="qamodal-err" data-qa-err hidden></p>' +
             '<button type="submit" class="qamodal-submit">' + esc(t.verify) + '</button>' +
           '</form>' +
@@ -443,7 +443,7 @@
     var code = input ? input.value.replace(/\D/g, '') : '';
     var btn = form.querySelector('button[type="submit"]');
     clearErr();
-    if (code.length !== 6) { showErr(t.errCode); return; }
+    if (!/^\d{6,10}$/.test(code)) { showErr(t.errCode); return; }
     if (btn) btn.disabled = true;
     verifyOtp(pendingEmail, code, function (err) {
       if (btn) btn.disabled = false;
