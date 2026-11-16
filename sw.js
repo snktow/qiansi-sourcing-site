@@ -1,8 +1,10 @@
-/* Qiansi Sourcing PWA service worker — qiansi-v5 (2026-11-16)
+/* Qiansi Sourcing PWA service worker — qiansi-v6 (2026-11-17)
+ * v6：询盘提交改走 Supabase RPC，并追加 FormSubmit 邮件提醒（sd-shared/landing-modules.js）。
+ * 必须换缓存版本，否则老用户仍跑 v5 缓存的旧提交逻辑。
  * v5：auth.js 改为 Supabase 邮箱验证码登录，必须换缓存版本，否则老用户跑旧登录逻辑。
  * 语言修复：预缓存全部语言首页；网络优先 + 5s 超时竞速；离线兜底按路径语言回退，
  * 不再把 /ar/ 等非 pt/zh 路径统一回退到英文首页；不拦截外域表单 POST。 */
-const CACHE = "qiansi-v5";
+const CACHE = "qiansi-v6";
 const ASSETS = [
   "/",
   "/index.html",

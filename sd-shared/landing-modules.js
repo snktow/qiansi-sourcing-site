@@ -882,14 +882,43 @@
   };
 
   /* ------------------------------------------------------------------ *
-   * Inquiry submit: write straight to Supabase.
-   * FormSubmit was never activated (activation mail lost in mail routing),
-   * and the old worker endpoint greet.../inquiries answers 401.
+   * Inquiry submit, two independent legs:
+   *   1) Supabase  -> durable record (source of truth, never lost)
+   *   2) FormSubmit -> e-mail alert to notify@ (form is activated; do not
+   *      rely on it for storage, it only serves as the "phone rings" leg)
+   * The old worker endpoint greet.../inquiries answers 401, unused.
    * ------------------------------------------------------------------ */
+  var MAIL_URL = 'https://formsubmit.co/ajax/notify@xn--yhq58j.com';
   var SB_URL = 'https://zrpovyybwkarwizcicwz.supabase.co/rest/v1/rpc/submit_inquiry';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
 
+  // Fire-and-forget e-mail alert. Never blocks or breaks the submit path:
+  // whatever happens here, the Supabase leg still decides the UI result.
+  function notifyByEmail(data) {
+    try {
+      fetch(MAIL_URL, {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '[新询盘] ' + (data.country || '-') + ' / ' + (data.name || '-'),
+          _template: 'table',
+          Name: data.name || '',
+          Contact: data.contact || '',
+          Country: data.country || '',
+          Product: data.product || '',
+          Quantity: data.quantity || '',
+          Budget: data.budget || '',
+          Message: data.message || '',
+          Language: data.language || 'en',
+          Page: (typeof location !== 'undefined' ? location.href : '')
+        })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
   function postInquiry(data) {
+    notifyByEmail(data);
     return fetch(SB_URL, {
       method: 'POST',
       headers: {
