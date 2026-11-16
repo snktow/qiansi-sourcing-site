@@ -1,7 +1,8 @@
-/* Qiansi Sourcing PWA service worker — qiansi-v4 (2026-10-11)
+/* Qiansi Sourcing PWA service worker — qiansi-v5 (2026-11-16)
+ * v5：auth.js 改为 Supabase 邮箱验证码登录，必须换缓存版本，否则老用户跑旧登录逻辑。
  * 语言修复：预缓存全部语言首页；网络优先 + 5s 超时竞速；离线兜底按路径语言回退，
  * 不再把 /ar/ 等非 pt/zh 路径统一回退到英文首页；不拦截外域表单 POST。 */
-const CACHE = "qiansi-v4";
+const CACHE = "qiansi-v5";
 const ASSETS = [
   "/",
   "/index.html",
