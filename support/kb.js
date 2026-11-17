@@ -111,10 +111,10 @@ window.QIANSI_KB = {
           id: "led-strips",
           q: { en: "What LED strips do you offer?", pt: "Quais fitas de LED vocês oferecem?", ar: "ما هي شرائط LED التي تقدمونها؟", zh: "你们有哪些 LED 灯带？" },
           a: {
-            en: "LED strips (220V COB outdoor waterproof, silicone linear, 5V RGB WS2812B): factory price band ¥1.88–11.88/pc, MOQ from 50 rolls, lead time 5–25 days. In Brazil the local market reference is about R$19.90–50 (roughly 2.5×–6× the factory price) — shown for reference only; we do not promise any resale margin. Re-quote before ordering.",
-            pt: "Fitas de LED (COB 220V à prova d'água para exteriores, linear de silicone, RGB 5V WS2812B): faixa de preço de fábrica ¥1,88–11,88/un., MOQ a partir de 50 rolos, prazo de 5–25 dias. No Brasil a referência de mercado local é cerca de R$19,90–50 (aproximadamente 2,5×–6× o preço de fábrica) — apenas para referência; não prometemos nenhuma margem de revenda. Reorçar antes de pedir.",
-            ar: "شرائط LED (COB 220 فولت مقاومة للماء للخارج، سيليكون خطي، RGB 5V WS2812B): نطاق سعر المصنع 1.88–11.88 يوان/قطعة، الحد الأدنى للطلب من 50 لفة، مدة التسليم 5–25 يومًا. في البرازيل المرجع لسعر السوق المحلي حوالي 19.90–50 ريالًا (نحو 2.5–6 أضعاف سعر المصنع) — للإشارة فقط؛ لا نَعِد بأي هامش إعادة بيع. يُعيد عرض السعر قبل الطلب.",
-            zh: "LED 灯带（220V COB 户外防水、防水硅胶线性、5V RGB WS2812B）：拿货价带 ¥1.88–11.88/件，MOQ 50 卷起，交付周期 5–25 天。巴西当地市场参考价约 R$19.90–50（约为拿货价 2.5×–6×），仅作参考，不承诺转售利润。下单前需重新询价。"
+            en: "LED strips (220V COB outdoor waterproof, silicone linear, 5V RGB WS2812B): factory price band ¥1.88–11.88/pc, MOQ from 50 rolls, lead time 5–25 days. Factory prices move, so every written quote is re-checked before ordering.",
+            pt: "Fitas de LED (COB 220V à prova d'água para exteriores, linear de silicone, RGB 5V WS2812B): faixa de preço de fábrica ¥1,88–11,88/un., MOQ a partir de 50 rolos, prazo de 5–25 dias. Os preços de fábrica variam, então cada orçamento é reconferido antes do pedido.",
+            ar: "شرائط LED (COB 220 فولت مقاومة للماء للخارج، سيليكون خطي، RGB 5V WS2812B): نطاق سعر المصنع 1.88–11.88 يوان/قطعة، الحد الأدنى للطلب من 50 لفة، مدة التسليم 5–25 يومًا. أسعار المصنع متغيرة، لذا يُعاد التحقق من كل عرض سعر قبل الطلب.",
+            zh: "LED 灯带（220V COB 户外防水、防水硅胶线性、5V RGB WS2812B）：拿货价带 ¥1.88–11.88/件，MOQ 50 卷起，交付周期 5–25 天。出厂价会变动，每次书面报价在下单前都会重新核实。"
           },
           keywords: ["led", "light", "strip", "rgb", "cob", "灯带", "LED", "fita", "luz", "شريط", "إضاءة"]
         }
@@ -156,34 +156,34 @@ window.QIANSI_KB = {
           id: "markets-served",
           q: { en: "Which markets do you serve?", pt: "Quais mercados vocês atendem?", ar: "ما هي الأسواق التي تخدمونها؟", zh: "你们服务哪些市场？" },
           a: {
-            en: "We serve importers and wholesalers worldwide (Belt & Road / multi-country). Brazil and Malaysia are our first served markets — each has a dedicated import guide — and we also work with US eBay sellers. Our focus is non-standard / compliance / high-complexity B2B orders.",
-            pt: "Atendemos importadores e atacadistas do mundo todo (Cinturão e Rota / multi-país). Brasil e Malásia são nossos primeiros mercados — cada um com guia de importação dedicado — e também trabalhamos com vendedores do eBay nos EUA. Nosso foco são pedidos B2B não padronizados / de conformidade / alta complexidade.",
-            ar: "نخدم المستوردين وتجار الجملة حول العالم (الحزام والطريق / متعدد البلدان). البرازيل وماليزيا هما أول سوقين نخدمهما — ولكل منهما دليل استيراد مخصص — ونعمل أيضًا مع بائعي eBay في الولايات المتحدة. تركيزنا على الطلبات B2B غير القياسية / المتوافقة / عالية التعقيد.",
-            zh: "我们服务全球进口商和批发商（一带一路/多国）。巴西、马来西亚为首个服务市场，各有专属进口指南；也承接美国 eBay 卖家。业务重点是“非标/合规/高复杂度”的 B2B 订单。"
+            en: "We work with importers and wholesalers worldwide, mostly along the Belt & Road. Our focus is non-standard, compliance-heavy and high-complexity B2B orders. We publish country import guides (including Brazil and Malaysia) covering duties, taxes and logistics, and each project is assessed case by case before we commit.",
+            pt: "Trabalhamos com importadores e atacadistas do mundo todo, principalmente ao longo do Cinturão e Rota. Nosso foco são pedidos B2B não padronizados, com exigências de conformidade e alta complexidade. Publicamos guias de importação por país (incluindo Brasil e Malásia) com impostos, taxas e logística, e cada projeto é avaliado caso a caso antes de assumirmos.",
+            ar: "نعمل مع المستوردين وتجار الجملة حول العالم، وغالباً على طول الحزام والطريق. تركيزنا على طلبات B2B غير القياسية والتي تتطلب التزاماً وأعمالاً معقدة. ننشر أدلة استيراد لكل بلد (ومنها البرازيل وماليزيا) تشمل الرسوم والضرائب والخدمات اللوجستية، ويُقيَّم كل مشروع على حدة قبل التعهد.",
+            zh: "我们服务全球进口商与批发商，主要沿一带一路。业务重点是“非标/合规/高复杂度”的 B2B 订单。我们整理了部分国家的进口指南（含巴西、马来西亚），内容为关税、税费与物流；每个项目先按实际情况评估，确认可行后再承诺承接。"
           },
-          keywords: ["market", "countries", "brazil", "malaysia", "worldwide", "市场", "巴西", "马来", "全球", "mercado", "países", "أسواق", "بلدان"]
+          keywords: ["market", "countries", "worldwide", "市场", "全球", "mercado", "países", "أسواق", "بلدان"]
         },
         {
           id: "brazil-market",
           q: { en: "Do you support Brazil? What's the market like?", pt: "Vocês atendem o Brasil? Como é o mercado?", ar: "هل تخدمون البرازيل؟ وكيف هو السوق؟", zh: "你们支持巴西吗？市场情况如何？" },
           a: {
-            en: "Yes — Brazil is a core market we serve (Mercado Livre, Shopee BR). As local market reference, info-only: yoga tapa bumbum skirt sets list around R$76.55 (kit of 4, 5,000+ sold) with white-label bands around R$19.90–23.99, and LED strips around R$19.90–50 (about 2.5×–6× the factory price). These are reference prices, not a promise of resale margin. Small parcels can use the Remessa Conforme framework.",
-            pt: "Sim — o Brasil é um mercado central que atendemos (Mercado Livre, Shopee BR). Como referência local e apenas informativa: kits de saia yoga tapa bumbum ficam em torno de R$76,55 (kit de 4, mais de 5.000 vendidos), com faixas white-label em torno de R$19,90–23,99, e fitas de LED em torno de R$19,90–50 (cerca de 2,5×–6× o preço de fábrica). São preços de referência, não uma promessa de margem de revenda. Encomendas pequenas podem usar o regime Remessa Conforme.",
-            ar: "نعم — البرازيل سوق رئيسي نخدمه (Mercado Livre وShopee BR). كمرجع للسوق المحلي وللإعلام فقط: تُباع أطقم التنورة اليوغية tapa bumbum بنحو 76.55 ريالًا (طقم من 4، أكثر من 5000 مبيع)، مع فئات white-label نحو 19.90–23.99 ريالًا، وشرائط LED نحو 19.90–50 ريالًا (حوالي 2.5–6 أضعاف سعر المصنع). وهي أسعار مرجعية وليست وعدًا بهامش إعادة بيع. يمكن أن تستخدم الطرود الصغيرة إطار Remessa Conforme.",
-            zh: "是的——巴西是我们服务的核心市场（Mercado Livre、Shopee BR）。作为当地市场参考、仅供了解：瑜伽遮臀裙套装（4 件套，已售 5000+）约 R$76.55，白牌走量带约 R$19.90–23.99，LED 灯带约 R$19.90–50（约为拿货价 2.5×–6×）——仅作参考，不承诺转售利润。小包可走 Remessa Conforme 计划。"
+            en: "We don't claim Brazil as an already-served market; projects are assessed case by case. What matters for an order: consumer goods face duty plus state-level ICMS, and small parcels may use the Remessa Conforme framework. HS/NCM codes and the exact tax are verified per shipment — we never quote them from memory. Send your product and quantity and we will tell you whether the route is viable before committing.",
+            pt: "Não afirmamos que o Brasil seja um mercado já atendido; cada projeto é avaliado caso a caso. O que importa para um pedido: bens de consumo pagam imposto de importação mais ICMS estadual, e encomendas pequenas podem usar o regime Remessa Conforme. Códigos HS/NCM e o imposto exato são verificados por embarque — nunca cotados de memória. Envie produto e quantidade e diremos se a rota é viável antes de assumir.",
+            ar: "لا نقدّم البرازيل كسوق مخدومة بالفعل؛ ويُقيَّم كل مشروع على حدة. ما يهم في الطلب: تخضع السلع الاستهلاكية للرسوم إضافة إلى ضريبة ICMS الولائية، وقد تستفيد الطرود الصغيرة من إطار Remessa Conforme. يتم التحقق من رموز HS/NCM والضريبة الفعلية لكل شحنة — ولا نقدّرها من الذاكرة. أرسل المنتج والكمية وسنوضح جدوى المسار قبل التعهد.",
+            zh: "我们不把巴西表述为“已服务市场”，项目按单评估。订单相关的要点：消费品进口涉及关税与州级 ICMS，小包可能适用 Remessa Conforme 计划；HS/NCM 税号与具体税额按每票核查，我们不凭记忆报价。把产品与数量发来，我们先判断这条线路是否可行，再谈承接。"
           },
-          keywords: ["brazil", "brasil", "mercado livre", "shopee br", "巴西", "mercado", "البرازيل"]
+          keywords: ["brazil", "brasil", "巴西", "البرازيل"]
         },
         {
           id: "malaysia-market",
           q: { en: "Do you support Malaysia?", pt: "Vocês atendem a Malásia?", ar: "هل تخدمون ماليزيا؟", zh: "你们支持马来西亚吗？" },
           a: {
-            en: "Yes — Malaysia is a core market (Shopee MY, English/Malay). Imports involve duty + SST (Sales & Service Tax) per JKDM. We have a dedicated import-to-Malaysia guide, and we also handle non-standard / compliance / bulk orders for this market.",
-            pt: "Sim — a Malásia é um mercado central (Shopee MY, inglês/malaio). As importações envolvem imposto + SST (imposto sobre vendas e serviços) conforme a JKDM. Temos um guia dedicado de importação para a Malásia e também atendemos pedidos não padronizados / de conformidade / granéis para este mercado.",
-            ar: "نعم — ماليزيا سوق رئيسي نخدمه (Shopee MY، الإنجليزية/الملايو). تشمل الواردات الرسوم + ضريبة المبيعات والخدمات (SST) وفقًا لـ JKDM. لدينا دليل استيراد مخصص إلى ماليزيا، كما نتولى الطلبات غير القياسية / المتوافقة / الكبيرة لهذا السوق.",
-            zh: "是的——马来西亚是核心市场（Shopee MY，英语/马来语）。进口涉及关税 + SST（销售与服务税），以 JKDM 为准。我们有专门的进口马来西亚指南，也承接该市场的非标/合规/大宗订单。"
+            en: "We don't present Malaysia as an already-served market; each project is assessed case by case. For orders to Malaysia, imports involve duty plus SST (Sales & Service Tax) under JKDM rules, and the exact rate is verified per product and per shipment. We keep an import-to-Malaysia guide for reference; send product and quantity and we assess viability first.",
+            pt: "Não apresentamos a Malásia como mercado já atendido; cada projeto é avaliado caso a caso. Para pedidos à Malásia, as importações envolvem imposto mais SST (imposto sobre vendas e serviços) conforme as regras da JKDM, e a alíquota exata é verificada por produto e por embarque. Temos um guia de importação para a Malásia como referência; envie produto e quantidade e avaliamos a viabilidade primeiro.",
+            ar: "لا نقدّم ماليزيا كسوق مخدومة بالفعل؛ ويُقيَّم كل مشروع على حدة. للطلبات إلى ماليزيا، تشمل الواردات الرسوم إضافة إلى ضريبة المبيعات والخدمات (SST) وفق قواعد JKDM، ويُتحقق من النسبة الفعلية لكل منتج وكل شحنة. لدينا دليل استيراد إلى ماليزيا للمراجعة؛ أرسل المنتج والكمية لنقيّم الجدوى أولاً.",
+            zh: "我们不把马来西亚表述为“已服务市场”，项目按单评估。发往马来西亚的订单：进口涉及关税 + SST（销售与服务税），以 JKDM 为准，具体税率按品类、按每票核实。我们有进口马来西亚指南可供参考；请发产品与数量，我们先评估可行性。"
           },
-          keywords: ["malaysia", "shopee my", "马来", "马来西亚", "malásia", "ماليزيا"]
+          keywords: ["malaysia", "马来", "马来西亚", "malásia", "ماليزيا"]
         }
       ]
     },
