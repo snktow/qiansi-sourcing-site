@@ -1,4 +1,4 @@
-{
+﻿{
   "schema_version": "1.0",
   "protocol": "qiansi-knowledge-supply",
   "generated": "2026-08-22",
@@ -17,8 +17,8 @@
     ],
     "contact": {
       "email": "notify@xn--yhq58j.com",
-      "inquiry_endpoint": "https://greet.xn--yhq58j.com/inquiries",
-      "inquiry_legacy_endpoint": "https://formsubmit.co/notify@xn--yhq58j.com",
+      "inquiry_endpoint": "https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry (Supabase RPC, anon-ready)",
+            "inquiry_formsubmit_endpoint": "https://formsubmit.co/notify@xn--yhq58j.com",
       "inquiry_json_receipt_endpoint": "https://formsubmit.co/ajax/notify@xn--yhq58j.com",
       "response_time": "Within 24 hours",
       "working_hours": "Mon-Sat 9:00-18:00 GMT+8"
