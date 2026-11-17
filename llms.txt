@@ -87,10 +87,11 @@ This website is built to serve AI agents as well as human visitors. Everything i
 
 ### 智能体入口（当前真实可用）
 
-> **重要：本站暂不提供公开的机器可调写入 API。** 此前文档中描述的 `/inquiries`、`/wall`、`/upload`、`/media` 等端点**均未上线**，请勿调用；旧域名 `greet.xn--yhq58j.com` 上的接口同样不可用。
+> **写入能力只有一项：提交询盘。** 走 Supabase RPC `submit_inquiry` 写库 + FormSubmit 邮件抄送双写，详见下文「智能体询盘协议 v2」。`/wall`、`/upload`、`/media`、`/inquiries` 等端点**均未上线**，请勿调用；旧域名 `greet.xn--yhq58j.com` 上的接口同样不可用。
 
-**当前真实的询盘入口（人可提交，智能体可代为填写）：**
-- https://xn--yhq58j.com/#inquiry
+**当前真实的询盘入口：**
+- 网页表单（人可填写）: https://xn--yhq58j.com/#inquiry
+- 机器可调（写库 + 邮件双写）: 见下文「智能体询盘协议 v2」
 
 **只读、可直接 GET 的资源：**
 - 机器可读知识包: https://xn--yhq58j.com/agents/knowledge.json
@@ -247,115 +248,89 @@ This website is built to serve AI agents as well as human visitors. Everything i
 
 - **可以拿样品吗？（Samples?）** 可以。发送询盘后，我们会在 24 小时内回复价格、样品与运输方案（见产品目录页）。样品细节在报价中一并说明。
 - **起订量是多少？（MOQ?）** 起订量灵活，可从小批量试单开始，销量起来后再逐步放量。产品目录页标注了示例起订量：宠物用品 MOQ 100–200 件、车载手机支架 MOQ 100–500 件、LED 灯带 MOQ 50–100 卷。具体品类与目标市场的 MOQ 以报价为准。
-- **服务费怎么收？（Service fee?）** 我们按单提供完整报价，包含货款 + 服务费 + 运费 + 税费（见首页"How it works / 合作流程"）。首单不满意，服务费可退。
+- **服务费怎么收？（Service fee?）** 我们按单提供完整报价，包含货款 + 服务费 + 运费 + 税费（见首页"How it works / 合作流程"）。验货不符或发货延误超出约定时间，服务费可退。
 - **多长时间回复？（Response time?）** 人工客服在 24 小时内回复询盘（工作时间周一至周六 9:00–18:00 GMT+8），按提交者的语言偏好使用中文/英文/葡萄牙语回复报价、可选项与物流方案。
 
 ## About
 Qiansi Sourcing (Kunming Zhoubiao Trading Co., Ltd.) is a China sourcing platform serving importers and wholesalers worldwide with factory-direct supply from verified Chinese factories. Services: factory wholesale prices, pre-dispatch order check with supplier photo/video confirmation, small parcel & dedicated-line logistics via partner carriers. Contact via the inquiry form on any of the three language pages, or email notify@千丝.com. Chinese, English and Portuguese supported.
 
-## Agent 询盘协议 v1（Agent Inquiry Protocol v1）/ 智能体可操作方式（原 Agent Actions 段）
+## 智能体询盘协议 v2（Agent Inquiry Protocol v2）
 
-AI agents (or any client) can send a sourcing inquiry or place a listing programmatically. No CAPTCHA, no JavaScript required — a plain HTTP POST works. A human on our team reads every submission and replies with prices/shipping options and a quote.
+AI agents (or any client) can submit a sourcing inquiry programmatically — no CAPTCHA, no JavaScript. An inquiry requires **two calls**: write to the database first, then send the email copy. This file does **not** offer any listing / posting API: the supply & demand wall is not live.
 
-### 方式一：POST 询盘端点（推荐，协议 v1）
+### 方式一（必须）：写入数据库 — Supabase RPC
 
-Endpoint: `https://formsubmit.co/notify@xn--yhq58j.com`（表单提交）
-JSON 结构化回执端点: `https://formsubmit.co/ajax/notify@xn--yhq58j.com`
-Method: `POST`
+- Endpoint: `https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry`
+- Method: `POST`，`Content-Type: application/json`
+- Headers: `apikey: <anon key>` 与 `Authorization: Bearer <anon key>`（填同一个值）
+- anon key（发布级公开密钥，只能调用本函数写入，不能读取任何数据）:
+  `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI`
 
-Content-Type:
-- form-urlencoded: `application/x-www-form-urlencoded`（默认，推荐）
-- JSON: `application/json`（仅用于 /ajax/ 端点，返回结构化 JSON 回执）
+Body（全部为字符串）：
 
-#### 蜜罐字段（必须留空，填了会被当机器人丢弃）
-- `_captcha` = `false`  （禁用验证码，必须携带）
-- `company` = （留空！蜜罐字段）
-- `_honey` = （留空！FormSubmit 官方蜜罐，任何值都会导致提交被静默丢弃）
-- `_blacklist` = （可选，内容固定，用于过滤垃圾词）
-
-#### 询盘字段（Agent 询盘 / lead-form · demand-form）
-| 字段 | 必填 | 说明 |
+| 字段 | 必填 | 含义 |
 |---|---|---|
-| product | 是 | 想买什么 / what you want to buy |
-| quantity | 是 | 数量 / quantity |
-| destination | 是 | 目的港或国家 / destination |
-| budget | 否 | 目标预算 / target budget |
-| contact | 是 | 联系方式（WhatsApp / email） |
-| language | 否 | 回复语言偏好（en / zh / pt / vi / th / id） |
-| private | 否 | = `yes` 私密匹配（不公开） |
-| compliance | 否 | = `yes` 确认符合中国出口管制及目的国进口法规 |
+| `p_name` | 是* | 联系人姓名 |
+| `p_contact` | 是* | WhatsApp 或邮箱 |
+| `p_country` | 否 | 目的国 |
+| `p_product` | 否 | 品类 / 产品 |
+| `p_quantity` | 否 | 数量 |
+| `p_budget` | 否 | 目标预算 |
+| `p_message` | 否 | 补充说明 |
+| `p_language` | 否 | en / zh / pt / ar 等 |
 
-（兼容字段：`name`、`whatsapp`、`message` 仍可用于首页 lead-form。）
+*`p_name` 与 `p_contact` 至少填一个，否则返回 400。
 
-#### curl 示例（form-urlencoded）
+成功返回自增编号（bigint），例如 `12`；对客户展示为 `QS-12`。
+
 ```
-curl -X POST https://formsubmit.co/notify@xn--yhq58j.com \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "_captcha=false" \
-  -d "_honey=" \
-  -d "company=" \
-  -d "product=LED strip lights" \
-  -d "quantity=200 rolls" \
-  -d "destination=Jakarta, Indonesia" \
-  -d "budget=USD 1,500" \
-  -d "contact=agent@example.com" \
-  -d "language=en" \
-  -d "private=yes" \
-  -d "compliance=yes"
+curl -X POST https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry \
+  -H "apikey: <anon key>" \
+  -H "Authorization: Bearer <anon key>" \
+  -H "Content-Type: application/json" \
+  -d '{"p_name":"Agent","p_contact":"agent@example.com","p_country":"Indonesia","p_product":"LED strip lights","p_quantity":"200 rolls","p_budget":"USD 1500","p_message":"3000K, 100m/roll","p_language":"en"}'
 ```
 
-#### curl 示例（JSON /ajax/，结构化回执）
+### 方式二（推荐，与方式一并行）：邮件抄送
+
+只发邮件不会入库，因此**必须**先完成方式一。
+
+- Endpoint: `https://formsubmit.co/ajax/notify@xn--yhq58j.com`
+- Content-Type: `application/x-www-form-urlencoded`（推荐）或 `application/json`
+- 蜜罐字段必须留空：`company`、`_honey`；另需 `_captcha=false`
+- 字段：`product`、`quantity`、`destination`、`budget`、`contact`、`language`、`message`
+- 返回 `{"success": true}` 表示邮件已入队
+
 ```
 curl -X POST https://formsubmit.co/ajax/notify@xn--yhq58j.com \
-  -H "Content-Type: application/json" \
-  -d '{
-    "product": "LED strip lights",
-    "quantity": "200 rolls",
-    "destination": "Jakarta, Indonesia",
-    "budget": "USD 1,500",
-    "contact": "agent@example.com",
-    "language": "en",
-    "private": "yes",
-    "compliance": "yes"
-  }'
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "_captcha=false" -d "_honey=" -d "company=" \
+  -d "product=LED strip lights" -d "quantity=200 rolls" \
+  -d "destination=Jakarta, Indonesia" -d "budget=USD 1,500" \
+  -d "contact=agent@example.com" -d "language=en"
 ```
-回执格式（/ajax/ 端点返回 JSON）: `{"success": true, "message": "..."}`；`success=false` 时 `message` 为失败原因。收到 `success: true` 即表示提交已入队，人工客服随后回复。
 
-> ⚠️ 本协议仅作文档化参考；请不要向线上端点发送测试 POST（会触发真实邮件到 notify@千丝.com）。
+### 字段对应
 
-Supply listing form (`supply-form`, 供应商发布):
-- `product` (required) — 产品名
-- `category` — Pet Supplies / Car Phone Mounts / LED Strip Lights / Other
-- `stocktype` — in stock / made to order / Presale / Futures
-- `moq` (required) — 最小起订量
-- `delivery` — 交期
-- `channel` — Small parcel / Dedicated line / Sea freight / Air freight / Any
-- `market` — 目标市场
-- `contact` (required) — 联系方式
-- `private` = `yes` — 可选，私密
-- `compliance` = `yes` — 合规确认
+| RPC | 邮件字段 | 含义 |
+|---|---|---|
+| `p_product` | `product` | 产品 |
+| `p_quantity` | `quantity` | 数量 |
+| `p_country` | `destination` | 目的国 |
+| `p_budget` | `budget` | 预算 |
+| `p_contact` | `contact` | 联系方式 |
+| `p_message` | `message` | 说明 |
+| `p_language` | `language` | 语言 |
 
-### 方式二：发邮件
+### 不要做的事
 
-Email: `notify@千丝.com`
-Subject 建议格式：`[询盘/Inquiry] {商品或类别} × {数量} → {目的国}`，例如 `[Inquiry] Stainless steel cat bowls × 1000 → Brazil`。
-正文请包含：商品/类别、数量、目的国、目标价（可选）、语言偏好、您的联系方式。
-
-### 智能体提交时应提供的字段（checklist）
-
-1. 商品或类别（product/category）
-2. 数量（quantity/MOQ）
-3. 目的国或目的港（destination）
-4. 语言偏好（中文 / English / Português）
-5. 联系方式（WhatsApp 或邮箱）
-6. （可选）目标预算、交期、物流方式偏好
+- 不要调用 `/wall`、`/upload`、`/media`、`/inquiries`：均未上线。
+- 不要向线上端点发送测试数据：会真实写库并触发邮件。
 
 ### 预期响应
 
-- 人工客服在工作时间（周一至周六 9:00–18:00 GMT+8）处理每一条询盘
-- 通过邮件回复：报价、可选项、物流方案
-- 语言：按提交者的语言偏好使用中文/英文/葡萄牙语回复
-
+- 工作时段（周一至周六 9:00–18:00 GMT+8）人工处理，首次回复 ≤24 小时。
+- 语言按 `p_language`；人工回复以中 / 英 / 葡为主。
 
 ## 供需信息墙（未上线）
 
