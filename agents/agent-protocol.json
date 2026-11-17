@@ -31,11 +31,12 @@
     "service_fee": {
       "charged_to": "buyer only",
       "tiers": {
-        "below_1k": "15% or flat ¥150, whichever is higher",
+        "below_1k": "flat ¥200",
         "1k_to_10k": "10%",
         "above_10k": "8%"
       },
-      "note": "Sellers pay nothing. The first-order service fee is refundable if you are not satisfied with the service."
+      "cap": "¥5,000 per order",
+      "note": "Sellers pay nothing. The service fee is refundable if inspection fails or shipment is delayed beyond the agreed date."
     },
     "markets": {
       "serves": "Worldwide importers and wholesalers, no market restriction",

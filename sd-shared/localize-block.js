@@ -61,7 +61,7 @@
         {
           type: 'currency-compliance',
           title: 'Moeda e conformidade',
-          body: 'Os preços do catálogo são cotados em yuan chinês (¥) e re-cotados no momento do pedido. O custo final em real (BRL) combina: mercadoria (preço direto de fábrica) + taxa de serviço + frete + impostos e taxas de importação, variando conforme o câmbio e a alíquota do código NCM. A taxa de serviço é cobrada somente do comprador, em três faixas: abaixo de ¥1K, 15% ou ¥150 fixos (o que for maior); de ¥1K a ¥10K, 10%; acima de ¥10K, 8%. Verificamos a identidade real do importador antes de prestar o serviço.'
+          body: 'Os preços do catálogo são cotados em yuan chinês (¥) e re-cotados no momento do pedido. O custo final em real (BRL) combina: mercadoria (preço direto de fábrica) + taxa de serviço + frete + impostos e taxas de importação, variando conforme o câmbio e a alíquota do código NCM. A taxa de serviço é cobrada somente do comprador, em três faixas: abaixo de ¥1K, ¥200 fixos; de ¥1K a ¥10K, 10%; acima de ¥10K, 8%, com teto de ¥5.000 por pedido. Verificamos a identidade real do importador antes de prestar o serviço.'
         },
         {
           type: 'local-faq',
