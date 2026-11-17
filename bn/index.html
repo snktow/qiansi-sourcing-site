@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
@@ -551,63 +551,72 @@
 
 <script>
 (function(){
+  // Lead capture: Supabase RPC (source of truth) + FormSubmit (email alert, free).
   var form = document.getElementById('lead-form');
   var msg  = document.getElementById('form-msg');
+  if (!form || !msg) return;
+
+  var SB_URL = 'https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
+  var MAIL_URL = 'https://formsubmit.co/ajax/notify@xn--yhq58j.com';
+
   function show(txt, ok){
     msg.textContent = txt;
     msg.className = ok ? 'ok' : 'err';
     msg.style.display = 'block';
   }
-  if(!form) return;
+
+  var L = (function(){
+    var lang = ((document.documentElement && document.documentElement.lang) || 'en').toLowerCase();
+    var t = {
+      en: { needName: 'Please fill in your name and a contact (WhatsApp or email).', submitting: 'Submitting your inquiry…', ok: '✓ Thank you, {name}! Your inquiry has been registered. Reference ID: QS-{id}. We will reply to {contact} shortly.', okMail: '✓ Thank you, {name}! Your inquiry has been received. We will reply to {contact} shortly.', err: 'Sorry, we could not register your inquiry right now. Please try again or email notify@xn--yhq58j.com.' },
+      zh: { needName: '请填写姓名和联系方式（WhatsApp 或邮箱）。', submitting: '正在提交您的询盘…', ok: '✓ 谢谢，{name}！您的询盘已登记。参考编号：QS-{id}。我们将尽快通过 {contact} 联系您。', okMail: '✓ 谢谢，{name}！我们已收到您的询盘，将尽快回复。', err: '抱歉，暂时无法登记您的询盘。请稍后重试，或邮件联系 notify@xn--yhq58j.com。' },
+      pt: { needName: 'Por favor, preencha seu nome e contato (WhatsApp ou e-mail).', submitting: 'Enviando sua consulta…', ok: '✓ Obrigado, {name}! ID: QS-{id}. Responderemos para {contact} em breve.', okMail: '✓ Obrigado, {name}! Recebemos sua consulta.', err: 'Desculpe, tente novamente ou email notify@xn--yhq58j.com.' },
+      ru: { needName: 'Укажите имя и контакт (WhatsApp или email).', submitting: 'Отправка…', ok: '✓ Спасибо, {name}! Номер: QS-{id}. Мы свяжемся через {contact}.', okMail: '✓ Спасибо, {name}! Мы получили ваш запрос.', err: 'Извините, попробуйте позже или notify@xn--yhq58j.com.' },
+      ar: { needName: 'يرجى ملء اسمك وطريقة الاتصال.', submitting: 'جارٍ الإرسال…', ok: '✓ شكراً، {name}! رقم: QS-{id}. سنرد عبر {contact}.', okMail: '✓ شكراً، {name}! لقد استلمنا استفسارك.', err: 'عذراً، حاول مرة أخرى أو notify@xn--yhq58j.com.' }
+    };
+    if (lang.indexOf('zh') === 0) return t.zh;
+    if (lang.indexOf('pt') === 0) return t.pt;
+    if (lang.indexOf('ru') === 0) return t.ru;
+    if (lang.indexOf('ar') === 0) return t.ar;
+    return t.en;
+  })();
+
   form.addEventListener('submit', function(e){
-    if (form.elements['company'].value !== '') { show(form.dataset.okDone || 'Thank you!', true); form.reset(); e.preventDefault(); return; }
-    var nameVal     = form.elements['name'].value.trim();
+    if (form.elements['company'].value !== '') { show('Thank you!', true); form.reset(); e.preventDefault(); return; }
+    var nameVal = form.elements['name'].value.trim();
     var whatsappVal = form.elements['whatsapp'].value.trim();
-    if (!nameVal || !whatsappVal) {
-      e.preventDefault(); show(form.dataset.okReq || 'Please fill in your name and a contact.', false); return;
-    }
+    if (!nameVal || !whatsappVal) { e.preventDefault(); show(L.needName, false); return; }
     e.preventDefault();
     var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
-
-    show("আপনার জিজ্ঞাসা পাঠানো হচ্ছে…", true);
-
-    // Primary path: register on the state-machine worker so the buyer gets an inquiry_id + tracking link.
-    // FormSubmit + geo beacon kept as fallback (double-write). Fields absent in this variant are omitted.
-    var fv = function(n){ var el = form.elements[n]; return (el && el.value) ? el.value.trim() : ''; };
-    var payload = {
-      product: fv('category') || 'General sourcing inquiry',
-      language: "bn",
-      company: nameVal,
-      contact: nameVal + ' / ' + whatsappVal,
-      note: fv('message')
-    };
-
-    fetch('https://greet.xn--yhq58j.com/inquiries', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
-    })
-    .then(function(res){ return res.json().catch(function(){ return {}; }); })
-    .then(function(data){
-      if (data && data.inquiry_id) {
-        var link = data.get_url || ('https://greet.xn--yhq58j.com/inquiries/' + data.inquiry_id);
-        done(true, (form.dataset.okDone || 'Thank you!') + ' ' + "রেফারেন্স আইডি" + ': ' + data.inquiry_id + '. ' + "এই আইডিটি রাখুন আপনার অনুরোধের অবস্থা জানতে; শীঘ্রই একটি কোটেশন পাবেন।" + ' — ' + link);
-      } else {
-        done(false, form.dataset.okErr || "দুঃখিত, এই মুহূর্তে আপনার জিজ্ঞাসা নিবন্ধন করা যায়নি। অনুগ্রহ করে কিছুক্ষণ পরে আবার চেষ্টা করুন বা notify@xn--yhq58j.com এ ইমেল করুন।");
-      }
-    })
-    .catch(function(){
-      done(false, form.dataset.okErr || "দুঃখিত, এই মুহূর্তে আপনার জিজ্ঞাসা নিবন্ধন করা যায়নি। অনুগ্রহ করে কিছুক্ষণ পরে আবার চেষ্টা করুন বা notify@xn--yhq58j.com এ ইমেল করুন।");
-    });
-
+    show(L.submitting, true);
+    var fieldVal = function(n){ var el = form.elements[n]; return el ? (el.value||'').trim() : ''; };
+    var pLang = ((document.documentElement && document.documentElement.lang) || 'en').split('-')[0].toLowerCase();
+    var mailed = Promise.resolve(false);
+    try {
+      var mailSubject = '[询盘] ' + [fieldVal('target_country'), nameVal, whatsappVal, fieldVal('category') || 'General sourcing inquiry', fieldVal('quantity')].filter(Boolean).join(' | ');
+      if (mailSubject.length > 140) mailSubject = mailSubject.slice(0, 137) + '...';
+      var mailBody = new URLSearchParams();
+      mailBody.set('_subject', mailSubject);
+      mailBody.set('_template', 'basic');
+      mailBody.set('Name', nameVal);
+      mailBody.set('Contact', whatsappVal);
+      mailBody.set('Country', fieldVal('target_country'));
+      mailBody.set('Product', fieldVal('category') || 'General sourcing inquiry');
+      mailBody.set('Quantity', fieldVal('quantity'));
+      mailBody.set('Budget', fieldVal('budget'));
+      mailBody.set('Message', fieldVal('message'));
+      mailBody.set('Language', pLang);
+      mailBody.set('Page', location.href);
+      if (whatsappVal.indexOf('@') > 0) mailBody.set('_replyto', whatsappVal);
+      mailed = fetch(MAIL_URL, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' }, body: mailBody.toString() }).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){ return !!(j && String(j.success) === 'true'); }).catch(function(){ return false; });
+    } catch (e) {}
+    fetch(SB_URL, { method: 'POST', headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, body: JSON.stringify({ p_name: nameVal, p_contact: whatsappVal, p_country: fieldVal('target_country'), p_product: fieldVal('category') || 'General sourcing inquiry', p_quantity: fieldVal('quantity'), p_budget: fieldVal('budget'), p_message: fieldVal('message'), p_language: pLang }) }).then(function(res){ return res.json().catch(function(){ return null; }); }).then(function(id){
+      if (id) { done(true, L.ok.replace(/\{name\}/g, nameVal.split(' ')[0]).replace(/\{id\}/g, id).replace(/\{contact\}/g, whatsappVal)); } else { throw new Error('empty id'); }
+    }).catch(function(){ mailed.then(function(ok){ if (ok) done(true, L.okMail.replace(/\{name\}/g, nameVal.split(' ')[0]).replace(/\{contact\}/g, whatsappVal)); else done(false, L.err); }); });
     fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){});
-    fetch(form.action, { method: 'POST', headers: {'Accept': 'application/json'}, body: new FormData(form) }).catch(function(){});
-});
-})();
-(function(){
-  // Qiansi self-check traffic ping (additive, privacy-friendly, fire-and-forget).
-  // One visit per page load, tagged by page path; country via CF-IPCountry.
-  fetch('https://geo.xn--yhq58j.com/api/hit?page=' + encodeURIComponent(location.pathname || '/'), {method:'GET', mode:'cors'}).catch(function(){});
+    fetch(form.action, { method: 'POST', headers: {'Accept':'application/json'}, body: new FormData(form) }).catch(function(){});
+  });
 })();
 </script>
 </body>
