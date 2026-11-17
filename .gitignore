@@ -1,0 +1,11 @@
+# 未上线内容，禁止发布
+next/
+preview/
+drafts/
+
+# 本地临时与备份
+*.bak
+*.bak-*
+*.tmp
+Thumbs.db
+.DS_Store
