@@ -889,7 +889,7 @@
    * The old worker endpoint greet.../inquiries answers 401, unused.
    * ------------------------------------------------------------------ */
   var MAIL_URL = 'https://formsubmit.co/ajax/notify@xn--yhq58j.com';
-  var SB_URL = 'https://zrpovyybwkarwizcicwz.supabase.co/rest/v1/rpc/submit_inquiry';
+  var SB_URL = 'https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
 
   // Fire-and-forget e-mail alert. Never blocks or breaks the submit path:

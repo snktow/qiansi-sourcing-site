@@ -23,7 +23,7 @@
 (function () {
   'use strict';
 
-  var SUPABASE_URL = 'https://zrpovyybwkarwizcicwz.supabase.co';
+  var SUPABASE_URL = 'https://supabase.xn--yhq58j.com';
   var SUPABASE_KEY = 'sb_publishable_xyPncXK1nC-UAaKaIuVyug_NuqDbXvS';
 
   var SESS_KEY = 'qiansi_session_v1';

@@ -1,4 +1,5 @@
-/* Qiansi Sourcing PWA service worker — qiansi-v8 (2026-11-17)
+/* Qiansi Sourcing PWA service worker — qiansi-v9 (2026-11-17)
+ * v9：Supabase 改用自定义域名 supabase.xn--yhq58j.com（Cloudflare Worker 反向代理，绕开 GFW 对 *.supabase.co 的 TLS 重置）。
  * v8：询盘邮件提醒改为「主题行承载全部关键信息 + 表单原生编码」，正文丢失也不影响跟进。
  * v7：询盘提交失败时以邮件通道兜底（不再把买家挡在 "Sorry" 前面）。
  * v6：询盘提交改走 Supabase RPC，并追加 FormSubmit 邮件提醒（sd-shared/landing-modules.js）。
@@ -6,7 +7,7 @@
  * v5：auth.js 改为 Supabase 邮箱验证码登录，必须换缓存版本，否则老用户跑旧登录逻辑。
  * 语言修复：预缓存全部语言首页；网络优先 + 5s 超时竞速；离线兜底按路径语言回退，
  * 不再把 /ar/ 等非 pt/zh 路径统一回退到英文首页；不拦截外域表单 POST。 */
-const CACHE = "qiansi-v8";
+const CACHE = "qiansi-v9";
 const ASSETS = [
   "/",
   "/index.html",
