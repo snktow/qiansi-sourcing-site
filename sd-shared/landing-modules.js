@@ -25,7 +25,7 @@
   var WALL_API_BASE =
     (typeof window !== 'undefined' && window.QIANSI_WALL_BASE) ? window.QIANSI_WALL_BASE :
     (typeof globalThis !== 'undefined' && globalThis.QIANSI_WALL_BASE) ? globalThis.QIANSI_WALL_BASE :
-    'https://qiansi-sd-wall.qiansi.workers.dev';
+    'https://gongxu.xn--yhq58j.com';
 
   /* ------------------------------------------------------------------ *
    * 5 broad categories mapped from the free-text wall `category` field.
@@ -615,22 +615,51 @@
       opts = opts || {};
       var q = { type: state.type, target: state.target, category: state.category, limit: 20 };
       if (state.cursor) q.cursor = state.cursor;
-      var url = WALL_API_BASE + '/wall?' + buildQuery(q);
-      fetch(url).then(function (r) {
+      var url = WALL_API_BASE + '/list?page=1&page_size=50';
+      fetch(url, { headers: { 'Accept': 'application/json' } }).then(function (r) {
+        if (!r.ok) throw new Error('http');
         return r.json();
       }).then(function (data) {
         if (!data || data.ok !== true) throw new Error('bad response');
-        var parsed = parseItems(data.items || [], U);
+        var raw = data.records || data.items || [];
+        if (!Array.isArray(raw)) raw = [];
+        var norm = [];
+        for (var i = 0; i < raw.length; i++) {
+          var it = raw[i] || {};
+          var ty = it.type;
+          if (ty === '供货' || ty === 'supply' || ty === 'seller') ty = 'seller';
+          else if (ty === '求货' || ty === 'demand' || ty === 'buyer') ty = 'buyer';
+          norm.push({
+            id: it.id,
+            name: it.category || it.name || '',
+            type: ty,
+            category: it.category || '',
+            desc: it.note || it.desc || '',
+            currency: '',
+            price: it.price || '',
+            MOQ: it.qty || it.MOQ || '',
+            delivery: it.urgency || it.delivery || '',
+            target: it.dest || it.target || '',
+            contact: it.contact || '',
+            origin: it.origin || ''
+          });
+        }
+        if (state.type && state.type !== 'all') {
+          norm = norm.filter(function (x) { return x.type === state.type; });
+        }
+        var parsed = parseItems(norm, U);
         if (append) state.items = state.items.concat(parsed);
         else state.items = parsed;
-        state.cursor = data.nextCursor || null;
-        state.nextCursor = data.nextCursor || null;
+        state.cursor = null;
+        state.nextCursor = null;
+        fmsg.textContent = '';
         render();
-      }).catch(function (e) {
-        fmsg.textContent = (U.lang === 'zh' ? '加载失败：' : 'Load failed: ') + e.message;
-        fmsg.className = 'qs-msg err';
-        empty.textContent = (U.lang === 'zh' ? '无法连接信息墙' : 'Cannot reach the wall');
-        empty.style.display = '';
+      }).catch(function () {
+        fmsg.textContent = (U.lang === 'zh'
+          ? '供需广场暂时无法加载，可直接把需求发给我们。'
+          : 'The board is temporarily unavailable. Send us your requirement directly.');
+        fmsg.className = 'qs-msg';
+        empty.textContent = (U.lang === 'zh' ? '暂无条目' : 'No listings yet');
         empty.style.display = '';
       });
     }
@@ -696,35 +725,12 @@
       if (!form.classList.contains('open')) fmsg.textContent = '';
     });
     btnSubmit.addEventListener('click', function () {
-      var body = {};
-      ['name', 'type', 'category', 'desc', 'price', 'currency', 'MOQ', 'delivery', 'target', 'contact']
-        .forEach(function (k) { body[k] = inputs[k].value.trim(); });
-      body.images = (inputs.images.value || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-      body.lang = U.lang;
-      btnSubmit.disabled = true; btnSubmit.textContent = U.publishing;
-      fetch(WALL_API_BASE + '/wall', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      }).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }); })
-        .then(function (res) {
-          btnSubmit.disabled = false; btnSubmit.textContent = U.submit;
-          if (res.d && res.d.ok) {
-            fmsg.textContent = U.lang === 'zh' ? '发布成功，已加入列表。' : 'Posted successfully.';
-            fmsg.className = 'qs-msg ok';
-            ['name', 'type', 'category', 'desc', 'price', 'MOQ', 'delivery', 'target', 'contact', 'images']
-              .forEach(function (k) { inputs[k].value = ''; });
-            fetchWall();
-          } else {
-            fmsg.textContent = (res.d && res.d.message) ? res.d.message : ('HTTP ' + res.s);
-            fmsg.className = 'qs-msg err';
-          }
-        })
-        .catch(function (e) {
-          btnSubmit.disabled = false; btnSubmit.textContent = U.submit;
-          fmsg.textContent = 'Error: ' + e.message;
-          fmsg.className = 'qs-msg err';
-        });
+      fmsg.className = 'qs-msg ok';
+      fmsg.textContent = U.lang === 'zh'
+        ? '正在打开供需广场，发布入口在页面右上角。'
+        : 'Opening the board — use the Post button at the top right.';
+      var target = WALL_API_BASE + '/';
+      try { window.open(target, '_blank', 'noopener'); } catch (e) { location.href = target; }
     });
     btnMore.addEventListener('click', function () { fetchWall(true, true); });
 
