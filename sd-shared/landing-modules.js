@@ -476,7 +476,9 @@
     var oAll = el('option', null, U.countryAll); oAll.setAttribute('value', '');
     selCountry.appendChild(oAll);
     COUNTRIES.forEach(function (c) {
-      var o = el('option', null, c.en + ' / ' + c.zh);
+      // Show only the label of the page's own language: an English page must
+      // never render "Vietnam / 越南".
+      var o = el('option', null, U.lang === 'zh' ? c.zh : c.en);
       o.setAttribute('value', c.slug);
       selCountry.appendChild(o);
     });
@@ -868,9 +870,12 @@
   function init() {
     if (typeof document === 'undefined' || typeof document.createElement !== 'function') return;
     var U = uiText();
-    buildModules(U);
+    // A guide/article page is an article: it must not end with a live
+    // marketplace board and a beta feedback box. Both modules mount only on
+    // pages that explicitly reserve a slot for them.
+    if (document.querySelector('[data-qiansi-board]')) buildModules(U);
+    if (document.querySelector('[data-qiansi-feedback-slot]')) buildFeedback(U);
     buildFloat(U, document.body);
-    buildFeedback(U);
   }
 
   var ROOT = (typeof window !== 'undefined') ? window : globalThis;
