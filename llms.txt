@@ -100,7 +100,7 @@ This website is built to serve AI agents as well as human visitors. Everything i
 - 能力目录: https://xn--yhq58j.com/agents/agent-capabilities.json
 - 公开只读契约: https://xn--yhq58j.com/openapi.json
 - 客服知识库（含服务模式、费用口径、常见问题）: https://xn--yhq58j.com/support/kb.js
-- 邮箱: notify@xn--yhq58j.com（服务工单收件箱，不是开放聊天入口）
+- 邮箱: notify@千丝.com（服务工单收件箱，不是开放聊天入口）
 
 > 计划中的撮合/信息墙 API 尚未上线。上线后会更新本文件与 `/openapi.json`；在此之前，任何声称可写入的端点都应视为不可用。
 

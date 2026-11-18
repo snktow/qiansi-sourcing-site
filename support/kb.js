@@ -8,7 +8,7 @@ window.QIANSI_KB = {
     zhBrand: "千丝采购",
     company: "Kunming Zhoubiao Trading Co., Ltd.",
     site: "https://xn--yhq58j.com/",
-    contact: "notify@xn--yhq58j.com",
+    contact: "notify@千丝.com",
     hours: "Monday–Saturday, 09:00–18:00 (GMT+8)",
     updated: "2026-09-03 (v0.2)",
     languages: ["en", "pt", "ar", "zh"]
@@ -33,10 +33,10 @@ window.QIANSI_KB = {
           id: "contact",
           q: { en: "How do I contact Qiansi?", pt: "Como entro em contato com a Qiansi?", ar: "كيف أتواصل مع Qiansi؟", zh: "怎么联系千丝？" },
           a: {
-            en: "Use the inquiry form on the site, email notify@xn--yhq58j.com (our unified entry point), or reach us on WhatsApp. Hours: Monday–Saturday, 09:00–18:00 (GMT+8). We answer inquiries within 24 hours.",
-            pt: "Use o formulário de contato no site, envie e-mail para notify@xn--yhq58j.com (nosso ponto de entrada unificado) ou fale conosco no WhatsApp. Horário: segunda a sábado, 09:00–18:00 (GMT+8). Respondemos em até 24 horas.",
-            ar: "استخدم نموذج الاستفسار في الموقع، أو أرسل بريدًا إلى notify@xn--yhq58j.com (نقطة الدخول الموحدة لدينا)، أو تواصل معنا عبر واتساب. ساعات العمل: الاثنين إلى السبت، 09:00–18:00 (بتوقيت غرينتش+8). نرد على الاستفسارات خلال 24 ساعة.",
-            zh: "使用网站询盘表单、发送邮件至 notify@xn--yhq58j.com（全站统一入口）或通过 WhatsApp 联系。工作时间：周一至周六 09:00–18:00（GMT+8）。我们会在 24 小时内回复询盘。"
+            en: "Use the inquiry form on the site, email notify@千丝.com (our unified entry point), or reach us on WhatsApp. Hours: Monday–Saturday, 09:00–18:00 (GMT+8). We answer inquiries within 24 hours.",
+            pt: "Use o formulário de contato no site, envie e-mail para notify@千丝.com (nosso ponto de entrada unificado) ou fale conosco no WhatsApp. Horário: segunda a sábado, 09:00–18:00 (GMT+8). Respondemos em até 24 horas.",
+            ar: "استخدم نموذج الاستفسار في الموقع، أو أرسل بريدًا إلى notify@千丝.com (نقطة الدخول الموحدة لدينا)، أو تواصل معنا عبر واتساب. ساعات العمل: الاثنين إلى السبت، 09:00–18:00 (بتوقيت غرينتش+8). نرد على الاستفسارات خلال 24 ساعة.",
+            zh: "使用网站询盘表单、发送邮件至 notify@千丝.com（全站统一入口）或通过 WhatsApp 联系。工作时间：周一至周六 09:00–18:00（GMT+8）。我们会在 24 小时内回复询盘。"
           },
           keywords: ["contact", "email", "whatsapp", "reach", "inquiry", "联系", "邮箱", "询盘", "contato", "تواصل", "بريد"]
         },

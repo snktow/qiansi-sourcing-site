@@ -305,7 +305,7 @@
       </div>
       <div>
         <h5>联系方式</h5>
-        <p>邮箱：<a href="mailto:notify@xn--yhq58j.com">notify@xn--yhq58j.com</a></p>
+        <p>邮箱：<a href="mailto:notify@xn--yhq58j.com">notify@千丝.com</a></p>
         <p>工作时间：周一至周六（GMT+8）9:00–18:00</p>
       </div>
       <div>
@@ -357,7 +357,7 @@
     }).then(function(d){
       done(true, '✓ 感谢您，' + payload.name + '！您的市场报告申请已收到，我们会在 24 小时内发送到您的联系方式。');
     }).catch(function(){
-      done(false, '抱歉，提交失败。请直接发邮件至 notify@xn--yhq58j.com');
+      done(false, '抱歉，提交失败。请直接发邮件至 notify@千丝.com');
     });
   });
 })();
@@ -398,7 +398,7 @@
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hs:v,lang:'zh'})})
       .then(function(r){return r.json();})
       .then(function(d){status.style.display='none'; render(d);})
-      .catch(function(){setStatus('网络错误。请稍后重试，或直接发邮件至 notify@xn--yhq58j.com。',false);});
+      .catch(function(){setStatus('网络错误。请稍后重试，或直接发邮件至 notify@千丝.com。',false);});
   }
   go.addEventListener('click',run);
   input.addEventListener('keydown',function(e){ if(e.key==='Enter'){e.preventDefault();run();} });

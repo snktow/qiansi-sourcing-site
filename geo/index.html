@@ -306,7 +306,7 @@
       </div>
       <div>
         <h5>Contact</h5>
-        <p>Email: <a href="mailto:notify@xn--yhq58j.com">notify@xn--yhq58j.com</a></p>
+        <p>Email: <a href="mailto:notify@xn--yhq58j.com">notify@千丝.com</a></p>
         <p>Working hours: Mon – Sat (GMT+8) · 9:00–18:00</p>
       </div>
       <div>
@@ -358,7 +358,7 @@
     }).then(function(d){
       done(true, '✓ Thank you, ' + payload.name.split(' ')[0] + '! Your market report request has been received. We will send it to your contact within 24 hours.');
     }).catch(function(){
-      done(false, 'Sorry, submission failed. Please email us directly at notify@xn--yhq58j.com');
+      done(false, 'Sorry, submission failed. Please email us directly at notify@千丝.com');
     });
   });
 })();
@@ -399,7 +399,7 @@
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hs:v,lang:'en'})})
       .then(function(r){return r.json();})
       .then(function(d){status.style.display='none'; render(d);})
-      .catch(function(){setStatus('Network error. Please try again, or email notify@xn--yhq58j.com.',false);});
+      .catch(function(){setStatus('Network error. Please try again, or email notify@千丝.com.',false);});
   }
   go.addEventListener('click',run);
   input.addEventListener('keydown',function(e){ if(e.key==='Enter'){e.preventDefault();run();} });

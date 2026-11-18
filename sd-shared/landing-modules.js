@@ -788,8 +788,8 @@
       msgPh: zh ? '请写下您的意见或建议…' : 'Share your thoughts or suggestions…',
       submit: zh ? '发送反馈' : 'Send Feedback',
       ok: zh ? '感谢您的反馈！我们会尽快处理。' : 'Thank you! Your feedback has been received.',
-      err: zh ? '抱歉，提交失败。请直接发送邮件至 notify@xn--yhq58j.com'
-        : 'Sorry, submission failed. Please email us at notify@xn--yhq58j.com',
+      err: zh ? '抱歉，提交失败。请直接发送邮件至 notify@千丝.com'
+        : 'Sorry, submission failed. Please email us at notify@千丝.com',
       req: zh ? '请填写昵称和留言内容' : 'Please fill in your name and message'
     };
 
@@ -1004,7 +1004,7 @@
         message: val('message'),
         language: (document.documentElement && document.documentElement.lang) || 'en'
       }).then(function (row) {
-        if (!row) { showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false); return; }
+        if (!row) { showMsg('Sorry, we could not register your inquiry right now. Please email notify@千丝.com.', false); return; }
         if (row.id) {
           showMsg('✓ Thank you! Your inquiry has been registered. Reference ID: QS-' + row.id + '. We will reply to ' + contact + ' shortly.', true);
         } else {
@@ -1012,7 +1012,7 @@
         }
         form.reset();
       }).catch(function () {
-        showMsg('Sorry, we could not register your inquiry right now. Please email notify@xn--yhq58j.com.', false);
+        showMsg('Sorry, we could not register your inquiry right now. Please email notify@千丝.com.', false);
       });
     }, true);
   }

@@ -4,7 +4,7 @@
     "title": "千丝 Qiansi Sourcing — 公开只读资源",
     "version": "2.0.0",
     "description": "本文件只声明当前真实可用、可直接 GET 的静态资源。\n\n【重要】本站暂未提供公开的机器可调写入 API。询盘通过网站表单提交：https://xn--yhq58j.com/#inquiry 。\n此前版本中列出的 /inquiries、/wall、/upload、/media 等端点均未上线，已从本文件移除；旧域名 greet.xn--yhq58j.com 上的接口同样不可用。\n\n【资金红线】本站仅做撮合与代采购履约，不代收货款、不经手资金、不收取定金。\n【合规红线】不得发布虚假、欺诈、侵权或违法内容。\n【数据口径】价格、费用与物流时效均带采集日期，实际以下单时的书面报价为准。",
-    "contact": { "email": "notify@xn--yhq58j.com", "name": "Qiansi Sourcing" },
+    "contact": { "email": "notify@千丝.com", "name": "Qiansi Sourcing" },
     "license": { "name": "Proprietary — 昆明周标贸易有限责任公司" }
   },
   "servers": [
