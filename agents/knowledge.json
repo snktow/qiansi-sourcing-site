@@ -18,8 +18,8 @@
     "contact": {
       "email": "zhoubiao@zhoubiaotrade.cn",
       "inquiry_endpoint": "https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry (Supabase RPC, anon-ready)",
-            "inquiry_formsubmit_endpoint": "https://formsubmit.co/zhoubiao@zhoubiaotrade.cn",
-      "inquiry_json_receipt_endpoint": "https://formsubmit.co/ajax/zhoubiao@zhoubiaotrade.cn",
+            "inquiry_formsubmit_endpoint": "https://formsubmit.co/notify@xn--yhq58j.com",
+      "inquiry_json_receipt_endpoint": "https://formsubmit.co/ajax/notify@xn--yhq58j.com",
       "response_time": "Within 24 hours",
       "working_hours": "Mon-Sat 9:00-18:00 GMT+8"
     }

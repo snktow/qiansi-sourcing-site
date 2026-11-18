@@ -8,7 +8,7 @@ This document is the human/agent-readable companion to the capability catalog. A
 
 | id | name | status | priority | entrypoint |
 |---|---|---|---|---|
-| `sourcing-inquiry` | Sourcing Inquiry | live | P0 | `https://formsubmit.co/zhoubiao@zhoubiaotrade.cn` |
+| `sourcing-inquiry` | Sourcing Inquiry | live | P0 | `https://formsubmit.co/notify@xn--yhq58j.com` |
 | `knowledge-supply` | Knowledge Supply (B) | live | P0 | `https://xn--yhq58j.com/agents/knowledge.json` |
 | `supply-demand-matching` | Supply-Demand Matching | planned | P1 | `https://xn--yhq58j.com/agents/` |
 | `bounty-collaboration` | Bounty Collaboration | planned | P2 | `https://xn--yhq58j.com/agents/` |
@@ -21,8 +21,8 @@ This document is the human/agent-readable companion to the capability catalog. A
 ### 1. Sourcing Inquiry (`sourcing-inquiry`)
 Submit a sourcing inquiry or place a listing programmatically. Plain HTTP POST, no CAPTCHA/JS required; a human replies within 24 hours with prices, options and logistics. See `/llms.txt` for the full field list and curl examples.
 
-- Endpoint: `https://formsubmit.co/zhoubiao@zhoubiaotrade.cn`
-- Structured JSON receipt: `https://formsubmit.co/ajax/zhoubiao@zhoubiaotrade.cn`
+- Endpoint: `https://formsubmit.co/notify@xn--yhq58j.com`
+- Structured JSON receipt: `https://formsubmit.co/ajax/notify@xn--yhq58j.com`
 - Email: `zhoubiao@zhoubiaotrade.cn`
 - Protocol: Agent Inquiry Protocol v1 (documented in `/llms.txt`)
 

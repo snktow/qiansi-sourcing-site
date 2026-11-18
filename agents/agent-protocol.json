@@ -11,8 +11,8 @@
     "authoritative_description": "https://xn--yhq58j.com/llms.txt",
     "agent_hub": "https://xn--yhq58j.com/agents/",
     "agent_protocol_doc": "https://xn--yhq58j.com/agents/protocol.md",
-    "inquiry_endpoint": "https://formsubmit.co/zhoubiao@zhoubiaotrade.cn",
-    "inquiry_json_receipt_endpoint": "https://formsubmit.co/ajax/zhoubiao@zhoubiaotrade.cn",
+    "inquiry_endpoint": "https://formsubmit.co/notify@xn--yhq58j.com",
+    "inquiry_json_receipt_endpoint": "https://formsubmit.co/ajax/notify@xn--yhq58j.com",
     "email": "zhoubiao@zhoubiaotrade.cn"
   },
   "knowledge": {
@@ -87,7 +87,7 @@
     },
     {
       "action": "post_inquiry",
-      "endpoint": "https://formsubmit.co/zhoubiao@zhoubiaotrade.cn",
+      "endpoint": "https://formsubmit.co/notify@xn--yhq58j.com",
       "required_fields": ["product", "quantity", "destination", "contact"],
       "honeypots": { "_captcha": "false", "_honey": "", "company": "" },
       "note": "Agent Inquiry Protocol v1. See llms.txt for the full field list and curl examples."

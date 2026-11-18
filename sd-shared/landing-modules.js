@@ -811,7 +811,7 @@
       '<h2>' + esc(t.title) + '</h2>' +
       '<p class="qsfb-sub">' + esc(t.sub) + '</p>' +
       '<p class="qsfb-disc">' + esc(t.disc) + '</p>' +
-      '<form class="qsfb-form" action="https://formsubmit.co/zhoubiao@zhoubiaotrade.cn" method="POST" novalidate>' +
+      '<form class="qsfb-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>' +
       '<input type="hidden" name="_captcha" value="false">' +
       '<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       '<input type="hidden" name="_subject" value="New Feedback from Qiansi Sourcing Website">' +
@@ -899,7 +899,7 @@
    *      rely on it for storage, it only serves as the "phone rings" leg)
    * The old worker endpoint greet.../inquiries answers 401, unused.
    * ------------------------------------------------------------------ */
-  var MAIL_URL = 'https://formsubmit.co/ajax/zhoubiao@zhoubiaotrade.cn';
+  var MAIL_URL = 'https://formsubmit.co/ajax/notify@xn--yhq58j.com';
   var SB_URL = 'https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
 
