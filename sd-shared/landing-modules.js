@@ -790,8 +790,8 @@
       msgPh: zh ? '请写下您的意见或建议…' : 'Share your thoughts or suggestions…',
       submit: zh ? '发送反馈' : 'Send Feedback',
       ok: zh ? '感谢您的反馈！我们会尽快处理。' : 'Thank you! Your feedback has been received.',
-      err: zh ? '抱歉，提交失败。请直接发送邮件至 notify@千丝.com'
-        : 'Sorry, submission failed. Please email us at notify@千丝.com',
+      err: zh ? '抱歉，提交失败。请直接发送邮件至 zhoubiao@zhoubiaotrade.cn'
+        : 'Sorry, submission failed. Please email us at zhoubiao@zhoubiaotrade.cn',
       req: zh ? '请填写昵称和留言内容' : 'Please fill in your name and message'
     };
 
@@ -811,7 +811,7 @@
       '<h2>' + esc(t.title) + '</h2>' +
       '<p class="qsfb-sub">' + esc(t.sub) + '</p>' +
       '<p class="qsfb-disc">' + esc(t.disc) + '</p>' +
-      '<form class="qsfb-form" action="https://formsubmit.co/notify@xn--yhq58j.com" method="POST" novalidate>' +
+      '<form class="qsfb-form" action="https://formsubmit.co/zhoubiao@zhoubiaotrade.cn" method="POST" novalidate>' +
       '<input type="hidden" name="_captcha" value="false">' +
       '<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       '<input type="hidden" name="_subject" value="New Feedback from Qiansi Sourcing Website">' +
@@ -899,7 +899,7 @@
    *      rely on it for storage, it only serves as the "phone rings" leg)
    * The old worker endpoint greet.../inquiries answers 401, unused.
    * ------------------------------------------------------------------ */
-  var MAIL_URL = 'https://formsubmit.co/ajax/notify@xn--yhq58j.com';
+  var MAIL_URL = 'https://formsubmit.co/ajax/zhoubiao@zhoubiaotrade.cn';
   var SB_URL = 'https://supabase.xn--yhq58j.com/rest/v1/rpc/submit_inquiry';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpycG92eXlid2thcndpemNpY3d6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MzE4MTUsImV4cCI6MjExMDQwNzgxNX0.3fqKo9DMMYOux62pMxGUmBbbaq3Kw-3CPzrTxRxy6bI';
 
@@ -1009,7 +1009,7 @@
         message: val('message'),
         language: (document.documentElement && document.documentElement.lang) || 'en'
       }).then(function (row) {
-        if (!row) { showMsg('Sorry, we could not register your inquiry right now. Please email notify@千丝.com.', false); return; }
+        if (!row) { showMsg('Sorry, we could not register your inquiry right now. Please email zhoubiao@zhoubiaotrade.cn.', false); return; }
         if (row.id) {
           showMsg('✓ Thank you! Your inquiry has been registered. Reference ID: QS-' + row.id + '. We will reply to ' + contact + ' shortly.', true);
         } else {
@@ -1017,7 +1017,7 @@
         }
         form.reset();
       }).catch(function () {
-        showMsg('Sorry, we could not register your inquiry right now. Please email notify@千丝.com.', false);
+        showMsg('Sorry, we could not register your inquiry right now. Please email zhoubiao@zhoubiaotrade.cn.', false);
       });
     }, true);
   }
