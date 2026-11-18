@@ -89,12 +89,12 @@ window.QIANSI_KB = {
           id: "pet-supplies",
           q: { en: "What pet supplies do you offer and at what price?", pt: "Quais produtos para pets vocês oferecem e a que preço?", ar: "ما هي مستلزمات الحيوانات الأليفة التي تقدمونها وبأي سعر؟", zh: "你们有哪些宠物用品，价格如何？" },
           a: {
-            en: "Pet supplies (2-in-1 auto feeder+waterer, stainless non-slip bowls): factory price band ¥0.14–10.2/pc, MOQ from 100–200 pcs, lead time 5–15 days. These are standard goods — a 2026-08-07 snapshot; re-quote before ordering. We do take such commodities when you ask explicitly, but our focus is non-standard / compliance orders.",
-            pt: "Produtos para pets (comedouro+bebedouro automático 2 em 1, tigelas de aço inox antiderrapantes): faixa de preço de fábrica ¥0,14–10,2/un., MOQ a partir de 100–200 un., prazo de 5–15 dias. São produtos padrão — um retrato de 2026-08-07; reorçar antes de pedir. Atendemos essas commodities quando você pede explicitamente, mas nosso foco são pedidos não padronizados / de conformidade.",
-            ar: "مستلزمات الحيوانات الأليفة (مغذية وسقاية أوتوماتيكية 2 في 1، أوعية من الفولاذ المقاوم للصدأ غير قابلة للانزلاق): نطاق سعر المصنع 0.14–10.2 يوان/قطعة، الحد الأدنى للطلب من 100–200 قطعة، مدة التسليم 5–15 يومًا. هذه سلع قياسية — لقطة بتاريخ 2026-08-07؛ أعد عرض السعر قبل الطلب. نخدم هذه السلع عندما تطلب ذلك صراحة، لكن تركيزنا على الطلبات غير القياسية / المتوافقة.",
-            zh: "宠物用品（二合一自动喂食器+饮水器、不锈钢防滑猫碗）：拿货价带 ¥0.14–10.2/件，MOQ 100–200 件起，交付周期 5–15 天。属标准品，为 2026-08-07 快照，下单前需重新询价。您明确要求时我们承接此类标准品，但业务重点是非标/合规订单。"
+            en: "Pet supplies (2-in-1 auto feeder + waterer): factory price band ¥0.14/pc, MOQ from 100 pcs, lead time 5–10 days. These are standard goods — a 2026-08-07 snapshot; re-quote before ordering. We do take such commodities when you ask explicitly, but our focus is non-standard / compliance orders.",
+            pt: "Produtos para pets (comedouro+bebedouro automático 2 em 1): faixa de preço de fábrica ¥0,14/un., MOQ a partir de 100 un., prazo de 5–10 dias. São produtos padrão — um retrato de 2026-08-07; reorçar antes de pedir. Atendemos essas commodities quando você pede explicitamente, mas nosso foco são pedidos não padronizados / de conformidade.",
+            ar: "مستلزمات الحيوانات الأليفة (مغذية وسقاية أوتوماتيكية 2 في 1): نطاق سعر المصنع 0.14 يوان/قطعة، الحد الأدنى للطلب من 100 قطعة، مدة التسليم 5–10 أيام. هذه سلع قياسية — لقطة بتاريخ 2026-08-07؛ أعد عرض السعر قبل الطلب. نخدم هذه السلع عندما تطلب ذلك صراحة، لكن تركيزنا على الطلبات غير القياسية / المتوافقة.",
+            zh: "宠物用品（二合一自动喂食器+饮水器）：拿货价 ¥0.14/件，MOQ 100 件起，交付周期 5–10 天。属标准品，为 2026-08-07 快照，下单前需重新询价。您明确要求时我们承接此类标准品，但业务重点是非标/合规订单。"
           },
-          keywords: ["pet", "cat", "dog", "feeder", "waterer", "bowl", "宠物", "猫", "狗", "喂食器", "饮水器", "pets", "gato", "cachorro", "حيوانات"]
+          keywords: ["pet", "cat", "dog", "feeder", "waterer", "宠物", "猫", "狗", "喂食器", "饮水器", "pets", "gato", "cachorro", "حيوانات"]
         },
         {
           id: "car-mounts",
