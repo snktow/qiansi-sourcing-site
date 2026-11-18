@@ -1193,8 +1193,8 @@
       note: fieldVal('message')
     };
 
-    // E-mail alert leg: FormSubmit is activated, so a new inquiry also lands in the
-    // notify@... inbox. Its result is only used as a fallback if the DB write fails.
+    // E-mail alert leg: a new inquiry also lands in the contact mailbox.
+    // Its result is only used as a fallback if the DB write fails.
     var mailed = Promise.resolve(false);
     try {
       // Body fields arrive empty on this channel, so the subject carries the data.

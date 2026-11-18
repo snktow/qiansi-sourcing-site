@@ -895,7 +895,7 @@
   /* ------------------------------------------------------------------ *
    * Inquiry submit, two independent legs:
    *   1) Supabase  -> durable record (source of truth, never lost)
-   *   2) FormSubmit -> e-mail alert to notify@ (form is activated; do not
+   *   2) FormSubmit -> e-mail alert to the contact mailbox (do not
    *      rely on it for storage, it only serves as the "phone rings" leg)
    * The old worker endpoint greet.../inquiries answers 401, unused.
    * ------------------------------------------------------------------ */
