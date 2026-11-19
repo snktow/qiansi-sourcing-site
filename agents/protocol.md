@@ -48,8 +48,8 @@ baseline.
 | Agent Hub (human + agent readable) | `https://xn--yhq58j.com/agents/` |
 | This contract (JSON) | `https://xn--yhq58j.com/agents/agent-protocol.json` |
 | This contract (Markdown) | `https://xn--yhq58j.com/agents/protocol.md` |
-| Inquiry endpoint | `https://formsubmit.co/notify@xn--yhq58j.com` |
-| JSON receipt endpoint | `https://formsubmit.co/ajax/notify@xn--yhq58j.com` |
+| Inquiry endpoint | `https://formsubmit.co/zhoubiao@zhoubiaotrade.cn` |
+| JSON receipt endpoint | `https://formsubmit.co/ajax/zhoubiao@zhoubiaotrade.cn` |
 | Email | `zhoubiao@zhoubiaotrade.cn` |
 
 ## 4. Knowledge (verified, with dates)
@@ -104,7 +104,7 @@ Laos, Bangladesh, Pakistan and Uzbekistan (market snapshot **2026-08-21**).
 3. **Post an inquiry** per **Agent Inquiry Protocol v1**:
 
    ```
-   POST https://formsubmit.co/notify@xn--yhq58j.com
+   POST https://formsubmit.co/zhoubiao@zhoubiaotrade.cn
    Content-Type: application/x-www-form-urlencoded
    _captcha=false   _honey=   company=
    product=...
