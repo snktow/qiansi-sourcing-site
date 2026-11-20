@@ -171,6 +171,8 @@
   .inquiry .sec-head p{color:#CFE0EB}
   form{max-width:640px;margin:0 auto;background:#fff;color:var(--text);border-radius:var(--radius);padding:32px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row.r3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:900px){.row.r3{grid-template-columns:1fr 1fr}}
   @media(max-width:640px){.row{grid-template-columns:1fr}}
   .field{margin-bottom:16px}
   label{display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px}
@@ -1025,16 +1027,20 @@
       <input type="hidden" name="_blacklist" value="bitcoin,invest,casino,viagra,贷款,彩票,点击,click here">
       <input type="hidden" name="_subject" value="New Inquiry from Qiansi Sourcing Website">
       <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="row">
-        <div class="field">
-          <label for="name">Your Name *</label>
-          <input type="text" id="name" name="name" required placeholder="e.g. João Silva">
-        </div>
-        <div class="field">
-          <label for="whatsapp">WhatsApp or Email *</label>
-          <input type="text" id="whatsapp" name="whatsapp" required placeholder="WhatsApp number or email — how we reach you">
-        </div>
-      </div>
+      <div class="row r3">
+<div class="field">
+<label for="name">Your Name *</label>
+<input type="text" id="name" name="name" required placeholder="e.g. João Silva">
+</div>
+<div class="field">
+<label for="email">Email</label>
+<input type="email" id="email" name="email" placeholder="name@company.com" autocomplete="email">
+</div>
+<div class="field">
+<label for="whatsapp">WhatsApp</label>
+<input type="tel" id="whatsapp" name="whatsapp" placeholder="+55 11 91234-5678" autocomplete="tel">
+</div>
+</div>
       <div class="row">
         <div class="field">
           <label for="category">Product Category</label>
@@ -1133,9 +1139,11 @@
 
     // Use form.elements to read controls, avoiding the name / HTMLFormElement.name conflict.
     var nameVal     = form.elements['name'].value.trim();
+    var emailVal = form.elements['email'] ? form.elements['email'].value.trim() : '';
     var whatsappVal = form.elements['whatsapp'].value.trim();
+    var contactVal = [emailVal, whatsappVal].filter(Boolean).join(' / ');
 
-    if (!nameVal || !whatsappVal) {
+    if (!nameVal || !contactVal) {
       e.preventDefault();
       show('Please fill in your name and a contact (WhatsApp or email).', false);
       return;
@@ -1171,7 +1179,9 @@
       mailBody.set('_subject', mailSubject);
       mailBody.set('_template', 'basic');
       mailBody.set('Name', nameVal);
-      mailBody.set('Contact', whatsappVal);
+      mailBody.set('Contact', contactVal);
+      mailBody.set('Email', emailVal);
+      mailBody.set('WhatsApp', whatsappVal);
       mailBody.set('Country', payload.destination);
       mailBody.set('Product', payload.product);
       mailBody.set('Quantity', payload.quantity);
@@ -1179,7 +1189,8 @@
       mailBody.set('Message', payload.note);
       mailBody.set('Language', payload.language);
       mailBody.set('Page', location.href);
-      if (whatsappVal.indexOf('@') > 0) mailBody.set('_replyto', whatsappVal);
+      var replyto = emailVal || (whatsappVal.indexOf('@') > 0 ? whatsappVal : '');
+      if (replyto) mailBody.set('_replyto', replyto);
       mailed = fetch('https://formsubmit.co/ajax/zhoubiao@zhoubiaotrade.cn', {
         method: 'POST',
         keepalive: true,
@@ -1202,7 +1213,7 @@
       },
       body: JSON.stringify({
         p_name: nameVal,
-        p_contact: whatsappVal,
+        p_contact: contactVal,
         p_country: payload.destination,
         p_product: payload.product,
         p_quantity: payload.quantity,

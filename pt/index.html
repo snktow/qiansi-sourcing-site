@@ -171,6 +171,8 @@
   .inquiry .sec-head p{color:#CFE0EB}
   form{max-width:640px;margin:0 auto;background:#fff;color:var(--text);border-radius:var(--radius);padding:32px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row.r3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:900px){.row.r3{grid-template-columns:1fr 1fr}}
   @media(max-width:640px){.row{grid-template-columns:1fr}}
   .field{margin-bottom:16px}
   label{display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px}
@@ -632,16 +634,20 @@
       <input type="hidden" name="_blacklist" value="bitcoin,invest,casino,viagra,贷款,彩票,点击,click here">
       <input type="hidden" name="_subject" value="Nova consulta do site Qiansi Sourcing">
       <input type="text" name="company" value="" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="row">
-        <div class="field">
-          <label for="name">Seu Nome *</label>
-          <input type="text" id="name" name="name" required placeholder="ex.: João Silva">
-        </div>
-        <div class="field">
-          <label for="whatsapp">WhatsApp ou E-mail *</label>
-          <input type="text" id="whatsapp" name="whatsapp" required placeholder="Número de WhatsApp ou e-mail — como entramos em contato">
-        </div>
-      </div>
+      <div class="row r3">
+<div class="field">
+<label for="name">Seu Nome *</label>
+<input type="text" id="name" name="name" required placeholder="ex.: João Silva">
+</div>
+<div class="field">
+<label for="email">Email</label>
+<input type="email" id="email" name="email" placeholder="name@company.com" autocomplete="email">
+</div>
+<div class="field">
+<label for="whatsapp">WhatsApp</label>
+<input type="tel" id="whatsapp" name="whatsapp" placeholder="+55 11 91234-5678" autocomplete="tel">
+</div>
+</div>
       <div class="row">
         <div class="field">
           <label for="category">Categoria de Produto</label>
@@ -753,8 +759,10 @@
   form.addEventListener('submit', function(e){
     if (form.elements['company'].value !== '') { show('Thank you!', true); form.reset(); e.preventDefault(); return; }
     var nameVal = form.elements['name'].value.trim();
+    var emailVal = form.elements['email'] ? form.elements['email'].value.trim() : '';
     var whatsappVal = form.elements['whatsapp'].value.trim();
-    if (!nameVal || !whatsappVal) { e.preventDefault(); show(L.needName, false); return; }
+    var contactVal = [emailVal, whatsappVal].filter(Boolean).join(' / ');
+    if (!nameVal || !contactVal) { e.preventDefault(); show(L.needName, false); return; }
     e.preventDefault();
     var done = function(ok, txt){ show(txt, ok); if(ok) form.reset(); };
     show(L.submitting, true);
@@ -762,13 +770,15 @@
     var pLang = ((document.documentElement && document.documentElement.lang) || 'en').split('-')[0].toLowerCase();
     var mailed = Promise.resolve(false);
     try {
-      var mailSubject = '[询盘] ' + [fieldVal('target_country'), nameVal, whatsappVal, fieldVal('category') || 'General sourcing inquiry', fieldVal('quantity')].filter(Boolean).join(' | ');
+      var mailSubject = '[询盘] ' + [fieldVal('target_country'), nameVal, contactVal, fieldVal('category') || 'General sourcing inquiry', fieldVal('quantity')].filter(Boolean).join(' | ');
       if (mailSubject.length > 140) mailSubject = mailSubject.slice(0, 137) + '...';
       var mailBody = new URLSearchParams();
       mailBody.set('_subject', mailSubject);
       mailBody.set('_template', 'basic');
       mailBody.set('Name', nameVal);
-      mailBody.set('Contact', whatsappVal);
+      mailBody.set('Contact', contactVal);
+      mailBody.set('Email', emailVal);
+      mailBody.set('WhatsApp', whatsappVal);
       mailBody.set('Country', fieldVal('target_country'));
       mailBody.set('Product', fieldVal('category') || 'General sourcing inquiry');
       mailBody.set('Quantity', fieldVal('quantity'));
@@ -776,12 +786,13 @@
       mailBody.set('Message', fieldVal('message'));
       mailBody.set('Language', pLang);
       mailBody.set('Page', location.href);
-      if (whatsappVal.indexOf('@') > 0) mailBody.set('_replyto', whatsappVal);
+      var replyto = emailVal || (whatsappVal.indexOf('@') > 0 ? whatsappVal : '');
+      if (replyto) mailBody.set('_replyto', replyto);
       mailed = fetch(MAIL_URL, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' }, body: mailBody.toString() }).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){ return !!(j && String(j.success) === 'true'); }).catch(function(){ return false; });
     } catch (e) {}
-    fetch(SB_URL, { method: 'POST', headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, body: JSON.stringify({ p_name: nameVal, p_contact: whatsappVal, p_country: fieldVal('target_country'), p_product: fieldVal('category') || 'General sourcing inquiry', p_quantity: fieldVal('quantity'), p_budget: fieldVal('budget'), p_message: fieldVal('message'), p_language: pLang }) }).then(function(res){ return res.json().catch(function(){ return null; }); }).then(function(id){
-      if (id) { done(true, L.ok.replace(/\{name\}/g, nameVal.split(' ')[0]).replace(/\{id\}/g, id).replace(/\{contact\}/g, whatsappVal)); } else { throw new Error('empty id'); }
-    }).catch(function(){ mailed.then(function(ok){ if (ok) done(true, L.okMail.replace(/\{name\}/g, nameVal.split(' ')[0]).replace(/\{contact\}/g, whatsappVal)); else done(false, L.err); }); });
+    fetch(SB_URL, { method: 'POST', headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, body: JSON.stringify({ p_name: nameVal, p_contact: contactVal, p_country: fieldVal('target_country'), p_product: fieldVal('category') || 'General sourcing inquiry', p_quantity: fieldVal('quantity'), p_budget: fieldVal('budget'), p_message: fieldVal('message'), p_language: pLang }) }).then(function(res){ return res.json().catch(function(){ return null; }); }).then(function(id){
+      if (id) { done(true, L.ok.replace(/\{name\}/g, nameVal.split(' ')[0]).replace(/\{id\}/g, id).replace(/\{contact\}/g, contactVal)); } else { throw new Error('empty id'); }
+    }).catch(function(){ mailed.then(function(ok){ if (ok) done(true, L.okMail.replace(/\{name\}/g, nameVal.split(' ')[0]).replace(/\{contact\}/g, contactVal)); else done(false, L.err); }); });
     fetch('https://geo.xn--yhq58j.com/api/inquiry', {method:'POST', mode:'cors'}).catch(function(){});
     fetch(form.action, { method: 'POST', headers: {'Accept':'application/json'}, body: new FormData(form) }).catch(function(){});
   });
