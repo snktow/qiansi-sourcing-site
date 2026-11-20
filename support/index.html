@@ -180,8 +180,6 @@
   var lang = localStorage.getItem('qiansi_kb_lang') || 'en';
   if (langs.indexOf(lang) < 0) lang = 'en';
 
-  var ENDPOINT_MAIL = 'mailto:' + KB.meta.contact;
-
   // Keyword matching lives in kb-match.js (shared with the self-test);
   // the window keeps only its UI helpers here.
   function isRTL(s){ return /[\u0600-\u06FF]/.test(s||''); }
@@ -249,7 +247,7 @@
       '<div class="a-body"'+dir+'>'+esc(itemA(item))+'</div>'+
       '<div class="a-meta"><span>'+(query?('Matched from “'+esc(query)+'”'):'')+'</span>'+
       '<button class="copy" data-copy="'+escAttr(itemA(item))+'">Copy</button>'+
-      '<span>Still need help? <a href="'+ENDPOINT_MAIL+'">Email a human</a> · '+(query?'':'')+'</span></div>';
+      '<span>Still need help? <a href="https://xn--yhq58j.com/#inquiry">Send an inquiry</a></span></div>';
     box.querySelector('.copy').onclick = function(){
       var t = this.getAttribute('data-copy');
       (navigator.clipboard&&navigator.clipboard.writeText) ? navigator.clipboard.writeText(t) : prompt('Copy:', t);
@@ -264,11 +262,12 @@
     var dir = isRTL(query)?' dir="rtl"':'';
     box.innerHTML =
       '<h3'+dir+'>We couldn’t match that to our knowledge base yet.</h3>'+
-      '<p'+dir+'>Our automated concierge knows answers about the company, service &amp; fees, products, logistics, markets and compliance — but it’s still learning. For the most accurate help, reach a human directly.</p>'+
+      '<p'+dir+'>Our automated concierge knows answers about the company, service &amp; fees, products, logistics, markets and compliance — but it’s still learning. For the most accurate help, send an inquiry through the form — it replies instantly with a reference number.</p>'+
       '<div class="actions">'+
-        '<a class="btn" href="'+ENDPOINT_MAIL+'">Email us — '+esc(KB.meta.contact)+'</a>'+
-        '<a class="btn ghost" href="https://xn--yhq58j.com/">Back to site</a>'+
+        '<a class="btn" href="https://xn--yhq58j.com/#inquiry">Use the inquiry form →</a>'+
+        '<a class="btn ghost" href="https://xn--yhq58j.com/">Browse the site</a>'+
       '</div>'+
+      '<p'+dir+' style="margin:14px 0 0;font-size:.85rem;color:var(--muted)">Or write to <strong>'+esc(KB.meta.contact)+'</strong> from your own mailbox.</p>'+
       '<p style="margin:14px 0 0;font-size:.8rem;color:var(--muted)">We answer inquiries within 24 hours. Hours: '+esc(KB.meta.hours)+'.</p>';
     box.classList.add('show');
     box.scrollIntoView({behavior:'smooth', block:'nearest'});
